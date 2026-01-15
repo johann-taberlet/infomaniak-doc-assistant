@@ -117,6 +117,17 @@ Exemple:
 - Tâche `api-001` → Lis `docs/reference/06-fastapi.md`
 - Tâche `rag-003` → Lis `docs/reference/03-qdrant.md`
 
+### MCP Tools Available
+Tu as accès à des outils MCP externes:
+
+| Outil | Usage |
+|-------|-------|
+| **Playwright** | Screenshots, navigation browser, tests UI (`browser_navigate`, `browser_take_screenshot`, `browser_click`) |
+| **Context7** | Documentation à jour des libs (`resolve-library-id` puis `query-docs`) |
+| **Perplexity** | Questions générales, recherche web (`perplexity_ask`) |
+
+Utilise `MCPSearch` pour trouver l'outil exact avant de l'appeler.
+
 ---
 
 ## Project Data
