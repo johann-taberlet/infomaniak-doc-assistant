@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 """
-Scrape Infomaniak documentation using Jina Reader API.
-Converts web pages to clean markdown.
+Scrape Infomaniak documentation using BeautifulSoup.
+Extracts clean content from FAQ pages.
 
 Usage:
-    export JINA_API_KEY="your_key_here"
-    python scripts/scrape_docs.py
+    uv run python scripts/scrape_docs.py
 """
 
-import os
 import re
 import time
 import httpx
 from pathlib import Path
+from bs4 import BeautifulSoup, NavigableString
 
-JINA_API_KEY = os.environ.get("JINA_API_KEY")
 OUTPUT_DIR = Path("data/docs")
-JINA_BASE_URL = "https://r.jina.ai"
 
 # Documentation URLs organized by product
 DOCS = {
@@ -91,7 +88,6 @@ DOCS = {
 
 def url_to_filename(url: str, product: str) -> str:
     """Convert URL to a safe filename."""
-    # Extract the slug from URL (last part after the ID)
     match = re.search(r"/faq/(\d+)/(.+)$", url)
     if match:
         faq_id, slug = match.groups()
@@ -99,27 +95,262 @@ def url_to_filename(url: str, product: str) -> str:
     return f"{product}_{hash(url)}.md"
 
 
-def fetch_with_jina(url: str) -> str | None:
-    """Fetch a URL using Jina Reader API and return markdown content."""
-    jina_url = f"{JINA_BASE_URL}/{url}"
-    headers = {}
-    if JINA_API_KEY:
-        headers["Authorization"] = f"Bearer {JINA_API_KEY}"
+def html_to_markdown(element) -> str:
+    """Convert BeautifulSoup element to clean markdown."""
+    if element is None:
+        return ""
 
+    lines = []
+
+    for child in element.children:
+        if isinstance(child, NavigableString):
+            text = str(child).strip()
+            if text:
+                lines.append(text)
+            continue
+
+        tag = child.name
+
+        if tag in ("h1", "h2", "h3", "h4", "h5", "h6"):
+            level = int(tag[1])
+            text = child.get_text(strip=True)
+            if text and text != "\xa0":  # Skip empty headers
+                lines.append(f"\n{'#' * level} {text}\n")
+
+        elif tag == "p":
+            text = process_inline(child)
+            if text.strip():
+                lines.append(f"\n{text}\n")
+
+        elif tag == "ul":
+            for li in child.find_all("li", recursive=False):
+                text = process_inline(li)
+                if text.strip():
+                    lines.append(f"- {text}")
+            lines.append("")
+
+        elif tag == "ol":
+            for i, li in enumerate(child.find_all("li", recursive=False), 1):
+                text = process_inline(li)
+                if text.strip():
+                    lines.append(f"{i}. {text}")
+            lines.append("")
+
+        elif tag == "div":
+            # Handle info/alert boxes
+            if "alert" in child.get("class", []):
+                inner_text = process_inline(child)
+                if inner_text.strip():
+                    lines.append(f"\n> **Note:** {inner_text}\n")
+            else:
+                # Recurse into other divs
+                inner = html_to_markdown(child)
+                if inner.strip():
+                    lines.append(inner)
+
+        elif tag == "img":
+            src = child.get("src", "")
+            alt = child.get("alt", "image")
+            if src:
+                lines.append(f"\n![{alt}]({src})\n")
+
+        elif tag == "br":
+            lines.append("\n")
+
+        elif tag == "a":
+            href = child.get("href", "")
+            text = child.get_text(strip=True)
+            if href and text:
+                lines.append(f"[{text}]({href})")
+
+        elif tag == "strong" or tag == "b":
+            text = child.get_text(strip=True)
+            if text:
+                lines.append(f"**{text}**")
+
+        elif tag == "em" or tag == "i":
+            text = child.get_text(strip=True)
+            if text:
+                lines.append(f"*{text}*")
+
+        elif tag == "code":
+            text = child.get_text(strip=True)
+            if text:
+                lines.append(f"`{text}`")
+
+        elif tag == "pre":
+            text = child.get_text()
+            lines.append(f"\n```\n{text}\n```\n")
+
+        elif tag == "table":
+            lines.append(process_table(child))
+
+        elif tag in ("span", "section"):
+            # Process inline or recurse
+            inner = process_inline(child)
+            if inner.strip():
+                lines.append(inner)
+
+    result = "\n".join(lines)
+    # Clean up excessive newlines
+    result = re.sub(r"\n{3,}", "\n\n", result)
+    return result.strip()
+
+
+def process_inline(element) -> str:
+    """Process inline elements and return text."""
+    if element is None:
+        return ""
+
+    parts = []
+
+    for child in element.children:
+        if isinstance(child, NavigableString):
+            parts.append(str(child))
+            continue
+
+        tag = child.name
+
+        if tag == "a":
+            href = child.get("href", "")
+            text = child.get_text(strip=True)
+            if href and text:
+                # Clean up internal FAQ links
+                if "faq.infomaniak.com" in href:
+                    href = href.replace("https://faq.infomaniak.com/", "https://www.infomaniak.com/en/support/faq/")
+                parts.append(f"[{text}]({href})")
+            elif text:
+                parts.append(text)
+
+        elif tag in ("strong", "b"):
+            text = child.get_text(strip=True)
+            if text:
+                parts.append(f"**{text}**")
+
+        elif tag in ("em", "i"):
+            text = child.get_text(strip=True)
+            if text:
+                parts.append(f"*{text}*")
+
+        elif tag == "code":
+            text = child.get_text(strip=True)
+            if text:
+                parts.append(f"`{text}`")
+
+        elif tag == "br":
+            parts.append("\n")
+
+        elif tag == "img":
+            src = child.get("src", "")
+            alt = child.get("alt", "image")
+            if src:
+                parts.append(f"\n![{alt}]({src})\n")
+
+        elif tag in ("span", "div", "li", "p"):
+            # Recurse
+            inner = process_inline(child)
+            if inner:
+                parts.append(inner)
+
+        else:
+            # Fallback: just get text
+            text = child.get_text()
+            if text:
+                parts.append(text)
+
+    return "".join(parts)
+
+
+def process_table(table) -> str:
+    """Convert HTML table to markdown table."""
+    rows = []
+    headers = []
+
+    # Find header row
+    thead = table.find("thead")
+    if thead:
+        for th in thead.find_all("th"):
+            headers.append(th.get_text(strip=True))
+
+    # If no thead, check first row
+    if not headers:
+        first_row = table.find("tr")
+        if first_row:
+            ths = first_row.find_all("th")
+            if ths:
+                headers = [th.get_text(strip=True) for th in ths]
+
+    # Process body rows
+    tbody = table.find("tbody") or table
+    for tr in tbody.find_all("tr"):
+        cells = tr.find_all(["td", "th"])
+        if cells:
+            row = [cell.get_text(strip=True) for cell in cells]
+            # Skip if this is the header row we already processed
+            if row != headers:
+                rows.append(row)
+
+    if not headers and rows:
+        headers = rows.pop(0)
+
+    if not headers:
+        return ""
+
+    # Build markdown table
+    lines = []
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+    for row in rows:
+        # Pad row if needed
+        while len(row) < len(headers):
+            row.append("")
+        lines.append("| " + " | ".join(row[:len(headers)]) + " |")
+
+    return "\n" + "\n".join(lines) + "\n"
+
+
+def scrape_page(url: str) -> tuple[str, str] | None:
+    """Scrape a single FAQ page and return (title, content)."""
     try:
-        response = httpx.get(jina_url, headers=headers, timeout=30.0)
+        response = httpx.get(url, timeout=30.0, follow_redirects=True)
         response.raise_for_status()
-        return response.text
     except httpx.HTTPError as e:
         print(f"  Error fetching {url}: {e}")
         return None
 
+    soup = BeautifulSoup(response.text, "lxml")
+
+    # Extract title
+    title_el = soup.find("h1", class_="question_faq")
+    title = title_el.get_text(strip=True) if title_el else "Untitled"
+
+    # Extract FAQ body content
+    faq_body = soup.find("div", class_="faq-body")
+    if not faq_body:
+        print(f"  No faq-body found in {url}")
+        return None
+
+    # Remove the "Link to this FAQ" section at the end
+    for div in faq_body.find_all("div"):
+        if div.find("strong") and "Link to this FAQ" in div.get_text():
+            div.decompose()
+
+    # Remove product icon
+    for icon in faq_body.find_all("i", class_="sprite-support-22"):
+        icon.decompose()
+    for pull_right in faq_body.find_all("div", class_="pull-right"):
+        pull_right.decompose()
+    for clear in faq_body.find_all("div", class_="clear"):
+        clear.decompose()
+
+    # Convert to markdown
+    content = html_to_markdown(faq_body)
+
+    return title, content
+
 
 def scrape_all():
     """Scrape all documentation pages."""
-    if not JINA_API_KEY:
-        print("Warning: JINA_API_KEY not set. Using Jina without authentication (rate limited).")
-
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     total = sum(len(urls) for urls in DOCS.values())
@@ -142,19 +373,21 @@ def scrape_all():
                 continue
 
             print(f"[{current}/{total}] Fetching: {filename}")
-            content = fetch_with_jina(url)
+            result = scrape_page(url)
 
-            if content:
-                # Add source URL as metadata at the top
+            if result:
+                title, content = result
                 with open(filepath, "w", encoding="utf-8") as f:
-                    f.write(f"<!-- source: {url} -->\n\n")
+                    f.write(f"# {title}\n\n")
+                    f.write(f"Source: {url}\n\n")
+                    f.write("---\n\n")
                     f.write(content)
                 print(f"  Saved: {filepath}")
             else:
-                print(f"  Failed to fetch")
+                print(f"  Failed to scrape")
 
-            # Rate limiting - be nice to Jina API
-            time.sleep(1.0)
+            # Rate limiting
+            time.sleep(0.5)
 
     print(f"\n=== Done! Scraped {current} pages to {OUTPUT_DIR} ===")
 
