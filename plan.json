@@ -9,7 +9,7 @@
       "Export settings singleton"
     ],
     "verification": "uv run python -c \"from app.config import settings; print(settings.LLM_PROVIDER)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "llm-001",

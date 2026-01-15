@@ -38,3 +38,26 @@ Template for each task entry:
 
 <!-- Progress entries will be added below this line -->
 
+### 2026-01-16 - Task: config-001
+**Status**: completed
+**Description**: Created app/config.py with Pydantic Settings
+
+**Actions Taken**:
+- Read docs/reference/11-pydantic-settings.md for reference patterns
+- Read .env.example to get all environment variables
+- Created app/config.py with Settings class using pydantic_settings.BaseSettings
+- Included all env vars: LLM provider, Ollama, Qwen API, Mistral API, Qdrant, App, Langfuse, RAG, Jina
+
+**Verification**:
+- Command: `uv run python -c "from app.config import settings; print(settings.LLM_PROVIDER)"`
+- Result: PASS - Output: `ollama`
+
+**Files Modified**:
+- app/config.py (created)
+
+**Notes**:
+- Used model_config dict with env_file, env_file_encoding, and extra="ignore"
+- All settings have sensible defaults matching .env.example
+
+---
+
