@@ -107,32 +107,17 @@ Each task should be completed one at a time, verified, and marked as `passes: tr
     "passes": false
   },
   {
-    "id": "rag-005",
-    "category": "feature",
-    "description": "Create scripts/scraper.py for documentation scraping",
-    "steps": [
-      "Create DocumentationScraper class",
-      "Implement fetch(url) method with rate limiting (1-3s delay)",
-      "Implement clean(soup) method to remove nav/footer/scripts",
-      "Implement extract_content(soup) method for text extraction",
-      "Implement get_sitemap_urls(sitemap_url) method",
-      "Add CLI interface with argparse",
-      "Test with a single page from docs.infomaniak.com"
-    ],
-    "verification": "python scripts/scraper.py --url https://docs.infomaniak.com --test shows extracted content",
-    "passes": false
-  },
-  {
     "id": "ingest-001",
     "category": "feature",
-    "description": "Create scripts/ingest.py for documentation ingestion pipeline",
+    "description": "Create scripts/ingest.py to process local documentation files",
     "steps": [
-      "Import scraper, chunker, embeddings, retriever modules",
-      "Create ingest_url(url) function for single page ingestion",
-      "Create ingest_sitemap(sitemap_url) function for bulk ingestion",
+      "Import chunker, embeddings, retriever modules",
+      "Create load_documents(directory) function to read .md/.html/.txt files from data/docs/",
+      "Create process_documents(docs) function for chunking",
+      "Create ingest_to_qdrant(chunks) function for embedding and storing",
       "Add progress logging with counts",
-      "Add CLI interface with argparse",
-      "Add --dry-run option to preview without ingesting"
+      "Add CLI interface with argparse (--source, --dry-run, --collection)",
+      "Add --dry-run option to preview chunks without ingesting"
     ],
     "verification": "python scripts/ingest.py --help shows usage",
     "passes": false
@@ -140,13 +125,12 @@ Each task should be completed one at a time, verified, and marked as `passes: tr
   {
     "id": "ingest-002",
     "category": "feature",
-    "description": "Run documentation ingestion for Infomaniak docs",
+    "description": "Run documentation ingestion from local files in data/docs/",
     "steps": [
       "Ensure Qdrant is running (docker)",
-      "Run ingestion for kDrive section",
-      "Run ingestion for kMeet section",
-      "Run ingestion for kChat section",
-      "Verify documents exist in Qdrant",
+      "Ensure documentation files exist in data/docs/ (user provides these)",
+      "Run: python scripts/ingest.py --source data/docs/",
+      "Verify documents exist in Qdrant collection",
       "Log total chunks indexed"
     ],
     "verification": "curl localhost:6333/collections/infomaniak_docs shows points_count > 0",
