@@ -10,28 +10,28 @@ Execute tasks from `plan.json` one at a time, verify completion, and iterate unt
 
 ## Workflow (Follow This Exactly)
 
-### 1. Read Technical Reference
-**ALWAYS** start by reading `docs/technical-reference-merged.md` to understand:
-- Code patterns for LangChain, Qdrant, FastAPI
-- How to structure Pydantic models
-- Best practices for the tech stack
-
-### 2. Read Current State
+### 1. Read Current State
 Read `activity.md` to understand:
 - What tasks have been completed
 - What task was last attempted
 - Any blockers or notes from previous iterations
 
-### 3. Find Next Task
+### 2. Find Next Task
 Read `plan.json` and find the **FIRST** task where `"passes": false`.
 - Tasks are ordered by dependency - do them in order
 - Never skip ahead
 
-### 3. Implement ONE Task
+### 3. Read Relevant Reference
+Read `docs/REFERENCE_INDEX.md` to find which reference file(s) to consult.
+- Regarde le préfixe de la tâche (ex: `llm-002` → préfixe `llm`)
+- Lis UNIQUEMENT le(s) fichier(s) pertinent(s) pour cette tâche
+- Ne lis PAS tous les fichiers - seulement ceux dont tu as besoin
+
+### 4. Implement ONE Task
 Focus entirely on completing this single task:
 - Follow the steps listed in the task description
 - Write clean, production-quality Python code
-- Follow existing patterns from `docs/technical-reference-merged.md`
+- Follow patterns from the reference file(s) you read
 - Use Pydantic v2 patterns
 - Use async/await for I/O operations
 - Add type hints to all functions
@@ -102,23 +102,20 @@ This signals the ralph.sh script to start a new iteration.
 
 | File | Purpose | When to Read |
 |------|---------|--------------|
-| `docs/technical-reference-merged.md` | **Code patterns, API examples, best practices** | **READ FIRST** - Before writing any code |
-| `plan.json` | Task list (JSON array) | Find next task with `passes: false` |
-| `activity.md` | Progress log | Check what was done, update after each task |
-| `docs/prd.md` | Product requirements, architecture | When you need context on the project |
-| `.env.example` | Environment variables | When configuring settings |
+| `docs/REFERENCE_INDEX.md` | **Index des références techniques** | Pour trouver quel fichier lire |
+| `plan.json` | Liste des tâches (JSON) | Trouver la prochaine tâche `passes: false` |
+| `activity.md` | Journal de progression | Vérifier ce qui a été fait, mettre à jour après chaque tâche |
+| `docs/prd.md` | Requirements et architecture | Quand tu as besoin de contexte |
+| `.env.example` | Variables d'environnement | Quand tu configures des settings |
 
-### Critical: Technical Reference
-The file `docs/technical-reference-merged.md` contains:
-- LangChain agent patterns (Section 1)
-- RAG pipeline patterns (Section 2)
-- Qdrant client usage (Section 3)
-- Ollama configuration (Section 4)
-- Pydantic validation (Section 5)
-- FastAPI async patterns (Section 6)
-- Langfuse observability (Section 7)
+### Progressive Disclosure
+Les références techniques sont découpées par thème dans `docs/reference/`.
+**Lis UNIQUEMENT les fichiers pertinents pour ta tâche actuelle.**
 
-**Use these patterns exactly.** Don't invent new approaches.
+Exemple:
+- Tâche `llm-002` → Lis `docs/reference/04-ollama.md`
+- Tâche `api-001` → Lis `docs/reference/06-fastapi.md`
+- Tâche `rag-003` → Lis `docs/reference/03-qdrant.md`
 
 ---
 
