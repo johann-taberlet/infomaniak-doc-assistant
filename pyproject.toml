@@ -1,0 +1,72 @@
+[project]
+name = "infomaniak-doc-assistant"
+version = "0.1.0"
+description = "AI-powered documentation assistant for Infomaniak products"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Johann Taberlet" }
+]
+
+dependencies = [
+    # LangChain ecosystem
+    "langchain>=0.3.0",
+    "langchain-ollama>=0.2.0",
+    "langchain-qdrant>=0.2.0",
+    "langchain-community>=0.3.0",
+    "langgraph>=0.2.0",
+
+    # LLM APIs (for cloud providers)
+    "langchain-mistralai>=0.2.0",
+
+    # Vector database
+    "qdrant-client>=1.12.0",
+
+    # Web framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+
+    # Data validation
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.0.0",
+
+    # Observability
+    "langfuse>=2.50.0",
+
+    # Web scraping
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.3.0",
+    "requests>=2.32.0",
+    "httpx>=0.27.0",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "tenacity>=8.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-httpx>=0.30.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "N", "W"]
