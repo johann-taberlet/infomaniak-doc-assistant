@@ -142,8 +142,8 @@ while [ $ITERATION -lt $MAX_ITERATIONS ]; do
 
     # Invoke Claude Code
     # --print: Output to stdout
-    # --dangerously-skip-permissions: Skip permission prompts (use with caution)
-    claude --print \
+    # --dangerously-skip-permissions: Skip permission prompts for autonomous execution
+    claude --print --dangerously-skip-permissions \
         "Read PROMPT.md and follow the instructions exactly.
          Then read activity.md for context on what was done previously.
          Then read plan.json to find the next task with passes: false.
