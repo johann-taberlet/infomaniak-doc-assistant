@@ -45,12 +45,12 @@ log_error() {
 
 # Count remaining tasks (tasks with "passes": false)
 count_remaining() {
-    grep -c '"passes": false' "${PROJECT_DIR}/plan.md" 2>/dev/null || echo "0"
+    grep -c '"passes": false' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
 }
 
 # Count completed tasks
 count_completed() {
-    grep -c '"passes": true' "${PROJECT_DIR}/plan.md" 2>/dev/null || echo "0"
+    grep -c '"passes": true' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
 }
 
 # Check if all tasks are complete
@@ -75,8 +75,8 @@ cd "$PROJECT_DIR"
 mkdir -p "$LOG_DIR" screenshots
 
 # Check for required files
-if [ ! -f "plan.md" ]; then
-    log_error "plan.md not found. Please create it first."
+if [ ! -f "plan.json" ]; then
+    log_error "plan.json not found. Please create it first."
     exit 1
 fi
 
@@ -146,8 +146,8 @@ while [ $ITERATION -lt $MAX_ITERATIONS ]; do
     claude --print \
         "Read PROMPT.md and follow the instructions exactly.
          Then read activity.md for context on what was done previously.
-         Then read plan.md to find the next task with passes: false.
-         Implement that ONE task, verify it, update activity.md and plan.md, commit, and output <promise>COMPLETE</promise>." \
+         Then read plan.json to find the next task with passes: false.
+         Implement that ONE task, verify it, update activity.md and plan.json, commit, and output <promise>COMPLETE</promise>." \
         2>&1 | tee "$LOG_FILE"
 
     # Check for completion signal

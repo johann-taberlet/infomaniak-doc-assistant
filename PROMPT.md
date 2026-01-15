@@ -4,20 +4,26 @@ You are an autonomous development agent implementing the **Infomaniak Documentat
 
 ## Your Mission
 
-Execute tasks from `plan.md` one at a time, verify completion, and iterate until all tasks pass.
+Execute tasks from `plan.json` one at a time, verify completion, and iterate until all tasks pass.
 
 ---
 
 ## Workflow (Follow This Exactly)
 
-### 1. Read Current State
-First, read `activity.md` to understand:
+### 1. Read Technical Reference
+**ALWAYS** start by reading `docs/technical-reference-merged.md` to understand:
+- Code patterns for LangChain, Qdrant, FastAPI
+- How to structure Pydantic models
+- Best practices for the tech stack
+
+### 2. Read Current State
+Read `activity.md` to understand:
 - What tasks have been completed
 - What task was last attempted
 - Any blockers or notes from previous iterations
 
-### 2. Find Next Task
-Read `plan.md` and find the **FIRST** task where `"passes": false`.
+### 3. Find Next Task
+Read `plan.json` and find the **FIRST** task where `"passes": false`.
 - Tasks are ordered by dependency - do them in order
 - Never skip ahead
 
@@ -43,7 +49,7 @@ After implementation:
    - Actions taken
    - Verification result (command and output)
    - Files modified
-2. Update `plan.md`: change `"passes": false` to `"passes": true` for this task
+2. Update `plan.json`: change `"passes": false` to `"passes": true` for this task
 3. Git commit with message: `[task-id] Brief description`
 
 **If verification FAILS:**
@@ -87,21 +93,32 @@ This signals the ralph.sh script to start a new iteration.
 - Do NOT run `git push` (local only)
 - Do NOT modify files outside the project directory
 - Do NOT install system packages with sudo
-- Do NOT create new tasks not in plan.md
+- Do NOT create new tasks not in plan.json
 - Do NOT over-engineer or add unnecessary features
 
 ---
 
 ## Reference Files
 
-| File | Purpose |
-|------|---------|
-| `plan.md` | Task list (JSON array) - find next task here |
-| `activity.md` | Progress log - update after each task |
-| `docs/prd.md` | Product requirements and architecture |
-| `docs/technical-reference-merged.md` | Code patterns and API reference |
-| `.env.example` | Environment variables reference |
-| `screenshots/` | Verification screenshots |
+| File | Purpose | When to Read |
+|------|---------|--------------|
+| `docs/technical-reference-merged.md` | **Code patterns, API examples, best practices** | **READ FIRST** - Before writing any code |
+| `plan.json` | Task list (JSON array) | Find next task with `passes: false` |
+| `activity.md` | Progress log | Check what was done, update after each task |
+| `docs/prd.md` | Product requirements, architecture | When you need context on the project |
+| `.env.example` | Environment variables | When configuring settings |
+
+### Critical: Technical Reference
+The file `docs/technical-reference-merged.md` contains:
+- LangChain agent patterns (Section 1)
+- RAG pipeline patterns (Section 2)
+- Qdrant client usage (Section 3)
+- Ollama configuration (Section 4)
+- Pydantic validation (Section 5)
+- FastAPI async patterns (Section 6)
+- Langfuse observability (Section 7)
+
+**Use these patterns exactly.** Don't invent new approaches.
 
 ---
 
