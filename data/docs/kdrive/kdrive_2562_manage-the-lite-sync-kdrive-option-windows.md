@@ -29,13 +29,9 @@ The Lite Sync option can be enabled during the installation of the application (
 3. Select kDrive Settings.
 4. Click the button in the *Synchronization* section to enable Lite Sync.
 
-The cloud icon 
-![sign](https://faq.storage.infomaniak.com/600a94fd3934a3.64423228png)
- will appear to the far right of a sync name on the application, indicating that Lite Sync is enabled. If the crossed-out cloud icon 
-![sign](https://faq.storage.infomaniak.com/6026707c50dc19.39686260png)
+The cloud icon
+ will appear to the far right of a sync name on the application, indicating that Lite Sync is enabled. If the crossed-out cloud icon
  is displayed, this means that Lite Sync is not enabled:
-
-![image](https://faq.storage5.infomaniak.com/5e9b21d989644ae0c73e2b667b2290df9bf0d159.png)
 
 #### Keep on this device
 
@@ -43,8 +39,6 @@ Once Lite Sync is enabled, you can still make a folder and its subfolders or onl
 
 1. From the Windows Explorer, navigate to a folder synchronized with kDrive and right-click.
 2. Select the Keep on this device option under kDrive:
-
-![image](https://faq.storage5.infomaniak.com/8b4826e80186e263347aff604940b894b0ccafba.png)
 
 #### Free up space
 
@@ -54,8 +48,6 @@ Conversely, once Lite Sync is enabled, you can free up space in a folder and its
 
 1. From the Windows Explorer, navigate to a folder synchronized with kDrive and right-click
 2. Select the Free up space option under kDrive:
-
-![image](https://faq.storage5.infomaniak.com/d323aa76dde944120f68c826ccee7b87fa5805ae.png)
 
 > **Note:**  The action Free up space will free up storage space on your computer. Files will remain visible but will no longer be accessible without an internet connection.
 
@@ -75,15 +67,9 @@ In some cases (e.g. if you copy the files from your hard drive while Lite Sync i
 
 Files on the hard drive synchronized with the Lite Sync option, everything is in the cloud (on your remote online kDrive):
 
-![sign](https://faq.storage.infomaniak.com/65cb36030cc548.14484672png)
-
 Deactivation of the LiteSync option, the "physical" synchronization starts:
 
-![sign](https://faq.storage.infomaniak.com/65cb360d7488f7.97293862png)
-
 Synchronization complete, the files have been downloaded to your computer and then have the appropriate icon:
-
-![sign](https://faq.storage.infomaniak.com/65cb3618a6af41.36350113png)
 
 To summarize, here are the status icons used in your Windows Explorer:
 
@@ -95,4 +81,4 @@ To do this:
 2. Click on the action menu ⋮ to the right of the kDrive window.
 3. Select kDrive Settings.
 4. Click on the button in the *Synchronization* section to disable Lite Sync.
-5. Two scenarios may occur:If there is enough space on your computer, a message confirming the deactivation is displayed; simply click on Continue.If there is not enough space on your computer, a message will indicate the missing space to allow the deactivation of Lite Sync; the synchronization of your kDrive will be paused until you select the files to synchronize on your computer.
+5. Two scenarios may occur:If there is enough space on your computer, a message confirming the deactivation is displayed; simply click on Continue. If there is not enough space on your computer, a message will indicate the missing space to allow the deactivation of Lite Sync; the synchronization of your kDrive will be paused until you select the files to synchronize on your computer.

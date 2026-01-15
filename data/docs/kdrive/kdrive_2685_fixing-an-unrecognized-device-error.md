@@ -8,7 +8,7 @@ This guide addresses connection issues with Infomaniak on certain mobile apps li
 
 ## Android security standards (Google Play Integrity)
 
-Some users are currently encountering an error message “Your device is not recognized as safe” when connecting to mobile apps (kDrive, Euria, SwissTransfer) on Android…
+Some users are currently encountering an error message “Your device is not recognized as safe” when connecting to mobile apps (kDrive, Euria, SwissTransfer) on Android...
 
 This blockage is related to Android security standards (Google Play Integrity) and usually occurs on devices using an unofficial operating system, rooted, or certain specific models.
 

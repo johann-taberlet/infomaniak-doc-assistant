@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdr
 
 ---
 
-Thank you for choosing [kDrive](https://infomaniak.com/gtl/kdrive), the independent and privacy-respecting solution for collaborating, sharing, and accessing your data from all your devices. Your data is encrypted, continuously backed up, and exclusively hosted in Switzerland.
+Thank you for choosing kDrive, the independent and privacy-respecting solution for collaborating, sharing, and accessing your data from all your devices. Your data is encrypted, continuously backed up, and exclusively hosted in Switzerland.
 
 ## Collaborative storage on a 100% Swiss Made cloud
 
@@ -89,8 +89,3 @@ Thank you for choosing [kDrive](https://infomaniak.com/gtl/kdrive), the independ
 
 - [kDrive data security](https://www.infomaniak.com/en/support/faq/2462)
 - [kDrive data analysis](https://www.infomaniak.com/en/support/faq/2412)
-
-## A question or feedback?
-
-- [Contact Infomaniak support](https://infomaniak.com/gtl/support.contact)
-- [Click here](https://www.infomaniak.com/en/support/faq/2324) to share feedback or a suggestion on an Infomaniak product

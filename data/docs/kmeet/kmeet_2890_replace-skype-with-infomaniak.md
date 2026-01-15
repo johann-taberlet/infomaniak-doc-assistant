@@ -14,7 +14,7 @@ One of the simplest ways to replace Skype is to adopt [kMeet](https://www.infoma
 
 - Unlimited audio and video calls
 - [Access without registration](https://www.infomaniak.com/en/support/faq/2473)
-- Compatibility [Web, mobile and desktop](https://infomaniak.com/gtl/apps.kmeet)
+- Compatibility Web, mobile and desktop
 - [Integrated chat](https://www.infomaniak.com/en/support/faq/2478) & reactions (emojis, sounds)
 - [Screen sharing](https://www.infomaniak.com/en/support/faq/2477) with [drawing](https://www.infomaniak.com/en/support/faq/2620) tools, [remote control](https://www.infomaniak.com/en/support/faq/2622)
 - [Breakout rooms](https://www.infomaniak.com/en/support/faq/2397)
@@ -36,68 +36,50 @@ To start a private communication between several people on the Internet, it is e
 1. Enter [kmeet.infomaniak.com](https://kmeet.infomaniak.com/) on a browser like Chrome or Safari.
 2. Click on **Start a new meeting**:
 
-![image](https://faq.storage5.infomaniak.com/fcde46a5990415d66b36f3cc951521a289383baa.png)
-
 3. Enter a name for the meeting, which allows future participants to know the subject of the discussion they are joining.
 4. Click on the button to **Continue**:
 
-![image](https://faq.storage5.infomaniak.com/0312d518b6dae711394ef8b16280318f917a1f94.png)
-
 5. Grant the necessary rights to kMeet:
-
-![image](https://faq.storage5.infomaniak.com/50806816db958245ed3280de0eb41fd5b0e15a6b.png)
 
 6. Enter your **name**, the one that other participants will see.
 7. Enable or disable any **communication means** if these should not be used for the moment.
 8. Click on the **button** to join the virtual meeting room (as the first participant since no one has been invited except you for the moment):
 
-![image](https://faq.storage5.infomaniak.com/0f0eff38fc8d288c9050c60474570783e46a5ba1.png)
-
 9. There you go, **the room is created** and you can now **copy the information related to this session** and **send it to the correspondents** so that they can join you (they will only have to execute the link you send them).
 10. Close the information window so that you can all chat together:
 
-![image](https://faq.storage5.infomaniak.com/8bc350ab3008edb4d67f497eaa02ca3b53552b20.png)
-
 11. The toolbar at the bottom of the screen allows you to enable or disable the microphone, the camera, etc.:
-
-![image](https://faq.storage5.infomaniak.com/f312eba8498aca6fc8dbf4c054c3cf372e801e16.png)
 
 To discover all the possibilities that kMeet offers, refer to [this other guide](https://www.infomaniak.com/en/support/faq/2474).
 
 ### 2. Planning and invitations withmy kSuite
 
-To work efficiently, kMeet can be **directly connected to your professional calendar**. This means that every time you create an event in your calendar…
+To work efficiently, kMeet can be **directly connected to your professional calendar**. This means that every time you create an event in your calendar...
 
-- … a video conference link is automatically generated…
-- … participants receive the invitation by email with all the information…
-- … and on the day of the event, they can join the meeting in one click, without registration or software to install.
+- ... a video conference link is automatically generated...
+- ... participants receive the invitation by email with all the information...
+- ... and on the day of the event, they can join the meeting in one click, without registration or software to install.
 
 **Benefit**: you centralize the management of meetings, reduce forgetfulness and simplify organization, all from a single interface.
 
 To set up this solution:
 
-1. [Sign up formy kSuite](https://infomaniak.com/gtl/ksuite.myksuite) to get an email address, for example `anna.alpha@ikmail.com` and, above all, access to Infomaniak services.
+1. Sign up formy kSuite to get an email address, for example `anna.alpha@ikmail.com` and, above all, access to Infomaniak services.
 2. Access the calendar [ksuite.infomaniak.com/calendar](https://ksuite.infomaniak.com/calendar) and then [create an event](https://www.infomaniak.com/en/support/faq/956) on the day of your choice.
 3. Add [participants](https://www.infomaniak.com/en/support/faq/956) to the event, even if they are not Infomaniak customers.
 4. Click the green button to **automatically add a kMeet link** to the event.
 5. Click the button to **save** your event:
 
-![image](https://faq.storage5.infomaniak.com/7c21d736ec1acace30f0bbe4ed9a81fc679d8740.png)
-
 6. Invitations will then be automatically sent by email to the participants, containing the clickable link to join the online discussion when the time comes:
 
-![image](https://faq.storage5.infomaniak.com/ea150e0ed7db8059dcd8521e95fab96df664553b.png)
-
 7. The kMeet meeting link is also visible on the event in the calendar directly:
-
-![image](https://faq.storage5.infomaniak.com/2242020701d4d1acc14835fa857c945ca6d15da3.png)
 
 ### 3. Call your correspondent like Skype
 
 To start a conversation at any time with a contact previously saved in your address book, you must both have **kChat**, available within the **Infomaniak kSuite**. To set up this solution, which can also be extended to an entire group of contacts:
 
-1. [Sign up forkSuite](https://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision) to get access to the corresponding Infomaniak services.
+1. Sign up forkSuite to get access to the corresponding Infomaniak services.
 2. [Configure the users](https://www.infomaniak.com/en/support/faq/879) (these can even be [external](https://www.infomaniak.com/en/support/faq/2846)) on the kSuite.
 3. [Install](https://www.infomaniak.com/en/support/faq/144) the **kChat** app or go to the URL [https://ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat)
-4. A user can then be called via kChat, which will ring the recipient's device:= Internet browser if the kChat URL is open, or computer/mobile device if the kChat app is installed.Refer to this other guide to learn more about video calls on kChat.
+4. A user can then be called via kChat, which will ring the recipient's device:= Internet browser if the kChat URL is open, or computer/mobile device if the kChat app is installed. Refer to this other guide to learn more about video calls on kChat.
 5. Your correspondent can then choose to answer; the call will be made with the kMeet technology **within kChat** or on the **kMeet app if it is installed**.

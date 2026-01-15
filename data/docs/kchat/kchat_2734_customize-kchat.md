@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2734/customize-kchat
 
 ---
 
-This guide details the various elements that can be configured and customized on [kChat](https://infomaniak.com/gtl/kchat) to best suit your usage preferences.
+This guide details the various elements that can be configured and customized on kChat to best suit your usage preferences.
 
 ## Change the language of the kChat interface
 
@@ -16,8 +16,6 @@ To access kChat preferences and, in particular, to define which channel(s) (one 
 
 1. [Click here](https://manager.infomaniak.com/v3/ng/kchat/) to access the management of your product on the Infomaniak Manager ([need help?](https://www.infomaniak.com/en/support/faq/1990#nav)).
 2. Click on **Settings** in the left sidebar:
-
-![image](https://faq.storage5.infomaniak.com/bb7c8c6659e612668d55d97605cbb8d9640d12c7.png)
 
 ## Customize the general display of kChat
 
@@ -52,13 +50,9 @@ The **light** or **dark** theme of the web app is configured globally (refer to 
 
 However, the desktop app can be configured independently of the rest; this is set from the icon ‍ at the top right of the interface:
 
-![image](https://faq.storage5.infomaniak.com/a862e38d99a0ee41835af71dd3dc853f8dc71af6.png)
-
 ## Customize a discussion, a channel, etc.
 
 Next to each element of the left sidebar is an action menu **⋮** allowing you to define the sorting order (alphabetical, by recent activity, manual):
-
-![image](https://faq.storage5.infomaniak.com/76b05eaeba29fb4d861b95c8a7cea88e68ad94d5.png)
 
 ## Set a status
 
@@ -69,12 +63,8 @@ To enhance your profile and its display, in kChat discussions as well as [on the
 3. Enter a custom status or choose one from the suggestions.
 4. Enter an expiration date if necessary:
 
-![image](https://faq.storage5.infomaniak.com/21aa48a12f015c207ac24991f33af0ddce5bdab1.png)
-
 5. Click on the smiley icon if you want to choose an emoji next to your name.
 6. Confirm with the **Set status** button.
-
-**⚠ Max. number of custom emojis:**
 
 ## Use kChat with your domain and brand
 

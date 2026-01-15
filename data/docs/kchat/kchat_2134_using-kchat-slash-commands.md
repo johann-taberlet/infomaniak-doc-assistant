@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-command
 
 ---
 
-This guide covers messages that start with `/` on [kChat](https://infomaniak.com/gtl/kchat) interpreted as slash commands.
+This guide covers messages that start with `/` on kChat interpreted as slash commands.
 
 ## Execute a slash command on kChat
 
@@ -30,15 +30,9 @@ To create a **custom slash command**:
 2. Click on the **New** icon ‍ next to your kChat organization name.
 3. Click on **Integrations**: 
 
-![image](https://faq.storage5.infomaniak.com/e205799c5c7e403b92ae0dd1921f78bfd456087a.png)
-
 4. Click on **Slash command**: 
 
-![image](https://faq.storage5.infomaniak.com/07c786ce8bbc87e358d111d1e40759b51cb1b8c2.png)
-
 5. Click the blue button to **Add a command**: 
-
-![image](https://faq.storage5.infomaniak.com/e05ee003cd93e6c0f2f81f4e09de5c048088412e.png)
 
 6. Configure the slash command (name, trigger (without the `/`), expected content type, action to execute*, etc., including whether the command should appear in the help modal mentioned in the chapter above).* This can include calling an external API, running a script, displaying a specific response, etc. For this, you will generally need an external script or application that will respond to the commands. You can also set additional parameters for the command, such as dropdown options, checkboxes, etc., depending on your needs.
 7. **Save** the command.

@@ -4,9 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/1431/transcribe-a-kmeet-meetin
 
 ---
 
-This guide explains how to use the **automatic transcription** feature of [kMeet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, which allows you to display real-time subtitles during meetings, thus facilitating the understanding of exchanges and meeting accessibility needs, or even translation at a later time.
-
-**⚠ Available with:**
+This guide explains how to use the **automatic transcription** feature of kMeet, the ethical free video conferencing solution by Infomaniak, which allows you to display real-time subtitles during meetings, thus facilitating the understanding of exchanges and meeting accessibility needs, or even translation at a later time.
 
 ### Preamble
 
@@ -22,8 +20,6 @@ You can display an automatic transcription of the statements made by participant
 4. Click on the **○○○** icon in the toolbar.
 5. Click on **Enable subtitles**.
 6. What is said by the participants is displayed at the bottom of your kMeet window:
-
-![image](https://faq.storage5.infomaniak.com/361bd97dbd0562d950caadd0e569796d9761057e.png)
 
 7. To stop displaying the transcription on your screen, click again on the appropriate menu (see point 5 above).
 

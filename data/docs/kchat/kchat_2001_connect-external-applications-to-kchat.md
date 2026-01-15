@@ -4,14 +4,12 @@ Source: https://www.infomaniak.com/en/support/faq/2001/connect-external-applicat
 
 ---
 
-This guide allows you to manage external applications with [kChat](https://infomaniak.com/gtl/kchat) using webhooks.
+This guide allows you to manage external applications with kChat using webhooks.
 
 ### Preamble
 
-- A webhook is a method that allows an application to be immediately informed when a particular event occurs in another application, rather than constantly asking this application if something new has happened ("polling").Outgoing webhook: kChat communicates information to other apps when an event occurs in kChat.Incoming webhook: kChat receives information from other apps to trigger actions in kChat.
+- A webhook is a method that allows an application to be immediately informed when a particular event occurs in another application, rather than constantly asking this application if something new has happened ("polling"). Outgoing webhook: kChat communicates information to other apps when an event occurs in kChat. Incoming webhook: kChat receives information from other apps to trigger actions in kChat.
 - It is not possible to import the discussion history from another application (Slack, Teams, Jabber, etc.) or from another Organization.
-
-**⚠ Max. number of incoming/outgoing webhooks:**
 
 ## Access the kChat webhooks interface
 
@@ -26,8 +24,6 @@ To configure a webhook, find self-hosted or third-party applications and integra
 3. Click on **Integrations**.
 4. Access the categories:
 
-![image](https://faq.storage5.infomaniak.com/6184238ffe75a7fd22ad0c252392f0fbd0754167.png)
-
 ## Integration example
 
 - [Reminder of Infomaniak calendar event on kChat](https://www.infomaniak.com/en/support/faq/2244)
@@ -38,8 +34,6 @@ To do this:
 
 1. Click on the category **Incoming Webhooks**.
 2. Click on the blue button **Add incoming webhooks**:
-
-![image](https://faq.storage5.infomaniak.com/a8afd894584a705bee1a7d20f305bf2900c81a14.png)
 
 3. Add a name and a description (max 500 characters) for the webhook.
 4. Select the channel that will receive the messages.
@@ -159,5 +153,3 @@ Content-Length: 630
 ```
 
 This will result in the display of this message in the channel *kchatemp* of the organization:
-
-![sign](https://faq.storage.infomaniak.com/64cd0f7f3139d8.11278371png)

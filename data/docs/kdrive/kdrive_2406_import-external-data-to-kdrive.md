@@ -4,11 +4,11 @@ Source: https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-k
 
 ---
 
-This guide explains how to import (one time only) to [kDrive](https://infomaniak.com/gtl/kdrive) data (files, folders, etc.) from an external cloud, such as your previous provider's, for example Dropbox or Microsoft.
+This guide explains how to import (one time only) to kDrive data (files, folders, etc.) from an external cloud, such as your previous provider's, for example Dropbox or Microsoft.
 
 ### Prerequisites
 
-- Have a [kDrive](https://infomaniak.com/gtl/ksuite.kdrive) or [kSuite](https://infomaniak.com/gtl/ksuite) offer (WebDAV not required)
+- Have a kDrive or kSuite offer (WebDAV not required)
 - Have sufficient permissions within [kDrive](https://www.infomaniak.com/en/support/faq/2365) or [kSuite](https://www.infomaniak.com/en/support/faq/879).
 - **Do not change your passwords until the import is complete**!
 
@@ -33,8 +33,8 @@ For example:
 
 ### Data not imported
 
-- **Data that has been shared with you** is not imported.Only data that truly belongs to you will be imported.
-- Google **documents** such as Gdocs, Sheets, Slides, etc. …… are not imported during a Dropbox import.… are converted by Google when these files are downloaded from Google Drive on macOS/Windows.… are not converted when they are copied from the local Google Drive directory to the local kDrive directory. Therefore, it is imperative to download the files from the Web version of Google Drive.
+- **Data that has been shared with you** is not imported. Only data that truly belongs to you will be imported.
+- Google **documents** such as Gdocs, Sheets, Slides, etc. ... are not imported during a Dropbox import.... are converted by Google when these files are downloaded from Google Drive on macOS/Windows.... are not converted when they are copied from the local Google Drive directory to the local kDrive directory. Therefore, it is imperative to download the files from the Web version of Google Drive.
 - Dropbox Paper documents.
 - Dropbox **share links**, visible [here](https://www.dropbox.com/share/links).
 - Dropbox files shared individually, visible [here](https://www.dropbox.com/share/files) (however, shared folders and common documents will be imported).
@@ -46,14 +46,10 @@ To proceed with the data import:
 3. Check or select the relevant kDrive in the dropdown menu of the left sidebar.
 4. Click on **Import external data** under **General**:
 
-![image](https://faq.storage5.infomaniak.com/bd02f08ad6329e6a2626534e486b47f5c78da751.png)
-
 5. Click on **Start.**
 6. Choose the relevant service (refer to the last chapter at the bottom of this guide).
 7. Choose the location where the imported files will be stored.
 8. Enter any required information if prompted and click the blue **Start** button:
-
-![image](https://faq.storage5.infomaniak.com/3daa78b092992d148469c54e55bb137abcf1b2f4.png)
 
 9. Enter any required information if prompted and click the blue **Continue** button.
 10. Complete the wizard.

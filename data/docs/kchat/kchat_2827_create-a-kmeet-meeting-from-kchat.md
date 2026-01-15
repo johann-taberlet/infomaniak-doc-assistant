@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-fr
 
 ---
 
-This guide explains how to start an audio or video conversation between one or more users [kChat](https://infomaniak.com/gtl/kchat), with Infomaniak's ethical free video conferencing solution, [kMeet](https://infomaniak.com/gtl/meet).
+This guide explains how to start an audio or video conversation between one or more users kChat, with Infomaniak's ethical free video conferencing solution, kMeet.
 
 ### Preamble
 
@@ -13,8 +13,6 @@ This guide explains how to start an audio or video conversation between one or m
 ## Create a meeting between kChat users
 
 To be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any kChat conversation, private or public channel, via the application or directly on the browser:
-
-![image](https://faq.storage5.infomaniak.com/5a5d7fb9e3f33518b10faf835670acbf0d48f2e6.png)
 
 - Call a user directly if you are in a direct discussion with them, or trigger a call to all members of a channel if you start the meeting from the channel.
 - Calling a user who is on “Do Not Disturb” will not trigger a ringtone or call modal for them, but they will see the message in the conversation.

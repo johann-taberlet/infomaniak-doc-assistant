@@ -14,9 +14,9 @@ This guide explains how to resolve an access or usage issue with [kDrive](https:
 - This can result in the inability to synchronize files correctly or to use kDrive.
 - In case of a problem, you must therefore manage to **authorize kDrive** within these applications and whitelist **at least two essential components**:kDrive.exe‍kDrive_client.exe‍
 
-## Authorize kDrive on…
+## Authorize kDrive on...
 
-### … macOS
+### ... macOS
 
 1. Open **System Preferences**
 2. Click on **Security** or **Security** and **Privacy**
@@ -65,7 +65,7 @@ This guide explains how to resolve an access or usage issue with [kDrive](https:
 
 1. Refer to [this other guide](https://support.avg.com/SupportArticleView?urlname=avg-antivirus-scan-exclusions) by selecting the files (read the preamble) in step 5 to exclude kDrive
 
-### … Avira
+### ... Avira
 
 1. Right-click the **Avira** icon in the notification area and **disable real-time protection**
 2. Expand **Avira** from the notification area
@@ -79,11 +79,11 @@ This guide explains how to resolve an access or usage issue with [kDrive](https:
 10. Add the files (read the preamble)
 11. Confirm the changes and enable real-time protection
 
-### … Bitdefender
+### ... Bitdefender
 
 1. Refer to [this other guide](https://www.bitdefender.fr/consumer/support/answer/26042/) by selecting the files (read the preamble) in step 5 to exclude kDrive
 
-### … CCleaner
+### ... CCleaner
 
 1. In CCleaner, click on the **Options** icon
 2. Click the **Exclude**
@@ -104,7 +104,7 @@ This guide explains how to resolve an access or usage issue with [kDrive](https:
 2. Press **F5** to open the **advanced configuration**
 3. Open **Antivirus and antispyware**
 4. Select **Exclusions**
-5. Click **Add…** in the right pane
+5. Click **Add...** in the right pane
 6. Add the files (read the preamble)
 7. Confirm changes and reactivate real-time protection
 
@@ -112,11 +112,7 @@ This guide explains how to resolve an access or usage issue with [kDrive](https:
 
 To reduce problems related to the use of kDrive files when Kaspersky is installed, you can exclude kdrive.infomaniak.com from the analysis:
 
-![image](https://faq.storage5.infomaniak.com/d446c6f3c79a74c7e9188163d6f40d72cc476c5e.png)
-
 If the problem persists, uncheck the box (3) below:
-
-![image](https://faq.storage5.infomaniak.com/ccf48e7950222d4088f769d52d72c269a9ac43b8.png)
 
 ### ... Malwarebytes
 
@@ -139,4 +135,4 @@ If the problem persists, uncheck the box (3) below:
 
 Check within NordVPN and more specifically in [Anti-menaces Pro](https://nordvpn.com/features/threat-protection) (`Threat Protection`) the list of recent files supposed to be malicious in order to authorize the kDrive files.
 
-> **Note:** ⚠️ For additional help [contact a partner](https://infomaniak.com/gtl/creez-votre-site.partners.annuaire) or [launch a free call for tenders](https://infomaniak.com/gtl/creez-votre-site.partners.create) — also discover the [role of the host](https://www.infomaniak.com/en/support/faq/2103).
+> **Note:** ⚠️ For additional help contact a partner or launch a free call for tenders — also discover the [role of the host](https://www.infomaniak.com/en/support/faq/2103).

@@ -8,7 +8,7 @@ This guide details the possible solutions when the desktop app icon **kDrive** (
 
 ### Preamble
 
-- kDrive does not indicate if a file is open or being modified on another local device (**no alert is displayed in this case**):It is therefore quite possible to view (read) a file while it is being modified on another device without this causing a conflict.The conflict only appears in case of simultaneous modification.
+- kDrive does not indicate if a file is open or being modified on another local device (**no alert is displayed in this case**):It is therefore quite possible to view (read) a file while it is being modified on another device without this causing a conflict. The conflict only appears in case of simultaneous modification.
 
 ## kDrive synchronization conflict cases
 
@@ -61,7 +61,7 @@ For other cases:
 
 - The kDrive Web version remains prioritized in most situations.
 - The conflicting local files are renamed with “`_conflict`”.
-- Important exception: when a locally modified file should be deleted according to the state of kDrive Web…… it is moved to a folder named “kDrive Rescue Folder” (instead of being deleted); this protects your local modifications from accidental deletion.
+- Important exception: when a locally modified file should be deleted according to the state of kDrive Web... it is moved to a folder named “kDrive Rescue Folder” (instead of being deleted); this protects your local modifications from accidental deletion.
 
 Special cases:
 
@@ -77,16 +77,10 @@ To display conflicting files:
 2. Click on the information button at the top.
 3. Click on the listed event to view its details:
 
-![détails évènement](https://faq.storage5.infomaniak.com/ab5ad01f13d50d598f1fc4ae261fd26d851dd3f9.png)
-
 4. Conflicts and errors are displayed in 2 distinct tabs allowing you to become aware of unsynchronized data:
-
-![conflict and error tabs](https://faq.storage.infomaniak.com/6615573b482e24.53982984gif)
 
  
 5. **The first tab** allows you to resolve conflicts:
-
-![conflict resolution](https://faq.storage5.infomaniak.com/b14b65533e89a38e3c05d4460eeecd4a54b7093a.png)
 
 6. You will then need to choose how to resolve the conflict by deciding to send the local versionto the server (= synchronize)or to the computer's recycle bin
 
@@ -104,8 +98,6 @@ If necessary, to **manually resolve certain synchronization conflicts** that hav
 2. **Compare** the differences.
 3. **Retrieve** the information from the conflict file (the one with the exclamation mark) in the base file.
 4. **Delete** the conflict file that is not synchronized (the one with the exclamation mark and the note `conflicted copy`):
-
-![example conflicted copy](https://faq.storage5.infomaniak.com/f4bb8f66c9028a186e5cc808358e5c243c690436.png)
 
 **Don't see conflict files on all your devices?** That's normal; the conflict file (the one with the exclamation mark and the note `conflicted copy` in its name) is not synchronized. The idea is that you, the author of the changes, are the best person to resolve the conflict.
 

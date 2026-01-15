@@ -21,15 +21,7 @@ By going to the kMeet **Settings** (click on the icon ‍ at the top right of th
 
 Examples with the kMeet application on computer:
 
-![image](https://faq.storage5.infomaniak.com/6e51cd43b39823f968abf8f17380300467502e8b.png)
-
-![image](https://faq.storage5.infomaniak.com/4aedd1122ab87d2147398de238128b57104daf78.png)
-
 Examples with the web version in your browser:
-
-![image](https://faq.storage5.infomaniak.com/ad1345f1e85b626c6558e4d9990b24d42a06174b.png)
-
-![image](https://faq.storage5.infomaniak.com/cd4163ed4463ad78bd4d7265170bc5f8d307c09a.png)
 
 You can also check that a **lock** in your browser's address bar is not blocking your multimedia access by simply clicking on this lock.
 
@@ -65,15 +57,13 @@ If that still doesn't work:
 
 ### 4. Join the ongoing meeting with a different device
 
-If you encounter any audio/video issues during a kMeet meeting, join it from a different device. Were you on a **computer**? Use your **mobile device**! Or vice versa…
+If you encounter any audio/video issues during a kMeet meeting, join it from a different device. Were you on a **computer**? Use your **mobile device**! Or vice versa...
 
 1. On the ongoing meeting with the device that is causing issues, invite a new participant to **get the meeting link**:
 
  
 2. From a new device, open a **web browser** (Chrome, Safari, Firefox, etc.).
 3. Enter the meeting link (*https://kmeet.infomaniak.com/* followed by the meeting link letters); example:
-
-![sign](https://faq.storage.infomaniak.com/65e6e3374301e6.37827587png)
 
 or proceed using the **code** of the meeting.
 

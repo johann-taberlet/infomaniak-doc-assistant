@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2478/discuss-during-a-kmeet-me
 
 ---
 
-This guide explains how to use the chat feature through the integrated chat in [kMeet](https://infomaniak.com/gtl/meet) the ethical free video conferencing solution by Infomaniak.
+This guide explains how to use the chat feature through the integrated chat in kMeet the ethical free video conferencing solution by Infomaniak.
 
 ### Preamble
 
@@ -18,5 +18,3 @@ To do this:
 1. Start the kMeet app.
 2. [Create](https://www.infomaniak.com/en/support/faq/2475) or [join](https://www.infomaniak.com/en/support/faq/2473) a meeting room.
 3. Click on the message bubble icon in the toolbar to **Open/Close the chat** and chat from a left sidebar:
-
-![image](https://faq.storage5.infomaniak.com/2c4192e97b7b67fde0a44dd8ddbfeb429a183da6.png)

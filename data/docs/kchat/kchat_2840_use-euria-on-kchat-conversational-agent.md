@@ -4,7 +4,7 @@ Source: https://www.infomaniak.com/en/support/faq/2840/use-euria-on-kchat-conver
 
 ---
 
-This guide allows you to quickly discover the essential functions of **Euria**, the artificial intelligence at your disposal within **kSuite**, particularly powerful as a conversational agent on the app [kChat](https://infomaniak.com/gtl/kchat).
+This guide allows you to quickly discover the essential functions of **Euria**, the artificial intelligence at your disposal within **kSuite**, particularly powerful as a conversational agent on the app kChat.
 
 ### Preamble
 
@@ -17,12 +17,11 @@ This guide allows you to quickly discover the essential functions of **Euria**, 
 
 The bots currently available on kChat are already part of your contacts.
 
-If you don't see them yet, click **in the left sidebar** of kChat…
+If you don't see them yet, click **in the left sidebar** of kChat...
 
-1. … on the channel search (bots also appear as channels)
-2. … or on the **+** icon next to **Direct Messages** to search for the bot
+1. ... on the channel search (bots also appear as channels)
+2. ... or on the **+** icon next to **Direct Messages** to search for the bot
 
-![image](https://faq.storage5.infomaniak.com/f90dcdaa2910c3f1c1da0c8ea7817a1d51e4403c.png)
 ​
 3. Add the bots labeled as such with the tag [bot] or search for the term *bot* or *chat.*
 *​*
@@ -30,5 +29,3 @@ If you don't see them yet, click **in the left sidebar** of kChat…
 Do not create a group conversation between the bots and yourself as it will not work. You need to create a private discussion channel between each bot individually and yourself.
 
 Then simply write to them as if you were conversing with an acquaintance:
-
-![image](https://faq.storage5.infomaniak.com/920083838d888c31a3dd32eff22e6d2f7d7f8614.png)
