@@ -45,17 +45,17 @@ log_error() {
 
 # Count remaining tasks (tasks with "passes": false)
 count_remaining() {
-    grep -c '"passes": false' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
+    jq '[.[] | select(.passes == false)] | length' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
 }
 
 # Count completed tasks
 count_completed() {
-    grep -c '"passes": true' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
+    jq '[.[] | select(.passes == true)] | length' "${PROJECT_DIR}/plan.json" 2>/dev/null || echo "0"
 }
 
-# Check if all tasks are complete
+# Check if all tasks are complete (returns 0 if all done, 1 otherwise)
 all_done() {
-    local remaining=$(count_remaining)
+    local remaining=$(jq '[.[] | select(.passes == false)] | length' "${PROJECT_DIR}/plan.json" 2>/dev/null)
     [ "$remaining" -eq 0 ]
 }
 
@@ -93,6 +93,12 @@ fi
 # Check for claude CLI
 if ! command -v claude &> /dev/null; then
     log_error "claude CLI not found. Please install it first."
+    exit 1
+fi
+
+# Check for jq
+if ! command -v jq &> /dev/null; then
+    log_error "jq not found. Please install it (brew install jq)."
     exit 1
 fi
 
