@@ -8,7 +8,7 @@
       "Create Settings class with env vars from .env.example",
       "Export settings singleton"
     ],
-    "verification": "python -c \"from app.config import settings; print(settings.LLM_PROVIDER)\"",
+    "verification": "uv run python -c \"from app.config import settings; print(settings.LLM_PROVIDER)\"",
     "passes": false
   },
   {
@@ -20,7 +20,7 @@
       "Define abstract methods: get_chat_model(), get_embeddings()",
       "Add type hints with BaseChatModel and Embeddings"
     ],
-    "verification": "python -c \"from app.llm.base import LLMProvider; print(LLMProvider)\"",
+    "verification": "uv run python -c \"from app.llm.base import LLMProvider; print(LLMProvider)\"",
     "passes": false
   },
   {
@@ -32,7 +32,7 @@
       "Create OllamaProvider class extending LLMProvider",
       "Implement get_chat_model() and get_embeddings() using config settings"
     ],
-    "verification": "python -c \"from app.llm.ollama_provider import OllamaProvider; print(OllamaProvider)\"",
+    "verification": "uv run python -c \"from app.llm.ollama_provider import OllamaProvider; print(OllamaProvider)\"",
     "passes": false
   },
   {
@@ -44,7 +44,7 @@
       "Create MistralAPIProvider class extending LLMProvider",
       "Implement get_chat_model() and get_embeddings()"
     ],
-    "verification": "python -c \"from app.llm.mistral_provider import MistralAPIProvider; print(MistralAPIProvider)\"",
+    "verification": "uv run python -c \"from app.llm.mistral_provider import MistralAPIProvider; print(MistralAPIProvider)\"",
     "passes": false
   },
   {
@@ -56,7 +56,7 @@
       "Create get_chat_model() and get_embeddings() helper functions",
       "Export these from app/llm/__init__.py"
     ],
-    "verification": "python -c \"from app.llm import get_chat_model; print(get_chat_model)\"",
+    "verification": "uv run python -c \"from app.llm import get_chat_model; print(get_chat_model)\"",
     "passes": false
   },
   {
@@ -68,7 +68,7 @@
       "Add /health GET endpoint returning {status: ok}",
       "Add CORS middleware"
     ],
-    "verification": "uvicorn app.main:app --port 8000 & sleep 3 && curl -s localhost:8000/health && pkill -f uvicorn",
+    "verification": "uv run uvicorn app.main:app --port 8000 & sleep 3 && curl -s localhost:8000/health && pkill -f uvicorn",
     "passes": false
   },
   {
@@ -80,7 +80,7 @@
       "Create ChatResponse model (answer: str, sources: list[str])",
       "Create HealthResponse model"
     ],
-    "verification": "python -c \"from app.models.schemas import ChatRequest; print(ChatRequest(message='test'))\"",
+    "verification": "uv run python -c \"from app.models.schemas import ChatRequest; print(ChatRequest(message='test'))\"",
     "passes": false
   },
   {
@@ -92,7 +92,7 @@
       "Create embed_text(text: str) -> list[float] function",
       "Create embed_documents(texts: list[str]) -> list[list[float]] function"
     ],
-    "verification": "python -c \"from app.rag.embeddings import embed_text; print(type(embed_text))\"",
+    "verification": "uv run python -c \"from app.rag.embeddings import embed_text; print(type(embed_text))\"",
     "passes": false
   },
   {
@@ -104,7 +104,7 @@
       "Create chunk_text(content: str, metadata: dict) function",
       "Use chunk_size=500, chunk_overlap=50"
     ],
-    "verification": "python -c \"from app.rag.chunker import chunk_text; print(len(chunk_text('test ' * 200, {})))\"",
+    "verification": "uv run python -c \"from app.rag.chunker import chunk_text; print(len(chunk_text('test ' * 200, {})))\"",
     "passes": false
   },
   {
@@ -114,10 +114,10 @@
     "steps": [
       "Import QdrantClient from qdrant_client",
       "Create QdrantRetriever class with __init__ connecting to Qdrant",
-      "Implement create_collection() method",
-      "Implement upsert(chunks: list) method"
+      "Implement create_collection() method (768 dimensions, COSINE distance)",
+      "Implement upsert(chunks: list) method with embeddings"
     ],
-    "verification": "python -c \"from app.rag.retriever import QdrantRetriever; print(QdrantRetriever)\"",
+    "verification": "uv run python -c \"from app.rag.retriever import QdrantRetriever; print(QdrantRetriever)\"",
     "passes": false
   },
   {
@@ -129,32 +129,34 @@
       "Return list of documents with scores",
       "Handle empty results gracefully"
     ],
-    "verification": "python -c \"from app.rag.retriever import QdrantRetriever; r = QdrantRetriever(); print(hasattr(r, 'search'))\"",
+    "verification": "uv run python -c \"from app.rag.retriever import QdrantRetriever; r = QdrantRetriever(); print(hasattr(r, 'search'))\"",
     "passes": false
   },
   {
     "id": "ingest-001",
     "category": "feature",
-    "description": "Create scripts/ingest.py to load local docs",
+    "description": "Create scripts/ingest.py to load docs from data/docs/",
     "steps": [
-      "Create load_documents(directory: str) function to read .md files",
-      "Create main() with argparse for --source argument",
-      "Print count of loaded files"
+      "Create load_documents(directory: str) to read .md files recursively",
+      "Parse each file: extract title (line 1), source URL (line 2), content (after ---)",
+      "Return list of dicts with keys: title, source, product, content",
+      "Default --source to data/docs"
     ],
-    "verification": "python scripts/ingest.py --help",
+    "verification": "uv run python scripts/ingest.py --dry-run | head -20",
     "passes": false
   },
   {
     "id": "ingest-002",
     "category": "feature",
-    "description": "Add chunking and ingestion to ingest.py",
+    "description": "Add chunking and Qdrant ingestion to ingest.py",
     "steps": [
-      "Import chunker and retriever modules",
-      "Chunk all loaded documents",
-      "Embed and store in Qdrant",
-      "Add --dry-run flag to preview without storing"
+      "Import chunker and QdrantRetriever",
+      "Chunk documents preserving metadata (source, product, title)",
+      "Create collection if not exists (768 dimensions for nomic-embed-text)",
+      "Embed chunks and upsert to Qdrant",
+      "Show progress with count of chunks ingested"
     ],
-    "verification": "python scripts/ingest.py --source data/docs --dry-run",
+    "verification": "uv run python scripts/ingest.py --source data/docs && curl -s localhost:6333/collections/infomaniak_docs | grep points_count",
     "passes": false
   },
   {
@@ -165,7 +167,7 @@
       "Create SYSTEM_PROMPT constant for RAG assistant",
       "Include rules: use only context, cite sources, respond in query language"
     ],
-    "verification": "python -c \"from app.agent.prompts import SYSTEM_PROMPT; print(SYSTEM_PROMPT[:50])\"",
+    "verification": "uv run python -c \"from app.agent.prompts import SYSTEM_PROMPT; print(SYSTEM_PROMPT[:50])\"",
     "passes": false
   },
   {
@@ -177,7 +179,7 @@
       "Create search_docs(query: str) tool using QdrantRetriever",
       "Format results with source citations"
     ],
-    "verification": "python -c \"from app.agent.tools import search_docs; print(search_docs.name)\"",
+    "verification": "uv run python -c \"from app.agent.tools import search_docs; print(search_docs.name)\"",
     "passes": false
   },
   {
@@ -189,7 +191,7 @@
       "Create get_agent() function with tools and prompt",
       "Add InMemorySaver for conversation memory"
     ],
-    "verification": "python -c \"from app.agent.executor import get_agent; print(get_agent)\"",
+    "verification": "uv run python -c \"from app.agent.executor import get_agent; print(get_agent)\"",
     "passes": false
   },
   {
@@ -225,7 +227,7 @@
       "Create get_langfuse_handler() function",
       "Return None if LANGFUSE_ENABLED is false"
     ],
-    "verification": "python -c \"from app.observability.langfuse import get_langfuse_handler; print(get_langfuse_handler())\"",
+    "verification": "uv run python -c \"from app.observability.langfuse import get_langfuse_handler; print(get_langfuse_handler())\"",
     "passes": false
   },
   {
@@ -261,7 +263,7 @@
       "Create test_health_returns_200()",
       "Create test_chat_rejects_empty_message()"
     ],
-    "verification": "pytest tests/test_api.py -v",
+    "verification": "uv run pytest tests/test_api.py -v",
     "passes": false
   },
   {
@@ -273,7 +275,7 @@
       "Create test_retriever_initializes()",
       "Skip if Qdrant unavailable"
     ],
-    "verification": "pytest tests/test_rag.py -v",
+    "verification": "uv run pytest tests/test_rag.py -v",
     "passes": false
   },
   {

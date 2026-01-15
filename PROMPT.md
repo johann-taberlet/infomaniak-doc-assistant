@@ -119,6 +119,43 @@ Exemple:
 
 ---
 
+## Project Data
+
+### Documentation Data Location
+Les données scrapées de la documentation Infomaniak sont dans:
+```
+data/docs/
+├── kchat/    # 21 fichiers - documentation kChat
+├── kmeet/    # 17 fichiers - documentation kMeet
+└── kdrive/   # 22 fichiers - documentation kDrive
+```
+
+### Format des fichiers
+Chaque fichier `.md` a ce format:
+```markdown
+# Titre de l'article
+
+Source: https://www.infomaniak.com/en/support/faq/XXXX/slug
+
+---
+
+Contenu de la documentation...
+```
+
+### Extraction de métadonnées
+Pour l'ingestion, extraire:
+- `title`: première ligne (après le `# `)
+- `source`: deuxième ligne (après `Source: `)
+- `product`: dossier parent (`kchat`, `kmeet`, ou `kdrive`)
+- `content`: tout après le `---`
+
+### Paramètres d'embedding
+- **Modèle**: `nomic-embed-text` via Ollama
+- **Dimensions**: 768 (important pour Qdrant!)
+- **Chunk size**: 500 caractères avec 50 d'overlap
+
+---
+
 ## Code Patterns Reference
 
 ### Pydantic Settings (config.py)

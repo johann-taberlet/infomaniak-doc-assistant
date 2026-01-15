@@ -4,7 +4,7 @@
 
 | Modèle | Dimensions | Usage |
 |--------|------------|-------|
-| nomic-embed-text | 1024 | Recommandé - bon équilibre |
+| nomic-embed-text | 768 | Recommandé - bon équilibre |
 | mxbai-embed-large | 1024 | Meilleure qualité |
 | all-minilm | 384 | Prototypage rapide |
 
@@ -18,7 +18,7 @@ embeddings = OllamaEmbeddings(
     base_url="http://localhost:11434"
 )
 
-# Dimension: 1024
+# Dimension: 768
 vector = embeddings.embed_query("Mon texte")
 vectors = embeddings.embed_documents(["Doc 1", "Doc 2"])
 ```

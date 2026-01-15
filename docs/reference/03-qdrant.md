@@ -14,7 +14,7 @@ client = QdrantClient(url="http://localhost:6333")
 client.create_collection(
     collection_name="infomaniak_docs",
     vectors_config=models.VectorParams(
-        size=1024,  # Dimension des embeddings (nomic-embed-text)
+        size=768,  # Dimension des embeddings (nomic-embed-text)
         distance=models.Distance.COSINE,
     ),
 )
@@ -28,7 +28,7 @@ client.upsert(
     points=[
         models.PointStruct(
             id=1,
-            vector=[0.1, 0.2, ...],  # 1024 dimensions
+            vector=[0.1, 0.2, ...],  # 768 dimensions
             payload={
                 "source": "docs.infomaniak.com",
                 "title": "Partage de fichiers",
