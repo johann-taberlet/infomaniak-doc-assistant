@@ -240,7 +240,7 @@
       "Increment counters in /chat endpoint"
     ],
     "verification": "curl localhost:8000/metrics",
-    "passes": false
+    "passes": true
   },
   {
     "id": "obs-003",

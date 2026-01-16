@@ -494,3 +494,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: obs-002
+**Status**: completed
+**Description**: Added GET /metrics endpoint with request and error counters
+
+**Actions Taken**:
+- Read docs/reference/06-fastapi.md and docs/reference/07-langfuse.md for patterns
+- Added simple in-memory metrics dict with request_count and error_count
+- Added /metrics GET endpoint returning the metrics dict as JSON
+- Updated /chat endpoint to increment request_count on each call
+- Added try/except to increment error_count on exceptions
+
+**Verification**:
+- Command: `curl localhost:8000/metrics`
+- Result: PASS - Output: `{"request_count":0,"error_count":0}`
+
+**Files Modified**:
+- app/main.py (updated)
+
+**Notes**:
+- Simple in-memory metrics reset on server restart
+- Counters track all /chat requests and errors
+
+---
+
