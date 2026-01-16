@@ -157,7 +157,7 @@
       "Show progress with count of chunks ingested"
     ],
     "verification": "uv run python scripts/ingest.py --source data/docs && curl -s localhost:6333/collections/infomaniak_docs | grep points_count",
-    "passes": false
+    "passes": true
   },
   {
     "id": "agent-001",

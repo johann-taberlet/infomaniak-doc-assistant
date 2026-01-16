@@ -320,3 +320,29 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: ingest-002
+**Status**: completed
+**Description**: Added chunking and Qdrant ingestion to ingest.py
+
+**Actions Taken**:
+- Imported chunker and QdrantRetriever from app.rag
+- Added ingestion logic in else branch (when not dry-run)
+- Creates collection if it doesn't exist (768 dimensions for nomic-embed-text)
+- Chunks all documents using chunk_text() preserving metadata (source, product, title)
+- Embeds chunks and upserts to Qdrant using retriever.upsert()
+- Shows progress with count of documents, chunks, and ingested points
+
+**Verification**:
+- Command: `uv run python scripts/ingest.py --source data/docs && curl -s localhost:6333/collections/infomaniak_docs | grep points_count`
+- Result: PASS - Output shows 579 chunks created from 60 documents, and Qdrant collection contains `"points_count":579`
+
+**Files Modified**:
+- scripts/ingest.py (updated)
+
+**Notes**:
+- Ingestion takes a few seconds due to embedding generation
+- Each chunk preserves original document metadata for source citation
+- Collection uses COSINE distance metric
+
+---
+

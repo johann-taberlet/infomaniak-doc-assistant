@@ -4,6 +4,9 @@
 import argparse
 from pathlib import Path
 
+from app.rag.chunker import chunk_text
+from app.rag.retriever import QdrantRetriever
+
 
 def load_documents(directory: str) -> list[dict]:
     """Load markdown documents from a directory recursively.
@@ -89,7 +92,28 @@ def main() -> None:
             print("-" * 40)
     else:
         print(f"Loaded {len(documents)} documents")
-        # Actual ingestion will be implemented in ingest-002
+
+        # Initialize retriever and create collection
+        retriever = QdrantRetriever()
+        retriever.create_collection()
+        print(f"Collection '{retriever.collection_name}' ready")
+
+        # Chunk all documents
+        all_chunks = []
+        for doc in documents:
+            metadata = {
+                "title": doc["title"],
+                "source": doc["source"],
+                "product": doc["product"],
+            }
+            chunks = chunk_text(doc["content"], metadata)
+            all_chunks.extend(chunks)
+
+        print(f"Created {len(all_chunks)} chunks from {len(documents)} documents")
+
+        # Upsert chunks to Qdrant
+        count = retriever.upsert(all_chunks)
+        print(f"Ingested {count} chunks into Qdrant")
 
 
 if __name__ == "__main__":
