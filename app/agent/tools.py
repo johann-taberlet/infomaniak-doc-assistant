@@ -4,6 +4,7 @@ from functools import cache
 
 from langchain.tools import tool
 
+from app.config import settings
 from app.rag.retriever import QdrantRetriever
 
 
@@ -27,7 +28,7 @@ def search_docs(query: str) -> str:
         Formatted search results with content and source citations.
     """
     retriever = get_retriever()
-    documents = retriever.search(query, top_k=5)
+    documents = retriever.search(query, top_k=settings.RAG_TOP_K)
 
     if not documents:
         return "No relevant documentation found for this query."

@@ -37,6 +37,8 @@ dependencies = [
     # Utilities
     "python-dotenv>=1.0.0",
     "tenacity>=8.2.0",
+    # Hybrid search
+    "rank-bm25>=0.2.2",
 ]
 
 [project.optional-dependencies]

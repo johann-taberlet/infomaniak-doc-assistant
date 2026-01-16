@@ -49,11 +49,15 @@ class Settings(BaseSettings):
     LANGFUSE_HOST: str = "https://cloud.langfuse.com"
 
     # RAG Configuration
-    RAG_CHUNK_SIZE: int = Field(default=500, gt=0)
-    RAG_CHUNK_OVERLAP: int = Field(default=50, ge=0)
-    RAG_TOP_K: int = Field(default=5, gt=0)
+    RAG_CHUNK_SIZE: int = Field(default=1500, gt=0)  # Larger chunks for better context
+    RAG_CHUNK_OVERLAP: int = Field(default=200, ge=0)  # More overlap to preserve context
+    RAG_TOP_K: int = Field(default=10, gt=0)  # More candidates for hybrid search
     RAG_SIMILARITY_THRESHOLD: float = Field(default=0.7, ge=0.0, le=1.0)
     RAG_VECTOR_DIMENSION: int = Field(default=4096, gt=0)  # 768 for nomic, 4096 for Qwen3
+
+    # Hybrid Search Configuration
+    RAG_HYBRID_ENABLED: bool = True  # Enable BM25 + vector hybrid search
+    RAG_BM25_K: int = Field(default=60, gt=0)  # RRF constant (higher = more equal weighting)
 
     # Jina API
     JINA_API_KEY: str = ""
