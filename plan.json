@@ -264,7 +264,7 @@
       "Create test_chat_rejects_empty_message()"
     ],
     "verification": "uv run pytest tests/test_api.py -v",
-    "passes": false
+    "passes": true
   },
   {
     "id": "test-002",

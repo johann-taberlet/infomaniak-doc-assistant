@@ -544,3 +544,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: test-001
+**Status**: completed
+**Description**: Created tests/test_api.py with API endpoint tests
+
+**Actions Taken**:
+- Added pytest and httpx as dev dependencies
+- Created tests/test_api.py with TestClient from fastapi.testclient
+- Implemented test_health_returns_200() to verify health endpoint
+- Implemented test_chat_rejects_empty_message() to verify validation
+
+**Verification**:
+- Command: `uv run pytest tests/test_api.py -v`
+- Result: PASS - 2 tests passed
+
+**Files Modified**:
+- tests/test_api.py (created)
+- pyproject.toml (updated with pytest, httpx deps)
+
+**Notes**:
+- TestClient used for synchronous testing of FastAPI app
+- Empty message validation triggers 400 response (min_length=1 constraint)
+
+---
+
