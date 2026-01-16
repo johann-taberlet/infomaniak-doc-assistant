@@ -35,7 +35,12 @@ class Settings(BaseSettings):
 
     # Qdrant Configuration
     QDRANT_HOST: str = "http://localhost:6333"
-    QDRANT_COLLECTION: str = Field(default="infomaniak_docs", min_length=1)
+    QDRANT_COLLECTION_BASE: str = Field(default="infomaniak_docs", min_length=1)
+
+    @property
+    def QDRANT_COLLECTION(self) -> str:
+        """Collection name with strategy suffix for A/B testing."""
+        return f"{self.QDRANT_COLLECTION_BASE}_{self.RAG_CHUNK_STRATEGY}"
 
     # Application Configuration
     APP_HOST: str = "0.0.0.0"
