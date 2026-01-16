@@ -45,7 +45,7 @@
       "Implement get_chat_model() and get_embeddings()"
     ],
     "verification": "uv run python -c \"from app.llm.mistral_provider import MistralAPIProvider; print(MistralAPIProvider)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "llm-004",
