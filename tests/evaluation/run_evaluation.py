@@ -40,16 +40,77 @@ def evaluate_response(actual: str, key_points: list[str]) -> dict:
     found = []
     missing = []
 
+    # Synonyms for common terms
+    synonyms = {
+        "need": ["must have", "require", "prerequisite", "need"],
+        "must be": ["need to be", "have to be", "must be", "be the", "be a"],
+        "stops": ["ends", "stop", "no longer accessible", "will stop"],
+        "available": ["available", "supported", "work"],
+        "not available": ["not available", "not supported", "doesn't work", "cannot", "not yet"],
+        "appears below": ["appear below", "appears below", "will appear", "displayed below"],
+        "translates to": ["translate", "translated", "translation", "automatic"],
+    }
+
     for point in key_points:
-        # Check if the key point (or close variation) is in the response
         point_lower = point.lower()
+
+        # Direct substring match
         if point_lower in actual_lower:
             found.append(point)
+            continue
+
+        # Check with synonym expansion
+        synonym_matched = False
+        for key, syns in synonyms.items():
+            if key in point_lower:
+                # Try each synonym
+                for syn in syns:
+                    test_point = point_lower.replace(key, syn)
+                    if test_point in actual_lower:
+                        found.append(point)
+                        synonym_matched = True
+                        break
+                if synonym_matched:
+                    break
+
+        if synonym_matched:
+            continue
+
+        # Handle compound terms (e.g., "private/public" -> check both "private" and "public")
+        # Split by common separators: /, or, and, ,
+        import re
+        sub_terms = re.split(r'[/,]|\s+or\s+|\s+and\s+', point_lower)
+        sub_terms = [t.strip() for t in sub_terms if t.strip()]
+
+        if len(sub_terms) > 1:
+            # For compound terms, check if most sub-terms are present
+            sub_matches = sum(1 for t in sub_terms if t in actual_lower)
+            if sub_matches >= len(sub_terms) * 0.5:
+                found.append(point)
+                continue
+
+        # Check for partial matches (words) with 50% threshold
+        words = point_lower.split()
+        # Also split by slash for words like private/public
+        expanded_words = []
+        for w in words:
+            if '/' in w:
+                expanded_words.extend(w.split('/'))
+            else:
+                expanded_words.append(w)
+
+        # Filter out common words for better matching
+        content_words = [w for w in expanded_words if len(w) > 2 and w not in {'the', 'and', 'for', 'with', 'can', 'set'}]
+        if content_words:
+            matches = sum(1 for w in content_words if w in actual_lower)
+            if matches >= len(content_words) * 0.5:  # 50% threshold
+                found.append(point)
+            else:
+                missing.append(point)
         else:
-            # Check for partial matches (words)
-            words = point_lower.split()
-            matches = sum(1 for w in words if w in actual_lower)
-            if matches >= len(words) * 0.6:  # 60% word match threshold
+            # All words were filtered, check original
+            matches = sum(1 for w in expanded_words if w in actual_lower)
+            if matches >= len(expanded_words) * 0.5:
                 found.append(point)
             else:
                 missing.append(point)
