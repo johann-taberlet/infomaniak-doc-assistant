@@ -592,3 +592,29 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: ui-001
+**Status**: completed
+**Description**: Created static/index.html with basic chat form and mounted static files in FastAPI
+
+**Actions Taken**:
+- Created static/ directory
+- Created static/index.html with HTML structure: header, chat container, input form
+- Added minimal CSS styling: Infomaniak blue theme (#0066cc), responsive layout, message bubbles
+- Imported StaticFiles from fastapi.staticfiles
+- Added app.mount("/static", StaticFiles(directory="static"), name="static")
+
+**Verification**:
+- Command: `curl localhost:8000/static/index.html`
+- Result: PASS - HTTP 200, returns full HTML content
+
+**Files Modified**:
+- static/index.html (created)
+- app/main.py (updated with static file mount)
+
+**Notes**:
+- Script tag placeholder added for ui-002 JavaScript implementation
+- CSS uses system font stack for cross-platform consistency
+- Chat container has min-height for initial display before messages
+
+---
+

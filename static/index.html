@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infomaniak Doc Assistant</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #0066cc;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        #chat-container {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            overflow-y: auto;
+            min-height: 400px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: #0066cc;
+            color: white;
+            margin-left: auto;
+        }
+        .message.assistant {
+            background: #e9ecef;
+            color: #333;
+        }
+        .message.loading {
+            background: #e9ecef;
+            color: #666;
+            font-style: italic;
+        }
+        #chat-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        #message-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        #message-input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        #send-button {
+            padding: 0.75rem 1.5rem;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background: #0052a3;
+        }
+        #send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Infomaniak Doc Assistant</h1>
+    </header>
+    <main>
+        <div id="chat-container"></div>
+        <form id="chat-form">
+            <input type="text" id="message-input" placeholder="Ask about kDrive, kMeet, or kChat..." autocomplete="off" required>
+            <button type="submit" id="send-button">Send</button>
+        </form>
+    </main>
+    <script>
+        // Chat functionality will be added in ui-002
+    </script>
+</body>
+</html>
