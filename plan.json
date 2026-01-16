@@ -192,7 +192,7 @@
       "Add InMemorySaver for conversation memory"
     ],
     "verification": "uv run python -c \"from app.agent.executor import get_agent; print(get_agent)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "api-002",
