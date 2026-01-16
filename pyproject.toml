@@ -39,8 +39,6 @@ dependencies = [
     "tenacity>=8.2.0",
     # Hybrid search
     "rank-bm25>=0.2.2",
-    # Reranking (v2 architecture)
-    "sentence-transformers>=2.2.0",
 ]
 
 [project.optional-dependencies]

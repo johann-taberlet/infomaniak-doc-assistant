@@ -35,24 +35,7 @@ class Settings(BaseSettings):
 
     # Qdrant Configuration
     QDRANT_HOST: str = "http://localhost:6333"
-    QDRANT_COLLECTION_BASE: str = Field(default="infomaniak_docs", min_length=1)
-
-    @property
-    def QDRANT_COLLECTION(self) -> str:
-        """Collection name with version and strategy suffix for A/B testing."""
-        return f"{self.QDRANT_COLLECTION_BASE}_{self.RAG_ARCHITECTURE_VERSION}_{self.RAG_CHUNK_STRATEGY}"
-
-    def get_embedding_model(self) -> str:
-        """Get embedding model based on architecture version."""
-        if self.RAG_ARCHITECTURE_VERSION == "v2":
-            return "baai/bge-m3"  # BGE-M3 for v2
-        return self.OPENROUTER_EMBEDDING_MODEL  # v1 default (qwen3-embedding-8b)
-
-    def get_vector_dimension(self) -> int:
-        """Get vector dimension based on architecture version."""
-        if self.RAG_ARCHITECTURE_VERSION == "v2":
-            return 1024  # BGE-M3 dimension
-        return self.RAG_VECTOR_DIMENSION  # v1 default (4096)
+    QDRANT_COLLECTION: str = Field(default="infomaniak_docs", min_length=1)
 
     # Application Configuration
     APP_HOST: str = "0.0.0.0"
@@ -65,28 +48,16 @@ class Settings(BaseSettings):
     LANGFUSE_SECRET_KEY: str = ""
     LANGFUSE_HOST: str = "https://cloud.langfuse.com"
 
-    # RAG Architecture Version (for A/B testing)
-    RAG_ARCHITECTURE_VERSION: Literal["v1", "v2"] = "v1"
-
     # RAG Configuration
-    RAG_CHUNK_STRATEGY: Literal["split", "document"] = "split"  # "split" or "document" (whole FAQ)
-    RAG_CHUNK_SIZE: int = Field(default=1500, gt=0)  # For "split" strategy only
-    RAG_CHUNK_OVERLAP: int = Field(default=200, ge=0)  # For "split" strategy only
-    RAG_TOP_K: int = Field(default=10, gt=0)  # More candidates for hybrid search
+    RAG_CHUNK_SIZE: int = Field(default=1500, gt=0)
+    RAG_CHUNK_OVERLAP: int = Field(default=200, ge=0)
+    RAG_TOP_K: int = Field(default=10, gt=0)
     RAG_SIMILARITY_THRESHOLD: float = Field(default=0.7, ge=0.0, le=1.0)
-    RAG_VECTOR_DIMENSION: int = Field(default=4096, gt=0)  # 768 for nomic, 4096 for Qwen3
+    RAG_VECTOR_DIMENSION: int = Field(default=4096, gt=0)  # 4096 for Qwen3 embeddings
 
     # Hybrid Search Configuration
     RAG_HYBRID_ENABLED: bool = True  # Enable BM25 + vector hybrid search
     RAG_BM25_K: int = Field(default=60, gt=0)  # RRF constant (higher = more equal weighting)
-
-    # Reranking Configuration (v2 architecture)
-    RAG_RERANK_ENABLED: bool = False  # Enable cross-encoder reranking
-    RAG_RERANK_MODEL: str = "BAAI/bge-reranker-v2-m3"  # Open-source multilingual reranker
-    RAG_RERANK_TOP_N: int = Field(default=5, gt=0)  # Final docs after reranking
-
-    # Contextual Retrieval (v2 architecture)
-    RAG_CONTEXTUAL_ENABLED: bool = False  # Prepend context to chunks before embedding
 
     # Jina API
     JINA_API_KEY: str = ""

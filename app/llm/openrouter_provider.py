@@ -20,7 +20,7 @@ class OpenRouterEmbeddings(Embeddings):
     """Custom embeddings class for OpenRouter API.
 
     Uses the OpenAI SDK directly to properly support encoding_format parameter
-    required by some models like BGE-M3.
+    required by OpenRouter's embedding models.
     """
 
     def __init__(self, model: str, api_key: str, site_url: str, site_name: str):
@@ -77,16 +77,11 @@ class OpenRouterProvider(LLMProvider):
     def get_embeddings(self) -> Embeddings:
         """Return the OpenRouter embeddings model instance.
 
-        Uses OpenRouter's embedding API with the configured model.
-        Model selection is dynamic based on RAG_ARCHITECTURE_VERSION:
-        - v1: Uses OPENROUTER_EMBEDDING_MODEL (default: qwen3-embedding-8b)
-        - v2: Uses BGE-M3 (baai/bge-m3)
-
         Returns:
-            Embeddings: OpenRouterEmbeddings configured for the selected model.
+            Embeddings: OpenRouterEmbeddings configured for the embedding model.
         """
         return OpenRouterEmbeddings(
-            model=settings.get_embedding_model(),
+            model=settings.OPENROUTER_EMBEDDING_MODEL,
             api_key=settings.OPENROUTER_API_KEY,
             site_url=settings.OPENROUTER_SITE_URL,
             site_name=settings.OPENROUTER_SITE_NAME,
