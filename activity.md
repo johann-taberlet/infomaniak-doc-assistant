@@ -130,3 +130,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: llm-004
+**Status**: completed
+**Description**: Created app/llm/factory.py and wired up __init__.py exports
+
+**Actions Taken**:
+- Created app/llm/factory.py with get_provider() function
+- Implemented provider selection based on LLM_PROVIDER config (supports "ollama" and "mistral")
+- Added get_chat_model() and get_embeddings() helper functions
+- Updated app/llm/__init__.py to export get_provider, get_chat_model, get_embeddings
+
+**Verification**:
+- Command: `uv run python -c "from app.llm import get_chat_model; print(get_chat_model)"`
+- Result: PASS - Output: `<function get_chat_model at 0x105f8c540>`
+
+**Files Modified**:
+- app/llm/factory.py (created)
+- app/llm/__init__.py (updated)
+
+**Notes**:
+- Factory pattern allows easy extension for new providers
+- ValueError raised for unsupported providers
+
+---
+

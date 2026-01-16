@@ -57,7 +57,7 @@
       "Export these from app/llm/__init__.py"
     ],
     "verification": "uv run python -c \"from app.llm import get_chat_model; print(get_chat_model)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "api-001",
