@@ -1,14 +1,18 @@
 """FastAPI application entry point."""
 
 import json
+import logging
 import uuid
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 from app.agent.executor import get_agent
 from app.models.schemas import ChatRequest, ChatResponse
+
+logger = logging.getLogger(__name__)
 
 # Simple in-memory metrics
 metrics = {
@@ -29,6 +33,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    """Handle validation errors with 400 status."""
+    logger.error("Validation error: %s", exc.errors())
+    return JSONResponse(status_code=400, content={"detail": exc.errors()})
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    """Handle unexpected errors with 500 status."""
+    logger.error("Internal error: %s", str(exc))
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
 
 
 @app.get("/health")

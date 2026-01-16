@@ -252,7 +252,7 @@
       "Log errors"
     ],
     "verification": "curl -X POST localhost:8000/chat -d 'invalid' returns 400",
-    "passes": false
+    "passes": true
   },
   {
     "id": "test-001",

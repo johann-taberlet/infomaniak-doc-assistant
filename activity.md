@@ -518,3 +518,29 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: obs-003
+**Status**: completed
+**Description**: Added error handling middleware with exception handlers
+
+**Actions Taken**:
+- Read docs/reference/06-fastapi.md for exception handler patterns
+- Added RequestValidationError exception handler returning 400 with error details
+- Added general Exception handler returning 500 with "Internal server error"
+- Added logging for both error types using Python's logging module
+
+**Verification**:
+- Command: `curl -X POST localhost:8000/chat -d 'invalid'`
+- Result: PASS - Returns HTTP 400 with `{"detail":[{"type":"json_invalid",...}]}`
+- Command: `curl -X POST localhost:8000/chat -H 'Content-Type: application/json' -d '{}'`
+- Result: PASS - Returns HTTP 400 with `{"detail":[{"type":"missing","loc":["body","message"],...}]}`
+
+**Files Modified**:
+- app/main.py (updated)
+
+**Notes**:
+- Used RequestValidationError from fastapi.exceptions for validation errors
+- Errors are logged with logger.error() for observability
+- Returns JSONResponse with appropriate status codes
+
+---
+
