@@ -18,28 +18,36 @@ class QdrantRetriever:
         self.client = QdrantClient(url=settings.QDRANT_HOST)
         self.collection_name = settings.QDRANT_COLLECTION
 
-    def create_collection(self) -> None:
+    def create_collection(self, force_recreate: bool = False) -> None:
         """Create the collection if it doesn't exist.
 
-        Uses 768 dimensions for nomic-embed-text embeddings and COSINE distance.
+        Uses configurable dimensions (RAG_VECTOR_DIMENSION) and COSINE distance.
+
+        Args:
+            force_recreate: If True, delete existing collection and recreate.
         """
         collections = self.client.get_collections().collections
         collection_names = [c.name for c in collections]
+
+        if force_recreate and self.collection_name in collection_names:
+            self.client.delete_collection(self.collection_name)
+            collection_names.remove(self.collection_name)
 
         if self.collection_name not in collection_names:
             self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=models.VectorParams(
-                    size=768,
+                    size=settings.RAG_VECTOR_DIMENSION,
                     distance=models.Distance.COSINE,
                 ),
             )
 
-    def upsert(self, chunks: list[Document]) -> int:
-        """Upsert document chunks into the collection.
+    def upsert(self, chunks: list[Document], batch_size: int = 50) -> int:
+        """Upsert document chunks into the collection in batches.
 
         Args:
             chunks: List of Document objects with page_content and metadata.
+            batch_size: Number of chunks to upsert per batch (default: 50).
 
         Returns:
             Number of points upserted.
@@ -47,31 +55,38 @@ class QdrantRetriever:
         if not chunks:
             return 0
 
-        # Extract texts and embed them
-        texts = [chunk.page_content for chunk in chunks]
-        vectors = embed_documents(texts)
+        total_upserted = 0
 
-        # Build points with unique IDs
-        points = []
-        for chunk, vector in zip(chunks, vectors):
-            point = models.PointStruct(
-                id=str(uuid.uuid4()),
-                vector=vector,
-                payload={
-                    "content": chunk.page_content,
-                    "source": chunk.metadata.get("source", ""),
-                    "title": chunk.metadata.get("title", ""),
-                    "product": chunk.metadata.get("product", ""),
-                },
+        # Process in batches to avoid payload size limits
+        for i in range(0, len(chunks), batch_size):
+            batch = chunks[i : i + batch_size]
+
+            # Extract texts and embed them
+            texts = [chunk.page_content for chunk in batch]
+            vectors = embed_documents(texts)
+
+            # Build points with unique IDs
+            points = []
+            for chunk, vector in zip(batch, vectors):
+                point = models.PointStruct(
+                    id=str(uuid.uuid4()),
+                    vector=vector,
+                    payload={
+                        "content": chunk.page_content,
+                        "source": chunk.metadata.get("source", ""),
+                        "title": chunk.metadata.get("title", ""),
+                        "product": chunk.metadata.get("product", ""),
+                    },
+                )
+                points.append(point)
+
+            self.client.upsert(
+                collection_name=self.collection_name,
+                points=points,
             )
-            points.append(point)
+            total_upserted += len(points)
 
-        self.client.upsert(
-            collection_name=self.collection_name,
-            points=points,
-        )
-
-        return len(points)
+        return total_upserted
 
     def search(self, query: str, top_k: int = 5) -> list[Document]:
         """Search for documents similar to the query.

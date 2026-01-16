@@ -7,6 +7,7 @@ from app.config import settings
 from app.llm.base import LLMProvider
 from app.llm.mistral_provider import MistralAPIProvider
 from app.llm.ollama_provider import OllamaProvider
+from app.llm.openrouter_provider import OpenRouterProvider
 
 
 def get_provider() -> LLMProvider:
@@ -24,6 +25,8 @@ def get_provider() -> LLMProvider:
         return OllamaProvider()
     elif provider_name == "mistral":
         return MistralAPIProvider()
+    elif provider_name == "openrouter":
+        return OpenRouterProvider()
     else:
         raise ValueError(f"Unsupported LLM provider: {provider_name}")
 

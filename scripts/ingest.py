@@ -77,6 +77,11 @@ def main() -> None:
         action="store_true",
         help="Only load and display documents, don't ingest",
     )
+    parser.add_argument(
+        "--force-recreate",
+        action="store_true",
+        help="Delete existing collection and recreate with new vector dimensions",
+    )
 
     args = parser.parse_args()
 
@@ -95,7 +100,9 @@ def main() -> None:
 
         # Initialize retriever and create collection
         retriever = QdrantRetriever()
-        retriever.create_collection()
+        if args.force_recreate:
+            print("Force recreating collection with new vector dimensions...")
+        retriever.create_collection(force_recreate=args.force_recreate)
         print(f"Collection '{retriever.collection_name}' ready")
 
         # Chunk all documents

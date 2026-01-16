@@ -1,7 +1,4 @@
 {
-  "enabledPlugins": {
-    "playwright@claude-plugins-official": true
-  },
   "permissions": {
     "allow": [
       "Bash(python *)",
@@ -48,6 +45,10 @@
       "Bash(docker-compose up *)",
       "Bash(rm -rf /*)"
     ]
+  },
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true
   },
   "settings": {
     "systemPromptFile": "PROMPT.md"

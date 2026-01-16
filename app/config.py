@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     """Application settings with validation constraints."""
 
     # LLM Provider - constrained to supported values
-    LLM_PROVIDER: Literal["ollama", "mistral", "qwen"] = "ollama"
+    LLM_PROVIDER: Literal["ollama", "mistral", "qwen", "openrouter"] = "ollama"
 
     # Ollama Configuration
     OLLAMA_HOST: str = "http://localhost:11434"
@@ -25,6 +25,13 @@ class Settings(BaseSettings):
     MISTRAL_API_KEY: str = ""
     MISTRAL_CHAT_MODEL: str = "mistral-large-latest"
     MISTRAL_EMBEDDING_MODEL: str = "mistral-embed"
+
+    # OpenRouter API Configuration
+    OPENROUTER_API_KEY: str = ""
+    OPENROUTER_CHAT_MODEL: str = "mistralai/ministral-8b"
+    OPENROUTER_EMBEDDING_MODEL: str = "qwen/qwen3-embedding-8b"
+    OPENROUTER_SITE_URL: str = "https://infomaniak-doc-assistant.demo"
+    OPENROUTER_SITE_NAME: str = "Infomaniak Doc Assistant"
 
     # Qdrant Configuration
     QDRANT_HOST: str = "http://localhost:6333"
@@ -46,6 +53,7 @@ class Settings(BaseSettings):
     RAG_CHUNK_OVERLAP: int = Field(default=50, ge=0)
     RAG_TOP_K: int = Field(default=5, gt=0)
     RAG_SIMILARITY_THRESHOLD: float = Field(default=0.7, ge=0.0, le=1.0)
+    RAG_VECTOR_DIMENSION: int = Field(default=4096, gt=0)  # 768 for nomic, 4096 for Qwen3
 
     # Jina API
     JINA_API_KEY: str = ""
