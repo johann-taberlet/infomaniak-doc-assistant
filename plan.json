@@ -228,7 +228,7 @@
       "Return None if LANGFUSE_ENABLED is false"
     ],
     "verification": "uv run python -c \"from app.observability.langfuse import get_langfuse_handler; print(get_langfuse_handler())\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "obs-002",

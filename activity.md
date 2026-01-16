@@ -470,3 +470,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: obs-001
+**Status**: completed
+**Description**: Created app/observability/langfuse.py with get_langfuse_handler() function
+
+**Actions Taken**:
+- Read docs/reference/07-langfuse.md for Langfuse patterns
+- Created app/observability/langfuse.py with get_langfuse_handler() function
+- Function returns CallbackHandler when LANGFUSE_ENABLED is true, None otherwise
+- Used langfuse.langchain.CallbackHandler import (updated from reference which had older import path)
+
+**Verification**:
+- Command: `uv run python -c "from app.observability.langfuse import get_langfuse_handler; print(get_langfuse_handler())"`
+- Result: PASS - Output: `None` (correct because LANGFUSE_ENABLED defaults to False)
+
+**Files Modified**:
+- app/observability/langfuse.py (created)
+
+**Notes**:
+- Import path is `langfuse.langchain.CallbackHandler` (not `langfuse.callback` as in older docs)
+- Handler is configured with public_key, secret_key, and host from settings
+- Returns None when disabled to avoid unnecessary API calls
+
+---
+
