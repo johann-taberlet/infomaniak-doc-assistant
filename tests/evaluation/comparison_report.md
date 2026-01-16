@@ -1,6 +1,6 @@
 # RAG Quality Evaluation Report
 
-**Generated:** 2026-01-16 12:50:59
+**Generated:** 2026-01-16 19:30:55
 **Questions Tested:** 20
 
 ---
@@ -9,19 +9,19 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Score | 31/60 (51.7%) |
-| Average Score | 1.55/3.00 |
-| Average Coverage | 45.5% |
-| Average Response Time | 37.0s |
+| Total Score | 47/60 (78.3%) |
+| Average Score | 2.35/3.00 |
+| Average Coverage | 73.0% |
+| Average Response Time | 13.1s |
 
 ## Rating Distribution
 
 | Rating | Count | Percentage |
 |--------|-------|------------|
-| Complete (3) | 5 | 25.0% |
-| Partial (2) | 5 | 25.0% |
-| Minimal (1) | 6 | 30.0% |
-| Wrong (0) | 4 | 20.0% |
+| Complete (3) | 9 | 45.0% |
+| Partial (2) | 9 | 45.0% |
+| Minimal (1) | 2 | 10.0% |
+| Wrong (0) | 0 | 0.0% |
 
 ---
 
@@ -31,99 +31,91 @@
 
 #### Q1: How do I create a kMeet meeting?
 
-**Rating:** [~] Partial (60.0% coverage)
+**Rating:** [+] Complete (100.0% coverage)
 
 **Response excerpt:**
-> To create a **kMeet meeting**, follow these steps:
+> To create a kMeet meeting, follow these steps:
 
-### **Basic Steps**
-1. **Access kMeet**:
-   - Open [kmeet.infomaniak.com](https://kmeet.infomaniak.com) in your browser or use the kMeet app on your device (macOS, Windows, Linux, iOS, Android).
-2. **Start a New Meeting**:
-   - Click "Start a new meeting" or similar option.  
-   *(Source: [Create a kMeet meeting](https://www.infomaniak.com/en/support/faq/2475))*  
+1. **Start kMeet**:
+   - Go to [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or use the kMeet application on your computer or mobile device.
 
----
+2. **Create a new meeting**:
+   - Click on the option to start a new meeting.
 
-### **Advanced Options**
-- **Secure the Meeting**:
-  - Set a **password** a...
+3. **Configure the meeting**:
+   - Enter a **name** for your meeting room.
+   - Allow access to your webcam and microphone.
+   - Enter your **pseudonym** or **first and last name**.
 
-**Key points found:** kmeet.infomaniak.com, click Join the meeting, share room link
-**Key points missing:** enter meeting room name, allow webcam/microphone access
+4. **Set security options (optional)**:
+ ...
+
+**Key points found:** kmeet.infomaniak.com, enter meeting room name, allow webcam/microphone access, click Join the meeting, share room link
 
 #### Q2: How can I share my screen during a kMeet call?
 
-**Rating:** [-] Minimal (40.0% coverage)
+**Rating:** [+] Complete (80.0% coverage)
 
 **Response excerpt:**
 > To share your screen during a kMeet call, follow these steps:
 
-- **During the call**:  
-  1. Click the **screen share icon** (usually a screen with a "+" or a camera icon) in the controls.  
-  2. Select the specific window, application, or entire screen you want to share.  
-  3. Confirm the share settings (e.g., allow others to take control).  
+1. Start kMeet via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or from one of the applications for computers or mobile devices.
+2. Create or join a meeting room.
+3. Click on the screen icon with an arrow to **Share your screen**.
+4. Read the warning that may be displayed by your device and validate the authorization to access the screen content.
+5. Choose whether to share your entire screen or a specific window.
+6. Click the...
 
-- **Permissions**:  
-  If using a browser, you may need to grant permission for screen sharing (e.g., click "Allow" when prompted).  
-
-- **Mobile device...
-
-**Key points found:** click screen icon with arrow, choose entire screen or specific window
-**Key points missing:** not available on iOS, validate authorization, stop by clicking toolbar icon
+**Key points found:** click screen icon with arrow, choose entire screen or specific window, validate authorization, stop by clicking toolbar icon
+**Key points missing:** not available on iOS
 
 #### Q3: What should I do if my audio is not working in kMeet?
 
-**Rating:** [~] Partial (50.0% coverage)
+**Rating:** [+] Complete (100.0% coverage)
 
 **Response excerpt:**
-> If your audio is not working in **kMeet**, follow these steps based on the Windows troubleshooting guide:
+> If your audio is not working in kMeet, follow these steps to troubleshoot the issue:
 
-### ✅ Check Privacy Settings
-1. Open **Windows Settings** > **Privacy**.
-2. Ensure **"Allow apps to access the camera"** and **"Choose which Microsoft Store apps can access the camera"** are enabled.
-3. Enable **Windows Search**, **Camera**, and **App Connector** (for microphone, repeat the same steps).
+### General Tips
+1. **Reauthorize Multimedia Access**:
+   - Go to **Settings** in kMeet (click the gear icon at the top right).
+   - Ensure access to the microphone is enabled and select the correct device.
+   - Check for a lock icon in your browser's address bar that might be blocking access and click it to adjust permissions.
+   - Source: [Fix an audio issue on kMeet](https://www.infomaniak.com/en/support/faq...
 
-### 🛠️ Use Audio Troubleshooter
-1. Click the **Search** icon in the taskbar, type **"Au...
-
-**Key points found:** check Settings for microphone permission, mobile Privacy settings, Windows Audio Troubleshooter
-**Key points missing:** browser lock icon, try different device, Firefox WebRTC disable option
+**Key points found:** check Settings for microphone permission, browser lock icon, mobile Privacy settings, Windows Audio Troubleshooter, try different device, Firefox WebRTC disable option
 
 #### Q4: How do I create side rooms (breakout rooms) in kMeet?
 
 **Rating:** [+] Complete (80.0% coverage)
 
 **Response excerpt:**
-> To create side rooms (breakout rooms) in **kMeet**, follow these steps:
+> To create side rooms (breakout rooms) in kMeet, follow these steps:
 
-- **Step 1:** Start a kMeet meeting as a **moderator** via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or a supported app.  
-- **Step 2:** While in the meeting, click the **multi-user icon** in the toolbar.  
-- **Step 3:** Click the **"Add side room"** button to create one or more breakout rooms.  
-- **Step 4:** Participants can join or leave side rooms using the same button (multi-user icon) to manage their sessio...
+1. **Start kMeet as a moderator**: Open kMeet via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or use the kMeet application on your computer or mobile device.
+2. **Join the meeting**: Ensure all participants are in the meeting.
+3. **Access the side rooms feature**: Click on the multi-user icon in the kMeet toolbar.
+4. **Create a side room**: Click the button to add a side room.
+5. **Manage participants**: Participants c...
 
 **Key points found:** click multi-user icon, add side room button, participants can join/leave, moderator can force participants to join
 **Key points missing:** must be moderator
 
 #### Q5: How can I record a kMeet meeting?
 
-**Rating:** [+] Complete (85.7% coverage)
+**Rating:** [-] Minimal (42.9% coverage)
 
 **Response excerpt:**
-> To record a **kMeet meeting** on **kDrive**, follow these steps:
+> To record a kMeet meeting, follow these steps:
 
-### 🎬 Record a kMeet Meeting on kDrive
-1. **Start kMeet** via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or your device app.
-2. **Join a meeting** or create a new one.
-3. Click the **action menu** (○○○) in the kMeet toolbar.
-4. Select the **record icon** (◉) to start recording.
-5. **Confirm the action**:
-   - Log in to your Infomaniak account if prompted.
-   - Choose a **kDrive folder** to save the recording.
-6. Click **...
+1. Start **kMeet** via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or from one of the apps for computers and mobile devices.
+2. Once in the meeting, click on the action menu **○○○** in the kMeet toolbar.
+3. Click on the icon ◉ **Start recording**.
+4. Confirm the operation and, if necessary, log in to your Infomaniak account. Then, select a kDrive to record the video conference on and click the button to start.
+5. To stop recording, click o...
 
-**Key points found:** must be moderator, click action menu (three dots), Start recording, saved to kDrive root, .mp4 format, max 3 hours
-**Key points missing:** need kDrive
+**Key points found:** click action menu (three dots), Start recording, saved to kDrive root
+**Key points missing:** need kDrive, must be moderator, .mp4 format, max 3 hours
 
 #### Q6: How do I set a password for my kMeet meeting?
 
@@ -132,14 +124,15 @@
 **Response excerpt:**
 > To set a password for your kMeet meeting, follow these steps:
 
-1. **Start kMeet** via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or your device app.
-2. **Create a new meeting**:
-   - Enter a name for your meeting room.
-   - Click **Security options**.
-   - Enable **Protect access** by toggling the switch.
-   - Set your desired **password**.
-   - Click **Continue** to start the meeting.
-3. **Share details**: Distribute the **meeting link/code** and **password** to participants (you can ...
+1. Start kMeet via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or from one of the applications for computers or mobile devices.
+2. Start a new meeting.
+3. Enter a **name** for your meeting room.
+4. Click on the **security options**.
+5. Enable the toggle switch to **Protect access**.
+6. Create the password.
+7. **Continue** to **start** the meeting.
+8. Specify the name you want to use as a participant in the meeting.
+9. Share ...
 
 **Key points found:** click security options, enable Protect access toggle, create password, share link AND password
 **Key points missing:** end-to-end encryption option available
@@ -149,289 +142,291 @@
 **Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> To livestream a kMeet meeting, follow these steps based on the Infomaniak documentation:
+> To livestream a kMeet meeting, follow these steps:
 
-### Steps to Broadcast a kMeet Meeting via Live Streaming
-1. **Start a kMeet Meeting**  
-   - Initiate a meeting via [kmeet.infomaniak.com](https://kmeet.infomaniak.com) or through the desktop/mobile app.  
-   - Ensure all participants are connected before starting the stream.  
+1. **Start the kMeet Meeting**:
+   - Open kMeet via [ksuite.infomaniak.com/kmeet](https://ksuite.infomaniak.com/kmeet) or use the kMeet app on your computer or mobile device.
 
-2. **Enable Live Streaming Mode**  
-   - During the meeting, access the **meeting settings** (usually via a menu icon like ⚙️ or ...
+2. **Initiate the Live Broadcast**:
+   - Once in the meeting, click on the action menu (**○○○**) in the kMeet toolbar.
+   - Select **Start live broadcast**.
 
-**Key points found:** Start live broadcast, copy stream URL to share, max 24 hours, stops when meeting ends
-**Key points missing:** must be moderator, click action menu
+3. **Start the Stream**:
+   - Click the **Start** button to begin the live broadcast.
+
+4. **Share the Stream Link*...
+
+**Key points found:** click action menu, Start live broadcast, copy stream URL to share, max 24 hours
+**Key points missing:** must be moderator, stops when meeting ends
 
 ### kDrive (7 questions)
 
 #### Q8: How do I install kDrive on Linux?
 
-**Rating:** [x] Wrong (0.0% coverage)
+**Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> The installation instructions for kDrive on Linux are available in the provided documentation. Here's what you can do:
+> To install kDrive on Linux, follow these steps:
 
-- Visit the official guide: [Install kDrive on Linux](https://www.infomaniak.com/en/support/faq/617/install-kdrive-on-linux) for detailed steps.
-- If you need further assistance, contact [Infomaniak support](https://www.infomaniak.com/en/support) for help with specific issues during installation. 
+### Prerequisites
+- Ensure you are using **Ubuntu 22.04 LTS** or later with **GNOME** or **KDE** desktop environments.
+- Download the kDrive AppImage file for Linux.
+- Install the required dependencies:
+  - **Fuse2**: Required to run AppImage. Install it using:
+    ```bash
+    sudo apt install libfuse2
+    ```
+  - **D-Bus**
+  - **Gnome-keyring** or **kwallet** (usually pre-installed except on some lightweight distributions).
 
-Let me know if you need additional guidance!
+### Installation Step...
 
-**Key points missing:** .AppImage file, install libfuse2, right-click Permissions, Allow executing file as program, Ubuntu 22.04 LTS officially supported, Lite Sync not available on Linux
+**Key points found:** install libfuse2, right-click Permissions, Allow executing file as program, Ubuntu 22.04 LTS officially supported
+**Key points missing:** .AppImage file, Lite Sync not available on Linux
 
 #### Q9: How can I share a file from kDrive?
 
-**Rating:** [-] Minimal (33.3% coverage)
+**Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> To share a file from **kDrive**, follow these steps:
+> To share a file from kDrive, follow these steps:
 
-- **Step 1**: Navigate to the file you want to share in your kDrive storage.
-- **Step 2**: Click the **"Share"** button (usually located near the file actions).
-- **Step 3**: Enter the email addresses of the people you want to share the file with.
-- **Step 4**: Set permission levels (e.g., **View**, **Edit**, or **Comment**).
-- **Step 5**: Optionally, set an expiration date for the shared link or enable a password.
-- **Step 6**: Send the invi...
+1. Access the kDrive web app by clicking [here](https://ksuite.infomaniak.com/kdrive).
+2. Right-click on the file or folder you want to share.
+3. Click on **Share** at the top of the dropdown menu.
 
-**Key points found:** click Share, public share link option
-**Key points missing:** right-click on file/folder, can set expiration, password, add users with viewing/modification/management rights, recipients can create free Infomaniak account
+From there, you have two options:
+
+### Option 1: Public Share Link
+- Activate the **public share link**.
+- Customize the sharing options:
+  - Allow modifications (if the file is in a collaborative format).
+  - Set an expiration date.
+  - Add a passwor...
+
+**Key points found:** right-click on file/folder, click Share, public share link option, add users with viewing/modification/management rights
+**Key points missing:** can set expiration, password, recipients can create free Infomaniak account
 
 #### Q10: What is a Drop Box in kDrive and how do I create one?
 
-**Rating:** [x] Wrong (0.0% coverage)
+**Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> The provided documentation does not contain information about a "Drop Box" feature in kDrive or steps to create one. These results relate to other topics like kDrive blocks, kChat invites, and screen sharing in kMeet. For details on Drop Box functionality, please contact Infomaniak support directly. 
+> A **Drop Box** in kDrive is a feature that allows you to create a dedicated folder where external contacts can upload files or folders directly into your kDrive. This is useful for collecting content from others without giving them full access to your kDrive.
 
-No relevant sources found in the provided context.
+### How to Create a Drop Box in kDrive:
 
-**Key points missing:** invite contacts to deposit files, click New then Drop Box, enter name, can set password, expiration, storage limit, email notification option, disable converts to regular folder
+1. **Access kDrive**:
+   - Go to the [kDrive Web app](https://ksuite.infomaniak.com/kdrive).
+
+2. **Navigate to the Desired Folder**:
+   - Choose the folder where you want the Drop Box to be created ...
+
+**Key points found:** invite contacts to deposit files, click New then Drop Box, enter name, email notification option
+**Key points missing:** can set password, expiration, storage limit, disable converts to regular folder
 
 #### Q11: How do I resolve sync conflicts in kDrive?
 
-**Rating:** [-] Minimal (33.3% coverage)
+**Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
 > To resolve sync conflicts in kDrive, follow these steps:
 
-- **Prevent conflicts** by:
-  - Avoiding simultaneous edits on the same file (unless using collaborative tools like Word/Excel online).
-  - Syncing offline changes before making online modifications.
-  - Avoiding duplicate folder names across devices.  
-  *(Source: [Avoid synchronization conflicts](https://www.infomaniak.com/en/support/faq/2403/resolve-a-kdrive-synchronization-conflict))*
+### Displaying Conflicts
+1. Left-click on the kDrive desktop app icon in your computer's notification area.
+2. Click on the information button at the top.
+3. Click on the listed event to view its details.
+4. Conflicts and errors are displayed in two distinct tabs, allowing you to identify unsynchronized data.
 
-- **Manual resolution** (if automatic fixes fail)...
+### Resolving Conflicts
+1. Choose how to resolve the conflict:
+   - Send the local version to the server (synchronize).
+   - Move ...
 
-**Key points found:** kDrive Web version is kept, kDrive Rescue Folder for protection
-**Key points missing:** conflicts when same file modified locally and online, local saved as _conflict, can keep both, delete, or merge, view via kDrive icon > info
+**Key points found:** conflicts when same file modified locally and online, kDrive Web version is kept, view via kDrive icon > info, kDrive Rescue Folder for protection
+**Key points missing:** local saved as _conflict, can keep both, delete, or merge
 
 #### Q12: How do I manage user rights in kDrive?
-
-**Rating:** [-] Minimal (40.0% coverage)
-
-**Response excerpt:**
-> To manage user rights in **kDrive**, follow these steps:
-
-### Steps to Modify User Permissions:
-1. **Access kDrive Web App**  
-   Go to [https://ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive) (source: [FAQ 2365](https://www.infomaniak.com/en/support/faq/2365/manage-a-kdrive-users-rights)).
-
-2. **Select the Relevant kDrive**  
-   Use the dropdown menu in the left sidebar to choose the specific kDrive instance.
-
-3. **Open User Management**  
-   Click the **action menu ⋮** next...
-
-**Key points found:** Administrator has full access, Manage users in action menu
-**Key points missing:** Administrator vs User levels, User cannot manage product, don't confuse Manager rights with kDrive rights
-
-#### Q13: How can I access kDrive files locally without downloading them?
 
 **Rating:** [+] Complete (80.0% coverage)
 
 **Response excerpt:**
-> To access kDrive files locally without fully downloading them, use the **Lite Sync** feature (available on Windows):
+> To manage user rights in kDrive, follow these steps:
 
-### Steps:
-- **Install the kDrive desktop app** (required for Lite Sync).  
-- Enable **Lite Sync** in the app settings. This stores files in a "dehydrated" state on your device, reducing local storage usage.  
-- Files are accessible via the **kDrive web app** (online service [kdrive.infomaniak.com](https://kdrive.infomaniak.com)), but locally they load on-demand when opened.  
+1. **Access kDrive**:
+   - Go to the [Infomaniak kDrive Web app](https://ksuite.infomaniak.com/kdrive).
+   - Select the relevant kDrive from the dropdown menu in the left sidebar.
 
-*...
+2. **Manage User Rights**:
+   - Click on the **action menu ⋮** next to the relevant item.
+   - Select **Manage users**.
+   - Choose the desired access level for the user:
+     - **Administrator**: Grants full rights, including sharing, statistics, and managing fold...
 
-**Key points found:** install kDrive desktop app, Open kDrive Web for server files, or open local folder, Lite Sync for virtual files
-**Key points missing:** click icon in notification area
+**Key points found:** Administrator vs User levels, Administrator has full access, User cannot manage product, Manage users in action menu
+**Key points missing:** don't confuse Manager rights with kDrive rights
+
+#### Q13: How can I access kDrive files locally without downloading them?
+
+**Rating:** [+] Complete (100.0% coverage)
+
+**Response excerpt:**
+> You can access your kDrive files locally without downloading them by using the **Lite Sync** feature in the kDrive desktop app. This feature allows you to view and manage files directly from your computer without taking up storage space, as the files remain stored in the cloud and are only downloaded when needed.
+
+### Steps to Enable Lite Sync:
+1. Install the [kDrive desktop app](https://www.infomaniak.com/en/support/faq/2374) on your device.
+2. Open the kDrive app and click on the app icon in t...
+
+**Key points found:** install kDrive desktop app, click icon in notification area, Open kDrive Web for server files, or open local folder, Lite Sync for virtual files
 
 #### Q14: How do I sync kDrive with my Synology NAS?
 
-**Rating:** [-] Minimal (20.0% coverage)
+**Rating:** [+] Complete (80.0% coverage)
 
 **Response excerpt:**
 > To sync kDrive with your Synology NAS, follow these steps:
 
-- **Install Synology Drive App**: Ensure the Synology Drive app is installed on your NAS device. This app facilitates cloud storage integration. [Synology Drive Documentation](https://www.synology.com/en-us/dsm/DSM-Drive)
-- **Configure Sync Folder**: Set up the folder on your NAS that you want to sync with kDrive. This is done via the Synology Drive app settings. [Synology Drive Setup Guide](https://www.synology.com/en-us/knowledgebase/...
+1. **Prerequisites:**
+   - Ensure your Synology NAS is accessible from the Internet.
+   - Know your kDrive identifier (kDrive ID). You can find it [here](https://www.infomaniak.com/en/support/faq/2409).
 
-**Key points found:** use Cloud Sync app
-**Key points missing:** choose WebDAV, server: https://[kDriveID].connect.kdrive.infomaniak.com, use application password, Bidirectional, Download remote, or Download local sync
+2. **Steps to Sync:**
+   - Log in to the Synology DiskStation Manager (DSM).
+   - If necessary, download and install the **Cloud Sync** app from the **Package Center**.
+   - Open **Cloud Sync**.
+   - Click on the **+** at the bottom lef...
+
+**Key points found:** use Cloud Sync app, choose WebDAV, use application password, Bidirectional, Download remote, or Download local sync
+**Key points missing:** server: https://[kDriveID].connect.kdrive.infomaniak.com
 
 ### kChat (6 questions)
 
 #### Q15: How do I create a channel in kChat?
 
-**Rating:** [x] Wrong (0.0% coverage)
+**Rating:** [-] Minimal (40.0% coverage)
 
 **Response excerpt:**
-> The provided documentation does not include specific steps for creating a channel in kChat. It focuses on managing existing channels (e.g., descriptions, headers, converting public/private channels, or organizing categories). 
+> To create a channel in kChat, follow these steps:
 
-For detailed instructions on creating a channel, please consult Infomaniak support or check the official kChat documentation directly. 
+1. Open the **kChat** web app: [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat).
+2. Click on the button located in the left sidebar.
+3. Select **Create a new channel**.
+4. Configure the channel by setting:
+   - **Name**: The name of the channel (modifiable later).
+   - **URL**: The URL of the channel (modifiable later).
+   - **Status**: Choose whether the channel is **PRIVATE** or **PUBLIC** (modifiable later).
+   - **Descripti...
 
-Source: [Manage a kChat channel](https://www.infomaniak.com/en/support/faq/2732/manage-a-kchat-channel)
-
-**Key points missing:** click button in left sidebar, Create a new channel, set name, URL, private/public, description, General channel exists by default, can convert, leave, archive channels
+**Key points found:** click button in left sidebar, Create a new channel
+**Key points missing:** set name, URL, private/public, description, General channel exists by default, can convert, leave, archive channels
 
 #### Q16: What slash commands are available in kChat?
+
+**Rating:** [~] Partial (66.7% coverage)
+
+**Response excerpt:**
+> Here are the available slash commands in kChat:
+
+- **Execute a slash command**:
+  - Click in the composition field within a channel.
+  - Enter a `/` (slash or forward slash) followed by the command.
+  - Confirm to send the command.
+  - Typing only `/` will display a modal with available commands, such as going offline.
+
+- **Create a custom slash command**:
+  - Access the Web kChat app or the desktop kChat app.
+  - Click on the **New** icon next to your kChat organization name.
+  - Click on **Int...
+
+**Key points found:** type / followed by command, just / shows available commands, can create custom slash commands, go to Integrations > Slash command
+**Key points missing:** custom commands can call APIs, external users cannot access Integrations
+
+#### Q17: How can I connect external applications to kChat?
 
 **Rating:** [+] Complete (83.3% coverage)
 
 **Response excerpt:**
-> The documentation mentions that kChat supports slash commands starting with `/`, but it does not provide a complete list of pre-defined commands. Here's what is known:
+> To connect external applications to kChat, you can use webhooks. Here’s how you can do it:
 
-- **Basic commands**: Typing `/` alone shows a modal with options like "Go offline" (source: [kChat slash commands guide](https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands)).
-- **Custom commands**: Users can create custom commands via the "Integrations" settings (requires technical setup, e.g., API calls o...
+### Steps to Connect External Applications to kChat:
 
-**Key points found:** type / followed by command, just / shows available commands, can create custom slash commands, go to Integrations > Slash command, custom commands can call APIs
-**Key points missing:** external users cannot access Integrations
+1. **Access the kChat Webhooks Interface**:
+   - Open the **kChat** web app or desktop app.
+   - Click on the **New** icon next to your kChat organization's name.
+   - Select **Integrations**.
+   - Choose the category **Incoming Webhooks**.
 
-#### Q17: How can I connect external applications to kChat?
+2. **Create an Incoming Webhook**:
+   - Click on the blue button **Add incoming webhooks**.
+   - Add a name and ...
 
-**Rating:** [~] Partial (50.0% coverage)
-
-**Response excerpt:**
-> To connect external applications to **kChat**, follow these steps based on the official documentation:
-
-### Steps to Connect External Applications via Webhooks
-1. **Ensure Prerequisites**  
-   - You must **not** be an external user (external users cannot access the *Integrations* menu).  
-   - Verify your account type and permissions.  
-
-2. **Configure Webhooks**  
-   - Navigate to the **Integrations** section in your kChat admin panel.  
-   - Locate the option to add or configure webhooks for e...
-
-**Key points found:** use webhooks, Integrations menu, external users cannot access Integrations
-**Key points missing:** Incoming webhooks receive from external apps, Outgoing webhooks send to external apps, POST request with JSON text field
+**Key points found:** use webhooks, Incoming webhooks receive from external apps, Outgoing webhooks send to external apps, POST request with JSON text field, external users cannot access Integrations
+**Key points missing:** Integrations menu
 
 #### Q18: How do I translate a message in kChat?
 
-**Rating:** [-] Minimal (40.0% coverage)
+**Rating:** [~] Partial (60.0% coverage)
 
 **Response excerpt:**
-> To translate a message in kChat:
+> To translate a message in kChat, follow these steps:
 
-- Click on the **Translate** button within the message  
-- The translated text will appear below the conversation and is only visible to you  
+1. Open the **kChat** web app, mobile app, or desktop app.
+2. View the message you want to translate.
+3. Click on the action menu (**•••**) located at the top right of the message.
+4. Select **Translate**.
+5. The translated message will appear below the conversation and will only be visible to you.
 
-Source: [Translate a message in kChat](https://www.infomaniak.com/en/support/faq/1467/translate-the-content-of-a-message-on-the-kchat-infomaniak-app)
+Source: [Translate the content of a message on the kChat Infomaniak app](https://www.infomaniak.com/en/support/faq/1467/translate-the-content-of-...
 
-**Key points found:** click Translate, only visible to you
-**Key points missing:** click action menu (three dots) on message, translation appears below, translates to your language
+**Key points found:** click action menu (three dots) on message, click Translate, only visible to you
+**Key points missing:** translation appears below, translates to your language
 
 #### Q19: How can I invite external users to kChat?
 
 **Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> To invite external users to kChat, follow these methods based on your needs:
+> To invite external users to kChat, follow these steps:
 
-### **Method 1: Invite as a Non-kSuite User (Not Counted Toward License)**
-- **Prerequisites**: You must be an administrator with full rights for kChat.
-- **Steps**:
-  1. Go to your Organization’s settings in kChat.
-  2. Invite the external user via email.
-  3. They will create an Infomaniak account if they don’t already have one.
-  4. They gain access to kChat but are **not counted** as a kSuite user or part of your O...
+1. **Access kChat**:
+   - Open the [kChat Web app](https://ksuite.infomaniak.com/kchat) or the kChat desktop app.
 
-**Key points found:** must be Organization administrator, click Invite members, enter email and specify channels, external users not counted as users
-**Key points missing:** users receive email invitation, guests have limited permissions
+2. **Invite Members**:
+   - Click the **Invite members** button.
+
+3. **Invite a New User**:
+   - Click the link to invite a new user.
+
+4. **Specify Details**:
+   - Enter the email address(es) of the person(s) you want to invite.
+   - Specify the channel(s) to which these users will have access.
+
+5. **Send the Invitation**:
+   -...
+
+**Key points found:** click Invite members, enter email and specify channels, users receive email invitation, external users not counted as users
+**Key points missing:** must be Organization administrator, guests have limited permissions
 
 #### Q20: What is Euria and how do I use it in kChat?
 
-**Rating:** [x] Wrong (0.0% coverage)
+**Rating:** [~] Partial (66.7% coverage)
 
 **Response excerpt:**
-> The provided documentation does not mention "Euria" or its integration with kChat. The available information covers kChat features like inviting users, connecting external applications via webhooks, and kDrive-related topics. For specifics on Euria, please contact Infomaniak support directly. 
+> ### What is Euria?
+Euria is an artificial intelligence integrated into Infomaniak's kSuite, designed to assist with tasks such as calculations, translations, providing information, and answering questions. It is particularly useful as a conversational agent in kChat and for summarizing discussions.
 
-No relevant sources found in the provided context.
+### How to Use Euria in kChat:
+1. **Add Euria to Your Contacts**:
+   - Euria is already available as a bot in your kChat contacts.
+   - If you don’t see it, click on the channel search or the **+** i...
 
-**Key points missing:** Euria is AI assistant in kSuite, calculations, translations, information, search for bot in channel search, create private discussion with bot, do not create group conversation, new users get welcome message
-
----
-
-## Root Cause Analysis
-
-### Investigation Results
-
-Manual investigation of the 4 "Wrong" responses revealed two distinct issues:
-
-#### Issue 1: Embedding Model Limitations (Q10, Q20)
-The `nomic-embed-text` model via Ollama struggles with:
-- **Proper nouns**: "Euria" queries return completely irrelevant documents despite 13 Euria chunks existing
-- **Question-style queries**: "What is a Drop Box?" fails, but "drop box kdrive" succeeds
-
-| Query | Correct Doc Found? | Notes |
-|-------|-------------------|-------|
-| "What is a Drop Box in kDrive?" | No | Returns irrelevant docs |
-| "drop box kdrive" | Yes (0.63) | Keyword match works |
-| "What is Euria in kChat?" | No | Returns irrelevant docs |
-| "euria kchat AI" | No | Even direct match fails |
-
-#### Issue 2: Chunk Content vs Query Mismatch (Q8, Q15)
-The correct documents ARE retrieved but:
-- Q8 (Linux install): Retrieved doc has score 0.764 but LLM says "visit the official guide" instead of reading the content
-- Q15 (kChat channel): Retrieved chunks contain channel management, not creation steps (chunking split the creation section)
-
-### Documents in Qdrant
-- Total chunks: 579
-- Drop Box chunks: 13
-- Euria chunks: 13
-- Linux kDrive chunks: 18
-
-All relevant content EXISTS but isn't being properly retrieved or utilized.
+**Key points found:** Euria is AI assistant in kSuite, calculations, translations, information, search for bot in channel search, create private discussion with bot
+**Key points missing:** do not create group conversation, new users get welcome message
 
 ---
 
 ## Recommendations
 
-### Quick Wins (for Demo)
-
-1. **Increase RAG_TOP_K from 5 to 8-10**
-   - More candidates = higher chance of relevant content
-   - Trade-off: slightly more context for LLM
-
-2. **Improve System Prompt**
-   - Add instruction: "Always extract specific steps from the retrieved documentation"
-   - Add: "Never say documentation doesn't contain info if documents were retrieved"
-
-3. **Chunk Size Adjustment**
-   - Current: 500 chars with 50 overlap
-   - Consider: 800-1000 chars to keep procedures intact
-
-### Medium-Term Improvements
-
-1. **Hybrid Search**
-   - Combine vector search with BM25 keyword search
-   - Would fix "Euria" and "Drop Box" retrieval
-
-2. **Query Expansion**
-   - Reformulate questions as keyword queries before search
-   - Example: "How do I create a channel?" → "kchat create channel steps"
-
-3. **Better Embedding Model**
-   - Consider `mxbai-embed-large` or OpenAI embeddings
-   - Trade-off: API costs vs quality
-
-### Performance Note
-Average response time of 37s is high. Consider:
-- Using a smaller/faster chat model
-- Caching frequent queries
-- Streaming responses (already implemented)
+- **Good coverage achieved.** Focus on:
+  - Response latency optimization
+  - Edge case handling

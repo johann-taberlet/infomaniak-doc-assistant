@@ -4,6 +4,7 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from app.config import settings
+from app.rag.contextual import add_context_to_chunk, get_product_related_terms
 
 
 def chunk_text(content: str, metadata: dict[str, str]) -> list[Document]:
@@ -24,7 +25,13 @@ def chunk_text(content: str, metadata: dict[str, str]) -> list[Document]:
     """
     if settings.RAG_CHUNK_STRATEGY == "document":
         # Whole document as single chunk - ideal for FAQ-style content
-        return [Document(page_content=content, metadata=metadata.copy())]
+        documents = [Document(page_content=content, metadata=metadata.copy())]
+
+        # Apply contextual preprocessing if enabled (v2 architecture)
+        if settings.RAG_CONTEXTUAL_ENABLED:
+            documents = _apply_contextual_preprocessing(documents, metadata)
+
+        return documents
 
     # Default: split into smaller chunks
     text_splitter = RecursiveCharacterTextSplitter(
@@ -35,4 +42,44 @@ def chunk_text(content: str, metadata: dict[str, str]) -> list[Document]:
 
     chunks = text_splitter.split_text(content)
 
-    return [Document(page_content=chunk, metadata=metadata.copy()) for chunk in chunks]
+    documents = [Document(page_content=chunk, metadata=metadata.copy()) for chunk in chunks]
+
+    # Apply contextual preprocessing if enabled (v2 architecture)
+    if settings.RAG_CONTEXTUAL_ENABLED:
+        documents = _apply_contextual_preprocessing(documents, metadata)
+
+    return documents
+
+
+def _apply_contextual_preprocessing(
+    documents: list[Document], metadata: dict[str, str]
+) -> list[Document]:
+    """Apply contextual preprocessing to documents.
+
+    Prepends document context (title, product, related terms) to each chunk
+    for improved embedding quality. Based on Anthropic's Contextual Retrieval technique.
+
+    Args:
+        documents: List of Document objects to preprocess.
+        metadata: Metadata containing title, product info.
+
+    Returns:
+        Documents with contextual prefix added to page_content.
+    """
+    title = metadata.get("title", "")
+    product = metadata.get("product", "")
+    related_terms = get_product_related_terms(product) if product else None
+
+    result = []
+    for doc in documents:
+        contextualized_content = add_context_to_chunk(
+            chunk_content=doc.page_content,
+            title=title,
+            product=product,
+            related_terms=related_terms,
+        )
+        result.append(
+            Document(page_content=contextualized_content, metadata=doc.metadata.copy())
+        )
+
+    return result

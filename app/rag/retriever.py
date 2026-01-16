@@ -45,7 +45,7 @@ class QdrantRetriever:
             self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=models.VectorParams(
-                    size=settings.RAG_VECTOR_DIMENSION,
+                    size=settings.get_vector_dimension(),  # Dynamic based on architecture version
                     distance=models.Distance.COSINE,
                 ),
             )
@@ -247,6 +247,9 @@ class QdrantRetriever:
         Reciprocal Rank Fusion (RRF) for improved retrieval of
         proper nouns and technical terms.
 
+        When reranking is enabled (RAG_RERANK_ENABLED=True), uses a
+        cross-encoder model to rerank the top candidates for improved precision.
+
         Args:
             query: The search query string.
             top_k: Maximum number of results to return (default: RAG_TOP_K).
@@ -257,10 +260,13 @@ class QdrantRetriever:
         if top_k is None:
             top_k = settings.RAG_TOP_K
 
+        # If reranking is enabled, fetch more candidates for reranking
+        fetch_k = top_k * 2 if settings.RAG_RERANK_ENABLED else top_k
+
         if settings.RAG_HYBRID_ENABLED:
             # Hybrid search: combine vector and BM25 results
             # Fetch more candidates from each retriever for better fusion
-            candidates_per_retriever = top_k * 2
+            candidates_per_retriever = fetch_k * 2
 
             # Expand query with synonyms for better BM25 matching
             expanded_query = expand_query(query)
@@ -277,8 +283,8 @@ class QdrantRetriever:
                 k=settings.RAG_BM25_K,
             )
 
-            # Take top_k from fused results
-            fused_results = fused_results[:top_k]
+            # Take top candidates from fused results
+            fused_results = fused_results[:fetch_k]
 
             documents = []
             for doc_id, rrf_score, payload in fused_results:
@@ -293,11 +299,9 @@ class QdrantRetriever:
                 )
                 documents.append(doc)
 
-            return documents
-
         else:
             # Pure vector search (original behavior)
-            vector_results = self._search_vector(query, top_k)
+            vector_results = self._search_vector(query, fetch_k)
 
             documents = []
             for doc_id, score, payload in vector_results:
@@ -312,4 +316,16 @@ class QdrantRetriever:
                 )
                 documents.append(doc)
 
-            return documents
+        # Apply reranking if enabled (v2 architecture)
+        if settings.RAG_RERANK_ENABLED and documents:
+            from app.rag.reranker import rerank_documents
+
+            logger.debug(f"Reranking {len(documents)} documents")
+            documents = rerank_documents(
+                query=query,
+                documents=documents,
+                top_n=settings.RAG_RERANK_TOP_N,
+                model_name=settings.RAG_RERANK_MODEL,
+            )
+
+        return documents

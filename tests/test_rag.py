@@ -7,9 +7,9 @@ from app.rag.chunker import chunk_text
 
 def test_chunker_splits_text():
     """Test that chunker splits text into multiple chunks."""
-    # Create text longer than chunk_size (500 chars)
-    long_text = "This is a test sentence. " * 50  # ~1250 chars
-    metadata = {"source": "test", "product": "kdrive"}
+    # Create text longer than chunk_size (1500 chars default)
+    long_text = "This is a test sentence. " * 100  # ~2500 chars
+    metadata = {"source": "test", "product": "kdrive", "title": "Test Document"}
 
     chunks = chunk_text(long_text, metadata)
 
