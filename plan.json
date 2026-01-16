@@ -81,7 +81,7 @@
       "Create HealthResponse model"
     ],
     "verification": "uv run python -c \"from app.models.schemas import ChatRequest; print(ChatRequest(message='test'))\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "rag-001",

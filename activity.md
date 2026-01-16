@@ -177,3 +177,26 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: models-001
+**Status**: completed
+**Description**: Created app/models/schemas.py with Pydantic models
+
+**Actions Taken**:
+- Read docs/reference/05-pydantic.md for Pydantic patterns
+- Created ChatRequest model with message (str, min_length=1, max_length=5000) and session_id (str | None)
+- Created ChatResponse model with answer (str) and sources (list[str])
+- Created HealthResponse model with status (str)
+
+**Verification**:
+- Command: `uv run python -c "from app.models.schemas import ChatRequest; print(ChatRequest(message='test'))"`
+- Result: PASS - Output: `message='test' session_id=None`
+
+**Files Modified**:
+- app/models/schemas.py (created)
+
+**Notes**:
+- Used Field(...) with min_length and max_length for message validation
+- Used Field(default_factory=list) for sources to avoid mutable default
+
+---
+
