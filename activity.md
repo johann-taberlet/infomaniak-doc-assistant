@@ -445,3 +445,28 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: api-003
+**Status**: completed
+**Description**: Added GET /chat/stream endpoint with SSE streaming
+
+**Actions Taken**:
+- Read docs/reference/06-fastapi.md for SSE patterns
+- Added json import and StreamingResponse import
+- Created format_sse() helper function to format data as SSE events
+- Created sse_stream() async generator using agent.astream_events() with version="v2"
+- Implemented /chat/stream GET endpoint returning StreamingResponse with text/event-stream media type
+
+**Verification**:
+- Command: `curl -N 'localhost:8000/chat/stream?message=hello' | head -20`
+- Result: PASS - Output shows streaming tokens: `data: {"token": "Hello"}`, `data: {"token": "!"}`, etc.
+
+**Files Modified**:
+- app/main.py (updated)
+
+**Notes**:
+- Uses astream_events with version="v2" for LangGraph streaming
+- Filters for "on_chat_model_stream" events to extract AI tokens
+- Final event sends {"done": True} to signal stream completion
+
+---
+

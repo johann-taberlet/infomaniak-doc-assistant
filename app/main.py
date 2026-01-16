@@ -1,9 +1,11 @@
 """FastAPI application entry point."""
 
+import json
 import uuid
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 
 from app.agent.executor import get_agent
 from app.models.schemas import ChatRequest, ChatResponse
@@ -65,3 +67,37 @@ async def chat(request: ChatRequest) -> ChatResponse:
                             sources.append(source)
 
     return ChatResponse(answer=answer, sources=sources)
+
+
+def format_sse(data: dict) -> str:
+    """Format data as a Server-Sent Event."""
+    return f"data: {json.dumps(data)}\n\n"
+
+
+async def sse_stream(message: str, session_id: str):
+    """Generate SSE events from agent streaming response."""
+    agent = get_agent()
+
+    async for event in agent.astream_events(
+        {"messages": [{"role": "user", "content": message}]},
+        {"configurable": {"thread_id": session_id}},
+        version="v2",
+    ):
+        kind = event.get("event")
+        # Stream AI message content tokens
+        if kind == "on_chat_model_stream":
+            content = event.get("data", {}).get("chunk")
+            if content and hasattr(content, "content") and content.content:
+                yield format_sse({"token": content.content})
+
+    yield format_sse({"done": True})
+
+
+@app.get("/chat/stream")
+async def chat_stream(message: str, session_id: str | None = None) -> StreamingResponse:
+    """Streaming chat endpoint using Server-Sent Events."""
+    sid = session_id or str(uuid.uuid4())
+    return StreamingResponse(
+        sse_stream(message, sid),
+        media_type="text/event-stream",
+    )

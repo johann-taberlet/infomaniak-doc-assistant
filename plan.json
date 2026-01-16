@@ -216,7 +216,7 @@
       "Stream tokens from agent"
     ],
     "verification": "curl -N 'localhost:8000/chat/stream?message=test'",
-    "passes": false
+    "passes": true
   },
   {
     "id": "obs-001",
