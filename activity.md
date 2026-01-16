@@ -246,3 +246,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: rag-003
+**Status**: completed
+**Description**: Created app/rag/retriever.py with QdrantRetriever class
+
+**Actions Taken**:
+- Read docs/reference/03-qdrant.md for Qdrant patterns
+- Created QdrantRetriever class with __init__ connecting to Qdrant using settings
+- Implemented create_collection() method (768 dimensions for nomic-embed-text, COSINE distance)
+- Implemented upsert(chunks) method that embeds documents and stores them in Qdrant
+
+**Verification**:
+- Command: `uv run python -c "from app.rag.retriever import QdrantRetriever; print(QdrantRetriever)"`
+- Result: PASS - Output: `<class 'app.rag.retriever.QdrantRetriever'>`
+
+**Files Modified**:
+- app/rag/retriever.py (created)
+
+**Notes**:
+- Uses uuid.uuid4() for unique point IDs
+- Stores payload with content, source, title, and product metadata
+- Checks if collection exists before creating to avoid errors
+
+---
+

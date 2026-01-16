@@ -118,7 +118,7 @@
       "Implement upsert(chunks: list) method with embeddings"
     ],
     "verification": "uv run python -c \"from app.rag.retriever import QdrantRetriever; print(QdrantRetriever)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "rag-004",

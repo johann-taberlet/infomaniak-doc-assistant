@@ -1,0 +1,73 @@
+"""Qdrant vector store retriever for RAG pipeline."""
+
+import uuid
+
+from qdrant_client import QdrantClient, models
+from langchain_core.documents import Document
+
+from app.config import settings
+from app.rag.embeddings import embed_text, embed_documents
+
+
+class QdrantRetriever:
+    """Retriever class for Qdrant vector database operations."""
+
+    def __init__(self) -> None:
+        """Initialize the Qdrant client connection."""
+        self.client = QdrantClient(url=settings.QDRANT_HOST)
+        self.collection_name = settings.QDRANT_COLLECTION
+
+    def create_collection(self) -> None:
+        """Create the collection if it doesn't exist.
+
+        Uses 768 dimensions for nomic-embed-text embeddings and COSINE distance.
+        """
+        collections = self.client.get_collections().collections
+        collection_names = [c.name for c in collections]
+
+        if self.collection_name not in collection_names:
+            self.client.create_collection(
+                collection_name=self.collection_name,
+                vectors_config=models.VectorParams(
+                    size=768,
+                    distance=models.Distance.COSINE,
+                ),
+            )
+
+    def upsert(self, chunks: list[Document]) -> int:
+        """Upsert document chunks into the collection.
+
+        Args:
+            chunks: List of Document objects with page_content and metadata.
+
+        Returns:
+            Number of points upserted.
+        """
+        if not chunks:
+            return 0
+
+        # Extract texts and embed them
+        texts = [chunk.page_content for chunk in chunks]
+        vectors = embed_documents(texts)
+
+        # Build points with unique IDs
+        points = []
+        for chunk, vector in zip(chunks, vectors):
+            point = models.PointStruct(
+                id=str(uuid.uuid4()),
+                vector=vector,
+                payload={
+                    "content": chunk.page_content,
+                    "source": chunk.metadata.get("source", ""),
+                    "title": chunk.metadata.get("title", ""),
+                    "product": chunk.metadata.get("product", ""),
+                },
+            )
+            points.append(point)
+
+        self.client.upsert(
+            collection_name=self.collection_name,
+            points=points,
+        )
+
+        return len(points)
