@@ -370,3 +370,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: agent-002
+**Status**: completed
+**Description**: Created app/agent/tools.py with search_docs tool
+
+**Actions Taken**:
+- Read docs/reference/01-langchain-agents.md for tool patterns
+- Created app/agent/tools.py with search_docs tool using @tool(parse_docstring=True)
+- Tool uses QdrantRetriever to search documentation
+- Formats results with title, product, content, and source citation
+
+**Verification**:
+- Command: `uv run python -c "from app.agent.tools import search_docs; print(search_docs.name)"`
+- Result: PASS - Output: `search_docs`
+
+**Files Modified**:
+- app/agent/tools.py (created)
+
+**Notes**:
+- Tool returns formatted results with markdown formatting
+- Includes source URLs for citation
+- Returns "No relevant documentation found" message when no results
+
+---
+

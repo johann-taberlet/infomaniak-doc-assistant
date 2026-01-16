@@ -180,7 +180,7 @@
       "Format results with source citations"
     ],
     "verification": "uv run python -c \"from app.agent.tools import search_docs; print(search_docs.name)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "agent-003",
