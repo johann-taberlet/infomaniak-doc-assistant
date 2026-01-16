@@ -105,7 +105,7 @@
       "Use chunk_size=500, chunk_overlap=50"
     ],
     "verification": "uv run python -c \"from app.rag.chunker import chunk_text; print(len(chunk_text('test ' * 200, {})))\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "rag-003",

@@ -223,3 +223,26 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: rag-002
+**Status**: completed
+**Description**: Created app/rag/chunker.py with text chunking function
+
+**Actions Taken**:
+- Read docs/reference/02-rag-pipeline.md for chunking patterns
+- Created app/rag/chunker.py with chunk_text() function
+- Used RecursiveCharacterTextSplitter with chunk_size=500, chunk_overlap=50
+- Returns list of Document objects with metadata attached to each chunk
+
+**Verification**:
+- Command: `uv run python -c "from app.rag.chunker import chunk_text; print(len(chunk_text('test ' * 200, {})))"`
+- Result: PASS - Output: `3`
+
+**Files Modified**:
+- app/rag/chunker.py (created)
+
+**Notes**:
+- Uses separators ["##", "###", "\n\n", "\n", ". ", " "] for markdown-aware splitting
+- Returns langchain_core.documents.Document objects for compatibility with LangChain
+
+---
+
