@@ -270,3 +270,28 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: rag-004
+**Status**: completed
+**Description**: Added search method to QdrantRetriever class
+
+**Actions Taken**:
+- Read docs/reference/03-qdrant.md for Qdrant search patterns
+- Implemented search(query: str, top_k: int = 5) method in QdrantRetriever
+- Method embeds the query using embed_text() and searches Qdrant
+- Returns list of Document objects with content and metadata including score
+- Handles empty results gracefully by returning empty list
+
+**Verification**:
+- Command: `uv run python -c "from app.rag.retriever import QdrantRetriever; r = QdrantRetriever(); print(hasattr(r, 'search'))"`
+- Result: PASS - Output: `True`
+
+**Files Modified**:
+- app/rag/retriever.py (updated)
+
+**Notes**:
+- Uses client.search() with with_payload=True to get document content
+- Score is included in document metadata for ranking
+- Returns langchain_core.documents.Document for LangChain compatibility
+
+---
+

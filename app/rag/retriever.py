@@ -71,3 +71,40 @@ class QdrantRetriever:
         )
 
         return len(points)
+
+    def search(self, query: str, top_k: int = 5) -> list[Document]:
+        """Search for documents similar to the query.
+
+        Args:
+            query: The search query string.
+            top_k: Maximum number of results to return.
+
+        Returns:
+            List of Document objects with content and metadata including score.
+        """
+        query_vector = embed_text(query)
+
+        results = self.client.search(
+            collection_name=self.collection_name,
+            query_vector=query_vector,
+            limit=top_k,
+            with_payload=True,
+        )
+
+        if not results:
+            return []
+
+        documents = []
+        for result in results:
+            doc = Document(
+                page_content=result.payload.get("content", ""),
+                metadata={
+                    "source": result.payload.get("source", ""),
+                    "title": result.payload.get("title", ""),
+                    "product": result.payload.get("product", ""),
+                    "score": result.score,
+                },
+            )
+            documents.append(doc)
+
+        return documents

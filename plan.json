@@ -130,7 +130,7 @@
       "Handle empty results gracefully"
     ],
     "verification": "uv run python -c \"from app.rag.retriever import QdrantRetriever; r = QdrantRetriever(); print(hasattr(r, 'search'))\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "ingest-001",
