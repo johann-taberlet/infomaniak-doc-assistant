@@ -3,6 +3,9 @@
 import json
 import logging
 import uuid
+from collections.abc import AsyncGenerator
+from pathlib import Path
+from typing import Any
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -12,10 +15,12 @@ from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import get_agent
 from app.models.schemas import ChatRequest, ChatResponse
+from app.observability.langfuse import get_langfuse_handler
 
 logger = logging.getLogger(__name__)
 
 # Simple in-memory metrics
+# PRODUCTION: Use asyncio.Lock for thread-safety, or prometheus_client for proper metrics
 metrics = {
     "request_count": 0,
     "error_count": 0,
@@ -28,6 +33,7 @@ app = FastAPI(
 )
 
 # CORS middleware
+# PRODUCTION: Restrict allow_origins to specific domains (e.g., ["https://app.infomaniak.com"])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -35,8 +41,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# PRODUCTION: Add rate limiting with slowapi or fastapi-limiter to prevent abuse
+
+# Mount static files (absolute path for portability)
+STATIC_DIR = Path(__file__).parent.parent / "static"
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.exception_handler(RequestValidationError)
@@ -78,10 +87,16 @@ async def chat(request: ChatRequest) -> ChatResponse:
         # Use provided session_id or generate a new one
         session_id = request.session_id or str(uuid.uuid4())
 
+        # Build config with optional Langfuse observability
+        config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
+        langfuse_handler = get_langfuse_handler()
+        if langfuse_handler:
+            config["callbacks"] = [langfuse_handler]
+
         # Invoke agent with message and thread_id for memory
         response = await agent.ainvoke(
             {"messages": [{"role": "user", "content": request.message}]},
-            {"configurable": {"thread_id": session_id}},
+            config,
         )
 
         # Extract the final answer from the agent response
@@ -111,18 +126,25 @@ async def chat(request: ChatRequest) -> ChatResponse:
         raise
 
 
-def format_sse(data: dict) -> str:
+def format_sse(data: dict[str, Any]) -> str:
     """Format data as a Server-Sent Event."""
     return f"data: {json.dumps(data)}\n\n"
 
 
-async def sse_stream(message: str, session_id: str):
+async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
     """Generate SSE events from agent streaming response."""
+    # PRODUCTION: Wrap in try/except to send error event on failure instead of silent disconnect
     agent = get_agent()
+
+    # Build config with optional Langfuse observability
+    config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
+    langfuse_handler = get_langfuse_handler()
+    if langfuse_handler:
+        config["callbacks"] = [langfuse_handler]
 
     async for event in agent.astream_events(
         {"messages": [{"role": "user", "content": message}]},
-        {"configurable": {"thread_id": session_id}},
+        config,
         version="v2",
     ):
         kind = event.get("event")

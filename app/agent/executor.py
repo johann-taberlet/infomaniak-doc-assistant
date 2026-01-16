@@ -9,6 +9,7 @@ from app.llm import get_chat_model
 
 
 # Memory checkpoint for conversation persistence
+# PRODUCTION: Use per-session checkpointer (Redis/PostgreSQL) for user isolation and persistence
 _checkpointer = InMemorySaver()
 
 

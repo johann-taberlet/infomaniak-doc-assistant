@@ -4,7 +4,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
 
-def chunk_text(content: str, metadata: dict) -> list[Document]:
+def chunk_text(content: str, metadata: dict[str, str]) -> list[Document]:
     """Split text into chunks with metadata.
 
     Args:

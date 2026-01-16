@@ -14,6 +14,7 @@ class QdrantRetriever:
 
     def __init__(self) -> None:
         """Initialize the Qdrant client connection."""
+        # PRODUCTION: Add retry logic with tenacity and connection health check
         self.client = QdrantClient(url=settings.QDRANT_HOST)
         self.collection_name = settings.QDRANT_COLLECTION
 

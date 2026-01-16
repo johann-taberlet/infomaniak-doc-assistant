@@ -17,6 +17,7 @@ class MistralAPIProvider(LLMProvider):
         Returns:
             BaseChatModel: ChatMistralAI configured with settings.
         """
+        # PRODUCTION: Validate that MISTRAL_API_KEY is non-empty before instantiation
         return ChatMistralAI(
             model=settings.MISTRAL_CHAT_MODEL,
             api_key=settings.MISTRAL_API_KEY,

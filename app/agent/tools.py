@@ -1,8 +1,19 @@
 """LangChain tools for the RAG agent."""
 
+from functools import cache
+
 from langchain.tools import tool
 
 from app.rag.retriever import QdrantRetriever
+
+
+@cache
+def get_retriever() -> QdrantRetriever:
+    """Get a cached QdrantRetriever instance.
+
+    Uses functools.cache for lazy initialization and connection reuse.
+    """
+    return QdrantRetriever()
 
 
 @tool(parse_docstring=True)
@@ -15,7 +26,7 @@ def search_docs(query: str) -> str:
     Returns:
         Formatted search results with content and source citations.
     """
-    retriever = QdrantRetriever()
+    retriever = get_retriever()
     documents = retriever.search(query, top_k=5)
 
     if not documents:
