@@ -168,7 +168,7 @@
       "Include rules: use only context, cite sources, respond in query language"
     ],
     "verification": "uv run python -c \"from app.agent.prompts import SYSTEM_PROMPT; print(SYSTEM_PROMPT[:50])\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "agent-002",

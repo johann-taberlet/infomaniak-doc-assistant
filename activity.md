@@ -346,3 +346,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: agent-001
+**Status**: completed
+**Description**: Created app/agent/prompts.py with SYSTEM_PROMPT constant
+
+**Actions Taken**:
+- Read docs/reference/01-langchain-agents.md for agent patterns
+- Read docs/prd.md Appendix B for sample prompt template
+- Created app/agent/prompts.py with SYSTEM_PROMPT constant
+- Included rules: use only context, cite sources, respond in query language, acknowledge limitations
+
+**Verification**:
+- Command: `uv run python -c "from app.agent.prompts import SYSTEM_PROMPT; print(SYSTEM_PROMPT[:50])"`
+- Result: PASS - Output: `You are an AI assistant for Infomaniak products (k`
+
+**Files Modified**:
+- app/agent/prompts.py (created)
+
+**Notes**:
+- Prompt mentions all three products: kDrive, kMeet, kChat
+- Includes instruction to cite sources with URLs
+- Suggests contacting Infomaniak support when unsure
+
+---
+
