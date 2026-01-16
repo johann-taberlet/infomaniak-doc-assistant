@@ -295,3 +295,28 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: ingest-001
+**Status**: completed
+**Description**: Created scripts/ingest.py to load docs from data/docs/
+
+**Actions Taken**:
+- Read docs/reference/03-qdrant.md for reference patterns
+- Created load_documents(directory: str) function to read .md files recursively
+- Parses each file: extracts title (line 1 after #), source URL (line 3 after Source:), content (after ---)
+- Returns list of dicts with keys: title, source, product, content
+- Added argparse with --source (default: data/docs) and --dry-run flags
+
+**Verification**:
+- Command: `uv run python scripts/ingest.py --dry-run | head -20`
+- Result: PASS - Found 60 documents with correct parsing of title, source, product, and content
+
+**Files Modified**:
+- scripts/ingest.py (created)
+
+**Notes**:
+- Uses pathlib.Path.rglob("*.md") for recursive file discovery
+- Product is extracted from parent folder name (kchat, kmeet, kdrive)
+- Dry run mode shows first 5 documents with preview
+
+---
+
