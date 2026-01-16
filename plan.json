@@ -204,7 +204,7 @@
       "Return ChatResponse with answer and sources"
     ],
     "verification": "curl -X POST localhost:8000/chat -H 'Content-Type: application/json' -d '{\"message\":\"test\"}'",
-    "passes": false
+    "passes": true
   },
   {
     "id": "api-003",

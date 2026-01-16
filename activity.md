@@ -419,3 +419,29 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: api-002
+**Status**: completed
+**Description**: Added POST /chat endpoint to app/main.py
+
+**Actions Taken**:
+- Read docs/reference/06-fastapi.md for FastAPI endpoint patterns
+- Read docs/reference/01-langchain-agents.md for agent invocation patterns
+- Added imports for ChatRequest, ChatResponse, get_agent, uuid
+- Implemented /chat POST endpoint with async ainvoke on agent
+- Used session_id for thread-based conversation memory (generates UUID if not provided)
+- Extracts answer from last AI message and sources from tool responses
+
+**Verification**:
+- Command: `curl -X POST localhost:8000/chat -H 'Content-Type: application/json' -d '{"message":"test"}'`
+- Result: PASS - Output: `{"answer":"It seems like you might be testing the system or looking for assistance. How can I help you today? 😊","sources":[]}`
+
+**Files Modified**:
+- app/main.py (updated)
+
+**Notes**:
+- Agent invoked with ainvoke for async support
+- Sources extracted by parsing tool message content for "Source:" lines
+- Response model enforced with response_model=ChatResponse
+
+---
+
