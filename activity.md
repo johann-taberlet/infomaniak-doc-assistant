@@ -38,6 +38,29 @@ Template for each task entry:
 
 <!-- Progress entries will be added below this line -->
 
+### 2026-01-16 - Task: llm-001
+**Status**: completed
+**Description**: Created app/llm/base.py with abstract LLMProvider class
+
+**Actions Taken**:
+- Read docs/reference/04-ollama.md for LLM patterns
+- Created abstract base class LLMProvider with ABC
+- Defined abstract methods: get_chat_model() returning BaseChatModel, get_embeddings() returning Embeddings
+- Used type hints from langchain_core
+
+**Verification**:
+- Command: `uv run python -c "from app.llm.base import LLMProvider; print(LLMProvider)"`
+- Result: PASS - Output: `<class 'app.llm.base.LLMProvider'>`
+
+**Files Modified**:
+- app/llm/base.py (created)
+
+**Notes**:
+- Used langchain_core.embeddings.Embeddings and langchain_core.language_models.chat_models.BaseChatModel for type hints
+- Abstract methods use `...` as placeholder (Pythonic convention)
+
+---
+
 ### 2026-01-16 - Task: config-001
 **Status**: completed
 **Description**: Created app/config.py with Pydantic Settings

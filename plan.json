@@ -21,7 +21,7 @@
       "Add type hints with BaseChatModel and Embeddings"
     ],
     "verification": "uv run python -c \"from app.llm.base import LLMProvider; print(LLMProvider)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "llm-002",
