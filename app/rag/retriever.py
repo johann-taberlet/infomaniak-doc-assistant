@@ -84,25 +84,25 @@ class QdrantRetriever:
         """
         query_vector = embed_text(query)
 
-        results = self.client.search(
+        response = self.client.query_points(
             collection_name=self.collection_name,
-            query_vector=query_vector,
+            query=query_vector,
             limit=top_k,
             with_payload=True,
         )
 
-        if not results:
+        if not response.points:
             return []
 
         documents = []
-        for result in results:
+        for point in response.points:
             doc = Document(
-                page_content=result.payload.get("content", ""),
+                page_content=point.payload.get("content", ""),
                 metadata={
-                    "source": result.payload.get("source", ""),
-                    "title": result.payload.get("title", ""),
-                    "product": result.payload.get("product", ""),
-                    "score": result.score,
+                    "source": point.payload.get("source", ""),
+                    "title": point.payload.get("title", ""),
+                    "product": point.payload.get("product", ""),
+                    "score": point.score,
                 },
             )
             documents.append(doc)

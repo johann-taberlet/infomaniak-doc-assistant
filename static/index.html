@@ -111,7 +111,63 @@
         </form>
     </main>
     <script>
-        // Chat functionality will be added in ui-002
+        const chatContainer = document.getElementById('chat-container');
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        let sessionId = null;
+
+        function addMessage(text, type) {
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.textContent = text;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return div;
+        }
+
+        async function sendMessage(message) {
+            // Add user message
+            addMessage(message, 'user');
+
+            // Show loading
+            const loadingDiv = addMessage('Thinking...', 'loading');
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, session_id: sessionId })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+
+                const data = await response.json();
+                sessionId = sessionId || crypto.randomUUID();
+
+                // Remove loading, add response
+                loadingDiv.remove();
+                addMessage(data.answer, 'assistant');
+            } catch (error) {
+                loadingDiv.remove();
+                addMessage('Error: Could not get response. Please try again.', 'assistant');
+                console.error('Chat error:', error);
+            } finally {
+                sendButton.disabled = false;
+                messageInput.focus();
+            }
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = messageInput.value.trim();
+            if (!message) return;
+            messageInput.value = '';
+            await sendMessage(message);
+        });
     </script>
 </body>
 </html>

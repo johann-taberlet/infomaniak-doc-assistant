@@ -618,3 +618,33 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: ui-002
+**Status**: completed
+**Description**: Added JavaScript to chat UI for POST /chat interaction
+
+**Actions Taken**:
+- Added JavaScript to static/index.html with fetch() call to POST /chat
+- Implemented addMessage() function to display messages in chat container
+- Implemented sendMessage() function with loading state and error handling
+- Added form submit event listener to capture user input
+- Also fixed Qdrant retriever bug: changed client.search() to client.query_points() (API change)
+
+**Verification**:
+- Browser test: Opened localhost:8000/static/index.html, sent "What is kDrive?"
+- Result: PASS - User message displayed in blue bubble, loading "Thinking..." shown, assistant response displayed with kDrive information
+- Screenshot saved to screenshots/ui-002.png
+
+**Files Modified**:
+- static/index.html (updated with JavaScript)
+- app/rag/retriever.py (fixed search method to use query_points)
+
+**Notes**:
+- JavaScript uses async/await for clean async handling
+- Session ID generated with crypto.randomUUID() for conversation continuity
+- Button disabled during request to prevent double-submit
+- Error handling displays user-friendly message on failure
+
+**Screenshot**: screenshots/ui-002.png
+
+---
+
