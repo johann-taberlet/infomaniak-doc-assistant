@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
 Scrape Infomaniak documentation using BeautifulSoup.
-Extracts clean content from FAQ pages.
+Auto-discovers and extracts clean content from FAQ pages.
 
 Usage:
     uv run python scripts/scrape_docs.py
+    uv run python scripts/scrape_docs.py --discover-only  # Just list URLs, don't scrape
 """
 
+import argparse
 import re
 import time
 import httpx
@@ -15,75 +17,82 @@ from bs4 import BeautifulSoup, NavigableString
 
 OUTPUT_DIR = Path("data/docs")
 
-# Documentation URLs organized by product
-DOCS = {
-    "kchat": [
-        "https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat",
-        "https://www.infomaniak.com/en/support/faq/2001/connect-external-applications-to-kchat",
-        "https://www.infomaniak.com/en/support/faq/1467/translate-the-content-of-a-message-on-the-kchat-infomaniak-app",
-        "https://www.infomaniak.com/en/support/faq/2244/create-an-event-reminder-via-webhooks-with-the-web-calendar-app-infomaniak",
-        "https://www.infomaniak.com/en/support/faq/1886/manage-kchat-members",
-        "https://www.infomaniak.com/en/support/faq/1190/manage-emoticons-and-gifs-on-kchat",
-        "https://www.infomaniak.com/en/support/faq/2480/use-euria-on-kchat-summarize-a-discussion",
-        "https://www.infomaniak.com/en/support/faq/1758/manage-kchat-conversations",
-        "https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat",
-        "https://www.infomaniak.com/en/support/faq/1622/receive-your-daily-schedule-by-email-or-kchat",
-        "https://www.infomaniak.com/en/support/faq/2732/manage-a-kchat-channel",
-        "https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security",
-        "https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat",
-        "https://www.infomaniak.com/en/support/faq/2870/manage-dark-mode",
-        "https://www.infomaniak.com/en/support/faq/1407/format-text-image-on-kchat",
-        "https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat",
-        "https://www.infomaniak.com/en/support/faq/2840/use-euria-on-kchat-conversational-agent",
-        "https://www.infomaniak.com/en/support/faq/1460/manage-kchat-notifications",
-        "https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands",
-        "https://www.infomaniak.com/en/support/faq/2734/customize-kchat",
-        "https://www.infomaniak.com/en/support/faq/2846/invite-an-external-user-to-use-kchat",
-    ],
-    "kmeet": [
-        "https://www.infomaniak.com/en/support/faq/2474/getting-started-guide-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting",
-        "https://www.infomaniak.com/en/support/faq/2452/resolve-a-video-issue-on-kmeet",
-        "https://www.infomaniak.com/en/support/faq/289/solving-a-problem-on-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2441/fix-an-audio-issue-on-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2473/join-a-kmeet-meeting",
-        "https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive",
-        "https://www.infomaniak.com/en/support/faq/2477/share-your-screen-on-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2397/create-a-kmeet-meeting-side-room",
-        "https://www.infomaniak.com/en/support/faq/1431/transcribe-a-kmeet-meeting-in-real-time-automatic-subtitles",
-        "https://www.infomaniak.com/en/support/faq/2476/manage-kmeet-participants",
-        "https://www.infomaniak.com/en/support/faq/2478/discuss-during-a-kmeet-meeting",
-        "https://www.infomaniak.com/en/support/faq/1355/broadcast-a-kmeet-meeting-via-live-streaming-mode",
-        "https://www.infomaniak.com/en/support/faq/2622/remotely-control-a-device-with-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key",
-        "https://www.infomaniak.com/en/support/faq/2620/draw-on-kmeet",
-        "https://www.infomaniak.com/en/support/faq/2890/replace-skype-with-infomaniak",
-    ],
-    "kdrive": [
-        "https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive",
-        "https://www.infomaniak.com/en/support/faq/2374/sync-kdrive-across-different-devices",
-        "https://www.infomaniak.com/en/support/faq/2410/understanding-kdrive-folders-personal-shared-common",
-        "https://www.infomaniak.com/en/support/faq/617/install-kdrive-on-linux",
-        "https://www.infomaniak.com/en/support/faq/2454/manage-the-folders-to-sync-on-kdrive",
-        "https://www.infomaniak.com/en/support/faq/2562/manage-the-lite-sync-kdrive-option-windows",
-        "https://www.infomaniak.com/en/support/faq/2456/access-kdrive-files-locally-and-online",
-        "https://www.infomaniak.com/en/support/faq/2382/share-data-from-the-kdrive-web-app",
-        "https://www.infomaniak.com/en/support/faq/2386/manage-kdrive-drop-boxes",
-        "https://www.infomaniak.com/en/support/faq/1633/manage-a-users-rights-within-an-organization",
-        "https://www.infomaniak.com/en/support/faq/1610/manage-a-organization-users-product-access",
-        "https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-kdrive",
-        "https://www.infomaniak.com/en/support/faq/2394/import-photos-to-the-kdrive-mobile-app-ios",
-        "https://www.infomaniak.com/en/support/faq/2024/transfer-a-product-from-one-organization-to-another",
-        "https://www.infomaniak.com/en/support/faq/2153/fix-a-kdrive-synchronization-issue",
-        "https://www.infomaniak.com/en/support/faq/2403/resolve-a-kdrive-synchronization-conflict",
-        "https://www.infomaniak.com/en/support/faq/1822/resolve-a-kdrive-block-antivirus-firewall-etc",
-        "https://www.infomaniak.com/en/support/faq/2685/fixing-an-unrecognized-device-error",
-        "https://www.infomaniak.com/en/support/faq/2364/manage-kdrive-users",
-        "https://www.infomaniak.com/en/support/faq/2365/manage-a-kdrive-users-rights",
-        "https://www.infomaniak.com/en/support/faq/1793/manage-sharing-of-the-common-folder-on-kdrive",
-        "https://www.infomaniak.com/en/support/faq/2404/sync-synology-with-kdrive",
-    ],
+# Product IDs for Infomaniak FAQ search API
+PRODUCTS = {
+    "kchat": 54,
+    "kmeet": 46,
+    "kdrive": 40,
 }
+
+# FAQ search API endpoint
+FAQ_SEARCH_URL = "https://www.infomaniak.com/en/support/faq/search"
+
+
+def discover_faq_urls(product: str, product_id: int) -> list[str]:
+    """
+    Auto-discover all FAQ URLs for a product using the search API.
+
+    Paginates through all pages until no more results.
+    """
+    urls = []
+    page = 1
+
+    headers = {
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0 (compatible; InfomaniakDocBot/1.0)",
+    }
+
+    while True:
+        params = {
+            "q": "",  # Empty query = all FAQs
+            "p": product_id,
+            "hp": 1,
+            "c": "",  # All categories
+            "i": page,
+        }
+
+        try:
+            response = httpx.get(FAQ_SEARCH_URL, params=params, headers=headers, timeout=30.0)
+            response.raise_for_status()
+        except httpx.HTTPError as e:
+            print(f"  Error fetching page {page}: {e}")
+            break
+
+        # Parse FAQ URLs from HTML response
+        soup = BeautifulSoup(response.text, "lxml")
+        faq_links = soup.find_all("a", href=re.compile(r"/en/support/faq/\d+/"))
+
+        page_urls = []
+        for link in faq_links:
+            href = link.get("href", "")
+            if href and re.match(r"https://www\.infomaniak\.com/en/support/faq/\d+/", href):
+                if href not in urls and href not in page_urls:
+                    page_urls.append(href)
+
+        if not page_urls:
+            break
+
+        urls.extend(page_urls)
+        print(f"  Page {page}: found {len(page_urls)} FAQs (total: {len(urls)})")
+        page += 1
+
+        # Rate limiting
+        time.sleep(0.3)
+
+    return urls
+
+
+def discover_all_docs() -> dict[str, list[str]]:
+    """Discover all FAQ URLs for all products."""
+    docs = {}
+
+    for product, product_id in PRODUCTS.items():
+        print(f"\n=== Discovering {product.upper()} FAQs (product_id={product_id}) ===")
+        urls = discover_faq_urls(product, product_id)
+        docs[product] = urls
+        print(f"  Total: {len(urls)} FAQs")
+
+    return docs
 
 
 def url_to_filename(url: str, product: str) -> str:
@@ -349,14 +358,17 @@ def scrape_page(url: str) -> tuple[str, str] | None:
     return title, content
 
 
-def scrape_all():
+def scrape_all(docs: dict[str, list[str]], force: bool = False):
     """Scrape all documentation pages."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    total = sum(len(urls) for urls in DOCS.values())
+    total = sum(len(urls) for urls in docs.values())
     current = 0
+    scraped = 0
+    skipped = 0
+    failed = 0
 
-    for product, urls in DOCS.items():
+    for product, urls in docs.items():
         product_dir = OUTPUT_DIR / product
         product_dir.mkdir(exist_ok=True)
 
@@ -367,9 +379,10 @@ def scrape_all():
             filename = url_to_filename(url, product)
             filepath = product_dir / filename
 
-            # Skip if already scraped
-            if filepath.exists():
+            # Skip if already scraped (unless force)
+            if filepath.exists() and not force:
                 print(f"[{current}/{total}] Skipping (exists): {filename}")
+                skipped += 1
                 continue
 
             print(f"[{current}/{total}] Fetching: {filename}")
@@ -383,14 +396,69 @@ def scrape_all():
                     f.write("---\n\n")
                     f.write(content)
                 print(f"  Saved: {filepath}")
+                scraped += 1
             else:
                 print(f"  Failed to scrape")
+                failed += 1
 
             # Rate limiting
             time.sleep(0.5)
 
-    print(f"\n=== Done! Scraped {current} pages to {OUTPUT_DIR} ===")
+    print(f"\n=== Done! ===")
+    print(f"  Scraped: {scraped}")
+    print(f"  Skipped: {skipped}")
+    print(f"  Failed:  {failed}")
+    print(f"  Output:  {OUTPUT_DIR}")
+
+
+def main():
+    """Main entry point with argument parsing."""
+    parser = argparse.ArgumentParser(
+        description="Scrape Infomaniak FAQ documentation"
+    )
+    parser.add_argument(
+        "--discover-only",
+        action="store_true",
+        help="Only discover FAQ URLs, don't scrape content",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-scrape even if files already exist",
+    )
+    parser.add_argument(
+        "--product",
+        choices=list(PRODUCTS.keys()),
+        help="Only scrape a specific product",
+    )
+    args = parser.parse_args()
+
+    # Filter products if specified
+    products = {args.product: PRODUCTS[args.product]} if args.product else PRODUCTS
+
+    # Discover FAQs
+    print("=== Auto-discovering FAQ URLs ===")
+    docs = {}
+    for product, product_id in products.items():
+        print(f"\n--- {product.upper()} (product_id={product_id}) ---")
+        urls = discover_faq_urls(product, product_id)
+        docs[product] = urls
+        print(f"  Found: {len(urls)} FAQs")
+
+    total = sum(len(urls) for urls in docs.values())
+    print(f"\n=== Total: {total} FAQs discovered ===")
+
+    if args.discover_only:
+        print("\n=== FAQ URLs ===")
+        for product, urls in docs.items():
+            print(f"\n{product.upper()}:")
+            for url in urls:
+                print(f"  {url}")
+        return
+
+    # Scrape content
+    scrape_all(docs, force=args.force)
 
 
 if __name__ == "__main__":
-    scrape_all()
+    main()
