@@ -61,6 +61,29 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: llm-002
+**Status**: completed
+**Description**: Created app/llm/ollama_provider.py with OllamaProvider class
+
+**Actions Taken**:
+- Read docs/reference/04-ollama.md for Ollama patterns
+- Created OllamaProvider class extending LLMProvider
+- Implemented get_chat_model() returning ChatOllama with settings
+- Implemented get_embeddings() returning OllamaEmbeddings with settings
+
+**Verification**:
+- Command: `uv run python -c "from app.llm.ollama_provider import OllamaProvider; print(OllamaProvider)"`
+- Result: PASS - Output: `<class 'app.llm.ollama_provider.OllamaProvider'>`
+
+**Files Modified**:
+- app/llm/ollama_provider.py (created)
+
+**Notes**:
+- Used ChatOllama with temperature=0.7, num_ctx=4096
+- Configuration values come from app.config.settings
+
+---
+
 ### 2026-01-16 - Task: config-001
 **Status**: completed
 **Description**: Created app/config.py with Pydantic Settings

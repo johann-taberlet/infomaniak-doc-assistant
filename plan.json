@@ -33,7 +33,7 @@
       "Implement get_chat_model() and get_embeddings() using config settings"
     ],
     "verification": "uv run python -c \"from app.llm.ollama_provider import OllamaProvider; print(OllamaProvider)\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "llm-003",
