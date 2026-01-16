@@ -648,3 +648,33 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: ui-003
+**Status**: completed
+**Description**: Added streaming support to chat UI using EventSource for SSE
+
+**Actions Taken**:
+- Replaced sendMessage() with sendMessageStream() function in static/index.html
+- Implemented EventSource connection to /chat/stream endpoint
+- Created empty response div that gets updated with streaming tokens
+- Added onmessage handler to parse SSE events and append tokens
+- Added onerror handler for graceful error handling
+- Updated form submit handler to use streaming function
+
+**Verification**:
+- Opened localhost:8000/static/index.html in browser
+- Sent message "What is kDrive?"
+- Result: PASS - Tokens streamed in real-time, response displayed progressively
+
+**Files Modified**:
+- static/index.html (updated JavaScript)
+
+**Notes**:
+- EventSource used for SSE (Server-Sent Events) streaming
+- Tokens appended to response div as they arrive via data.token
+- Stream completes when data.done is received
+- Button disabled during streaming, re-enabled on completion
+
+**Screenshot**: screenshots/ui-003.png
+
+---
+

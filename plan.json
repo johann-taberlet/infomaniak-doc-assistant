@@ -312,6 +312,6 @@
       "Handle completion event"
     ],
     "verification": "Send message and see streaming response",
-    "passes": false
+    "passes": true
   }
 ]

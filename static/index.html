@@ -126,47 +126,61 @@
             return div;
         }
 
-        async function sendMessage(message) {
+        function sendMessageStream(message) {
             // Add user message
             addMessage(message, 'user');
 
-            // Show loading
-            const loadingDiv = addMessage('Thinking...', 'loading');
+            // Create response div that will be updated with streaming tokens
+            const responseDiv = addMessage('', 'assistant');
             sendButton.disabled = true;
 
-            try {
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message, session_id: sessionId })
-                });
+            // Initialize session ID if not set
+            if (!sessionId) {
+                sessionId = crypto.randomUUID();
+            }
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error ${response.status}`);
+            // Build URL with query parameters
+            const url = `/chat/stream?message=${encodeURIComponent(message)}&session_id=${encodeURIComponent(sessionId)}`;
+
+            // Use EventSource for SSE streaming
+            const eventSource = new EventSource(url);
+
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+
+                    if (data.done) {
+                        // Stream complete
+                        eventSource.close();
+                        sendButton.disabled = false;
+                        messageInput.focus();
+                    } else if (data.token) {
+                        // Append token to response
+                        responseDiv.textContent += data.token;
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    }
+                } catch (e) {
+                    console.error('Parse error:', e);
                 }
+            };
 
-                const data = await response.json();
-                sessionId = sessionId || crypto.randomUUID();
-
-                // Remove loading, add response
-                loadingDiv.remove();
-                addMessage(data.answer, 'assistant');
-            } catch (error) {
-                loadingDiv.remove();
-                addMessage('Error: Could not get response. Please try again.', 'assistant');
-                console.error('Chat error:', error);
-            } finally {
+            eventSource.onerror = (error) => {
+                console.error('EventSource error:', error);
+                eventSource.close();
+                if (!responseDiv.textContent) {
+                    responseDiv.textContent = 'Error: Could not get response. Please try again.';
+                }
                 sendButton.disabled = false;
                 messageInput.focus();
-            }
+            };
         }
 
-        chatForm.addEventListener('submit', async (e) => {
+        chatForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const message = messageInput.value.trim();
             if (!message) return;
             messageInput.value = '';
-            await sendMessage(message);
+            sendMessageStream(message);
         });
     </script>
 </body>
