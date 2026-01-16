@@ -69,7 +69,7 @@
       "Add CORS middleware"
     ],
     "verification": "uv run uvicorn app.main:app --port 8000 & sleep 3 && curl -s localhost:8000/health && pkill -f uvicorn",
-    "passes": false
+    "passes": true
   },
   {
     "id": "models-001",

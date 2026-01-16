@@ -154,3 +154,26 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: api-001
+**Status**: completed
+**Description**: Created app/main.py with FastAPI app and /health endpoint
+
+**Actions Taken**:
+- Read docs/reference/06-fastapi.md for FastAPI patterns
+- Created FastAPI app instance with title, description, version
+- Added CORS middleware with allow_origins=["*"]
+- Added /health GET endpoint returning {"status": "ok"}
+
+**Verification**:
+- Command: `uv run uvicorn app.main:app --port 8000 & sleep 3 && curl -s localhost:8000/health && pkill -f uvicorn`
+- Result: PASS - Output: `{"status":"ok"}`
+
+**Files Modified**:
+- app/main.py (created)
+
+**Notes**:
+- Used allow_origins=["*"] for development flexibility
+- Endpoint returns dict[str, str] with type hint
+
+---
+
