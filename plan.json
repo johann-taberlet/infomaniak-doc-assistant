@@ -276,7 +276,7 @@
       "Skip if Qdrant unavailable"
     ],
     "verification": "uv run pytest tests/test_rag.py -v",
-    "passes": false
+    "passes": true
   },
   {
     "id": "ui-001",

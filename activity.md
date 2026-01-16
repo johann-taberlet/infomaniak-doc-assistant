@@ -568,3 +568,27 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: test-002
+**Status**: completed
+**Description**: Created tests/test_rag.py with RAG component tests
+
+**Actions Taken**:
+- Created tests/test_rag.py with pytest
+- Implemented test_chunker_splits_text() to verify text chunking and metadata preservation
+- Implemented test_retriever_initializes() to verify QdrantRetriever initialization
+- Added skip logic if Qdrant is unavailable
+
+**Verification**:
+- Command: `uv run pytest tests/test_rag.py -v`
+- Result: PASS - 2 tests passed
+
+**Files Modified**:
+- tests/test_rag.py (created)
+
+**Notes**:
+- Chunker test verifies text is split into multiple chunks with metadata attached
+- Retriever test checks initialization and presence of required methods
+- Uses pytest.skip() to gracefully handle unavailable Qdrant server
+
+---
+
