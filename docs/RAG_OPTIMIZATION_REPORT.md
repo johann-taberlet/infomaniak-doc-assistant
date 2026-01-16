@@ -291,6 +291,46 @@ User Query
 
 ---
 
+## Experiment 6: Document-as-Chunk Strategy
+
+**Hypothesis:** Since FAQ articles are already semantically coherent units, using whole documents as chunks should preserve context better than splitting.
+
+**Implementation:**
+- Added `RAG_CHUNK_STRATEGY` config: `"split"` or `"document"`
+- Automatic collection naming: `infomaniak_docs_split` / `infomaniak_docs_document`
+- Both collections coexist for A/B testing
+
+**Results:**
+
+| Strategy | Chunks | Correct | Partial | Wrong |
+|----------|--------|---------|---------|-------|
+| Split | 168 | 95% | 5% | 0% |
+| Document | 60 | 95% | 5% | 0% |
+
+**Same overall accuracy, but different questions affected:**
+
+| Question | Split | Document | Notes |
+|----------|-------|----------|-------|
+| Q2 (screen share) | 60% | 80% ↑ | Better with full context |
+| Q5 (record) | 57% | 71% ↑ | Better with full context |
+| Q7 (livestream) | 100% | 50% ↓ | Worse - doc rank dropped 4→9 |
+| Q10 (drop box) | 67% | 100% ↑ | Better with full context |
+| Q15 (channel) | 60% | 80% ↑ | Better with full context |
+
+**Analysis - Why Q7 degraded:**
+- Broadcast doc dropped from rank 4 (split) to rank 9 (document)
+- Larger irrelevant docs rank higher due to more BM25 keyword matches
+- Document strategy: 20 slots × whole docs = less source diversity
+- Split strategy: 20 slots × chunks = more diverse sources
+
+**When to use each strategy:**
+- **Document:** Best for single-source answers where full context helps
+- **Split:** Best for answers requiring info from multiple sources
+
+**Verdict:** ⚠️ Trade-off - neither strictly better
+
+---
+
 ## Future Improvements
 
 1. **Dynamic query expansion** using LLM to generate search terms
@@ -298,6 +338,7 @@ User Query
 3. **Metadata filtering** by product (kMeet, kDrive, kChat)
 4. **Caching** for BM25 index rebuilding
 5. **Evaluation automation** with LLM-based scoring
+6. **Hybrid chunking** - document strategy with fallback to split for long docs
 
 ---
 
