@@ -93,7 +93,7 @@
       "Create embed_documents(texts: list[str]) -> list[list[float]] function"
     ],
     "verification": "uv run python -c \"from app.rag.embeddings import embed_text; print(type(embed_text))\"",
-    "passes": false
+    "passes": true
   },
   {
     "id": "rag-002",

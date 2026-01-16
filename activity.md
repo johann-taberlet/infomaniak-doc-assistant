@@ -200,3 +200,26 @@ Template for each task entry:
 
 ---
 
+### 2026-01-16 - Task: rag-001
+**Status**: completed
+**Description**: Created app/rag/embeddings.py with embedding functions
+
+**Actions Taken**:
+- Read docs/reference/02-rag-pipeline.md and docs/reference/08-embeddings.md for patterns
+- Created app/rag/embeddings.py with embed_text() and embed_documents() functions
+- Used get_embeddings() from app.llm to get the embeddings provider
+- Used embed_query() for single text and embed_documents() for multiple texts
+
+**Verification**:
+- Command: `uv run python -c "from app.rag.embeddings import embed_text; print(type(embed_text))"`
+- Result: PASS - Output: `<class 'function'>`
+
+**Files Modified**:
+- app/rag/embeddings.py (created)
+
+**Notes**:
+- Functions delegate to the configured LLM provider's embedding model
+- Returns list[float] for single text, list[list[float]] for multiple texts
+
+---
+
