@@ -8,15 +8,6 @@ import { QuickActions } from './QuickActions'
 import { PlatformAvailability } from './PlatformAvailability'
 import './Markdown.css'
 
-// Debug logging with timestamps
-const DEBUG = true
-const startTime = Date.now()
-const log = (component: string, action: string, data?: unknown) => {
-  if (!DEBUG) return
-  const elapsed = ((Date.now() - startTime) / 1000).toFixed(3)
-  console.log(`[${elapsed}s] [${component}] ${action}`, data ?? '')
-}
-
 interface StreamingSegmentsProps {
   segments: MessageSegment[]
   /** Whether streaming is still active */
@@ -44,31 +35,16 @@ export function StreamingSegments({
   // Reset when message ID changes (new message) or segments array shrinks
   useEffect(() => {
     if (messageId !== prevMessageIdRef.current) {
-      log('StreamingSegments', 'NEW MESSAGE - resetting', { messageId })
       setCompletedCount(0)
       prevSegmentsLengthRef.current = 0
       prevMessageIdRef.current = messageId
       stepGuideStepCountsRef.current.clear()
     } else if (segments.length < prevSegmentsLengthRef.current) {
-      log('StreamingSegments', 'SEGMENTS SHRUNK - resetting', {
-        prev: prevSegmentsLengthRef.current,
-        now: segments.length
-      })
       setCompletedCount(0)
       stepGuideStepCountsRef.current.clear()
-    } else if (segments.length > prevSegmentsLengthRef.current) {
-      log('StreamingSegments', 'NEW SEGMENT ARRIVED', {
-        index: segments.length - 1,
-        type: segments[segments.length - 1]?.type,
-        componentType: segments[segments.length - 1]?.type === 'component'
-          ? (segments[segments.length - 1] as { component: UIComponent }).component.type
-          : undefined,
-        completedCount,
-        isStreaming
-      })
     }
     prevSegmentsLengthRef.current = segments.length
-  }, [segments.length, messageId, completedCount, isStreaming])
+  }, [segments.length, messageId])
 
   // Detect when a completed step_guide receives new steps and "un-complete" it
   useEffect(() => {
@@ -82,17 +58,9 @@ export function StreamingSegments({
           const prevStepCount = stepGuideStepCountsRef.current.get(index) || 0
 
           if (currentStepCount > prevStepCount) {
-            log('StreamingSegments', 'STEP_GUIDE UPDATED', {
-              index,
-              prevSteps: prevStepCount,
-              newSteps: currentStepCount,
-              completedCount,
-              willUncomplete: index < completedCount
-            })
             stepGuideStepCountsRef.current.set(index, currentStepCount)
 
             if (index < completedCount) {
-              log('StreamingSegments', 'UN-COMPLETING step_guide', { index, completedCount })
               setCompletedCount(index)
             }
           }
@@ -103,11 +71,7 @@ export function StreamingSegments({
 
   // Handle animation complete for current segment
   const handleSegmentComplete = useCallback(() => {
-    setCompletedCount(prev => {
-      const next = prev + 1
-      log('StreamingSegments', 'SEGMENT COMPLETE', { prev, next })
-      return next
-    })
+    setCompletedCount(prev => prev + 1)
   }, [])
 
   // Auto-complete instant components (source_cards, quick_actions, platform_availability)
@@ -116,10 +80,7 @@ export function StreamingSegments({
   const autoCompleteRef = useRef(false)
   useEffect(() => {
     const currentSegment = segments[completedCount]
-    if (!currentSegment) {
-      log('StreamingSegments', 'AUTO-COMPLETE skipped (no segment)', { completedCount, segmentsLength: segments.length })
-      return
-    }
+    if (!currentSegment) return
 
     // Only auto-complete component segments that are "instant"
     if (currentSegment.type === 'component') {
@@ -130,7 +91,6 @@ export function StreamingSegments({
         component.type === 'platform_availability'
 
       if (isInstantComponent && !autoCompleteRef.current) {
-        log('StreamingSegments', 'AUTO-COMPLETE triggered', { type: component.type, completedCount, isStreaming })
         autoCompleteRef.current = true
         const timer = setTimeout(() => {
           handleSegmentComplete()
@@ -142,28 +102,13 @@ export function StreamingSegments({
         }
       }
     }
-  }, [segments, completedCount, isStreaming, handleSegmentComplete])
+  }, [segments, completedCount, handleSegmentComplete])
 
   // Render a segment
   const renderSegment = (segment: MessageSegment, index: number) => {
     const isCurrentlyAnimating = index === completedCount
     const isCompleted = index < completedCount
     const shouldShow = isCompleted || isCurrentlyAnimating
-
-    // Log render decisions for debugging
-    if (segment.type === 'component') {
-      const comp = segment.component as UIComponent
-      log('StreamingSegments', 'RENDER', {
-        index,
-        type: comp.type,
-        isCompleted,
-        isCurrentlyAnimating,
-        shouldShow,
-        isStreaming,
-        completedCount,
-        mode: isCompleted ? 'STATIC' : 'ANIMATING'
-      })
-    }
 
     // Don't show future segments until animation queue reaches them
     // This applies both during AND after streaming - animation should complete naturally

@@ -4,15 +4,6 @@ import type { Step } from '../../types'
 import './StepGuide.css'
 import './Markdown.css'
 
-// Debug logging with timestamps
-const DEBUG = true
-const startTime = Date.now()
-const log = (action: string, data?: unknown) => {
-  if (!DEBUG) return
-  const elapsed = ((Date.now() - startTime) / 1000).toFixed(3)
-  console.log(`[${elapsed}s] [StreamingStepGuide] ${action}`, data ?? '')
-}
-
 interface StreamingStepGuideProps {
   title: string
   steps: Step[]
@@ -61,15 +52,11 @@ export function StreamingStepGuide({
 
   // Schedule onComplete call
   const scheduleComplete = useCallback(() => {
-    log('SCHEDULING COMPLETE', { delay: completeDelay })
     cancelCompleteTimer()
     completeTimerRef.current = setTimeout(() => {
       if (!onCompleteCalledRef.current) {
-        log('CALLING onComplete')
         onCompleteCalledRef.current = true
         onComplete?.()
-      } else {
-        log('onComplete SKIPPED (already called)')
       }
     }, completeDelay)
   }, [cancelCompleteTimer, completeDelay, onComplete])
@@ -77,34 +64,22 @@ export function StreamingStepGuide({
   // Handle steps array changes
   useEffect(() => {
     if (steps.length > prevStepsLengthRef.current) {
-      log('NEW STEPS ARRIVED', {
-        prev: prevStepsLengthRef.current,
-        now: steps.length,
-        animatedStepCount,
-        wasCompleted: onCompleteCalledRef.current
-      })
       cancelCompleteTimer()
       onCompleteCalledRef.current = false
     }
     if (steps.length < prevStepsLengthRef.current) {
-      log('STEPS REDUCED - resetting', {
-        prev: prevStepsLengthRef.current,
-        now: steps.length
-      })
       setAnimatedStepCount(0)
       setCurrentCharIndex(0)
       onCompleteCalledRef.current = false
       cancelCompleteTimer()
     }
     prevStepsLengthRef.current = steps.length
-  }, [steps.length, cancelCompleteTimer, animatedStepCount])
+  }, [steps.length, cancelCompleteTimer])
 
   // Animation effect - runs on every tick
   useEffect(() => {
     // If skipAnimation is true, show all content instantly
     if (skipAnimation) {
-      log('ANIMATION SKIP (skipAnimation=true)')
-      // Set animatedStepCount to show all steps instantly
       if (animatedStepCount < steps.length) {
         setAnimatedStepCount(steps.length)
         setCurrentCharIndex(999999) // Large number to show full text
@@ -113,20 +88,13 @@ export function StreamingStepGuide({
     }
 
     // Already completed?
-    if (onCompleteCalledRef.current) {
-      log('ANIMATION SKIP (already completed)')
-      return
-    }
+    if (onCompleteCalledRef.current) return
 
     // No steps yet? Wait.
-    if (steps.length === 0) {
-      log('ANIMATION SKIP (no steps)')
-      return
-    }
+    if (steps.length === 0) return
 
     // All current steps fully animated?
     if (animatedStepCount >= steps.length) {
-      log('ALL STEPS ANIMATED', { animatedStepCount, stepsLength: steps.length })
       scheduleComplete()
       return
     }
@@ -141,7 +109,6 @@ export function StreamingStepGuide({
 
     // Current step fully displayed?
     if (currentCharIndex >= totalChars) {
-      log('STEP COMPLETE', { stepIndex: animatedStepCount, title: currentStep.title.slice(0, 20) })
       // Move to next step after a small pause
       const timer = setTimeout(() => {
         setAnimatedStepCount(prev => prev + 1)

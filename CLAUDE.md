@@ -1,0 +1,1 @@
+Use pyright-lsp to debug python code.

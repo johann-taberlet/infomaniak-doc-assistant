@@ -2,15 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { Markdown } from './Markdown'
 import './Markdown.css'
 
-// Debug logging with timestamps
-const DEBUG = true
-const startTime = Date.now()
-const log = (action: string, data?: unknown) => {
-  if (!DEBUG) return
-  const elapsed = ((Date.now() - startTime) / 1000).toFixed(3)
-  console.log(`[${elapsed}s] [StreamingText] ${action}`, data ?? '')
-}
-
 interface StreamingTextProps {
   content: string
   /** Delay between characters in ms (default: 8) */
@@ -39,7 +30,6 @@ export function StreamingText({
     if (content !== contentRef.current) {
       // If new content is extension of old, don't reset
       if (!content.startsWith(contentRef.current)) {
-        log('CONTENT CHANGED - resetting', { oldLength: contentRef.current.length, newLength: content.length })
         setDisplayedLength(0)
         onCompleteCalledRef.current = false
       }
@@ -54,7 +44,6 @@ export function StreamingText({
     // All displayed?
     if (displayedLength >= totalLength) {
       if (!onCompleteCalledRef.current) {
-        log('COMPLETE', { length: totalLength, preview: content.slice(0, 30) })
         onCompleteCalledRef.current = true
         onComplete?.()
       }
