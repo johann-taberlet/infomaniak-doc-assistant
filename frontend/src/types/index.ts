@@ -83,19 +83,22 @@ export type UIComponent =
   | QuickActionsComponent
   | PlatformAvailabilityComponent
 
-// SSE event types
-export interface TokenEvent {
-  token: string
-}
+// SSE segment types (from backend with order parameter)
+export type Segment =
+  | { type: 'text'; content: string; order: number }
+  | { type: 'step_guide'; title: string; steps: Step[]; order: number; id: string }
+  | { type: 'platform_availability'; feature: string; platforms: PlatformStatus[]; order: number; id: string }
+  | { type: 'quick_actions'; actions: QuickAction[]; order: number; id: string }
+  | { type: 'source_cards'; sources: SourceDocument[] }  // No order, always last
 
-export interface UIComponentEvent {
-  ui_component: UIComponent
+// SSE event types
+export interface SegmentEvent {
+  segment: Segment
 }
 
 export interface DoneEvent {
   done: true
   language?: string
-  sources?: SourceCardsComponent[]  // Sources always come last
 }
 
-export type SSEEvent = TokenEvent | UIComponentEvent | DoneEvent
+export type SSEEvent = SegmentEvent | DoneEvent

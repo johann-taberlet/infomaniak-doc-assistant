@@ -1,4 +1,5 @@
 import type { SourceDocument } from '../../types'
+import { stripMarkdown } from '../../utils/text'
 import './SourceCards.css'
 
 interface SourceCardsProps {
@@ -41,7 +42,7 @@ export function SourceCards({ sources }: SourceCardsProps) {
               <span className="source-card-rank">#{index + 1}</span>
             </div>
             <h4 className="source-card-title">{source.title}</h4>
-            <p className="source-card-snippet">{source.snippet}</p>
+            <p className="source-card-snippet">{stripMarkdown(source.snippet)}</p>
           </a>
         ))}
       </div>

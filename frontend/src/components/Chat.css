@@ -52,72 +52,39 @@
   line-height: 1.5;
 }
 
-/* Markdown styles */
-.message.assistant h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0.75rem 0 0.5rem 0;
-  color: #222;
+/* Thinking indicator */
+.message-content.thinking {
+  color: #6c757d;
+  font-style: italic;
 }
 
-.message.assistant h3:first-child {
-  margin-top: 0;
+.thinking-dots span {
+  animation: thinkingDot 1.4s infinite;
+  opacity: 0;
 }
 
-.message.assistant p {
-  margin: 0.5rem 0;
+.thinking-dots span:nth-child(1) {
+  animation-delay: 0s;
 }
 
-.message.assistant ul,
-.message.assistant ol {
-  margin: 0.5rem 0 0.5rem 1.5rem;
+.thinking-dots span:nth-child(2) {
+  animation-delay: 0.2s;
 }
 
-.message.assistant li {
-  margin: 0.25rem 0;
+.thinking-dots span:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
-.message.assistant strong {
-  font-weight: 600;
-}
-
-.message.assistant code {
-  background: #d4d4d4;
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px;
-  font-family: monospace;
-  font-size: 0.9em;
-}
-
-.message.assistant pre {
-  background: #2d2d2d;
-  color: #f8f8f2;
-  padding: 0.75rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  margin: 0.5rem 0;
-}
-
-.message.assistant pre code {
-  background: none;
-  padding: 0;
-  color: inherit;
-}
-
-.message.assistant a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-.message.assistant a:hover {
-  text-decoration: underline;
-}
-
-.message.assistant blockquote {
-  border-left: 3px solid #0066cc;
-  margin: 0.5rem 0;
-  padding-left: 0.75rem;
-  color: #555;
+@keyframes thinkingDot {
+  0%, 20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60%, 100% {
+    opacity: 0;
+  }
 }
 
 /* TTS Button */

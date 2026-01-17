@@ -2,7 +2,6 @@
 
 import json
 import logging
-import re
 import uuid
 from collections.abc import AsyncGenerator
 from pathlib import Path
@@ -15,12 +14,9 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import get_agent
-from app.agent.tools import ALL_TOOLS, get_pending_ui_components
+from app.agent.tools import collect_all_segments, reset_context
 from app.models.schemas import ChatRequest, ChatResponse
 from app.observability.langfuse import get_langfuse_handler
-
-# Tool names for filtering out tool call text from stream
-TOOL_NAMES = {tool.name for tool in ALL_TOOLS}
 
 logger = logging.getLogger(__name__)
 
@@ -136,29 +132,17 @@ def format_sse(data: dict[str, Any]) -> str:
     return f"data: {json.dumps(data)}\n\n"
 
 
-def extract_language(text: str) -> tuple[str, str | None]:
-    """Extract language marker from end of text and return (cleaned_text, language)."""
-    # Match [LANG:xx] at the end of text (with possible trailing whitespace)
-    match = re.search(r"\[LANG:(\w{2})\]\s*$", text)
-    if match:
-        lang = match.group(1).lower()
-        cleaned = text[: match.start()].rstrip()
-        return cleaned, lang
-    return text, None
-
-
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
     """Generate SSE events from agent streaming response.
 
-    Emits three types of events during streaming:
-    - token: Streamed text tokens from the LLM
-    - ui_component: Inline UI components (StepGuide, QuickActions, etc.) - emitted immediately
-    - done: Signal that streaming is complete, includes language and sources (SourceCards)
+    Emits segments after all tools complete:
+    - segment: Each content segment (text or component) with order
+    - done: Signal that streaming is complete, includes language
     """
     agent = get_agent()
 
-    # Clear any stale UI components from previous requests
-    get_pending_ui_components()
+    # Reset context for this request
+    reset_context()
 
     # Build config with optional Langfuse observability
     config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
@@ -166,12 +150,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     if langfuse_handler:
         config["callbacks"] = [langfuse_handler]
 
-    # Accumulate full response to extract language marker at the end
-    full_response = ""
-    # Collect source cards to emit at the very end (after all other content)
-    source_cards: list[dict[str, Any]] = []
-    # Track when we're in tool execution to skip streaming tool call content
-    in_tool_call = False
+    # Track when response is complete
+    response_complete = False
 
     async for event in agent.astream_events(
         {"messages": [{"role": "user", "content": message}]},
@@ -180,50 +160,27 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     ):
         kind = event.get("event")
 
-        # Track tool execution state
-        if kind == "on_tool_start":
-            in_tool_call = True
-            continue
-
+        # Check for finish_response tool completion
         if kind == "on_tool_end":
-            in_tool_call = False
-            # Process UI components from the tool
-            for component in get_pending_ui_components():
-                # Use by_alias=True to get camelCase keys for frontend
-                component_dict = component.model_dump(by_alias=True)
-                if component_dict.get("type") == "source_cards":
-                    # Hold source cards until the end
-                    source_cards.append(component_dict)
-                else:
-                    # Emit other components immediately (inline in message flow)
-                    yield format_sse({"ui_component": component_dict})
-            continue
+            output = event.get("data", {}).get("output", "")
+            if output == "RESPONSE_COMPLETE":
+                response_complete = True
 
-        # Stream AI message content tokens (skip during tool calls)
-        if kind == "on_chat_model_stream":
-            # Skip all content while tools are executing
-            if in_tool_call:
-                continue
+    # Collect all segments, sources, and language
+    segments, sources, language = collect_all_segments()
 
-            chunk = event.get("data", {}).get("chunk")
-            if chunk:
-                # Skip if this is a tool call chunk (structured tool calling)
-                if hasattr(chunk, "tool_call_chunks") and chunk.tool_call_chunks:
-                    continue
-                # Stream actual text content
-                if hasattr(chunk, "content") and chunk.content:
-                    full_response += chunk.content
-                    yield format_sse({"token": chunk.content})
+    # Emit each segment in order
+    for segment in segments:
+        yield format_sse({"segment": segment})
 
-    # Extract language from accumulated response
-    _, language = extract_language(full_response)
+    # Emit sources as final segment (no order, always last)
+    if sources:
+        yield format_sse({"segment": {"type": "source_cards", "sources": sources}})
 
-    # Send done event with language and sources (sources always come last)
+    # Send done event with language
     done_data: dict[str, Any] = {"done": True}
     if language:
         done_data["language"] = language
-    if source_cards:
-        done_data["sources"] = source_cards
     yield format_sse(done_data)
 
 

@@ -5,6 +5,7 @@ import { SourceCards } from './ui/SourceCards'
 import { StepGuide } from './ui/StepGuide'
 import { QuickActions } from './ui/QuickActions'
 import { PlatformAvailability } from './ui/PlatformAvailability'
+import './ui/Markdown.css'
 
 const AVAILABLE_LANGS = ['en', 'ko', 'es', 'pt', 'fr'] as const
 
@@ -55,7 +56,7 @@ function renderSegment(segment: MessageSegment, index: number) {
     // Only render non-empty text segments
     if (!segment.content.trim()) return null
     return (
-      <div key={`text-${index}`} className="message-content">
+      <div key={`text-${index}`} className="message-content markdown-content">
         <Markdown>{segment.content}</Markdown>
       </div>
     )
@@ -109,13 +110,22 @@ export function MessageRenderer({
 
   // Render assistant message content - use segments if available
   const renderAssistantContent = () => {
+    // Show loading indicator while waiting for response
+    if (!message.content && (!message.segments || message.segments.length === 0)) {
+      return (
+        <div className="message-content thinking">
+          Thinking<span className="thinking-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+      )
+    }
+
     if (message.segments && message.segments.length > 0) {
       // Render interleaved segments (text and components in order)
       return message.segments.map(renderSegment)
     }
     // Fallback: render content as single text block
     return (
-      <div className="message-content">
+      <div className="message-content markdown-content">
         <Markdown>{message.content}</Markdown>
       </div>
     )

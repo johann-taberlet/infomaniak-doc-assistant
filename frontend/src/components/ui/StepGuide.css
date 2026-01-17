@@ -109,7 +109,6 @@
 }
 
 .step-description {
-  margin: 0;
   font-size: 0.8125rem;
   color: #6c757d;
   line-height: 1.4;
@@ -134,10 +133,6 @@
 
 .step-details {
   padding: 0 1rem 0.75rem 3.5rem;
-}
-
-.step-details p {
-  margin: 0 0 0.5rem;
   font-size: 0.8125rem;
   color: #495057;
   line-height: 1.5;

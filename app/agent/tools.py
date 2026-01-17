@@ -1,6 +1,7 @@
 """LangChain tools for the RAG agent."""
 
 import json
+from contextvars import ContextVar
 from functools import cache
 from typing import Any
 
@@ -12,7 +13,6 @@ from app.models.schemas import (
     PlatformStatus,
     QuickAction,
     QuickActionsComponent,
-    SourceCardsComponent,
     SourceDocument,
     Step,
     StepGuideComponent,
@@ -29,23 +29,81 @@ def get_retriever() -> QdrantRetriever:
     return QdrantRetriever()
 
 
-# Global storage for UI components to be emitted during streaming
-# This is populated by tools and consumed by the SSE stream
-_pending_ui_components: list[Any] = []
+# Context variables for request-scoped storage
+_segments_var: ContextVar[list[dict[str, Any]]] = ContextVar("segments", default=[])
+_sources_var: ContextVar[list[dict[str, Any]]] = ContextVar("sources", default=[])
+_language_var: ContextVar[str | None] = ContextVar("language", default=None)
 
 
-def get_pending_ui_components() -> list[Any]:
-    """Get and clear pending UI components."""
-    global _pending_ui_components
-    components = _pending_ui_components.copy()
-    _pending_ui_components = []
-    return components
+def get_segments() -> list[dict[str, Any]]:
+    """Get current segments list (creates new list if not set)."""
+    try:
+        return _segments_var.get()
+    except LookupError:
+        segments: list[dict[str, Any]] = []
+        _segments_var.set(segments)
+        return segments
 
 
-def add_ui_component(component: Any) -> None:
-    """Add a UI component to be emitted."""
-    global _pending_ui_components
-    _pending_ui_components.append(component)
+def add_segment(segment: dict[str, Any]) -> None:
+    """Add a segment to the current request."""
+    segments = get_segments()
+    segments.append(segment)
+
+
+def get_sources() -> list[dict[str, Any]]:
+    """Get current sources list (creates new list if not set)."""
+    try:
+        return _sources_var.get()
+    except LookupError:
+        sources: list[dict[str, Any]] = []
+        _sources_var.set(sources)
+        return sources
+
+
+def add_source(source: dict[str, Any]) -> None:
+    """Add a source to the current request."""
+    sources = get_sources()
+    sources.append(source)
+
+
+def set_response_language(language: str) -> None:
+    """Set the language for the current response."""
+    _language_var.set(language)
+
+
+def get_response_language() -> str | None:
+    """Get the language for the current response."""
+    try:
+        return _language_var.get()
+    except LookupError:
+        return None
+
+
+def reset_context() -> None:
+    """Reset all context variables for a new request."""
+    _segments_var.set([])
+    _sources_var.set([])
+    _language_var.set(None)
+
+
+def collect_all_segments() -> tuple[list[dict[str, Any]], list[dict[str, Any]], str | None]:
+    """Collect all segments, sources, and language, then reset context.
+
+    Returns:
+        Tuple of (segments sorted by order, sources, language)
+    """
+    segments = get_segments()
+    sources = get_sources()
+    language = get_response_language()
+
+    # Sort segments by order
+    sorted_segments = sorted(segments, key=lambda s: s.get("order", 0))
+
+    # Reset for next request
+    reset_context()
+
+    return sorted_segments, sources, language
 
 
 # Maximum number of sources to show in the UI cards (top N most relevant)
@@ -68,8 +126,7 @@ def search_docs(query: str) -> str:
     if not documents:
         return "No relevant documentation found for this query."
 
-    # Build UI component for sources (only top N for UI display)
-    sources: list[SourceDocument] = []
+    # Build sources for UI (stored separately, emitted last)
     results = []
     seen_titles: set[str] = set()
 
@@ -85,34 +142,62 @@ def search_docs(query: str) -> str:
         results.append(result)
 
         # Build source document for UI (deduplicated by title, limited count)
-        if len(sources) < MAX_UI_SOURCES and title not in seen_titles:
+        if len(get_sources()) < MAX_UI_SOURCES and title not in seen_titles:
             seen_titles.add(title)
             snippet = content[:150] + "..." if len(content) > 150 else content
-            sources.append(
-                SourceDocument(
-                    title=title,
-                    product=product or "Infomaniak",
-                    url=source,
-                    snippet=snippet,
-                    relevance_score=score,
-                )
+            source_doc = SourceDocument(
+                title=title,
+                product=product or "Infomaniak",
+                url=source,
+                snippet=snippet,
+                relevance_score=score,
             )
-
-    # Add SourceCards UI component
-    if sources:
-        add_ui_component(SourceCardsComponent(sources=sources))
+            add_source(source_doc.model_dump(by_alias=True))
 
     return "\n\n---\n\n".join(results)
 
 
 @tool(parse_docstring=True)
-def render_steps(title: str, steps_json: str) -> str:
+def render_text(order: int, content: str) -> str:
+    """Output a text segment to the user.
+
+    Use this tool to output any text you want the user to see.
+    Call this multiple times with different order numbers to build your response.
+
+    Args:
+        order: Display order number starting from 1.
+        content: The markdown text to display.
+
+    Returns:
+        Confirmation that text was rendered.
+    """
+    add_segment({"type": "text", "content": content, "order": order})
+    return f"Text rendered at position {order}"
+
+
+@tool(parse_docstring=True)
+def finish_response(language: str) -> str:
+    """Signal that you have finished building the response. Call this LAST.
+
+    Args:
+        language: The language code used in your response (e.g., 'en', 'fr', 'de').
+
+    Returns:
+        Completion signal.
+    """
+    set_response_language(language)
+    return "RESPONSE_COMPLETE"
+
+
+@tool(parse_docstring=True)
+def render_steps(order: int, title: str, steps_json: str) -> str:
     """Render an interactive step-by-step guide for procedural instructions.
 
     Use this tool when explaining how to do something with multiple steps.
     The user will see an interactive checklist they can mark as complete.
 
     Args:
+        order: Display order number for this component.
         title: The title of the guide, like How to share a folder on kDrive.
         steps_json: JSON array of step objects. Each object needs number, title,
                    description fields. Optional fields are details and command.
@@ -125,21 +210,24 @@ def render_steps(title: str, steps_json: str) -> str:
         steps = [Step(**step) for step in steps_data]
 
         component = StepGuideComponent(title=title, steps=steps)
-        add_ui_component(component)
+        segment = component.model_dump(by_alias=True)
+        segment["order"] = order
+        add_segment(segment)
 
-        return f"Step guide '{title}' with {len(steps)} steps has been rendered."
+        return f"Step guide '{title}' with {len(steps)} steps rendered at position {order}."
     except (json.JSONDecodeError, TypeError) as e:
         return f"Error parsing steps: {e}. Please provide valid JSON."
 
 
 @tool(parse_docstring=True)
-def render_quick_actions(actions_json: str) -> str:
+def render_quick_actions(order: int, actions_json: str) -> str:
     """Render contextual quick action buttons after your response.
 
     Use this tool to provide helpful follow-up actions like opening documentation,
     contacting support, or deep links to specific features.
 
     Args:
+        order: Display order number for this component.
         actions_json: JSON array of action objects. Each object needs a label field.
                      Optional fields are url, action (open_docs/contact_support/copy), icon.
 
@@ -151,21 +239,24 @@ def render_quick_actions(actions_json: str) -> str:
         actions = [QuickAction(**action) for action in actions_data]
 
         component = QuickActionsComponent(actions=actions)
-        add_ui_component(component)
+        segment = component.model_dump(by_alias=True)
+        segment["order"] = order
+        add_segment(segment)
 
-        return f"Quick actions rendered: {', '.join(a.label for a in actions)}"
+        return f"Quick actions rendered at position {order}: {', '.join(a.label for a in actions)}"
     except (json.JSONDecodeError, TypeError) as e:
         return f"Error parsing actions: {e}. Please provide valid JSON."
 
 
 @tool(parse_docstring=True)
-def render_platform_availability(feature: str, platforms_json: str) -> str:
+def render_platform_availability(order: int, feature: str, platforms_json: str) -> str:
     """Render a visual grid showing feature availability across platforms.
 
     Use this tool when discussing platform-specific limitations or availability.
     Shows checkmarks, partial support, or unavailable status for each platform.
 
     Args:
+        order: Display order number for this component.
         feature: The feature name like Lite Sync or Screen sharing.
         platforms_json: JSON array of platform status objects. Each needs platform
                        (web/windows/macos/ios/android/linux) and availability (full/partial/none).
@@ -179,9 +270,11 @@ def render_platform_availability(feature: str, platforms_json: str) -> str:
         platforms = [PlatformStatus(**p) for p in platforms_data]
 
         component = PlatformAvailabilityComponent(feature=feature, platforms=platforms)
-        add_ui_component(component)
+        segment = component.model_dump(by_alias=True)
+        segment["order"] = order
+        add_segment(segment)
 
-        return f"Platform availability for '{feature}' rendered across {len(platforms)} platforms."
+        return f"Platform availability for '{feature}' rendered at position {order}."
     except (json.JSONDecodeError, TypeError) as e:
         return f"Error parsing platforms: {e}. Please provide valid JSON."
 
@@ -189,7 +282,9 @@ def render_platform_availability(feature: str, platforms_json: str) -> str:
 # List of all available tools for the agent
 ALL_TOOLS = [
     search_docs,
+    render_text,
     render_steps,
     render_quick_actions,
     render_platform_availability,
+    finish_response,
 ]

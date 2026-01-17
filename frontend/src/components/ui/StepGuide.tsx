@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import Markdown from 'react-markdown'
 import type { Step } from '../../types'
 import './StepGuide.css'
+import './Markdown.css'
 
 interface StepGuideProps {
   title: string
@@ -81,7 +83,9 @@ export function StepGuide({ title, steps }: StepGuideProps) {
                 </button>
                 <div className="step-content">
                   <h5 className="step-title">{step.title}</h5>
-                  <p className="step-description">{step.description}</p>
+                  <div className="step-description markdown-content markdown-compact">
+                    <Markdown>{step.description}</Markdown>
+                  </div>
                 </div>
                 {hasDetails && (
                   <button
@@ -94,8 +98,8 @@ export function StepGuide({ title, steps }: StepGuideProps) {
                 )}
               </div>
               {hasDetails && isExpanded && (
-                <div className="step-details">
-                  {step.details && <p>{step.details}</p>}
+                <div className="step-details markdown-content markdown-compact">
+                  {step.details && <Markdown>{step.details}</Markdown>}
                   {step.command && (
                     <div className="step-command">
                       <code>{step.command}</code>
