@@ -150,21 +150,13 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     if langfuse_handler:
         config["callbacks"] = [langfuse_handler]
 
-    # Track when response is complete
-    response_complete = False
-
     async for event in agent.astream_events(
         {"messages": [{"role": "user", "content": message}]},
         config,
         version="v2",
     ):
-        kind = event.get("event")
-
-        # Check for finish_response tool completion
-        if kind == "on_tool_end":
-            output = event.get("data", {}).get("output", "")
-            if output == "RESPONSE_COMPLETE":
-                response_complete = True
+        # Process all events until stream completes
+        pass
 
     # Collect all segments, sources, and language
     segments, sources, language = collect_all_segments()

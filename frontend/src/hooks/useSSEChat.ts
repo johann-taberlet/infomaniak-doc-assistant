@@ -97,11 +97,8 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
 
           if (segment.type === 'text') {
             segmentsRef.current.push({ type: 'text', content: segment.content })
-          } else if (segment.type === 'source_cards') {
-            // Source cards come as a special segment
-            segmentsRef.current.push({ type: 'component', component: segment })
           } else {
-            // Other UI components (step_guide, platform_availability, quick_actions)
+            // UI components (step_guide, platform_availability, quick_actions, source_cards)
             segmentsRef.current.push({ type: 'component', component: segment })
           }
 

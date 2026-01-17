@@ -26,12 +26,6 @@ class ChatResponse(BaseModel):
     sources: list[str] = Field(default_factory=list)
 
 
-class HealthResponse(BaseModel):
-    """Response model for health endpoint."""
-
-    status: str
-
-
 # ============================================================
 # Generative UI Component Models
 # ============================================================
