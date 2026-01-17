@@ -150,9 +150,10 @@ def extract_language(text: str) -> tuple[str, str | None]:
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
     """Generate SSE events from agent streaming response.
 
-    Emits two types of events during streaming:
+    Emits three types of events during streaming:
     - token: Streamed text tokens from the LLM
-    - done: Signal that streaming is complete, includes language and UI components
+    - ui_component: Inline UI components (StepGuide, QuickActions, etc.) - emitted immediately
+    - done: Signal that streaming is complete, includes language and sources (SourceCards)
     """
     agent = get_agent()
 
@@ -167,8 +168,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
 
     # Accumulate full response to extract language marker at the end
     full_response = ""
-    # Collect all UI components to emit at the end
-    ui_components: list[dict[str, Any]] = []
+    # Collect source cards to emit at the very end (after all other content)
+    source_cards: list[dict[str, Any]] = []
     # Track when we're in tool execution to skip streaming tool call content
     in_tool_call = False
 
@@ -186,9 +187,16 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
 
         if kind == "on_tool_end":
             in_tool_call = False
-            # Collect UI components (will be emitted at the end)
+            # Process UI components from the tool
             for component in get_pending_ui_components():
-                ui_components.append(component.model_dump())
+                # Use by_alias=True to get camelCase keys for frontend
+                component_dict = component.model_dump(by_alias=True)
+                if component_dict.get("type") == "source_cards":
+                    # Hold source cards until the end
+                    source_cards.append(component_dict)
+                else:
+                    # Emit other components immediately (inline in message flow)
+                    yield format_sse({"ui_component": component_dict})
             continue
 
         # Stream AI message content tokens (skip during tool calls)
@@ -210,12 +218,12 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     # Extract language from accumulated response
     _, language = extract_language(full_response)
 
-    # Send done event with language and UI components
+    # Send done event with language and sources (sources always come last)
     done_data: dict[str, Any] = {"done": True}
     if language:
         done_data["language"] = language
-    if ui_components:
-        done_data["ui_components"] = ui_components
+    if source_cards:
+        done_data["sources"] = source_cards
     yield format_sse(done_data)
 
 

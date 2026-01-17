@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
-import type { Message, SSEEvent } from '../types'
+import type { Message, UIComponent, SSEEvent } from '../types'
 
 interface UseSSEChatOptions {
   onStreamStart?: () => void
@@ -28,6 +28,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
   const sessionIdRef = useRef<string>(generateId())
   const eventSourceRef = useRef<EventSource | null>(null)
   const streamingMessageRef = useRef<string>('')
+  const uiComponentsRef = useRef<UIComponent[]>([])
 
   const sendMessage = useCallback((content: string) => {
     if (isStreaming || !content.trim()) return
@@ -42,6 +43,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
     setMessages(prev => [...prev, userMessage])
     setIsStreaming(true)
     streamingMessageRef.current = ''
+    uiComponentsRef.current = []
     options.onStreamStart?.()
 
     // Create assistant message placeholder
@@ -66,14 +68,21 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
         const data: SSEEvent = JSON.parse(event.data)
 
         if ('done' in data && data.done) {
-          // Stream complete - add UI components now
+          // Stream complete - add sources at the very end
           const finalContent = stripLangMarker(streamingMessageRef.current)
+
+          // Combine inline components with sources (sources come last)
+          const allComponents = [...uiComponentsRef.current]
+          if (data.sources) {
+            allComponents.push(...data.sources)
+          }
+
           const finalMessage: Message = {
             id: assistantId,
             role: 'assistant',
             content: finalContent,
             language: data.language,
-            uiComponents: data.ui_components,
+            uiComponents: allComponents.length > 0 ? allComponents : undefined,
           }
 
           setMessages(prev =>
@@ -91,6 +100,16 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             prev.map(m =>
               m.id === assistantId
                 ? { ...m, content: streamingMessageRef.current }
+                : m
+            )
+          )
+        } else if ('ui_component' in data) {
+          // Add inline UI component immediately (not sources)
+          uiComponentsRef.current.push(data.ui_component)
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantId
+                ? { ...m, uiComponents: [...uiComponentsRef.current] }
                 : m
             )
           )

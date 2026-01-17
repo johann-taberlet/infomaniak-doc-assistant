@@ -83,10 +83,14 @@ export interface TokenEvent {
   token: string
 }
 
+export interface UIComponentEvent {
+  ui_component: UIComponent
+}
+
 export interface DoneEvent {
   done: true
   language?: string
-  ui_components?: UIComponent[]
+  sources?: SourceCardsComponent[]  // Sources always come last
 }
 
-export type SSEEvent = TokenEvent | DoneEvent
+export type SSEEvent = TokenEvent | UIComponentEvent | DoneEvent

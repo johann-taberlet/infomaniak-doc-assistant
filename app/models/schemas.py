@@ -1,9 +1,15 @@
 """Pydantic models for API request/response schemas."""
 
-from typing import Literal
 import uuid
+from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+
+
+def to_camel(string: str) -> str:
+    """Convert snake_case to camelCase."""
+    components = string.split("_")
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 class ChatRequest(BaseModel):
@@ -33,6 +39,8 @@ class HealthResponse(BaseModel):
 
 class SourceDocument(BaseModel):
     """A source document for attribution."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
     title: str
     product: str  # kDrive, kMeet, kChat, etc.
