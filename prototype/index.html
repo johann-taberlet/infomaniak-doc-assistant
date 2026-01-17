@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReAct Pattern Prototype</title>
+    <!-- Marked.js for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0066cc, #004499);
+            color: white;
+            padding: 16px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #messages {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+        }
+
+        .message {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .message.user {
+            background: #0066cc;
+            color: white;
+            align-self: flex-end;
+            max-width: 80%;
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+            max-width: 100%;
+        }
+
+        .segment {
+            margin-bottom: 16px;
+        }
+
+        .segment:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Text segment - markdown styles */
+        .segment-text {
+            line-height: 1.6;
+        }
+
+        .segment-text h1, .segment-text h2, .segment-text h3 {
+            margin: 16px 0 8px 0;
+            font-weight: 600;
+        }
+
+        .segment-text h1:first-child, .segment-text h2:first-child, .segment-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .segment-text h3 {
+            font-size: 1.1rem;
+        }
+
+        .segment-text p {
+            margin-bottom: 12px;
+        }
+
+        .segment-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .segment-text ul, .segment-text ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        .segment-text li {
+            margin-bottom: 4px;
+        }
+
+        .segment-text a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .segment-text a:hover {
+            text-decoration: underline;
+        }
+
+        .segment-text code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+
+        .segment-text strong {
+            font-weight: 600;
+        }
+
+        /* Step guide */
+        .step-guide {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .step-guide-title {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .step {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .step-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .step-checkbox.checked {
+            background: #0066cc;
+            color: white;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Platform availability */
+        .platform-grid {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .platform-title {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            padding: 12px;
+        }
+
+        .platform {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 6px;
+            background: #f8f9fa;
+        }
+
+        .platform-icon {
+            font-size: 1.25rem;
+        }
+
+        .platform-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .platform-status.full { background: #22c55e; }
+        .platform-status.partial { background: #f59e0b; }
+        .platform-status.none { background: #ef4444; }
+
+        /* Quick actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .quick-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: #f0f7ff;
+            border: 1px solid #0066cc;
+            border-radius: 20px;
+            color: #0066cc;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-action:hover {
+            background: #0066cc;
+            color: white;
+        }
+
+        .quick-action-icon {
+            font-size: 1rem;
+        }
+
+        /* Source cards */
+        .source-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .source-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s;
+        }
+
+        .source-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .source-product {
+            font-size: 0.75rem;
+            color: #0066cc;
+            font-weight: 500;
+        }
+
+        .source-rank {
+            font-size: 0.7rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .source-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .source-snippet {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Input area */
+        #input-area {
+            display: flex;
+            gap: 12px;
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        #message-input:focus {
+            border-color: #0066cc;
+        }
+
+        #send-btn {
+            padding: 12px 24px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #send-btn:hover {
+            background: #0055aa;
+        }
+
+        #send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: #0066cc;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Separator */
+        .segment-separator {
+            border-top: 1px solid #e0e0e0;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ReAct Pattern Prototype</h1>
+        <p>Testing interleaved text + UI components via tool calls</p>
+    </header>
+
+    <main>
+        <div id="messages"></div>
+
+        <div id="input-area">
+            <input
+                type="text"
+                id="message-input"
+                placeholder="Ask a question (e.g., 'How do I create a Drop Box in kDrive?')"
+                autofocus
+            />
+            <button id="send-btn">Send</button>
+        </div>
+    </main>
+
+    <script>
+        const messagesEl = document.getElementById('messages');
+        const inputEl = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Fallback UUID generation for non-secure contexts
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        let sessionId = generateUUID();
+
+        const PLATFORM_ICONS = {
+            web: '🌐',
+            windows: '🪟',
+            macos: '🍎',
+            ios: '📱',
+            android: '🤖',
+            linux: '🐧'
+        };
+
+        // Render markdown using marked.js with inline rendering for step descriptions
+        function renderMarkdown(text, inline = false) {
+            if (inline) {
+                return marked.parseInline(text);
+            }
+            return marked.parse(text);
+        }
+
+        // Handle quick action button clicks
+        function handleQuickAction(action, label) {
+            switch(action) {
+                case 'contact_support':
+                    alert('Contact support: This would open a support ticket form');
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(label).then(() => {
+                        alert('Copied to clipboard!');
+                    });
+                    break;
+                default:
+                    console.log('Quick action:', action, label);
+            }
+        }
+
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'message user';
+            div.textContent = text;
+            messagesEl.appendChild(div);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function createAssistantMessage() {
+            const div = document.createElement('div');
+            div.className = 'message assistant';
+            messagesEl.appendChild(div);
+            return div;
+        }
+
+        function renderSegment(container, segment) {
+            const segmentDiv = document.createElement('div');
+            segmentDiv.className = 'segment';
+
+            switch (segment.type) {
+                case 'text':
+                    segmentDiv.className += ' segment-text';
+                    segmentDiv.innerHTML = renderMarkdown(segment.content);
+                    break;
+
+                case 'step_guide':
+                    segmentDiv.innerHTML = `
+                        <div class="step-guide">
+                            <div class="step-guide-title">${segment.title}</div>
+                            ${segment.steps.map(step => `
+                                <div class="step">
+                                    <div class="step-checkbox" onclick="this.classList.toggle('checked')">
+                                        ${step.number}
+                                    </div>
+                                    <div class="step-content">
+                                        <div class="step-title">${renderMarkdown(step.title, true)}</div>
+                                        <div class="step-description">${renderMarkdown(step.description, true)}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+
+                case 'platform_availability':
+                    segmentDiv.innerHTML = `
+                        <div class="platform-grid">
+                            <div class="platform-title">${segment.feature} - Platform Support</div>
+                            <div class="platforms">
+                                ${segment.platforms.map(p => `
+                                    <div class="platform">
+                                        <span class="platform-icon">${PLATFORM_ICONS[p.platform] || '?'}</span>
+                                        <span>${p.platform}</span>
+                                        <span class="platform-status ${p.availability}"></span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'quick_actions':
+                    const ACTION_ICONS = {
+                        open_docs: '📄',
+                        contact_support: '💬',
+                        copy: '📋'
+                    };
+                    segmentDiv.innerHTML = `
+                        <div class="quick-actions">
+                            ${segment.actions.map(a => {
+                                const icon = a.icon || ACTION_ICONS[a.action] || '→';
+                                if (a.url) {
+                                    return `<a href="${a.url}" target="_blank" class="quick-action">
+                                        <span class="quick-action-icon">${icon}</span>
+                                        ${a.label}
+                                    </a>`;
+                                } else {
+                                    return `<button class="quick-action" onclick="handleQuickAction('${a.action}', '${a.label}')">
+                                        <span class="quick-action-icon">${icon}</span>
+                                        ${a.label}
+                                    </button>`;
+                                }
+                            }).join('')}
+                        </div>
+                    `;
+                    break;
+
+                case 'source_cards':
+                    segmentDiv.innerHTML = `
+                        <div class="segment-separator"></div>
+                        <div class="source-cards">
+                            ${segment.sources.map(s => `
+                                <a href="${s.url}" target="_blank" class="source-card">
+                                    <div class="source-header">
+                                        <span class="source-product">${s.product}</span>
+                                        ${s.rank ? `<span class="source-rank">#${s.rank}</span>` : ''}
+                                    </div>
+                                    <div class="source-title">${s.title}</div>
+                                    <div class="source-snippet">${s.snippet}</div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+
+                default:
+                    segmentDiv.textContent = JSON.stringify(segment);
+            }
+
+            container.appendChild(segmentDiv);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function showLoading(container) {
+            const loading = document.createElement('div');
+            loading.className = 'loading';
+            loading.innerHTML = `
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span>Thinking...</span>
+            `;
+            container.appendChild(loading);
+            return loading;
+        }
+
+        async function sendMessage() {
+            const message = inputEl.value.trim();
+            if (!message) return;
+
+            inputEl.value = '';
+            sendBtn.disabled = true;
+
+            addUserMessage(message);
+            const assistantMsg = createAssistantMessage();
+            const loading = showLoading(assistantMsg);
+
+            try {
+                const url = `/chat/stream?message=${encodeURIComponent(message)}&session_id=${sessionId}`;
+                const eventSource = new EventSource(url);
+
+                eventSource.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+
+                    if (data.segment) {
+                        // Remove loading indicator on first segment
+                        if (loading.parentNode) {
+                            loading.remove();
+                        }
+                        renderSegment(assistantMsg, data.segment);
+                    }
+
+                    if (data.done) {
+                        eventSource.close();
+                        sendBtn.disabled = false;
+                        // Remove loading if still present
+                        if (loading.parentNode) {
+                            loading.remove();
+                        }
+                    }
+                };
+
+                eventSource.onerror = (error) => {
+                    console.error('EventSource error:', error);
+                    eventSource.close();
+                    sendBtn.disabled = false;
+                    if (loading.parentNode) {
+                        loading.remove();
+                    }
+                    assistantMsg.innerHTML = '<p style="color: red;">Error: Failed to get response</p>';
+                };
+            } catch (error) {
+                console.error('Error:', error);
+                sendBtn.disabled = false;
+                if (loading.parentNode) {
+                    loading.remove();
+                }
+                assistantMsg.innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        inputEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
