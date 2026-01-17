@@ -163,6 +163,7 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         # Track state for status updates
         llm_call_count = 0
         search_completed = False
+        response_finished = False
         last_status: str | None = None
         event_count = 0
 
@@ -195,6 +196,12 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
             if event_kind in ("on_chat_model_start", "on_chat_model_end", "on_tool_start", "on_tool_end"):
                 tlog.info("[T+%.3fs] %s - %s", elapsed, event_kind.upper(), event_name)
 
+            # Detect finish_response completion and break out of loop
+            if event_kind == "on_tool_end" and event_name == "finish_response":
+                response_finished = True
+                tlog.info("[T+%.3fs] FINISH_RESPONSE detected - breaking out of event loop", elapsed)
+                break
+
             # Emit status updates based on actual events
             if event_kind == "on_chat_model_start":
                 llm_call_count += 1
@@ -217,7 +224,7 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
                     yield status_event
 
         total_time = time.perf_counter() - start_time
-        tlog.info("[T+%.3fs] EVENT LOOP COMPLETE - %d events processed", total_time, event_count)
+        tlog.info("[T+%.3fs] EVENT LOOP COMPLETE - %d events, finished=%s", total_time, event_count, response_finished)
 
         # Collect all segments, sources, and language
         segments, sources, language = collect_all_segments()
