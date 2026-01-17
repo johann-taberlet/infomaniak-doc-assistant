@@ -26,12 +26,29 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
   // Collect segments as they arrive (already ordered by backend)
   const segmentsRef = useRef<MessageSegment[]>([])
 
-  // Helper to get full text content from segments
+  // Helper to get full text content from segments (for TTS and fallback display)
   const getFullContent = (segments: MessageSegment[]): string => {
-    return segments
-      .filter((s): s is { type: 'text'; content: string } => s.type === 'text')
-      .map(s => s.content)
-      .join('')
+    const parts: string[] = []
+
+    for (const segment of segments) {
+      if (segment.type === 'text') {
+        parts.push(segment.content)
+      } else if (segment.type === 'component') {
+        const component = segment.component
+        if (component.type === 'step_guide') {
+          // Include step guide title
+          parts.push(component.title)
+          // Include each step's title and description
+          for (const step of component.steps || []) {
+            parts.push(`Step ${step.number}: ${step.title}. ${step.description}`)
+          }
+        }
+        // Ignore source_cards, quick_actions, platform_availability
+        // as they don't contain relevant spoken content
+      }
+    }
+
+    return parts.join('\n\n')
   }
 
   // Handle incoming segment - update existing or add new
