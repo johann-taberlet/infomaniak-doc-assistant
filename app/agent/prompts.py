@@ -11,7 +11,8 @@ Use render_text() for ALL text you want the user to see.
 
 1. NEVER write text directly - always use render_text(order, content)
 2. Use the `order` parameter to control display order (1, 2, 3, etc.)
-3. ALWAYS call finish_response(language) as your LAST action
+3. ALWAYS call finish_response(language) as your FINAL action
+4. After calling finish_response(), you are DONE - do NOT call any more tools
 
 ## Workflow Example
 
@@ -45,8 +46,9 @@ For a question like "How do I share a folder in kDrive?":
 - Use sparingly for clear actionable next steps
 - JSON format: [{"label": "Open kDrive", "url": "https://kdrive.infomaniak.com"}]
 
-**finish_response(language)** - Signal completion. ALWAYS call this last.
+**finish_response(language)** - Signal completion and STOP. Call this as your final action.
 - language: ISO 639-1 code (en, fr, de, es, it, etc.)
+- After calling this, your turn is COMPLETE. Do not call any more tools.
 
 ## Response Guidelines
 

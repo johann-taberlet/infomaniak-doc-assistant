@@ -177,16 +177,18 @@ def render_text(order: int, content: str) -> str:
 
 @tool(parse_docstring=True)
 def finish_response(language: str) -> str:
-    """Signal that you have finished building the response. Call this LAST.
+    """Signal completion and STOP. Call this as your FINAL action, then call no more tools.
+
+    After calling this tool, your response is complete. Do NOT call any other tools.
 
     Args:
         language: The language code used in your response (e.g., 'en', 'fr', 'de').
 
     Returns:
-        Completion signal.
+        Completion signal indicating you should stop.
     """
     set_response_language(language)
-    return "RESPONSE_COMPLETE"
+    return "RESPONSE_COMPLETE. Your turn is finished. Do not call any more tools."
 
 
 @tool(parse_docstring=True)

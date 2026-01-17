@@ -164,12 +164,20 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         llm_call_count = 0
         search_completed = False
         last_status: str | None = None
+        event_count = 0
+
+        # Timeline logging
+        start_time = time.perf_counter()
+        tlog = _timeline_logger
+        tlog.info("=" * 60)
+        tlog.info("[T+0.000s] REQUEST START - Message: %s (session: %s)", message[:80], session_id)
 
         def make_status(status: str) -> str | None:
             """Only emit status if it changed."""
             nonlocal last_status
             if status != last_status:
                 last_status = status
+                tlog.info("[T+%.3fs] STATUS EMIT - %s", time.perf_counter() - start_time, status)
                 return format_sse({"status": status})
             return None
 
@@ -178,8 +186,14 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
             config,
             version="v2",
         ):
+            event_count += 1
+            elapsed = time.perf_counter() - start_time
             event_kind = event.get("event", "unknown")
             event_name = event.get("name", "")
+
+            # Log all significant events
+            if event_kind in ("on_chat_model_start", "on_chat_model_end", "on_tool_start", "on_tool_end"):
+                tlog.info("[T+%.3fs] %s - %s", elapsed, event_kind.upper(), event_name)
 
             # Emit status updates based on actual events
             if event_kind == "on_chat_model_start":
@@ -202,11 +216,18 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
                 if status_event := make_status("Found relevant documents"):
                     yield status_event
 
+        total_time = time.perf_counter() - start_time
+        tlog.info("[T+%.3fs] EVENT LOOP COMPLETE - %d events processed", total_time, event_count)
+
         # Collect all segments, sources, and language
         segments, sources, language = collect_all_segments()
+        tlog.info("[T+%.3fs] COLLECTED - %d segments, %d sources, lang=%s",
+                  time.perf_counter() - start_time, len(segments), len(sources), language)
 
         # Emit each segment in order
         for segment in segments:
+            tlog.info("[T+%.3fs] EMIT SEGMENT - type=%s",
+                      time.perf_counter() - start_time, segment.get("type"))
             yield format_sse({"segment": segment})
 
         # Emit sources as final segment (no order, always last)
@@ -223,6 +244,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         done_data: dict[str, Any] = {"done": True}
         if language:
             done_data["language"] = language
+        tlog.info("[T+%.3fs] EMIT DONE", time.perf_counter() - start_time)
+        tlog.info("=" * 60)
         yield format_sse(done_data)
 
     except Exception as e:
