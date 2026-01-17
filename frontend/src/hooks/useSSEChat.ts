@@ -114,6 +114,15 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
           eventSourceRef.current = null
           setIsStreaming(false)
           options.onStreamEnd?.(finalMessage)
+        } else if ('status' in data) {
+          // Status update - show progress to user
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantId
+                ? { ...m, status: data.status }
+                : m
+            )
+          )
         } else if ('segment' in data) {
           // Add segment (backend sends them in order)
           const segment = data.segment
@@ -125,14 +134,14 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             segmentsRef.current.push({ type: 'component', component: segment })
           }
 
-          // Update message with current segments
+          // Update message with current segments (clear status as we now have content)
           const currentSegments = [...segmentsRef.current]
           const currentContent = getFullContent(currentSegments)
 
           setMessages(prev =>
             prev.map(m =>
               m.id === assistantId
-                ? { ...m, content: currentContent, segments: currentSegments }
+                ? { ...m, content: currentContent, segments: currentSegments, status: undefined }
                 : m
             )
           )

@@ -11,6 +11,7 @@ export interface Message {
   language?: string
   segments?: MessageSegment[]  // Interleaved text and components in order
   isError?: boolean  // True if this message contains an error
+  status?: string  // Current status while streaming (e.g., "Searching documentation...")
 }
 
 // Base UI component type
@@ -97,6 +98,10 @@ export interface SegmentEvent {
   segment: Segment
 }
 
+export interface StatusEvent {
+  status: string
+}
+
 export interface ErrorEvent {
   error: string
 }
@@ -106,4 +111,4 @@ export interface DoneEvent {
   language?: string
 }
 
-export type SSEEvent = SegmentEvent | ErrorEvent | DoneEvent
+export type SSEEvent = SegmentEvent | StatusEvent | ErrorEvent | DoneEvent

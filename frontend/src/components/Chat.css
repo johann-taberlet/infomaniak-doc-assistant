@@ -52,8 +52,8 @@
   line-height: 1.5;
 }
 
-/* Thinking indicator */
-.message-content.thinking {
+/* Status indicator (searching, generating, etc.) */
+.message-content.status-indicator {
   color: #6c757d;
   font-style: italic;
 }

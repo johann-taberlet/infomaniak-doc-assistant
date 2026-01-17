@@ -21,6 +21,13 @@ from app.observability.langfuse import get_langfuse_handler
 
 logger = logging.getLogger(__name__)
 
+# Configure file logging for timeline analysis
+_timeline_logger = logging.getLogger("timeline")
+_timeline_logger.setLevel(logging.INFO)
+_timeline_handler = logging.FileHandler("/tmp/agent_timeline.log", mode="a")
+_timeline_handler.setFormatter(logging.Formatter("%(message)s"))
+_timeline_logger.addHandler(_timeline_handler)
+
 # Simple in-memory metrics
 # PRODUCTION: Use asyncio.Lock for thread-safety, or prometheus_client for proper metrics
 metrics = {
@@ -153,46 +160,47 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         if langfuse_handler:
             config["callbacks"] = [langfuse_handler]
 
-        # === TIMELINE LOGGING ===
-        start_time = time.perf_counter()
-        logger.info("=" * 60)
-        logger.info("[T+0.000s] REQUEST START - Message: %s", message[:100])
+        # Track state for status updates
+        llm_call_count = 0
+        search_completed = False
+        last_status: str | None = None
+
+        def make_status(status: str) -> str | None:
+            """Only emit status if it changed."""
+            nonlocal last_status
+            if status != last_status:
+                last_status = status
+                return format_sse({"status": status})
+            return None
 
         async for event in agent.astream_events(
             {"messages": [{"role": "user", "content": message}]},
             config,
             version="v2",
         ):
-            elapsed = time.perf_counter() - start_time
             event_kind = event.get("event", "unknown")
             event_name = event.get("name", "")
 
-            # Log key events with timestamps
+            # Emit status updates based on actual events
             if event_kind == "on_chat_model_start":
-                logger.info("[T+%.3fs] LLM START - %s", elapsed, event_name)
-            elif event_kind == "on_chat_model_end":
-                logger.info("[T+%.3fs] LLM END - %s", elapsed, event_name)
-            elif event_kind == "on_tool_start":
-                tool_input = event.get("data", {}).get("input", {})
-                # Truncate long inputs for readability
-                input_str = str(tool_input)[:200]
-                logger.info("[T+%.3fs] TOOL START - %s | Input: %s", elapsed, event_name, input_str)
-            elif event_kind == "on_tool_end":
-                tool_output = event.get("data", {}).get("output", "")
-                # Truncate long outputs for readability
-                output_str = str(tool_output)[:200]
-                logger.info("[T+%.3fs] TOOL END - %s | Output: %s", elapsed, event_name, output_str)
-            elif event_kind == "on_chat_model_stream":
-                # Log first token from each chunk (to track streaming progress)
-                chunk = event.get("data", {}).get("chunk")
-                if chunk and hasattr(chunk, "content") and chunk.content:
-                    content_preview = str(chunk.content)[:50]
-                    logger.debug("[T+%.3fs] TOKEN - %s", elapsed, content_preview)
+                llm_call_count += 1
+                if llm_call_count == 1:
+                    # First LLM call - understanding the question
+                    if status_event := make_status("Understanding your question..."):
+                        yield status_event
+                elif search_completed:
+                    # LLM call after search - generating response
+                    if status_event := make_status("Generating response..."):
+                        yield status_event
 
-        total_time = time.perf_counter() - start_time
-        logger.info("[T+%.3fs] STREAM COMPLETE - Total time: %.3fs", total_time, total_time)
-        logger.info("=" * 60)
-        # === END TIMELINE LOGGING ===
+            elif event_kind == "on_tool_start" and event_name == "search_docs":
+                if status_event := make_status("Searching documentation..."):
+                    yield status_event
+
+            elif event_kind == "on_tool_end" and event_name == "search_docs":
+                search_completed = True
+                if status_event := make_status("Found relevant documents"):
+                    yield status_event
 
         # Collect all segments, sources, and language
         segments, sources, language = collect_all_segments()

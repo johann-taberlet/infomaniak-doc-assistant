@@ -110,11 +110,12 @@ export function MessageRenderer({
 
   // Render assistant message content - use segments if available
   const renderAssistantContent = () => {
-    // Show loading indicator while waiting for response
+    // Show status or loading indicator while waiting for response
     if (!message.content && (!message.segments || message.segments.length === 0)) {
+      const statusText = message.status || 'Thinking'
       return (
-        <div className="message-content thinking">
-          Thinking<span className="thinking-dots"><span>.</span><span>.</span><span>.</span></span>
+        <div className="message-content status-indicator">
+          {statusText}<span className="thinking-dots"><span>.</span><span>.</span><span>.</span></span>
         </div>
       )
     }
