@@ -1,0 +1,104 @@
+[
+  {
+    "id": "Q5",
+    "question": "How do I sign a PDF document in kDrive?",
+    "answer_preview": "To sign a PDF document in kDrive, follow these steps:\n\n### Prerequisites:\n- You must have access to the kDrive web app.\n\n### Steps to Sign a PDF Document:\n1. Access the kDrive web app by visiting [kDrive](https://ksuite.infomaniak.com/kdrive).\n2. Open the PDF document you want to sign.\n3. Click the **Edit** button at the top of the document to open the file editor.\n4. Click the **Signature** icon in the toolbar.\n5. Click **Add a signature**.\n6. Choose how you want to create your signature:\n   - ...",
+    "sources": [
+      "https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app",
+      "https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app",
+      "https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive"
+    ],
+    "found_terms": [
+      "draw",
+      "type",
+      "save"
+    ],
+    "missing_terms": [
+      "Edit button",
+      "Signature icon",
+      "import image"
+    ],
+    "coverage": 50.0
+  },
+  {
+    "id": "Q13",
+    "question": "How do I restore my entire kDrive to a previous state (rewind)?",
+    "answer_preview": "To restore your entire kDrive to a previous state (rewind), follow these steps:\n\n### Prerequisites\n- You must be an **Administrator** or **Legal Representative** within the Organization.\n\n### Steps to Restore kDrive\n1. Access the **kDrive web app** by visiting [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive).\n2. Click on the **Settings** icon in the top right corner.\n3. Select the relevant kDrive from the dropdown menu in the left sidebar.\n4. Click on **Restore**.\n5. Read the...",
+    "sources": [
+      "https://www.infomaniak.com/en/support/faq/1838/restore-kdrive-to-a-previous-state",
+      "https://www.infomaniak.com/en/support/faq/2383/manage-kdrive-file-deletion",
+      "https://www.infomaniak.com/en/support/faq/2384/restore-a-kdrive-file-to-a-previous-version"
+    ],
+    "found_terms": [
+      "Settings",
+      "Restore",
+      "Administrator",
+      "date",
+      "90 days",
+      "3 months"
+    ],
+    "missing_terms": [],
+    "coverage": 100.0
+  },
+  {
+    "id": "Q15",
+    "question": "How do I set a reminder for a kChat message?",
+    "answer_preview": "To set a reminder for a kChat message, follow these steps:\n\n### Prerequisites:\n- You must have access to kChat.\n\n### Steps:\n1. **Hover over the message** you want to set a reminder for.\n2. Click on the additional actions icon (**\u2022\u2022\u2022**) in the top right corner of the message.\n3. Select **Remind** from the menu.\n4. Choose the desired time for the reminder notification.\n\n### Important Notes:\n- You will receive a notification at the chosen time from the kChat Bot (Euria).\n- The notification will inc...",
+    "sources": [
+      "https://www.infomaniak.com/en/support/faq/1664/create-a-kchat-message-reminder",
+      "https://www.infomaniak.com/en/support/faq/2244/create-an-event-reminder-via-webhooks-with-the-web-calendar-app-infomaniak",
+      "https://www.infomaniak.com/en/support/faq/1460/manage-kchat-notifications"
+    ],
+    "found_terms": [
+      "hover",
+      "Remind",
+      "notification"
+    ],
+    "missing_terms": [
+      "action menu",
+      "three dots"
+    ],
+    "coverage": 60.0
+  },
+  {
+    "id": "Q7",
+    "question": "How can I search for files within kDrive?",
+    "answer_preview": "### How to Search for Files in kDrive\n\n#### **On the kDrive Mobile App (iOS/Android)**\n- **Search Field**: On the main page of the kDrive app, use the search field to enter the text you want to find.\n- **Magnifying Glass**: While browsing folders, tap the magnifying glass icon at the top right to start a search.\n\n#### **On the kDrive Web App**\n- **Search Bar**: The search bar is always visible at the top of the screen.\n- **Keyboard Shortcut**: Use `CMD-F` (Mac) or `CTRL-F` (Windows) to quickly f...",
+    "sources": [
+      "https://www.infomaniak.com/en/support/faq/2320/search-for-data-on-kdrive",
+      "https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive",
+      "https://www.infomaniak.com/en/support/faq/2628/manage-kdrive-categories-to-organize-your-device-data"
+    ],
+    "found_terms": [
+      "search bar",
+      "CMD-F",
+      "CTRL-F",
+      "advanced search",
+      "content search",
+      "filter"
+    ],
+    "missing_terms": [],
+    "coverage": 100.0
+  },
+  {
+    "id": "Q12",
+    "question": "How do I manage deleted files and the trash in kDrive?",
+    "answer_preview": "To manage deleted files and the trash in kDrive, follow these steps:\n\n### Accessing the Trash\n1. **Prerequisites**: You must have access to the kDrive Web app.\n2. **Steps**:\n   - Click [here](https://manager.infomaniak.com/v3/ng/products/ksuite/kdrive) to access the management of your product on the Infomaniak Manager.\n   - Click directly on the name assigned to the product concerned.\n   - Click on **Trash** in the left sidebar to view the files that are in it.\n\n### Configuring Trash Settings\n1....",
+    "sources": [
+      "https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive",
+      "https://www.infomaniak.com/en/support/faq/2383/manage-kdrive-file-deletion",
+      "https://www.infomaniak.com/en/support/faq/2410/understanding-kdrive-folders-personal-shared-common"
+    ],
+    "found_terms": [
+      "trash",
+      "retention",
+      "restore"
+    ],
+    "missing_terms": [
+      "30 days",
+      "365 days",
+      "permanently delete"
+    ],
+    "coverage": 50.0
+  }
+]
