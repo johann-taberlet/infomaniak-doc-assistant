@@ -1,10 +1,7 @@
-import Markdown from 'react-markdown'
-import type { Message, MessageSegment, UIComponent } from '../types'
+import { Markdown } from './ui/Markdown'
+import type { Message } from '../types'
 import type { TTSStatus } from '../hooks/useTTS'
-import { SourceCards } from './ui/SourceCards'
-import { StepGuide } from './ui/StepGuide'
-import { QuickActions } from './ui/QuickActions'
-import { PlatformAvailability } from './ui/PlatformAvailability'
+import { StreamingSegments } from './ui/StreamingSegments'
 import './ui/Markdown.css'
 
 const AVAILABLE_LANGS = ['en', 'ko', 'es', 'pt', 'fr'] as const
@@ -13,6 +10,8 @@ interface MessageRendererProps {
   message: Message
   onTTSRequest?: (message: Message) => void
   ttsStatus?: TTSStatus
+  /** True if this message is currently being streamed */
+  isStreaming?: boolean
 }
 
 function getEffectiveLanguage(message: Message): string {
@@ -22,47 +21,6 @@ function getEffectiveLanguage(message: Message): string {
   }
   // Default to English for TTS
   return 'en'
-}
-
-function renderUIComponent(component: UIComponent, key?: string) {
-  switch (component.type) {
-    case 'source_cards':
-      return <SourceCards key={key || component.id} sources={component.sources} />
-    case 'step_guide':
-      return (
-        <StepGuide
-          key={key || component.id}
-          title={component.title}
-          steps={component.steps}
-        />
-      )
-    case 'quick_actions':
-      return <QuickActions key={key || component.id} actions={component.actions} />
-    case 'platform_availability':
-      return (
-        <PlatformAvailability
-          key={key || component.id}
-          feature={component.feature}
-          platforms={component.platforms}
-        />
-      )
-    default:
-      return null
-  }
-}
-
-function renderSegment(segment: MessageSegment, index: number) {
-  if (segment.type === 'text') {
-    // Only render non-empty text segments
-    if (!segment.content.trim()) return null
-    return (
-      <div key={`text-${index}`} className="message-content markdown-content">
-        <Markdown>{segment.content}</Markdown>
-      </div>
-    )
-  } else {
-    return renderUIComponent(segment.component, `component-${index}`)
-  }
 }
 
 function getTTSButtonContent(status?: TTSStatus): string {
@@ -92,6 +50,7 @@ export function MessageRenderer({
   message,
   onTTSRequest,
   ttsStatus,
+  isStreaming = false,
 }: MessageRendererProps) {
   const isAssistant = message.role === 'assistant'
   // Show TTS for any assistant message with content (not errors)
@@ -130,9 +89,16 @@ export function MessageRenderer({
     }
 
     if (message.segments && message.segments.length > 0) {
-      // Render interleaved segments (text and components in order)
-      return message.segments.map(renderSegment)
+      // Use StreamingSegments for queued animations
+      return (
+        <StreamingSegments
+          segments={message.segments}
+          isStreaming={isStreaming}
+          messageId={message.id}
+        />
+      )
     }
+
     // Fallback: render content as single text block
     return (
       <div className="message-content markdown-content">

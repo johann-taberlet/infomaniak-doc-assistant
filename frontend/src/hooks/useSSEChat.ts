@@ -1,5 +1,14 @@
 import { useState, useCallback, useRef } from 'react'
-import type { Message, MessageSegment, SSEEvent } from '../types'
+import type { Message, MessageSegment, SSEEvent, Segment, UIComponent } from '../types'
+
+// Debug logging with timestamps
+const DEBUG = true
+const startTime = Date.now()
+const log = (action: string, data?: unknown) => {
+  if (!DEBUG) return
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(3)
+  console.log(`[${elapsed}s] [useSSEChat] ${action}`, data ?? '')
+}
 
 interface UseSSEChatOptions {
   onStreamStart?: () => void
@@ -33,6 +42,36 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
       .map(s => s.content)
       .join('')
   }
+
+  // Handle incoming segment - update existing or add new
+  const handleSegment = useCallback((segment: Segment) => {
+    const segmentType = segment.type
+    const segmentOrder = 'order' in segment ? segment.order : undefined
+
+    if (segmentType === 'text') {
+      log('SEGMENT RECEIVED', { type: 'text', order: segmentOrder, preview: segment.content.slice(0, 30) })
+      segmentsRef.current.push({ type: 'text', content: segment.content })
+    } else if (segmentType === 'step_guide' && segmentOrder !== undefined) {
+      const stepCount = 'steps' in segment ? (segment.steps as unknown[])?.length : 0
+      const existingIndex = segmentsRef.current.findIndex(
+        s => s.type === 'component' &&
+             s.component.type === 'step_guide' &&
+             'order' in s.component &&
+             (s.component as { order?: number }).order === segmentOrder
+      )
+
+      if (existingIndex >= 0) {
+        log('SEGMENT RECEIVED', { type: 'step_guide', order: segmentOrder, steps: stepCount, action: 'UPDATE' })
+        segmentsRef.current[existingIndex] = { type: 'component', component: segment as unknown as UIComponent }
+      } else {
+        log('SEGMENT RECEIVED', { type: 'step_guide', order: segmentOrder, steps: stepCount, action: 'NEW' })
+        segmentsRef.current.push({ type: 'component', component: segment as unknown as UIComponent })
+      }
+    } else {
+      log('SEGMENT RECEIVED', { type: segmentType, order: segmentOrder })
+      segmentsRef.current.push({ type: 'component', component: segment as unknown as UIComponent })
+    }
+  }, [])
 
   const sendMessage = useCallback((content: string) => {
     if (isStreaming || !content.trim()) return
@@ -94,6 +133,8 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             return
           }
 
+          log('DONE RECEIVED', { segmentCount: segmentsRef.current.length, language: data.language })
+
           // Stream complete - finalize message
           const finalSegments = [...segmentsRef.current]
           const finalContent = getFullContent(finalSegments)
@@ -112,6 +153,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
 
           eventSource.close()
           eventSourceRef.current = null
+          log('STREAMING ENDED')
           setIsStreaming(false)
           options.onStreamEnd?.(finalMessage)
         } else if ('status' in data) {
@@ -124,15 +166,8 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             )
           )
         } else if ('segment' in data) {
-          // Add segment (backend sends them in order)
-          const segment = data.segment
-
-          if (segment.type === 'text') {
-            segmentsRef.current.push({ type: 'text', content: segment.content })
-          } else {
-            // UI components (step_guide, platform_availability, quick_actions, source_cards)
-            segmentsRef.current.push({ type: 'component', component: segment })
-          }
+          // Handle segment (update or add)
+          handleSegment(data.segment)
 
           // Update message with current segments (clear status as we now have content)
           const currentSegments = [...segmentsRef.current]
@@ -181,7 +216,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
 
       options.onError?.(new Error('Stream connection failed'))
     }
-  }, [isStreaming, options])
+  }, [isStreaming, options, handleSegment])
 
   const clearMessages = useCallback(() => {
     if (eventSourceRef.current) {

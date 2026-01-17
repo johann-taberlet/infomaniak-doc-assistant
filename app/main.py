@@ -14,10 +14,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.agent.executor import get_agent
-from app.agent.tools import collect_all_segments, reset_context
+from app.agent.executor import search_documentation, stream_ndjson_response
+from app.agent.tools import get_sources, reset_context
 from app.models.schemas import ChatRequest, ChatResponse
-from app.observability.langfuse import get_langfuse_handler
 
 logger = logging.getLogger(__name__)
 
@@ -87,49 +86,49 @@ async def get_metrics() -> dict[str, int]:
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest) -> ChatResponse:
-    """Chat endpoint that invokes the agent with the user's message."""
+    """Chat endpoint that invokes the agent with the user's message.
+
+    Note: This endpoint is kept for backwards compatibility but the
+    streaming endpoint (/chat/stream) is preferred for better UX.
+    """
     metrics["request_count"] += 1
 
     try:
-        agent = get_agent()
-
         # Use provided session_id or generate a new one
         session_id = request.session_id or str(uuid.uuid4())
 
-        # Build config with optional Langfuse observability
-        config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
-        langfuse_handler = get_langfuse_handler()
-        if langfuse_handler:
-            config["callbacks"] = [langfuse_handler]
+        # Reset context for this request
+        reset_context()
 
-        # Invoke agent with message and thread_id for memory
-        response = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": request.message}]},
-            config,
+        # 1. Search documentation
+        search_context = await search_documentation(request.message)
+        sources = get_sources()
+
+        # 2. Collect full NDJSON response
+        full_response = ""
+        async for chunk in stream_ndjson_response(
+            request.message, search_context, session_id
+        ):
+            full_response += chunk
+
+        # Extract text content from NDJSON for simple response
+        answer_parts = []
+        for line in full_response.split("\n"):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                obj = json.loads(line)
+                if obj.get("type") == "text":
+                    answer_parts.append(obj.get("content", ""))
+            except json.JSONDecodeError:
+                pass
+
+        answer = "\n".join(answer_parts) if answer_parts else full_response
+
+        return ChatResponse(
+            answer=answer, sources=[s.get("url", "") for s in sources if s.get("url")]
         )
-
-        # Extract the final answer from the agent response
-        messages = response.get("messages", [])
-        answer = ""
-        sources: list[str] = []
-
-        if messages:
-            # Get the last AI message
-            last_message = messages[-1]
-            answer = last_message.content if hasattr(last_message, "content") else str(last_message)
-
-            # Extract sources from tool messages
-            for msg in messages:
-                if hasattr(msg, "content") and "Source:" in str(msg.content):
-                    # Parse source URLs from tool responses
-                    content = str(msg.content)
-                    for line in content.split("\n"):
-                        if line.strip().startswith("Source:"):
-                            source = line.replace("Source:", "").strip()
-                            if source and source not in sources:
-                                sources.append(source)
-
-        return ChatResponse(answer=answer, sources=sources)
     except Exception:
         metrics["error_count"] += 1
         raise
@@ -141,118 +140,225 @@ def format_sse(data: dict[str, Any]) -> str:
 
 
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
-    """Generate SSE events from agent streaming response.
+    """Generate SSE events from NDJSON streaming response.
 
-    Emits segments after all tools complete:
-    - segment: Each content segment (text or component) with order
-    - error: Signal that an error occurred with a user-friendly message
+    Parses NDJSON lines and emits SSE events progressively:
+    - status: Progress updates during processing
+    - segment: Each content segment (text or component)
+    - error: Signal that an error occurred
     - done: Signal that streaming is complete, includes language
     """
     try:
-        agent = get_agent()
-
         # Reset context for this request
         reset_context()
-
-        # Build config with optional Langfuse observability
-        config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
-        langfuse_handler = get_langfuse_handler()
-        if langfuse_handler:
-            config["callbacks"] = [langfuse_handler]
-
-        # Track state for status updates
-        llm_call_count = 0
-        search_completed = False
-        response_finished = False
-        last_status: str | None = None
-        event_count = 0
 
         # Timeline logging
         start_time = time.perf_counter()
         tlog = _timeline_logger
         tlog.info("=" * 60)
-        tlog.info("[T+0.000s] REQUEST START - Message: %s (session: %s)", message[:80], session_id)
+        tlog.info(
+            "[T+0.000s] REQUEST START - Message: %s (session: %s)",
+            message[:80],
+            session_id,
+        )
 
-        def make_status(status: str) -> str | None:
-            """Only emit status if it changed."""
-            nonlocal last_status
-            if status != last_status:
-                last_status = status
-                tlog.info("[T+%.3fs] STATUS EMIT - %s", time.perf_counter() - start_time, status)
-                return format_sse({"status": status})
-            return None
+        # Status: searching
+        yield format_sse({"status": "Searching documentation..."})
+        tlog.info("[T+%.3fs] STATUS - Searching", time.perf_counter() - start_time)
 
-        async for event in agent.astream_events(
-            {"messages": [{"role": "user", "content": message}]},
-            config,
-            version="v2",
-        ):
-            event_count += 1
-            elapsed = time.perf_counter() - start_time
-            event_kind = event.get("event", "unknown")
-            event_name = event.get("name", "")
+        # 1. RAG Search
+        search_context = await search_documentation(message)
+        sources = get_sources()
 
-            # Log all significant events
-            if event_kind in ("on_chat_model_start", "on_chat_model_end", "on_tool_start", "on_tool_end"):
-                tlog.info("[T+%.3fs] %s - %s", elapsed, event_kind.upper(), event_name)
+        tlog.info(
+            "[T+%.3fs] SEARCH COMPLETE - %d sources",
+            time.perf_counter() - start_time,
+            len(sources),
+        )
 
-            # Track when finish_response completes
-            if event_kind == "on_tool_end" and event_name == "finish_response":
-                response_finished = True
-                tlog.info("[T+%.3fs] FINISH_RESPONSE detected", elapsed)
+        # Status: generating
+        yield format_sse({"status": "Generating response..."})
+        tlog.info("[T+%.3fs] STATUS - Generating", time.perf_counter() - start_time)
 
-            # Emit status updates based on actual events
-            if event_kind == "on_chat_model_start":
-                llm_call_count += 1
-                if llm_call_count == 1:
-                    # First LLM call - understanding the question
-                    if status_event := make_status("Understanding your question..."):
-                        yield status_event
-                elif search_completed:
-                    # LLM call after search - generating response
-                    if status_event := make_status("Generating response..."):
-                        yield status_event
+        # 2. Stream NDJSON and parse line by line
+        buffer = ""
+        current_step_guide: dict[str, Any] | None = None
+        first_content_emitted = False
 
-            elif event_kind == "on_tool_start" and event_name == "search_docs":
-                if status_event := make_status("Searching documentation..."):
-                    yield status_event
+        async for token in stream_ndjson_response(message, search_context, session_id):
+            buffer += token
 
-            elif event_kind == "on_tool_end" and event_name == "search_docs":
-                search_completed = True
-                if status_event := make_status("Found relevant documents"):
-                    yield status_event
+            # Parse complete lines
+            while "\n" in buffer:
+                line, buffer = buffer.split("\n", 1)
+                line = line.strip()
 
-        total_time = time.perf_counter() - start_time
-        tlog.info("[T+%.3fs] EVENT LOOP COMPLETE - %d events, finished=%s", total_time, event_count, response_finished)
+                if not line:
+                    continue
 
-        # Collect all segments, sources, and language
-        segments, sources, language = collect_all_segments()
-        tlog.info("[T+%.3fs] COLLECTED - %d segments, %d sources, lang=%s",
-                  time.perf_counter() - start_time, len(segments), len(sources), language)
+                try:
+                    obj = json.loads(line)
+                    obj_type = obj.get("type")
 
-        # Emit each segment in order
-        for segment in segments:
-            tlog.info("[T+%.3fs] EMIT SEGMENT - type=%s",
-                      time.perf_counter() - start_time, segment.get("type"))
-            yield format_sse({"segment": segment})
+                    if not first_content_emitted:
+                        first_content_emitted = True
+                        tlog.info(
+                            "[T+%.3fs] FIRST CONTENT - type=%s",
+                            time.perf_counter() - start_time,
+                            obj_type,
+                        )
 
-        # Emit sources as final segment (no order, always last)
+                    if obj_type == "text":
+                        # Emit text segment
+                        segment = {
+                            "type": "text",
+                            "order": obj.get("order", 1),
+                            "content": obj.get("content", ""),
+                            "id": str(uuid.uuid4()),
+                        }
+                        tlog.info(
+                            "[T+%.3fs] EMIT TEXT - order=%s",
+                            time.perf_counter() - start_time,
+                            obj.get("order"),
+                        )
+                        yield format_sse({"segment": segment})
+
+                    elif obj_type == "step_guide_start":
+                        # Start a new step guide (emit skeleton)
+                        current_step_guide = {
+                            "type": "step_guide",
+                            "title": obj.get("title", ""),
+                            "order": obj.get("order", 2),
+                            "steps": [],
+                            "id": str(uuid.uuid4()),
+                        }
+                        tlog.info(
+                            "[T+%.3fs] STEP GUIDE START - title=%s",
+                            time.perf_counter() - start_time,
+                            obj.get("title"),
+                        )
+                        yield format_sse({"segment": current_step_guide})
+
+                    elif obj_type == "step":
+                        # Add step to current guide and emit update
+                        if current_step_guide:
+                            step = {
+                                "number": obj.get("number", 1),
+                                "title": obj.get("title", ""),
+                                "description": obj.get("description", ""),
+                            }
+                            # Add optional fields if present
+                            if "details" in obj:
+                                step["details"] = obj["details"]
+                            if "command" in obj:
+                                step["command"] = obj["command"]
+
+                            current_step_guide["steps"].append(step)
+                            tlog.info(
+                                "[T+%.3fs] EMIT STEP %d - %s",
+                                time.perf_counter() - start_time,
+                                obj.get("number"),
+                                obj.get("title", "")[:30],
+                            )
+                            yield format_sse({"segment": current_step_guide})
+
+                    elif obj_type == "step_guide_end":
+                        # Mark step guide as complete
+                        tlog.info(
+                            "[T+%.3fs] STEP GUIDE END",
+                            time.perf_counter() - start_time,
+                        )
+                        current_step_guide = None
+
+                    elif obj_type == "quick_actions":
+                        # Emit quick actions
+                        segment = {
+                            "type": "quick_actions",
+                            "order": obj.get("order", 99),
+                            "actions": obj.get("actions", []),
+                            "id": str(uuid.uuid4()),
+                        }
+                        tlog.info(
+                            "[T+%.3fs] EMIT QUICK ACTIONS",
+                            time.perf_counter() - start_time,
+                        )
+                        yield format_sse({"segment": segment})
+
+                    elif obj_type == "done":
+                        # Emit sources
+                        if sources:
+                            tlog.info(
+                                "[T+%.3fs] EMIT SOURCES - %d items",
+                                time.perf_counter() - start_time,
+                                len(sources),
+                            )
+                            yield format_sse(
+                                {
+                                    "segment": {
+                                        "type": "source_cards",
+                                        "id": str(uuid.uuid4()),
+                                        "sources": sources,
+                                    }
+                                }
+                            )
+
+                        # Emit done
+                        language = obj.get("language", "en")
+                        tlog.info(
+                            "[T+%.3fs] EMIT DONE - lang=%s",
+                            time.perf_counter() - start_time,
+                            language,
+                        )
+                        tlog.info("=" * 60)
+                        yield format_sse({"done": True, "language": language})
+                        return
+
+                except json.JSONDecodeError:
+                    # Invalid JSON line - log but continue
+                    tlog.warning(
+                        "[T+%.3fs] INVALID JSON: %s",
+                        time.perf_counter() - start_time,
+                        line[:50],
+                    )
+
+        # Handle remaining buffer (in case no trailing newline)
+        if buffer.strip():
+            try:
+                obj = json.loads(buffer.strip())
+                if obj.get("type") == "done":
+                    if sources:
+                        yield format_sse(
+                            {
+                                "segment": {
+                                    "type": "source_cards",
+                                    "id": str(uuid.uuid4()),
+                                    "sources": sources,
+                                }
+                            }
+                        )
+                    yield format_sse(
+                        {"done": True, "language": obj.get("language", "en")}
+                    )
+                    return
+            except json.JSONDecodeError:
+                pass
+
+        # Fallback: emit sources and done if we didn't get a done signal
+        tlog.warning(
+            "[T+%.3fs] FALLBACK DONE (no done signal received)",
+            time.perf_counter() - start_time,
+        )
         if sources:
-            yield format_sse({
-                "segment": {
-                    "type": "source_cards",
-                    "id": str(uuid.uuid4()),
-                    "sources": sources,
+            yield format_sse(
+                {
+                    "segment": {
+                        "type": "source_cards",
+                        "id": str(uuid.uuid4()),
+                        "sources": sources,
+                    }
                 }
-            })
-
-        # Send done event with language
-        done_data: dict[str, Any] = {"done": True}
-        if language:
-            done_data["language"] = language
-        tlog.info("[T+%.3fs] EMIT DONE", time.perf_counter() - start_time)
-        tlog.info("=" * 60)
-        yield format_sse(done_data)
+            )
+        yield format_sse({"done": True})
 
     except Exception as e:
         # Log the full error for debugging
@@ -260,13 +366,13 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         metrics["error_count"] += 1
 
         # Send user-friendly error message
-        error_message = "Sorry, an error occurred while processing your request. Please try again."
+        error_message = (
+            "Sorry, an error occurred while processing your request. Please try again."
+        )
 
         # Include more specific message for known error types
         error_str = str(e).lower()
-        if "parsing failed" in error_str or "could not be parsed" in error_str:
-            error_message = "The AI model had trouble generating a response. Please try rephrasing your question."
-        elif "rate limit" in error_str:
+        if "rate limit" in error_str:
             error_message = "Too many requests. Please wait a moment and try again."
         elif "timeout" in error_str:
             error_message = "The request timed out. Please try again."

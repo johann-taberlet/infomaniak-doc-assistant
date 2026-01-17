@@ -43,12 +43,13 @@ export function Chat({ onTTSRequest, ttsStatus }: ChatProps) {
             <p>Ask about kDrive, kMeet, or kChat...</p>
           </div>
         )}
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <MessageRenderer
             key={message.id}
             message={message}
             onTTSRequest={onTTSRequest}
             ttsStatus={ttsStatus}
+            isStreaming={isStreaming && index === messages.length - 1}
           />
         ))}
       </div>

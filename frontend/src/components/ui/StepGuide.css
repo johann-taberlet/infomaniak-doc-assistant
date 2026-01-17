@@ -46,6 +46,18 @@
 
 .step-item {
   border-bottom: 1px solid #e9ecef;
+  animation: step-enter 0.3s ease-out;
+}
+
+@keyframes step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .step-item:last-child {
@@ -112,6 +124,13 @@
   font-size: 0.8125rem;
   color: #6c757d;
   line-height: 1.4;
+}
+
+.step-description img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.5rem 0;
 }
 
 .step-expand {

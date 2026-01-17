@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Markdown from 'react-markdown'
+import { Markdown } from './Markdown'
 import type { Step } from '../../types'
 import './StepGuide.css'
 import './Markdown.css'
