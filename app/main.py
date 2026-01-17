@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 import uuid
 from collections.abc import AsyncGenerator
 from pathlib import Path
@@ -131,6 +132,17 @@ def format_sse(data: dict[str, Any]) -> str:
     return f"data: {json.dumps(data)}\n\n"
 
 
+def extract_language(text: str) -> tuple[str, str | None]:
+    """Extract language marker from end of text and return (cleaned_text, language)."""
+    # Match [LANG:xx] at the end of text (with possible trailing whitespace)
+    match = re.search(r"\[LANG:(\w{2})\]\s*$", text)
+    if match:
+        lang = match.group(1).lower()
+        cleaned = text[: match.start()].rstrip()
+        return cleaned, lang
+    return text, None
+
+
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
     """Generate SSE events from agent streaming response."""
     # PRODUCTION: Wrap in try/except to send error event on failure instead of silent disconnect
@@ -142,6 +154,9 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     if langfuse_handler:
         config["callbacks"] = [langfuse_handler]
 
+    # Accumulate full response to extract language marker at the end
+    full_response = ""
+
     async for event in agent.astream_events(
         {"messages": [{"role": "user", "content": message}]},
         config,
@@ -152,9 +167,17 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         if kind == "on_chat_model_stream":
             content = event.get("data", {}).get("chunk")
             if content and hasattr(content, "content") and content.content:
+                full_response += content.content
                 yield format_sse({"token": content.content})
 
-    yield format_sse({"done": True})
+    # Extract language from accumulated response
+    _, language = extract_language(full_response)
+
+    # Send done event with language if detected
+    done_data: dict[str, Any] = {"done": True}
+    if language:
+        done_data["language"] = language
+    yield format_sse(done_data)
 
 
 @app.get("/chat/stream")
