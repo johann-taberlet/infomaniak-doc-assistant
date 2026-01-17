@@ -137,43 +137,71 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
 
     Emits segments after all tools complete:
     - segment: Each content segment (text or component) with order
+    - error: Signal that an error occurred with a user-friendly message
     - done: Signal that streaming is complete, includes language
     """
-    agent = get_agent()
+    try:
+        agent = get_agent()
 
-    # Reset context for this request
-    reset_context()
+        # Reset context for this request
+        reset_context()
 
-    # Build config with optional Langfuse observability
-    config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
-    langfuse_handler = get_langfuse_handler()
-    if langfuse_handler:
-        config["callbacks"] = [langfuse_handler]
+        # Build config with optional Langfuse observability
+        config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
+        langfuse_handler = get_langfuse_handler()
+        if langfuse_handler:
+            config["callbacks"] = [langfuse_handler]
 
-    async for event in agent.astream_events(
-        {"messages": [{"role": "user", "content": message}]},
-        config,
-        version="v2",
-    ):
-        # Process all events until stream completes
-        pass
+        async for event in agent.astream_events(
+            {"messages": [{"role": "user", "content": message}]},
+            config,
+            version="v2",
+        ):
+            # Process all events until stream completes
+            pass
 
-    # Collect all segments, sources, and language
-    segments, sources, language = collect_all_segments()
+        # Collect all segments, sources, and language
+        segments, sources, language = collect_all_segments()
 
-    # Emit each segment in order
-    for segment in segments:
-        yield format_sse({"segment": segment})
+        # Emit each segment in order
+        for segment in segments:
+            yield format_sse({"segment": segment})
 
-    # Emit sources as final segment (no order, always last)
-    if sources:
-        yield format_sse({"segment": {"type": "source_cards", "sources": sources}})
+        # Emit sources as final segment (no order, always last)
+        if sources:
+            yield format_sse({
+                "segment": {
+                    "type": "source_cards",
+                    "id": str(uuid.uuid4()),
+                    "sources": sources,
+                }
+            })
 
-    # Send done event with language
-    done_data: dict[str, Any] = {"done": True}
-    if language:
-        done_data["language"] = language
-    yield format_sse(done_data)
+        # Send done event with language
+        done_data: dict[str, Any] = {"done": True}
+        if language:
+            done_data["language"] = language
+        yield format_sse(done_data)
+
+    except Exception as e:
+        # Log the full error for debugging
+        logger.exception("Error during SSE stream: %s", str(e))
+        metrics["error_count"] += 1
+
+        # Send user-friendly error message
+        error_message = "Sorry, an error occurred while processing your request. Please try again."
+
+        # Include more specific message for known error types
+        error_str = str(e).lower()
+        if "parsing failed" in error_str or "could not be parsed" in error_str:
+            error_message = "The AI model had trouble generating a response. Please try rephrasing your question."
+        elif "rate limit" in error_str:
+            error_message = "Too many requests. Please wait a moment and try again."
+        elif "timeout" in error_str:
+            error_message = "The request timed out. Please try again."
+
+        yield format_sse({"error": error_message})
+        yield format_sse({"done": True})
 
 
 @app.get("/chat/stream")

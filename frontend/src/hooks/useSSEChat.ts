@@ -70,7 +70,17 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
       try {
         const data: SSEEvent = JSON.parse(event.data)
 
-        if ('done' in data && data.done) {
+        if ('error' in data) {
+          // Server-side error - display error message to user
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantId
+                ? { ...m, content: data.error, isError: true }
+                : m
+            )
+          )
+          options.onError?.(new Error(data.error))
+        } else if ('done' in data && data.done) {
           // Stream complete - finalize message
           const finalSegments = [...segmentsRef.current]
           const finalContent = getFullContent(finalSegments)

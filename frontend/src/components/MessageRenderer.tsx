@@ -94,8 +94,8 @@ export function MessageRenderer({
   ttsStatus,
 }: MessageRendererProps) {
   const isAssistant = message.role === 'assistant'
-  // Show TTS for any assistant message with content
-  const showTTS = isAssistant && message.content.length > 0
+  // Show TTS for any assistant message with content (not errors)
+  const showTTS = isAssistant && message.content.length > 0 && !message.isError
 
   const isDisabled = ttsStatus === 'loading' || ttsStatus === 'generating'
 
@@ -115,6 +115,15 @@ export function MessageRenderer({
       return (
         <div className="message-content thinking">
           Thinking<span className="thinking-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+      )
+    }
+
+    // Show error message with distinct styling
+    if (message.isError) {
+      return (
+        <div className="message-content error-content">
+          {message.content}
         </div>
       )
     }

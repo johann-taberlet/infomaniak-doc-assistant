@@ -87,6 +87,17 @@
   }
 }
 
+/* Error message */
+.message-content.error-content {
+  color: #721c24;
+}
+
+.message.assistant:has(.error-content) {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding-bottom: 0.75rem; /* No extra padding for TTS button */
+}
+
 /* TTS Button */
 .tts-button {
   position: absolute;

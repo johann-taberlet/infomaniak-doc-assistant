@@ -10,6 +10,7 @@ export interface Message {
   content: string  // Full text content (for TTS, etc.)
   language?: string
   segments?: MessageSegment[]  // Interleaved text and components in order
+  isError?: boolean  // True if this message contains an error
 }
 
 // Base UI component type
@@ -89,11 +90,15 @@ export type Segment =
   | { type: 'step_guide'; title: string; steps: Step[]; order: number; id: string }
   | { type: 'platform_availability'; feature: string; platforms: PlatformStatus[]; order: number; id: string }
   | { type: 'quick_actions'; actions: QuickAction[]; order: number; id: string }
-  | { type: 'source_cards'; sources: SourceDocument[] }  // No order, always last
+  | { type: 'source_cards'; sources: SourceDocument[]; id: string }  // No order, always last
 
 // SSE event types
 export interface SegmentEvent {
   segment: Segment
+}
+
+export interface ErrorEvent {
+  error: string
 }
 
 export interface DoneEvent {
@@ -101,4 +106,4 @@ export interface DoneEvent {
   language?: string
 }
 
-export type SSEEvent = SegmentEvent | DoneEvent
+export type SSEEvent = SegmentEvent | ErrorEvent | DoneEvent
