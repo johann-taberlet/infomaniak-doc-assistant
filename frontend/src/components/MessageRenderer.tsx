@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown'
-import type { Message, UIComponent } from '../types'
+import type { Message, MessageSegment, UIComponent } from '../types'
 import type { TTSStatus } from '../hooks/useTTS'
 import { SourceCards } from './ui/SourceCards'
 import { StepGuide } from './ui/StepGuide'
@@ -23,30 +23,44 @@ function getEffectiveLanguage(message: Message): string {
   return 'en'
 }
 
-function renderUIComponent(component: UIComponent) {
+function renderUIComponent(component: UIComponent, key?: string) {
   switch (component.type) {
     case 'source_cards':
-      return <SourceCards key={component.id} sources={component.sources} />
+      return <SourceCards key={key || component.id} sources={component.sources} />
     case 'step_guide':
       return (
         <StepGuide
-          key={component.id}
+          key={key || component.id}
           title={component.title}
           steps={component.steps}
         />
       )
     case 'quick_actions':
-      return <QuickActions key={component.id} actions={component.actions} />
+      return <QuickActions key={key || component.id} actions={component.actions} />
     case 'platform_availability':
       return (
         <PlatformAvailability
-          key={component.id}
+          key={key || component.id}
           feature={component.feature}
           platforms={component.platforms}
         />
       )
     default:
       return null
+  }
+}
+
+function renderSegment(segment: MessageSegment, index: number) {
+  if (segment.type === 'text') {
+    // Only render non-empty text segments
+    if (!segment.content.trim()) return null
+    return (
+      <div key={`text-${index}`} className="message-content">
+        <Markdown>{segment.content}</Markdown>
+      </div>
+    )
+  } else {
+    return renderUIComponent(segment.component, `component-${index}`)
   }
 }
 
@@ -93,14 +107,25 @@ export function MessageRenderer({
     onTTSRequest?.(messageWithLang)
   }
 
+  // Render assistant message content - use segments if available
+  const renderAssistantContent = () => {
+    if (message.segments && message.segments.length > 0) {
+      // Render interleaved segments (text and components in order)
+      return message.segments.map(renderSegment)
+    }
+    // Fallback: render content as single text block
+    return (
+      <div className="message-content">
+        <Markdown>{message.content}</Markdown>
+      </div>
+    )
+  }
+
   return (
     <div className={`message ${message.role}`}>
       {isAssistant ? (
         <>
-          <div className="message-content">
-            <Markdown>{message.content}</Markdown>
-          </div>
-          {message.uiComponents?.map(renderUIComponent)}
+          {renderAssistantContent()}
           {showTTS && (
             <button
               className={getTTSButtonClass(ttsStatus)}

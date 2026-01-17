@@ -1,10 +1,15 @@
+// Message segment - either text or a UI component
+export type MessageSegment =
+  | { type: 'text'; content: string }
+  | { type: 'component'; component: UIComponent }
+
 // Chat types
 export interface Message {
   id: string
   role: 'user' | 'assistant'
-  content: string
+  content: string  // Full text content (for TTS, etc.)
   language?: string
-  uiComponents?: UIComponent[]
+  segments?: MessageSegment[]  // Interleaved text and components in order
 }
 
 // Base UI component type

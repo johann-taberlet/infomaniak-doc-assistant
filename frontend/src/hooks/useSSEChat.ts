@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
-import type { Message, UIComponent, SSEEvent } from '../types'
+import type { Message, MessageSegment, SSEEvent } from '../types'
 
 interface UseSSEChatOptions {
   onStreamStart?: () => void
@@ -27,8 +27,27 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
   const [isStreaming, setIsStreaming] = useState(false)
   const sessionIdRef = useRef<string>(generateId())
   const eventSourceRef = useRef<EventSource | null>(null)
-  const streamingMessageRef = useRef<string>('')
-  const uiComponentsRef = useRef<UIComponent[]>([])
+  // Track segments (interleaved text and components) and current text buffer
+  const segmentsRef = useRef<MessageSegment[]>([])
+  const textBufferRef = useRef<string>('')
+
+  // Helper to build segments array for message updates
+  const buildCurrentSegments = (): MessageSegment[] => {
+    const segments = [...segmentsRef.current]
+    // Add current text buffer as a segment if non-empty
+    if (textBufferRef.current) {
+      segments.push({ type: 'text', content: textBufferRef.current })
+    }
+    return segments
+  }
+
+  // Helper to get full text content from segments
+  const getFullContent = (segments: MessageSegment[]): string => {
+    return segments
+      .filter((s): s is { type: 'text'; content: string } => s.type === 'text')
+      .map(s => s.content)
+      .join('')
+  }
 
   const sendMessage = useCallback((content: string) => {
     if (isStreaming || !content.trim()) return
@@ -42,8 +61,8 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
 
     setMessages(prev => [...prev, userMessage])
     setIsStreaming(true)
-    streamingMessageRef.current = ''
-    uiComponentsRef.current = []
+    segmentsRef.current = []
+    textBufferRef.current = ''
     options.onStreamStart?.()
 
     // Create assistant message placeholder
@@ -68,13 +87,35 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
         const data: SSEEvent = JSON.parse(event.data)
 
         if ('done' in data && data.done) {
-          // Stream complete - add sources at the very end
-          const finalContent = stripLangMarker(streamingMessageRef.current)
+          // Stream complete - finalize segments
+          // Flush any remaining text buffer
+          if (textBufferRef.current) {
+            segmentsRef.current.push({
+              type: 'text',
+              content: textBufferRef.current,
+            })
+            textBufferRef.current = ''
+          }
 
-          // Combine inline components with sources (sources come last)
-          const allComponents = [...uiComponentsRef.current]
+          // Add sources at the very end
           if (data.sources) {
-            allComponents.push(...data.sources)
+            for (const source of data.sources) {
+              segmentsRef.current.push({ type: 'component', component: source })
+            }
+          }
+
+          // Build final message
+          const finalSegments = [...segmentsRef.current]
+          const rawContent = getFullContent(finalSegments)
+          const finalContent = stripLangMarker(rawContent)
+
+          // Strip lang marker from the last text segment
+          for (let i = finalSegments.length - 1; i >= 0; i--) {
+            if (finalSegments[i].type === 'text') {
+              const textSeg = finalSegments[i] as { type: 'text'; content: string }
+              textSeg.content = stripLangMarker(textSeg.content)
+              break
+            }
           }
 
           const finalMessage: Message = {
@@ -82,7 +123,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             role: 'assistant',
             content: finalContent,
             language: data.language,
-            uiComponents: allComponents.length > 0 ? allComponents : undefined,
+            segments: finalSegments.length > 0 ? finalSegments : undefined,
           }
 
           setMessages(prev =>
@@ -94,22 +135,41 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
           setIsStreaming(false)
           options.onStreamEnd?.(finalMessage)
         } else if ('token' in data) {
-          // Append token
-          streamingMessageRef.current += data.token
+          // Append token to current text buffer
+          textBufferRef.current += data.token
+          const currentSegments = buildCurrentSegments()
+          const currentContent = getFullContent(currentSegments)
+
           setMessages(prev =>
             prev.map(m =>
               m.id === assistantId
-                ? { ...m, content: streamingMessageRef.current }
+                ? { ...m, content: currentContent, segments: currentSegments }
                 : m
             )
           )
         } else if ('ui_component' in data) {
-          // Add inline UI component immediately (not sources)
-          uiComponentsRef.current.push(data.ui_component)
+          // Flush text buffer as a segment, then add component
+          if (textBufferRef.current) {
+            segmentsRef.current.push({
+              type: 'text',
+              content: textBufferRef.current,
+            })
+            textBufferRef.current = ''
+          }
+
+          // Add component segment
+          segmentsRef.current.push({
+            type: 'component',
+            component: data.ui_component,
+          })
+
+          const currentSegments = buildCurrentSegments()
+          const currentContent = getFullContent(currentSegments)
+
           setMessages(prev =>
             prev.map(m =>
               m.id === assistantId
-                ? { ...m, uiComponents: [...uiComponentsRef.current] }
+                ? { ...m, content: currentContent, segments: currentSegments }
                 : m
             )
           )
@@ -125,7 +185,10 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
       eventSourceRef.current = null
       setIsStreaming(false)
 
-      if (!streamingMessageRef.current) {
+      const currentSegments = buildCurrentSegments()
+      const currentContent = getFullContent(currentSegments)
+
+      if (!currentContent) {
         setMessages(prev =>
           prev.map(m =>
             m.id === assistantId
@@ -135,10 +198,12 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
         )
       } else {
         // Keep what we received
-        const finalContent = stripLangMarker(streamingMessageRef.current)
+        const finalContent = stripLangMarker(currentContent)
         setMessages(prev =>
           prev.map(m =>
-            m.id === assistantId ? { ...m, content: finalContent } : m
+            m.id === assistantId
+              ? { ...m, content: finalContent, segments: currentSegments }
+              : m
           )
         )
       }

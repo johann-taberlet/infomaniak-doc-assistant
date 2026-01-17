@@ -38,11 +38,7 @@ export function SourceCards({ sources }: SourceCardsProps) {
               >
                 {source.product}
               </span>
-              {source.relevanceScore !== undefined && (
-                <span className="source-card-score">
-                  {Math.round(source.relevanceScore * 100)}%
-                </span>
-              )}
+              <span className="source-card-rank">#{index + 1}</span>
             </div>
             <h4 className="source-card-title">{source.title}</h4>
             <p className="source-card-snippet">{source.snippet}</p>
