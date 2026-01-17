@@ -66,12 +66,16 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
     const eventSource = new EventSource(url)
     eventSourceRef.current = eventSource
 
+    // Track if we received an error (to prevent done from overwriting)
+    let receivedError = false
+
     eventSource.onmessage = (event) => {
       try {
         const data: SSEEvent = JSON.parse(event.data)
 
         if ('error' in data) {
           // Server-side error - display error message to user
+          receivedError = true
           setMessages(prev =>
             prev.map(m =>
               m.id === assistantId
@@ -79,8 +83,17 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
                 : m
             )
           )
+          // Close stream immediately on error
+          eventSource.close()
+          eventSourceRef.current = null
+          setIsStreaming(false)
           options.onError?.(new Error(data.error))
         } else if ('done' in data && data.done) {
+          // Don't overwrite if we already received an error
+          if (receivedError) {
+            return
+          }
+
           // Stream complete - finalize message
           const finalSegments = [...segmentsRef.current]
           const finalContent = getFullContent(finalSegments)
@@ -142,7 +155,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
         setMessages(prev =>
           prev.map(m =>
             m.id === assistantId
-              ? { ...m, content: 'Error: Could not get response. Please try again.' }
+              ? { ...m, content: 'Error: Could not get response. Please try again.', isError: true }
               : m
           )
         )

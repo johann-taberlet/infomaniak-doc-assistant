@@ -200,8 +200,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         elif "timeout" in error_str:
             error_message = "The request timed out. Please try again."
 
+        logger.info("Sending error event to client: %s", error_message)
         yield format_sse({"error": error_message})
-        yield format_sse({"done": True})
 
 
 @app.get("/chat/stream")
