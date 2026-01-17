@@ -73,11 +73,23 @@ async def stream_ndjson_response(
     # Get conversation history
     history = get_conversation_history(session_id)
 
+    # Detect if message is likely English (simple heuristic)
+    english_indicators = ['what', 'how', 'why', 'when', 'where', 'which', 'can', 'do', 'does', 'is', 'are', 'the', 'and', 'to', 'in', 'on', 'for']
+    message_lower = message.lower()
+    english_word_count = sum(1 for word in english_indicators if word in message_lower.split())
+    is_likely_english = english_word_count >= 2
+
+    # Add explicit language instruction with the user message
+    if is_likely_english:
+        user_content = f"[RESPOND IN ENGLISH - The user wrote in English]\n\n{message}"
+    else:
+        user_content = message
+
     # Build messages: system + history + current message
     messages: list[BaseMessage] = [
         SystemMessage(content=system_prompt),
         *history,
-        HumanMessage(content=message),
+        HumanMessage(content=user_content),
     ]
 
     # Add user message to history
