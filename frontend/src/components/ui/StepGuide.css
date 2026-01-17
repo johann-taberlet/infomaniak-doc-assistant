@@ -1,0 +1,176 @@
+.step-guide {
+  margin-top: 1rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.step-guide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.step-guide-icon {
+  font-size: 1rem;
+}
+
+.step-guide-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+.step-guide-progress-text {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.step-guide-progress-bar {
+  height: 4px;
+  background: #e9ecef;
+}
+
+.step-guide-progress-fill {
+  height: 100%;
+  background: #28a745;
+  transition: width 0.3s ease;
+}
+
+.step-guide-steps {
+  padding: 0.5rem 0;
+}
+
+.step-item {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.step-item:last-child {
+  border-bottom: none;
+}
+
+.step-item.completed .step-title {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.step-item.completed .step-description {
+  color: #adb5bd;
+}
+
+.step-item-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.step-checkbox {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #dee2e6;
+  border-radius: 50%;
+  background: white;
+  color: #495057;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.step-checkbox:hover {
+  border-color: #0066cc;
+  color: #0066cc;
+}
+
+.step-item.completed .step-checkbox {
+  background: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.step-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.step-description {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #6c757d;
+  line-height: 1.4;
+}
+
+.step-expand {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: #6c757d;
+  font-size: 0.625rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.step-expand:hover {
+  background: #e9ecef;
+}
+
+.step-details {
+  padding: 0 1rem 0.75rem 3.5rem;
+}
+
+.step-details p {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.step-command {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #212529;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
+.step-command code {
+  flex: 1;
+  color: #f8f8f2;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 0.8125rem;
+  overflow-x: auto;
+}
+
+.step-copy {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.step-copy:hover {
+  opacity: 1;
+}

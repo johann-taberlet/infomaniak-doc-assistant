@@ -4,7 +4,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.prebuilt import create_react_agent
 
 from app.agent.prompts import SYSTEM_PROMPT
-from app.agent.tools import search_docs
+from app.agent.tools import ALL_TOOLS
 from app.llm import get_chat_model
 
 
@@ -17,14 +17,13 @@ def get_agent():
     """Create and return a ReAct agent for the documentation assistant.
 
     Returns:
-        A LangGraph ReAct agent with search_docs tool and conversation memory.
+        A LangGraph ReAct agent with search and UI rendering tools, plus conversation memory.
     """
     model = get_chat_model()
-    tools = [search_docs]
 
     agent = create_react_agent(
         model=model,
-        tools=tools,
+        tools=ALL_TOOLS,
         checkpointer=_checkpointer,
         prompt=SYSTEM_PROMPT,
     )

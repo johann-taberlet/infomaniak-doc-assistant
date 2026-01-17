@@ -15,6 +15,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import get_agent
+from app.agent.tools import get_pending_ui_components
 from app.models.schemas import ChatRequest, ChatResponse
 from app.observability.langfuse import get_langfuse_handler
 
@@ -144,9 +145,18 @@ def extract_language(text: str) -> tuple[str, str | None]:
 
 
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
-    """Generate SSE events from agent streaming response."""
+    """Generate SSE events from agent streaming response.
+
+    Emits three types of events:
+    - token: Streamed text tokens from the LLM
+    - ui_component: Rich UI components (SourceCards, StepGuide, etc.)
+    - done: Signal that streaming is complete, with optional language code
+    """
     # PRODUCTION: Wrap in try/except to send error event on failure instead of silent disconnect
     agent = get_agent()
+
+    # Clear any stale UI components from previous requests
+    get_pending_ui_components()
 
     # Build config with optional Langfuse observability
     config: dict[str, Any] = {"configurable": {"thread_id": session_id}}
@@ -163,12 +173,20 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         version="v2",
     ):
         kind = event.get("event")
+
         # Stream AI message content tokens
         if kind == "on_chat_model_stream":
             content = event.get("data", {}).get("chunk")
             if content and hasattr(content, "content") and content.content:
                 full_response += content.content
                 yield format_sse({"token": content.content})
+
+        # After tool execution completes, emit any pending UI components
+        elif kind == "on_tool_end":
+            for component in get_pending_ui_components():
+                # Convert Pydantic model to dict for JSON serialization
+                component_dict = component.model_dump()
+                yield format_sse({"ui_component": component_dict})
 
     # Extract language from accumulated response
     _, language = extract_language(full_response)
