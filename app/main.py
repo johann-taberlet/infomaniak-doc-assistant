@@ -196,11 +196,10 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
             if event_kind in ("on_chat_model_start", "on_chat_model_end", "on_tool_start", "on_tool_end"):
                 tlog.info("[T+%.3fs] %s - %s", elapsed, event_kind.upper(), event_name)
 
-            # Detect finish_response completion and break out of loop
+            # Track when finish_response completes
             if event_kind == "on_tool_end" and event_name == "finish_response":
                 response_finished = True
-                tlog.info("[T+%.3fs] FINISH_RESPONSE detected - breaking out of event loop", elapsed)
-                break
+                tlog.info("[T+%.3fs] FINISH_RESPONSE detected", elapsed)
 
             # Emit status updates based on actual events
             if event_kind == "on_chat_model_start":
