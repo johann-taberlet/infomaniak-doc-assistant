@@ -29,6 +29,7 @@
   padding: 0.75rem 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-left: 1rem;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -39,6 +40,7 @@
 .source-cards-scroll::-webkit-scrollbar-track {
   background: #e9ecef;
   border-radius: 3px;
+  margin: 0 1rem;
 }
 
 .source-cards-scroll::-webkit-scrollbar-thumb {

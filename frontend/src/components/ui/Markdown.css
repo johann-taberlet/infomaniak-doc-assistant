@@ -68,6 +68,14 @@
   text-decoration: underline;
 }
 
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  display: block;
+}
+
 .markdown-content blockquote {
   border-left: 3px solid #0066cc;
   margin: 0.5rem 0;
