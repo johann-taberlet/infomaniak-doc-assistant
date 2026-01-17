@@ -6,12 +6,21 @@ import { StepGuide } from './ui/StepGuide'
 import { QuickActions } from './ui/QuickActions'
 import { PlatformAvailability } from './ui/PlatformAvailability'
 
-const AVAILABLE_LANGS = ['en', 'ko', 'es', 'pt', 'fr']
+const AVAILABLE_LANGS = ['en', 'ko', 'es', 'pt', 'fr'] as const
 
 interface MessageRendererProps {
   message: Message
   onTTSRequest?: (message: Message) => void
   ttsStatus?: TTSStatus
+}
+
+function getEffectiveLanguage(message: Message): string {
+  // If language is detected and supported, use it
+  if (message.language && AVAILABLE_LANGS.includes(message.language as typeof AVAILABLE_LANGS[number])) {
+    return message.language
+  }
+  // Default to English for TTS
+  return 'en'
 }
 
 function renderUIComponent(component: UIComponent) {
@@ -70,13 +79,19 @@ export function MessageRenderer({
   ttsStatus,
 }: MessageRendererProps) {
   const isAssistant = message.role === 'assistant'
-  const showTTS =
-    isAssistant &&
-    message.language &&
-    AVAILABLE_LANGS.includes(message.language) &&
-    message.content.length > 0
+  // Show TTS for any assistant message with content
+  const showTTS = isAssistant && message.content.length > 0
 
   const isDisabled = ttsStatus === 'loading' || ttsStatus === 'generating'
+
+  const handleTTSClick = () => {
+    // Create a message with effective language for TTS
+    const messageWithLang: Message = {
+      ...message,
+      language: getEffectiveLanguage(message),
+    }
+    onTTSRequest?.(messageWithLang)
+  }
 
   return (
     <div className={`message ${message.role}`}>
@@ -89,7 +104,7 @@ export function MessageRenderer({
           {showTTS && (
             <button
               className={getTTSButtonClass(ttsStatus)}
-              onClick={() => onTTSRequest?.(message)}
+              onClick={handleTTSClick}
               title={ttsStatus === 'playing' ? 'Stop' : 'Read aloud'}
               disabled={isDisabled}
             >

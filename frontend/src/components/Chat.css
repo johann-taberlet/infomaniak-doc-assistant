@@ -1,10 +1,12 @@
 .chat {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-width: 800px;
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   padding: 1rem;
+  min-height: 0; /* Important for flexbox */
 }
 
 .chat-container {
@@ -14,7 +16,6 @@
   padding: 1rem;
   margin-bottom: 1rem;
   overflow-y: auto;
-  min-height: 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -153,10 +154,15 @@
   color: #0066cc;
 }
 
+.tts-button:disabled {
+  cursor: wait;
+}
+
 /* Chat form */
 .chat-form {
   display: flex;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .chat-form input {

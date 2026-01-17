@@ -48,6 +48,10 @@ def add_ui_component(component: Any) -> None:
     _pending_ui_components.append(component)
 
 
+# Maximum number of sources to show in the UI cards (top N most relevant)
+MAX_UI_SOURCES = 4
+
+
 @tool(parse_docstring=True)
 def search_docs(query: str) -> str:
     """Search the Infomaniak documentation for relevant information.
@@ -64,9 +68,10 @@ def search_docs(query: str) -> str:
     if not documents:
         return "No relevant documentation found for this query."
 
-    # Build UI component for sources
+    # Build UI component for sources (only top N for UI display)
     sources: list[SourceDocument] = []
     results = []
+    seen_titles: set[str] = set()
 
     for doc in documents:
         title = doc.metadata.get("title", "Untitled")
@@ -75,21 +80,23 @@ def search_docs(query: str) -> str:
         content = doc.page_content
         score = doc.metadata.get("score")
 
-        # Add to text results
+        # Add to text results (all documents for LLM context)
         result = f"**{title}** ({product})\n{content}\nSource: {source}"
         results.append(result)
 
-        # Build source document for UI
-        snippet = content[:150] + "..." if len(content) > 150 else content
-        sources.append(
-            SourceDocument(
-                title=title,
-                product=product or "Infomaniak",
-                url=source,
-                snippet=snippet,
-                relevance_score=score,
+        # Build source document for UI (deduplicated by title, limited count)
+        if len(sources) < MAX_UI_SOURCES and title not in seen_titles:
+            seen_titles.add(title)
+            snippet = content[:150] + "..." if len(content) > 150 else content
+            sources.append(
+                SourceDocument(
+                    title=title,
+                    product=product or "Infomaniak",
+                    url=source,
+                    snippet=snippet,
+                    relevance_score=score,
+                )
             )
-        )
 
     # Add SourceCards UI component
     if sources:

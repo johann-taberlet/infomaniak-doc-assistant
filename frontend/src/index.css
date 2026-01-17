@@ -16,12 +16,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  min-height: 100vh;
+html, body {
+  height: 100%;
 }
 
 #root {
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
