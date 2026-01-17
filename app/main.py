@@ -15,8 +15,11 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import get_agent
-from app.agent.tools import get_pending_ui_components
+from app.agent.tools import ALL_TOOLS, get_pending_ui_components
 from app.models.schemas import ChatRequest, ChatResponse
+
+# Tool names for filtering out tool call text from stream
+TOOL_NAMES = {tool.name for tool in ALL_TOOLS}
 from app.observability.langfuse import get_langfuse_handler
 
 logger = logging.getLogger(__name__)
@@ -133,6 +136,8 @@ def format_sse(data: dict[str, Any]) -> str:
     return f"data: {json.dumps(data)}\n\n"
 
 
+
+
 def extract_language(text: str) -> tuple[str, str | None]:
     """Extract language marker from end of text and return (cleaned_text, language)."""
     # Match [LANG:xx] at the end of text (with possible trailing whitespace)
@@ -166,6 +171,10 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
 
     # Accumulate full response to extract language marker at the end
     full_response = ""
+    # Buffer to detect tool calls that arrive in chunks
+    pending_buffer = ""
+    # Track when we're in tool execution to skip streaming tool call content
+    in_tool_call = False
 
     async for event in agent.astream_events(
         {"messages": [{"role": "user", "content": message}]},
@@ -174,19 +183,68 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     ):
         kind = event.get("event")
 
-        # Stream AI message content tokens
-        if kind == "on_chat_model_stream":
-            content = event.get("data", {}).get("chunk")
-            if content and hasattr(content, "content") and content.content:
-                full_response += content.content
-                yield format_sse({"token": content.content})
+        # Track tool execution state
+        if kind == "on_tool_start":
+            in_tool_call = True
+            pending_buffer = ""  # Discard any buffered tool call text
+            continue
 
-        # After tool execution completes, emit any pending UI components
-        elif kind == "on_tool_end":
+        if kind == "on_tool_end":
+            in_tool_call = False
+            # Emit any pending UI components
             for component in get_pending_ui_components():
-                # Convert Pydantic model to dict for JSON serialization
                 component_dict = component.model_dump()
                 yield format_sse({"ui_component": component_dict})
+            continue
+
+        # Stream AI message content tokens (skip during tool calls)
+        if kind == "on_chat_model_stream":
+            chunk = event.get("data", {}).get("chunk")
+            if chunk:
+                # Skip if this is a tool call chunk
+                if hasattr(chunk, "tool_call_chunks") and chunk.tool_call_chunks:
+                    in_tool_call = True
+                    pending_buffer = ""
+                    continue
+                # Skip if we're in the middle of tool execution
+                if in_tool_call:
+                    continue
+                # Only stream actual text content
+                if hasattr(chunk, "content") and chunk.content:
+                    content = chunk.content
+                    pending_buffer += content
+
+                    # Check if buffer looks like start of a tool call
+                    # Pattern: tool_name{ or tool_name(
+                    buffer_stripped = pending_buffer.strip()
+                    is_tool_call_start = False
+                    for name in TOOL_NAMES:
+                        if buffer_stripped.startswith(name):
+                            # Could be a tool call, wait for more or detect completion
+                            if name + "{" in buffer_stripped or name + "(" in buffer_stripped:
+                                # Definitely a tool call
+                                in_tool_call = True
+                                pending_buffer = ""
+                                is_tool_call_start = True
+                                break
+                            elif len(buffer_stripped) <= len(name) + 5:
+                                # Still accumulating, might be tool call
+                                is_tool_call_start = True
+                                break
+
+                    if is_tool_call_start:
+                        continue
+
+                    # Not a tool call, flush buffer
+                    if pending_buffer:
+                        full_response += pending_buffer
+                        yield format_sse({"token": pending_buffer})
+                        pending_buffer = ""
+
+    # Flush any remaining buffer (shouldn't normally have content)
+    if pending_buffer and not in_tool_call:
+        full_response += pending_buffer
+        yield format_sse({"token": pending_buffer})
 
     # Extract language from accumulated response
     _, language = extract_language(full_response)
