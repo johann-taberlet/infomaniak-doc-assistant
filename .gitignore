@@ -63,3 +63,6 @@ Thumbs.db
 # Project specific
 *.db
 *.sqlite3
+
+# Large ONNX models (use Git LFS or download separately)
+static/tts/onnx/*.onnx
