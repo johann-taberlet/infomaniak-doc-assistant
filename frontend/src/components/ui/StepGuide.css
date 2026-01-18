@@ -1,8 +1,8 @@
 .step-guide {
   margin-top: 1.5rem;
-  border-radius: 8px;
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
+  border-radius: var(--ik-radius-md);
+  background: var(--ik-bg-tertiary);
+  border: 1px solid var(--ik-border);
 }
 
 .step-guide-header {
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--ik-border);
 }
 
 .step-guide-icon {
@@ -21,22 +21,22 @@
   flex: 1;
   font-weight: 600;
   font-size: 0.875rem;
-  color: #495057;
+  color: var(--ik-text-secondary);
 }
 
 .step-guide-progress-text {
   font-size: 0.75rem;
-  color: #6c757d;
+  color: var(--ik-text-muted);
 }
 
 .step-guide-progress-bar {
   height: 4px;
-  background: #e9ecef;
+  background: var(--ik-border);
 }
 
 .step-guide-progress-fill {
   height: 100%;
-  background: #28a745;
+  background: var(--ik-primary);
   transition: width 0.3s ease;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .step-item {
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--ik-border);
   animation: step-enter 0.3s ease-out;
 }
 
@@ -66,11 +66,11 @@
 
 .step-item.completed .step-title {
   text-decoration: line-through;
-  color: #6c757d;
+  color: var(--ik-text-muted);
 }
 
 .step-item.completed .step-description {
-  color: #adb5bd;
+  color: var(--ik-text-muted);
 }
 
 .step-item-main {
@@ -84,28 +84,28 @@
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--ik-border);
   border-radius: 50%;
-  background: white;
-  color: #495057;
+  background: var(--ik-bg-card);
+  color: var(--ik-text-secondary);
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all var(--ik-transition);
 }
 
 .step-checkbox:hover {
-  border-color: #0066cc;
-  color: #0066cc;
+  border-color: var(--ik-primary);
+  color: var(--ik-primary);
 }
 
 .step-item.completed .step-checkbox {
-  background: #28a745;
-  border-color: #28a745;
-  color: white;
+  background: var(--ik-primary);
+  border-color: var(--ik-primary);
+  color: var(--ik-text-inverse);
 }
 
 .step-content {
@@ -117,12 +117,12 @@
   margin: 0 0 0.25rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #212529;
+  color: var(--ik-text-primary);
 }
 
 .step-description {
   font-size: 0.8125rem;
-  color: #6c757d;
+  color: var(--ik-text-secondary);
   line-height: 1.4;
 }
 
@@ -139,21 +139,22 @@
   height: 24px;
   border: none;
   background: none;
-  color: #6c757d;
+  color: var(--ik-text-muted);
   font-size: 0.625rem;
   cursor: pointer;
   border-radius: 4px;
-  transition: background 0.2s;
+  transition: all var(--ik-transition);
 }
 
 .step-expand:hover {
-  background: #e9ecef;
+  background: var(--ik-border);
+  color: var(--ik-primary);
 }
 
 .step-details {
   padding: 0 1rem 0.75rem 3.5rem;
   font-size: 0.8125rem;
-  color: #495057;
+  color: var(--ik-text-secondary);
   line-height: 1.5;
 }
 
