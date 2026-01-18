@@ -45,7 +45,6 @@
 .message.assistant {
   background: #e9ecef;
   color: #333;
-  padding-bottom: 2.5rem;
 }
 
 .message-content {
@@ -114,24 +113,36 @@
   padding-bottom: 0.75rem; /* No extra padding for TTS button */
 }
 
+/* TTS Button Container */
+.tts-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
 /* TTS Button */
 .tts-button {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: none;
-  border: none;
+  background: #fff;
+  border: 1px solid #d1d5db;
   cursor: pointer;
-  font-size: 1rem;
-  opacity: 0.6;
-  transition: opacity 0.2s, transform 0.1s;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 0.8rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
 }
 
 .tts-button:hover {
-  opacity: 1;
-  background: rgba(0, 0, 0, 0.05);
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  color: #1f2937;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .tts-button:active {
@@ -139,17 +150,38 @@
 }
 
 .tts-button.loading {
-  opacity: 0.4;
+  color: #9ca3af;
   cursor: wait;
 }
 
 .tts-button.playing {
-  opacity: 1;
-  color: #0066cc;
+  background: #0066cc;
+  border-color: #0066cc;
+  color: #fff;
+}
+
+.tts-button.playing:hover {
+  background: #0052a3;
+  border-color: #0052a3;
+  color: #fff;
 }
 
 .tts-button:disabled {
   cursor: wait;
+}
+
+/* TTS spinner animation */
+.tts-spinner {
+  animation: tts-spin 1s linear infinite;
+}
+
+@keyframes tts-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Chat form */

@@ -1,3 +1,4 @@
+import { useState, useCallback, useEffect, type ReactNode } from 'react'
 import { Markdown } from './ui/Markdown'
 import type { Message } from '../types'
 import { AVAILABLE_LANGS, type TTSStatus } from '../hooks/useTTS'
@@ -12,24 +13,46 @@ interface MessageRendererProps {
   isStreaming?: boolean
 }
 
-function getEffectiveLanguage(message: Message): string {
-  // If language is detected and supported, use it
-  if (message.language && AVAILABLE_LANGS.includes(message.language as typeof AVAILABLE_LANGS[number])) {
-    return message.language
-  }
-  // Default to English for TTS
-  return 'en'
+function isTTSLanguageSupported(message: Message): boolean {
+  return !!message.language && AVAILABLE_LANGS.includes(message.language as typeof AVAILABLE_LANGS[number])
 }
 
-function getTTSButtonProps(status?: TTSStatus): { content: string; className: string } {
+const SpeakerIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+  </svg>
+)
+
+const StopIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <rect x="6" y="6" width="12" height="12" rx="2" />
+  </svg>
+)
+
+const LoadingIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tts-spinner">
+    <path d="M12 2v4" />
+    <path d="M12 18v4" />
+    <path d="M4.93 4.93l2.83 2.83" />
+    <path d="M16.24 16.24l2.83 2.83" />
+    <path d="M2 12h4" />
+    <path d="M18 12h4" />
+    <path d="M4.93 19.07l2.83-2.83" />
+    <path d="M16.24 7.76l2.83-2.83" />
+  </svg>
+)
+
+function getTTSButtonContent(status?: TTSStatus): { icon: ReactNode; className: string } {
   const isLoading = status === 'loading' || status === 'generating'
   if (isLoading) {
-    return { content: '\u23F3', className: 'tts-button loading' }
+    return { icon: <LoadingIcon />, className: 'tts-button loading' }
   }
   if (status === 'playing') {
-    return { content: '\u23F9', className: 'tts-button playing' }
+    return { icon: <StopIcon />, className: 'tts-button playing' }
   }
-  return { content: '\uD83D\uDD0A', className: 'tts-button' }
+  return { icon: <SpeakerIcon />, className: 'tts-button' }
 }
 
 export function MessageRenderer({
@@ -39,18 +62,36 @@ export function MessageRenderer({
   isStreaming = false,
 }: MessageRendererProps) {
   const isAssistant = message.role === 'assistant'
-  // Show TTS for any assistant message with content (not errors)
-  const showTTS = isAssistant && message.content.length > 0 && !message.isError
+
+  // Track when streaming animation is complete (not just backend streaming)
+  const [animationComplete, setAnimationComplete] = useState(false)
+
+  // Reset animation state when streaming starts
+  useEffect(() => {
+    if (isStreaming) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on prop change
+      setAnimationComplete(false)
+    }
+  }, [isStreaming])
+
+  const handleAnimationComplete = useCallback(() => {
+    setAnimationComplete(true)
+  }, [])
+
+  // Show TTS only if language is supported and all animations are complete
+  const hasSegments = message.segments && message.segments.length > 0
+  const showTTS = isAssistant &&
+    message.content.length > 0 &&
+    !message.isError &&
+    !isStreaming &&
+    isTTSLanguageSupported(message) &&
+    (hasSegments ? animationComplete : true)
 
   const isDisabled = ttsStatus === 'loading' || ttsStatus === 'generating'
 
   const handleTTSClick = () => {
-    // Create a message with effective language for TTS
-    const messageWithLang: Message = {
-      ...message,
-      language: getEffectiveLanguage(message),
-    }
-    onTTSRequest?.(messageWithLang)
+    // Language is already validated by showTTS condition
+    onTTSRequest?.(message)
   }
 
   // Render assistant message content - use segments if available
@@ -81,6 +122,7 @@ export function MessageRenderer({
           segments={message.segments}
           isStreaming={isStreaming}
           messageId={message.id}
+          onAnimationComplete={handleAnimationComplete}
         />
       )
     }
@@ -93,7 +135,7 @@ export function MessageRenderer({
     )
   }
 
-  const ttsButtonProps = getTTSButtonProps(ttsStatus)
+  const ttsButton = getTTSButtonContent(ttsStatus)
 
   return (
     <div className={`message ${message.role}`}>
@@ -101,14 +143,17 @@ export function MessageRenderer({
         <>
           {renderAssistantContent()}
           {showTTS && (
-            <button
-              className={ttsButtonProps.className}
-              onClick={handleTTSClick}
-              title={ttsStatus === 'playing' ? 'Stop' : 'Read aloud'}
-              disabled={isDisabled}
-            >
-              {ttsButtonProps.content}
-            </button>
+            <div className="tts-button-container">
+              <button
+                className={ttsButton.className}
+                onClick={handleTTSClick}
+                title={ttsStatus === 'playing' ? 'Stop' : 'Read aloud'}
+                disabled={isDisabled}
+              >
+                {ttsButton.icon}
+                <span>Listen</span>
+              </button>
+            </div>
           )}
         </>
       ) : (

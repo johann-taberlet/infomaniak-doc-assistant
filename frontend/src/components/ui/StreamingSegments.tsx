@@ -14,6 +14,8 @@ interface StreamingSegmentsProps {
   isStreaming: boolean
   /** Message ID to detect new messages and reset animation state */
   messageId?: string
+  /** Called when all segment animations have completed */
+  onAnimationComplete?: () => void
 }
 
 /**
@@ -24,6 +26,7 @@ export function StreamingSegments({
   segments,
   isStreaming,
   messageId,
+  onAnimationComplete,
 }: StreamingSegmentsProps) {
   // How many segments have completed their animation
   const [completedCount, setCompletedCount] = useState(0)
@@ -104,6 +107,23 @@ export function StreamingSegments({
       }
     }
   }, [segments, completedCount, handleSegmentComplete])
+
+  // Notify when all animations are complete
+  const animationCompleteCalledRef = useRef(false)
+  useEffect(() => {
+    // Reset the flag when message changes or streaming restarts
+    if (isStreaming) {
+      animationCompleteCalledRef.current = false
+      return
+    }
+
+    // All animations complete when: streaming ended AND all segments animated
+    const allComplete = !isStreaming && segments.length > 0 && completedCount >= segments.length
+    if (allComplete && !animationCompleteCalledRef.current) {
+      animationCompleteCalledRef.current = true
+      onAnimationComplete?.()
+    }
+  }, [isStreaming, segments.length, completedCount, onAnimationComplete])
 
   // Render a segment
   const renderSegment = (segment: MessageSegment, index: number) => {
