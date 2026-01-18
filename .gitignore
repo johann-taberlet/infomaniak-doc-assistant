@@ -67,6 +67,7 @@ Thumbs.db
 # Large ONNX models (use Git LFS or download separately)
 static/tts/onnx/*.onnx
 
-.claude
+.claude/
 .playwright-mcp
 docs
+.mcp.json
