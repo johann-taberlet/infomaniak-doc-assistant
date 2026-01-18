@@ -8,6 +8,7 @@ Implements simplified NDJSON streaming:
 from collections.abc import AsyncGenerator
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_core.runnables import RunnableConfig
 
 from app.agent.prompts import NDJSON_SYSTEM_PROMPT
 from app.agent.tools import search_docs
@@ -16,6 +17,9 @@ from app.observability.langfuse import get_langfuse_handler
 
 # In-memory conversation store (session_id -> messages)
 _conversations: dict[str, list[BaseMessage]] = {}
+
+# Maximum messages to keep in conversation history to prevent context overflow
+_MAX_CONVERSATION_HISTORY = 10
 
 
 def get_conversation_history(session_id: str) -> list[BaseMessage]:
@@ -28,9 +32,9 @@ def add_to_conversation(session_id: str, message: BaseMessage) -> None:
     if session_id not in _conversations:
         _conversations[session_id] = []
     _conversations[session_id].append(message)
-    # Keep only last 10 messages to prevent context overflow
-    if len(_conversations[session_id]) > 10:
-        _conversations[session_id] = _conversations[session_id][-10:]
+    # Keep only recent messages to prevent context overflow
+    if len(_conversations[session_id]) > _MAX_CONVERSATION_HISTORY:
+        _conversations[session_id] = _conversations[session_id][-_MAX_CONVERSATION_HISTORY:]
 
 
 async def search_documentation(query: str) -> str:
@@ -95,7 +99,9 @@ async def stream_ndjson_response(
 
     # Get optional Langfuse handler for observability
     langfuse_handler = get_langfuse_handler()
-    config = {"callbacks": [langfuse_handler]} if langfuse_handler else None
+    config: RunnableConfig | None = None
+    if langfuse_handler:
+        config = RunnableConfig(callbacks=[langfuse_handler])
 
     async for chunk in model.astream(messages, config=config):
         if chunk.content:

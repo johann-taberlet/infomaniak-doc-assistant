@@ -1,7 +1,6 @@
 """BM25 sparse retrieval for hybrid search."""
 
 import re
-from functools import cache
 
 from rank_bm25 import BM25Okapi
 
@@ -65,7 +64,7 @@ class BM25Index:
         results = list(zip(self.doc_ids, scores))
         results.sort(key=lambda x: x[1], reverse=True)
 
-        return results[:top_k]
+        return [(doc_id, float(score)) for doc_id, score in results[:top_k]]
 
     def get_content(self, doc_id: str) -> str | None:
         """Get document content by ID.

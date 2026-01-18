@@ -14,6 +14,6 @@ def get_langfuse_handler() -> CallbackHandler | None:
 
     return CallbackHandler(
         public_key=settings.LANGFUSE_PUBLIC_KEY,
-        secret_key=settings.LANGFUSE_SECRET_KEY,
-        host=settings.LANGFUSE_HOST,
+        secret_key=settings.LANGFUSE_SECRET_KEY,  # type: ignore[call-arg]
+        host=settings.LANGFUSE_HOST,  # type: ignore[call-arg]
     )

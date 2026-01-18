@@ -47,6 +47,8 @@ def reset_context() -> None:
 
 # Maximum number of sources to show in the UI cards (top N most relevant)
 MAX_UI_SOURCES = 4
+# Maximum length for source snippets in UI
+_MAX_SNIPPET_LENGTH = 150
 
 
 @tool(parse_docstring=True)
@@ -83,7 +85,7 @@ def search_docs(query: str) -> str:
         # Build source document for UI (deduplicated by title, limited count)
         if len(get_sources()) < MAX_UI_SOURCES and title not in seen_titles:
             seen_titles.add(title)
-            snippet = content[:150] + "..." if len(content) > 150 else content
+            snippet = content[:_MAX_SNIPPET_LENGTH] + "..." if len(content) > _MAX_SNIPPET_LENGTH else content
             source_doc = SourceDocument(
                 title=title,
                 product=product or "Infomaniak",

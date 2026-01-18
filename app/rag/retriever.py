@@ -13,6 +13,30 @@ from app.rag.query_expansion import expand_query
 
 logger = logging.getLogger(__name__)
 
+# Batch size for scrolling through Qdrant collection
+_QDRANT_SCROLL_BATCH_SIZE = 100
+
+
+def _create_document(payload: dict, score: float) -> Document:
+    """Create a Document from Qdrant payload.
+
+    Args:
+        payload: Qdrant point payload with content and metadata.
+        score: Relevance score (RRF or vector similarity).
+
+    Returns:
+        Document with page_content and metadata.
+    """
+    return Document(
+        page_content=payload.get("content", ""),
+        metadata={
+            "source": payload.get("source", ""),
+            "title": payload.get("title", ""),
+            "product": payload.get("product", ""),
+            "score": score,
+        },
+    )
+
 
 class QdrantRetriever:
     """Retriever class for Qdrant with hybrid search (vector + BM25)."""
@@ -116,7 +140,7 @@ class QdrantRetriever:
             while True:
                 result = self.client.scroll(
                     collection_name=self.collection_name,
-                    limit=100,
+                    limit=_QDRANT_SCROLL_BATCH_SIZE,
                     offset=offset,
                     with_payload=True,
                     with_vectors=False,
@@ -125,10 +149,11 @@ class QdrantRetriever:
                 points, offset = result
 
                 for point in points:
+                    payload = point.payload or {}
                     documents.append(
                         {
                             "id": str(point.id),
-                            "content": point.payload.get("content", ""),
+                            "content": payload.get("content", ""),
                         }
                     )
 
@@ -204,12 +229,12 @@ class QdrantRetriever:
         payloads: dict[str, dict] = {}
 
         # Score from vector search
-        for rank, (doc_id, score, payload) in enumerate(vector_results):
+        for rank, (doc_id, _, payload) in enumerate(vector_results):
             rrf_scores[doc_id] = rrf_scores.get(doc_id, 0) + 1 / (k + rank + 1)
             payloads[doc_id] = payload
 
         # Score from BM25 search
-        for rank, (doc_id, score) in enumerate(bm25_results):
+        for rank, (doc_id, _) in enumerate(bm25_results):
             rrf_scores[doc_id] = rrf_scores.get(doc_id, 0) + 1 / (k + rank + 1)
 
         # For BM25-only results, fetch payload from Qdrant
@@ -225,7 +250,7 @@ class QdrantRetriever:
                         with_payload=True,
                     )
                     if points:
-                        payloads[doc_id] = points[0].payload
+                        payloads[doc_id] = points[0].payload or {}
                 except Exception:
                     payloads[doc_id] = {}
 
@@ -278,34 +303,18 @@ class QdrantRetriever:
             # Take top results from fused results
             fused_results = fused_results[:top_k]
 
-            documents = []
-            for doc_id, rrf_score, payload in fused_results:
-                doc = Document(
-                    page_content=payload.get("content", ""),
-                    metadata={
-                        "source": payload.get("source", ""),
-                        "title": payload.get("title", ""),
-                        "product": payload.get("product", ""),
-                        "score": rrf_score,
-                    },
-                )
-                documents.append(doc)
+            documents = [
+                _create_document(payload, rrf_score)
+                for _, rrf_score, payload in fused_results
+            ]
 
         else:
             # Pure vector search (original behavior)
             vector_results = self._search_vector(query, top_k)
 
-            documents = []
-            for doc_id, score, payload in vector_results:
-                doc = Document(
-                    page_content=payload.get("content", ""),
-                    metadata={
-                        "source": payload.get("source", ""),
-                        "title": payload.get("title", ""),
-                        "product": payload.get("product", ""),
-                        "score": score,
-                    },
-                )
-                documents.append(doc)
+            documents = [
+                _create_document(payload, score)
+                for _, score, payload in vector_results
+            ]
 
         return documents

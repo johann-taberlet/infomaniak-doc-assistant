@@ -7,6 +7,7 @@ Supports both chat models and embedding models via OpenRouter's API.
 """
 
 from openai import OpenAI
+from pydantic import SecretStr
 
 from langchain_core.embeddings import Embeddings
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -65,8 +66,8 @@ class OpenRouterProvider(LLMProvider):
         """
         return ChatOpenAI(
             model=settings.OPENROUTER_CHAT_MODEL,
-            openai_api_key=settings.OPENROUTER_API_KEY,
-            openai_api_base="https://openrouter.ai/api/v1",
+            api_key=SecretStr(settings.OPENROUTER_API_KEY),
+            base_url="https://openrouter.ai/api/v1",
             temperature=settings.LLM_TEMPERATURE,
             default_headers={
                 "HTTP-Referer": settings.OPENROUTER_SITE_URL,

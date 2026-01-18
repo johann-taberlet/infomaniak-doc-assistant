@@ -1,4 +1,4 @@
-# LLM module - Multi-provider abstraction (Ollama, Qwen API, Mistral API)
+# LLM module - Multi-provider abstraction (Ollama, OpenRouter)
 
 from app.llm.factory import get_chat_model, get_embeddings, get_provider
 

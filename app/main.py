@@ -144,6 +144,106 @@ def format_sse(data: dict[str, Any]) -> str:
     return f"data: {json.dumps(data)}\n\n"
 
 
+def _create_source_cards_segment(sources: list[dict[str, Any]]) -> dict[str, Any]:
+    """Create a source_cards segment for SSE emission."""
+    return {
+        "segment": {
+            "type": "source_cards",
+            "id": str(uuid.uuid4()),
+            "sources": sources,
+        }
+    }
+
+
+def _get_user_friendly_error(exc: Exception) -> str:
+    """Convert an exception to a user-friendly error message."""
+    error_str = str(exc).lower()
+    if "rate limit" in error_str:
+        return "Too many requests. Please wait a moment and try again."
+    if "timeout" in error_str:
+        return "The request timed out. Please try again."
+    return "Sorry, an error occurred while processing your request. Please try again."
+
+
+class _StreamState:
+    """Mutable state for SSE stream processing."""
+
+    def __init__(self, start_time: float) -> None:
+        self.start_time = start_time
+        self.current_step_guide: dict[str, Any] | None = None
+        self.first_content_emitted = False
+
+    def elapsed(self) -> float:
+        """Return elapsed time since stream start."""
+        return time.perf_counter() - self.start_time
+
+
+def _handle_text_segment(obj: dict[str, Any], state: _StreamState) -> str:
+    """Handle a text segment from NDJSON."""
+    segment = {
+        "type": "text",
+        "order": obj.get("order", 1),
+        "content": obj.get("content", ""),
+        "id": str(uuid.uuid4()),
+    }
+    _timeline_logger.info(
+        "[T+%.3fs] EMIT TEXT - order=%s", state.elapsed(), obj.get("order")
+    )
+    return format_sse({"segment": segment})
+
+
+def _handle_step_guide_start(obj: dict[str, Any], state: _StreamState) -> str:
+    """Handle step_guide_start from NDJSON."""
+    state.current_step_guide = {
+        "type": "step_guide",
+        "title": obj.get("title", ""),
+        "order": obj.get("order", 2),
+        "steps": [],
+        "id": str(uuid.uuid4()),
+    }
+    _timeline_logger.info(
+        "[T+%.3fs] STEP GUIDE START - title=%s", state.elapsed(), obj.get("title")
+    )
+    return format_sse({"segment": state.current_step_guide})
+
+
+def _handle_step(obj: dict[str, Any], state: _StreamState) -> str | None:
+    """Handle a step from NDJSON. Returns None if no current step guide."""
+    if not state.current_step_guide:
+        return None
+
+    step: dict[str, Any] = {
+        "number": obj.get("number", 1),
+        "title": obj.get("title", ""),
+        "description": obj.get("description", ""),
+    }
+    if "details" in obj:
+        step["details"] = obj["details"]
+    if "command" in obj:
+        step["command"] = obj["command"]
+
+    state.current_step_guide["steps"].append(step)
+    _timeline_logger.info(
+        "[T+%.3fs] EMIT STEP %d - %s",
+        state.elapsed(),
+        obj.get("number"),
+        obj.get("title", "")[:30],
+    )
+    return format_sse({"segment": state.current_step_guide})
+
+
+def _handle_quick_actions(obj: dict[str, Any], state: _StreamState) -> str:
+    """Handle quick_actions from NDJSON."""
+    segment = {
+        "type": "quick_actions",
+        "order": obj.get("order", 99),
+        "actions": obj.get("actions", []),
+        "id": str(uuid.uuid4()),
+    }
+    _timeline_logger.info("[T+%.3fs] EMIT QUICK ACTIONS", state.elapsed())
+    return format_sse({"segment": segment})
+
+
 async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]:
     """Generate SSE events from NDJSON streaming response.
 
@@ -157,8 +257,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         # Reset context for this request
         reset_context()
 
-        # Timeline logging
-        start_time = time.perf_counter()
+        # Initialize stream state
+        state = _StreamState(time.perf_counter())
         tlog = _timeline_logger
         tlog.info("=" * 60)
         tlog.info(
@@ -169,26 +269,20 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
 
         # Status: searching
         yield format_sse({"status": "Searching documentation..."})
-        tlog.info("[T+%.3fs] STATUS - Searching", time.perf_counter() - start_time)
+        tlog.info("[T+%.3fs] STATUS - Searching", state.elapsed())
 
         # 1. RAG Search
         search_context = await search_documentation(message)
         sources = get_sources()
 
-        tlog.info(
-            "[T+%.3fs] SEARCH COMPLETE - %d sources",
-            time.perf_counter() - start_time,
-            len(sources),
-        )
+        tlog.info("[T+%.3fs] SEARCH COMPLETE - %d sources", state.elapsed(), len(sources))
 
         # Status: generating
         yield format_sse({"status": "Generating response..."})
-        tlog.info("[T+%.3fs] STATUS - Generating", time.perf_counter() - start_time)
+        tlog.info("[T+%.3fs] STATUS - Generating", state.elapsed())
 
         # 2. Stream NDJSON and parse line by line
         buffer = ""
-        current_step_guide: dict[str, Any] | None = None
-        first_content_emitted = False
 
         async for token in stream_ndjson_response(message, search_context, session_id):
             buffer += token
@@ -205,126 +299,42 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
                     obj = json.loads(line)
                     obj_type = obj.get("type")
 
-                    if not first_content_emitted:
-                        first_content_emitted = True
-                        tlog.info(
-                            "[T+%.3fs] FIRST CONTENT - type=%s",
-                            time.perf_counter() - start_time,
-                            obj_type,
-                        )
+                    if not state.first_content_emitted:
+                        state.first_content_emitted = True
+                        tlog.info("[T+%.3fs] FIRST CONTENT - type=%s", state.elapsed(), obj_type)
 
                     if obj_type == "text":
-                        # Emit text segment
-                        segment = {
-                            "type": "text",
-                            "order": obj.get("order", 1),
-                            "content": obj.get("content", ""),
-                            "id": str(uuid.uuid4()),
-                        }
-                        tlog.info(
-                            "[T+%.3fs] EMIT TEXT - order=%s",
-                            time.perf_counter() - start_time,
-                            obj.get("order"),
-                        )
-                        yield format_sse({"segment": segment})
+                        yield _handle_text_segment(obj, state)
 
                     elif obj_type == "step_guide_start":
-                        # Start a new step guide (emit skeleton)
-                        current_step_guide = {
-                            "type": "step_guide",
-                            "title": obj.get("title", ""),
-                            "order": obj.get("order", 2),
-                            "steps": [],
-                            "id": str(uuid.uuid4()),
-                        }
-                        tlog.info(
-                            "[T+%.3fs] STEP GUIDE START - title=%s",
-                            time.perf_counter() - start_time,
-                            obj.get("title"),
-                        )
-                        yield format_sse({"segment": current_step_guide})
+                        yield _handle_step_guide_start(obj, state)
 
                     elif obj_type == "step":
-                        # Add step to current guide and emit update
-                        if current_step_guide:
-                            step = {
-                                "number": obj.get("number", 1),
-                                "title": obj.get("title", ""),
-                                "description": obj.get("description", ""),
-                            }
-                            # Add optional fields if present
-                            if "details" in obj:
-                                step["details"] = obj["details"]
-                            if "command" in obj:
-                                step["command"] = obj["command"]
-
-                            current_step_guide["steps"].append(step)
-                            tlog.info(
-                                "[T+%.3fs] EMIT STEP %d - %s",
-                                time.perf_counter() - start_time,
-                                obj.get("number"),
-                                obj.get("title", "")[:30],
-                            )
-                            yield format_sse({"segment": current_step_guide})
+                        result = _handle_step(obj, state)
+                        if result:
+                            yield result
 
                     elif obj_type == "step_guide_end":
-                        # Mark step guide as complete
-                        tlog.info(
-                            "[T+%.3fs] STEP GUIDE END",
-                            time.perf_counter() - start_time,
-                        )
-                        current_step_guide = None
+                        tlog.info("[T+%.3fs] STEP GUIDE END", state.elapsed())
+                        state.current_step_guide = None
 
                     elif obj_type == "quick_actions":
-                        # Emit quick actions
-                        segment = {
-                            "type": "quick_actions",
-                            "order": obj.get("order", 99),
-                            "actions": obj.get("actions", []),
-                            "id": str(uuid.uuid4()),
-                        }
-                        tlog.info(
-                            "[T+%.3fs] EMIT QUICK ACTIONS",
-                            time.perf_counter() - start_time,
-                        )
-                        yield format_sse({"segment": segment})
+                        yield _handle_quick_actions(obj, state)
 
                     elif obj_type == "done":
-                        # Emit sources
+                        # Emit sources and done
                         if sources:
-                            tlog.info(
-                                "[T+%.3fs] EMIT SOURCES - %d items",
-                                time.perf_counter() - start_time,
-                                len(sources),
-                            )
-                            yield format_sse(
-                                {
-                                    "segment": {
-                                        "type": "source_cards",
-                                        "id": str(uuid.uuid4()),
-                                        "sources": sources,
-                                    }
-                                }
-                            )
+                            tlog.info("[T+%.3fs] EMIT SOURCES - %d items", state.elapsed(), len(sources))
+                            yield format_sse(_create_source_cards_segment(sources))
 
-                        # Emit done
                         language = obj.get("language", "en")
-                        tlog.info(
-                            "[T+%.3fs] EMIT DONE - lang=%s",
-                            time.perf_counter() - start_time,
-                            language,
-                        )
+                        tlog.info("[T+%.3fs] EMIT DONE - lang=%s", state.elapsed(), language)
                         tlog.info("=" * 60)
                         yield format_sse({"done": True, "language": language})
                         return
 
                 except json.JSONDecodeError:
-                    # Invalid JSON line - log but continue
-                    tlog.warning(
-                        "[T+%.3fs] INVALID JSON: %s",
-                        time.perf_counter() - start_time,
-                        line[:50],
-                    )
+                    tlog.warning("[T+%.3fs] INVALID JSON: %s", state.elapsed(), line[:50])
 
         # Handle remaining buffer (in case no trailing newline)
         if buffer.strip():
@@ -332,57 +342,24 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
                 obj = json.loads(buffer.strip())
                 if obj.get("type") == "done":
                     if sources:
-                        yield format_sse(
-                            {
-                                "segment": {
-                                    "type": "source_cards",
-                                    "id": str(uuid.uuid4()),
-                                    "sources": sources,
-                                }
-                            }
-                        )
-                    yield format_sse(
-                        {"done": True, "language": obj.get("language", "en")}
-                    )
+                        yield format_sse(_create_source_cards_segment(sources))
+                    yield format_sse({"done": True, "language": obj.get("language", "en")})
                     return
             except json.JSONDecodeError:
                 pass
 
         # Fallback: emit sources and done if we didn't get a done signal
-        tlog.warning(
-            "[T+%.3fs] FALLBACK DONE (no done signal received)",
-            time.perf_counter() - start_time,
-        )
+        tlog.warning("[T+%.3fs] FALLBACK DONE (no done signal received)", state.elapsed())
         if sources:
-            yield format_sse(
-                {
-                    "segment": {
-                        "type": "source_cards",
-                        "id": str(uuid.uuid4()),
-                        "sources": sources,
-                    }
-                }
-            )
+            yield format_sse(_create_source_cards_segment(sources))
         yield format_sse({"done": True})
 
     except Exception as e:
-        # Log the full error for debugging
         logger.exception("Error during SSE stream: %s", str(e))
         async with _metrics_lock:
             metrics["error_count"] += 1
 
-        # Send user-friendly error message
-        error_message = (
-            "Sorry, an error occurred while processing your request. Please try again."
-        )
-
-        # Include more specific message for known error types
-        error_str = str(e).lower()
-        if "rate limit" in error_str:
-            error_message = "Too many requests. Please wait a moment and try again."
-        elif "timeout" in error_str:
-            error_message = "The request timed out. Please try again."
-
+        error_message = _get_user_friendly_error(e)
         logger.info("Sending error event to client: %s", error_message)
         yield format_sse({"error": error_message})
 

@@ -8,6 +8,12 @@ from app.llm.base import LLMProvider
 from app.llm.ollama_provider import OllamaProvider
 from app.llm.openrouter_provider import OpenRouterProvider
 
+# Provider registry for extensibility
+_PROVIDERS: dict[str, type[LLMProvider]] = {
+    "ollama": OllamaProvider,
+    "openrouter": OpenRouterProvider,
+}
+
 
 def get_provider() -> LLMProvider:
     """Return the LLM provider based on configuration.
@@ -19,13 +25,13 @@ def get_provider() -> LLMProvider:
         ValueError: If the configured provider is not supported.
     """
     provider_name = settings.LLM_PROVIDER.lower()
+    provider_class = _PROVIDERS.get(provider_name)
 
-    if provider_name == "ollama":
-        return OllamaProvider()
-    elif provider_name == "openrouter":
-        return OpenRouterProvider()
-    else:
-        raise ValueError(f"Unsupported LLM provider: {provider_name}")
+    if provider_class is None:
+        supported = ", ".join(_PROVIDERS.keys())
+        raise ValueError(f"Unsupported LLM provider: {provider_name}. Supported: {supported}")
+
+    return provider_class()
 
 
 def get_chat_model() -> BaseChatModel:

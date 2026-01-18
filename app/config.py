@@ -50,9 +50,6 @@ class Settings(BaseSettings):
     RAG_HYBRID_ENABLED: bool = True  # Enable BM25 + vector hybrid search
     RAG_BM25_K: int = Field(default=60, gt=0)  # RRF constant (higher = more equal weighting)
 
-    # Jina API
-    JINA_API_KEY: str = ""
-
     model_config = {
         "env_file": ".env",
         "env_file_encoding": "utf-8",
