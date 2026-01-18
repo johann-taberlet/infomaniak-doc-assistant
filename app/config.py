@@ -51,6 +51,9 @@ class Settings(BaseSettings):
     RAG_HYBRID_ENABLED: bool = True  # Enable BM25 + vector hybrid search
     RAG_BM25_K: int = Field(default=60, gt=0)  # RRF constant (higher = more equal weighting)
 
+    # Demo Access Control
+    DEMO_ACCESS_TOKEN: str = ""  # If empty, protection is disabled
+
     model_config = {
         "env_file": ".env",
         "env_file_encoding": "utf-8",

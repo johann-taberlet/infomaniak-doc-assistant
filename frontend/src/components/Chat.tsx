@@ -27,6 +27,7 @@ interface TTSTranslations {
 }
 
 interface ChatProps {
+  token?: string | null
   onTTSRequest?: (message: Message) => void
   ttsStatus?: TTSStatus
   translations: ChatTranslations
@@ -35,7 +36,7 @@ interface ChatProps {
   lang: 'en' | 'fr'
 }
 
-export function Chat({ onTTSRequest, ttsStatus, translations, statusTranslations, ttsTranslations, lang }: ChatProps) {
+export function Chat({ token, onTTSRequest, ttsStatus, translations, statusTranslations, ttsTranslations, lang }: ChatProps) {
   const [input, setInput] = useState('')
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -46,6 +47,7 @@ export function Chat({ onTTSRequest, ttsStatus, translations, statusTranslations
   const lastScrollTopRef = useRef(0)
 
   const { messages, isStreaming, sendMessage } = useSSEChat({
+    token,
     onStreamEnd: () => {
       inputRef.current?.focus()
     },

@@ -15,6 +15,10 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
+      '/metrics': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
       '/static/tts': {
         target: 'http://localhost:8000',
         changeOrigin: true,

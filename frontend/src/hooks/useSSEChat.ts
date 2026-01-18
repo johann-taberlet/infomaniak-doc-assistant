@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react'
 import type { Message, MessageSegment, SSEEvent, Segment, UIComponent } from '../types'
 
 interface UseSSEChatOptions {
+  token?: string | null
   onStreamStart?: () => void
   onStreamEnd?: (message: Message) => void
   onError?: (error: Error) => void
@@ -103,7 +104,10 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
 
     // Build URL with query parameters
     const apiBase = import.meta.env.VITE_API_URL || ''
-    const url = `${apiBase}/chat/stream?message=${encodeURIComponent(content)}&session_id=${encodeURIComponent(sessionIdRef.current)}`
+    let url = `${apiBase}/chat/stream?message=${encodeURIComponent(content)}&session_id=${encodeURIComponent(sessionIdRef.current)}`
+    if (options.token) {
+      url += `&token=${encodeURIComponent(options.token)}`
+    }
 
     const eventSource = new EventSource(url)
     eventSourceRef.current = eventSource

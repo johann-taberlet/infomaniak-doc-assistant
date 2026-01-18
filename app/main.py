@@ -9,7 +9,7 @@ from collections.abc import AsyncGenerator
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
@@ -17,6 +17,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import search_documentation, stream_ndjson_response
 from app.agent.tools import get_sources, reset_context
+from app.auth import verify_demo_token
 from app.config import settings
 from app.models.schemas import ChatRequest, ChatResponse
 
@@ -80,14 +81,14 @@ async def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
-@app.get("/metrics")
+@app.get("/metrics", dependencies=[Depends(verify_demo_token)])
 async def get_metrics() -> dict[str, int]:
     """Return application metrics."""
     async with _metrics_lock:
         return dict(metrics)
 
 
-@app.post("/chat", response_model=ChatResponse)
+@app.post("/chat", response_model=ChatResponse, dependencies=[Depends(verify_demo_token)])
 async def chat(request: ChatRequest) -> ChatResponse:
     """Chat endpoint that invokes the agent with the user's message.
 
@@ -383,7 +384,7 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         yield format_sse({"error": error_message})
 
 
-@app.get("/chat/stream")
+@app.get("/chat/stream", dependencies=[Depends(verify_demo_token)])
 async def chat_stream(message: str, session_id: str | None = None) -> StreamingResponse:
     """Streaming chat endpoint using Server-Sent Events."""
     sid = session_id or str(uuid.uuid4())

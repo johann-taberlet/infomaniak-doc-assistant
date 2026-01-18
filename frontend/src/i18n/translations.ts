@@ -22,6 +22,10 @@ export interface Translations {
     stop: string
     readAloud: string
   }
+  accessDenied: {
+    title: string
+    message: string
+  }
 }
 
 export const translations: Record<string, Translations> = {
@@ -49,6 +53,10 @@ export const translations: Record<string, Translations> = {
       stop: 'Stop',
       readAloud: 'Read aloud',
     },
+    accessDenied: {
+      title: 'Access Denied',
+      message: 'A valid access token is required to use this application.',
+    },
   },
   fr: {
     appTitle: 'Infomaniak Doc Assistant',
@@ -73,6 +81,10 @@ export const translations: Record<string, Translations> = {
       listen: 'Écouter',
       stop: 'Arrêter',
       readAloud: 'Lire à voix haute',
+    },
+    accessDenied: {
+      title: 'Accès refusé',
+      message: 'Un jeton d\'accès valide est requis pour utiliser cette application.',
     },
   },
 }

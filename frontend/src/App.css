@@ -37,3 +37,10 @@
   min-height: 0; /* Important for flexbox to allow shrinking */
   overflow: hidden;
 }
+
+.app-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

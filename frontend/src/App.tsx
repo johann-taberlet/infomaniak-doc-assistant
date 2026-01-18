@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { Chat } from './components/Chat'
+import { AccessDenied } from './components/AccessDenied'
 import { TTSLoadingModal } from './components/TTSLoadingModal'
 import { ThemeToggle } from './components/ThemeToggle'
 import { useTTS, AVAILABLE_LANGS } from './hooks/useTTS'
@@ -7,10 +8,36 @@ import { useLocale } from './hooks/useLocale'
 import type { Message } from './types'
 import './App.css'
 
+type TokenStatus = 'checking' | 'valid' | 'invalid'
+
 function App() {
   const [showTTSModal, setShowTTSModal] = useState(false)
+  const [tokenStatus, setTokenStatus] = useState<TokenStatus>('checking')
   const { status, loadProgress, error, load, speak, stop } = useTTS()
   const { lang, t } = useLocale()
+
+  // Read token from URL query parameter (computed once on mount)
+  const token = useMemo(() => {
+    return new URLSearchParams(window.location.search).get('token')
+  }, [])
+
+  // Verify token with backend on mount
+  useEffect(() => {
+    if (!token) {
+      setTokenStatus('invalid')
+      return
+    }
+
+    const apiBase = import.meta.env.VITE_API_URL || ''
+    fetch(`${apiBase}/metrics?token=${encodeURIComponent(token)}`)
+      .then(response => {
+        setTokenStatus(response.ok ? 'valid' : 'invalid')
+      })
+      .catch(() => {
+        // Network error - allow access (backend might not require token)
+        setTokenStatus('valid')
+      })
+  }, [token])
 
   const handleTTSRequest = useCallback(
     async (message: Message) => {
@@ -43,6 +70,24 @@ function App() {
     setShowTTSModal(false)
   }
 
+  // Show loading while checking token
+  if (tokenStatus === 'checking') {
+    return (
+      <div className="app">
+        <div className="app-loading" />
+      </div>
+    )
+  }
+
+  // Show access denied if token is invalid
+  if (tokenStatus === 'invalid') {
+    return (
+      <div className="app">
+        <AccessDenied translations={t.accessDenied} />
+      </div>
+    )
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -51,6 +96,7 @@ function App() {
       </header>
       <main className="app-main">
         <Chat
+          token={token}
           onTTSRequest={handleTTSRequest}
           ttsStatus={status}
           translations={t.chat}
