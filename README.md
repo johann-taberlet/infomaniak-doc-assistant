@@ -9,92 +9,39 @@ AI assistant for Infomaniak documentation (kDrive, kMeet, kChat, kSuite, SwissTr
 - **Vector Store**: Qdrant
 - **LLM**: Ollama (local) or OpenRouter (cloud)
 
-## Prerequisites
-
-- Python 3.11+
-- Node.js 20+
-- Ollama with `qwen3:8b` and `nomic-embed-text` models
-- Qdrant (via Docker)
-
-## Installation
-
-### 1. Clone and setup backend
+## Quick Start
 
 ```bash
-# Install dependencies
-uv sync
+# 1. Install dependencies
+uv sync && cd frontend && npm install && cd ..
 
-# Copy environment file
+# 2. Configure environment
 cp .env.example .env
-```
+# Edit .env: set LLM_PROVIDER and API keys
 
-### 2. Start services
+# 3. Start Qdrant
+docker run -d -p 6333:6333 qdrant/qdrant
 
-```bash
-# Start Qdrant
-docker run -p 6333:6333 qdrant/qdrant
+# 4. Ingest documentation into vector store
+uv run python scripts/ingest.py
 
-# Pull Ollama models
-ollama pull qwen3:8b
-ollama pull nomic-embed-text
-```
-
-### 3. Setup frontend
-
-```bash
-cd frontend
-npm install
+# 5. Run the application
+uv run uvicorn app.main:app --reload  # Backend on :8000
+cd frontend && npm run dev             # Frontend on :5173
 ```
 
 ## Configuration
 
-Edit `.env` to configure the application:
+Edit `.env` to switch between local (Ollama) and cloud (OpenRouter) LLM providers:
 
-```env
-# LLM Provider: "ollama" or "openrouter"
-LLM_PROVIDER=ollama
-LLM_TEMPERATURE=0.7
+| Variable | Description |
+|----------|-------------|
+| `LLM_PROVIDER` | `ollama` or `openrouter` |
+| `OPENROUTER_API_KEY` | Required for OpenRouter |
+| `OPENROUTER_CHAT_MODEL` | e.g. `mistralai/mistral-large-2512` |
+| `QDRANT_HOST` | Default: `http://localhost:6333` |
 
-# Ollama (local)
-OLLAMA_HOST=http://localhost:11434
-OLLAMA_CHAT_MODEL=qwen3:8b
-OLLAMA_EMBEDDING_MODEL=nomic-embed-text
-
-# OpenRouter (cloud) - requires API key
-OPENROUTER_API_KEY=
-OPENROUTER_CHAT_MODEL=mistralai/ministral-8b
-
-# Qdrant
-QDRANT_HOST=http://localhost:6333
-QDRANT_COLLECTION=infomaniak_docs
-
-# Observability (optional)
-LANGFUSE_ENABLED=false
-LANGFUSE_PUBLIC_KEY=
-LANGFUSE_SECRET_KEY=
-```
-
-## Running
-
-### Development
-
-```bash
-# Terminal 1: Backend
-uv run uvicorn app.main:app --reload
-
-# Terminal 2: Frontend
-cd frontend && npm run dev
-```
-
-### Production
-
-```bash
-# Build frontend
-cd frontend && npm run build
-
-# Run backend (serves static files)
-uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
-```
+See `.env.example` for all available options.
 
 ## API Endpoints
 
@@ -137,3 +84,64 @@ cd frontend && npm run build
 # Lint frontend
 cd frontend && npm run lint
 ```
+
+## Known Limitations
+
+### Model Compatibility
+
+While the project supports local models via Ollama, **all testing has been done with Mistral Large 3 via OpenRouter**. Using smaller or less capable models may result in:
+
+- Poorly structured responses that break the Generative UI components
+- Incorrect NDJSON output format for streaming
+- Reduced prompt adherence and instruction following
+
+See the [Roadmap](#roadmap) section for planned prompt optimization work.
+
+### Image Relevance in Responses
+
+The assistant may occasionally display images that are not contextually accurate. This happens because:
+
+- Images are scraped from Infomaniak FAQ pages and converted to markdown URLs
+- During ingestion, images are **stripped from the content** to optimize text embeddings
+- The LLM has no knowledge of what each image URL actually depicts
+- When the model decides to include an image, it may select an incorrect one
+
+See the [Roadmap](#roadmap) for planned improvements.
+
+## Roadmap
+
+### Multimodal RAG Enhancement
+
+To improve image relevance in responses, the following improvements are planned:
+
+1. **Vision-based captioning at ingestion**
+   - Use Gemini 2.5 Flash Batch API to generate detailed descriptions of each screenshot
+   - Extract UI elements (buttons, menus, dialogs) with their labels and purposes
+   - Store captions as separate chunks linked to image URLs
+
+2. **Structured metadata storage**
+   - Store image descriptions with rich metadata in Qdrant
+   - Include `image_url`, `caption`, `ui_elements`, and `surrounding_context`
+   - Enable retrieval of relevant images based on semantic search
+
+3. **URL validation at generation**
+   - Cross-check image URLs in LLM responses against retrieved documents
+   - Reject hallucinated URLs that weren't in the retrieval context
+
+4. **Query classification for selective vision**
+   - Classify queries as TEXT_ONLY, IMAGE_REQUIRED, or HYBRID
+   - Only fetch raw images for visual queries to optimize costs
+
+### Small Model Support
+
+Optimize prompts for smaller/local models to ensure proper output structure:
+
+1. **Prompt engineering for smaller models**
+   - Simplify system prompts for better adherence on 7B-8B models
+   - Add few-shot examples for NDJSON output format
+   - Test and validate with Qwen3 8B, Mistral 7B, and similar models
+
+2. **Structured output enforcement**
+   - Ensure Generative UI components (`step_guide`, `platform_availability`) render correctly
+   - Add fallback parsing for malformed JSON responses
+   - Validate output schema before streaming to frontend
