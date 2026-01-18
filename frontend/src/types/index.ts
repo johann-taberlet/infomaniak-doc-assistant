@@ -11,6 +11,7 @@ export interface Message {
   language?: string
   segments?: MessageSegment[]  // Interleaved text and components in order
   isError?: boolean  // True if this message contains an error
+  isConnectionError?: boolean  // True if this is a connection error (for i18n)
   status?: string  // Current status while streaming (e.g., "Searching documentation...")
 }
 

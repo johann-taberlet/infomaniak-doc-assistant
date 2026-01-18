@@ -139,9 +139,18 @@ async def chat(request: ChatRequest) -> ChatResponse:
         raise
 
 
-def format_sse(data: dict[str, Any]) -> str:
-    """Format data as a Server-Sent Event."""
-    return f"data: {json.dumps(data)}\n\n"
+def format_sse(data: dict[str, Any], flush: bool = False) -> str:
+    """Format data as a Server-Sent Event.
+
+    Args:
+        data: The data to send
+        flush: If True, add padding to force buffer flush
+    """
+    event = f"data: {json.dumps(data)}\n\n"
+    if flush:
+        # Add padding to force buffer flush (some proxies buffer small responses)
+        event += ": padding" + " " * 2048 + "\n\n"
+    return event
 
 
 def _create_source_cards_segment(sources: list[dict[str, Any]]) -> dict[str, Any]:
@@ -267,9 +276,19 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
             session_id,
         )
 
+        # Status: understanding
+        yield format_sse({"status": "Understanding your question..."}, flush=True)
+        tlog.info("[T+%.3fs] STATUS - Understanding", state.elapsed())
+
+        # Minimal delay to flush the event before blocking
+        await asyncio.sleep(0.01)
+
         # Status: searching
-        yield format_sse({"status": "Searching documentation..."})
+        yield format_sse({"status": "Searching documentation..."}, flush=True)
         tlog.info("[T+%.3fs] STATUS - Searching", state.elapsed())
+
+        # Minimal delay to flush the event before blocking on search
+        await asyncio.sleep(0.01)
 
         # 1. RAG Search
         search_context = await search_documentation(message)
@@ -278,7 +297,7 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
         tlog.info("[T+%.3fs] SEARCH COMPLETE - %d sources", state.elapsed(), len(sources))
 
         # Status: generating
-        yield format_sse({"status": "Generating response..."})
+        yield format_sse({"status": "Generating response..."}, flush=True)
         tlog.info("[T+%.3fs] STATUS - Generating", state.elapsed())
 
         # 2. Stream NDJSON and parse line by line
@@ -371,4 +390,9 @@ async def chat_stream(message: str, session_id: str | None = None) -> StreamingR
     return StreamingResponse(
         sse_stream(message, sid),
         media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate, no-transform",
+            "X-Accel-Buffering": "no",  # Disable nginx buffering
+            "Connection": "keep-alive",
+        },
     )

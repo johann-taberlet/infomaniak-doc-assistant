@@ -197,7 +197,7 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
         setMessages(prev =>
           prev.map(m =>
             m.id === assistantId
-              ? { ...m, content: 'Error: Could not get response. Please try again.', isError: true }
+              ? { ...m, content: '', isError: true, isConnectionError: true }
               : m
           )
         )

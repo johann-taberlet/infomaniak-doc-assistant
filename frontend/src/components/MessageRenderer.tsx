@@ -5,12 +5,28 @@ import { AVAILABLE_LANGS, type TTSStatus } from '../hooks/useTTS'
 import { StreamingSegments } from './ui/StreamingSegments'
 import './ui/Markdown.css'
 
+interface StatusTranslations {
+  thinking: string
+  understanding: string
+  searching: string
+  generating: string
+}
+
+interface TTSTranslations {
+  listen: string
+  stop: string
+  readAloud: string
+}
+
 interface MessageRendererProps {
   message: Message
   onTTSRequest?: (message: Message) => void
   ttsStatus?: TTSStatus
   /** True if this message is currently being streamed */
   isStreaming?: boolean
+  statusTranslations: StatusTranslations
+  ttsTranslations: TTSTranslations
+  errorMessage: string
 }
 
 function isTTSLanguageSupported(message: Message): boolean {
@@ -55,11 +71,33 @@ function getTTSButtonContent(status?: TTSStatus): { icon: ReactNode; className: 
   return { icon: <SpeakerIcon />, className: 'tts-button' }
 }
 
+function translateStatus(backendStatus: string | undefined, translations: StatusTranslations): string {
+  if (!backendStatus) return translations.thinking
+
+  const status = backendStatus.toLowerCase()
+
+  // Map backend status strings to translation keys
+  if (status.includes('understand')) {
+    return translations.understanding
+  }
+  if (status.includes('search')) {
+    return translations.searching
+  }
+  if (status.includes('generat')) {
+    return translations.generating
+  }
+
+  return translations.thinking
+}
+
 export function MessageRenderer({
   message,
   onTTSRequest,
   ttsStatus,
   isStreaming = false,
+  statusTranslations,
+  ttsTranslations,
+  errorMessage,
 }: MessageRendererProps) {
   const isAssistant = message.role === 'assistant'
 
@@ -98,7 +136,7 @@ export function MessageRenderer({
   const renderAssistantContent = () => {
     // Show status or loading indicator while waiting for response
     if (!message.content && (!message.segments || message.segments.length === 0)) {
-      const statusText = message.status || 'Thinking'
+      const statusText = translateStatus(message.status, statusTranslations)
       return (
         <div className="message-content status-indicator">
           {statusText}<span className="thinking-dots"><span>.</span><span>.</span><span>.</span></span>
@@ -108,9 +146,10 @@ export function MessageRenderer({
 
     // Show error message with distinct styling
     if (message.isError) {
+      const displayedError = message.isConnectionError ? errorMessage : message.content
       return (
         <div className="message-content error-content">
-          {message.content}
+          {displayedError}
         </div>
       )
     }
@@ -147,11 +186,11 @@ export function MessageRenderer({
               <button
                 className={ttsButton.className}
                 onClick={handleTTSClick}
-                title={ttsStatus === 'playing' ? 'Stop' : 'Read aloud'}
+                title={ttsStatus === 'playing' ? ttsTranslations.stop : ttsTranslations.readAloud}
                 disabled={isDisabled}
               >
                 {ttsButton.icon}
-                <span>Listen</span>
+                <span>{ttsTranslations.listen}</span>
               </button>
             </div>
           )}

@@ -3,7 +3,17 @@ import './ThemeToggle.css'
 
 type Theme = 'light' | 'dark' | 'system'
 
-export function ThemeToggle() {
+interface ThemeTranslations {
+  light: string
+  dark: string
+  auto: string
+}
+
+interface ThemeToggleProps {
+  translations: ThemeTranslations
+}
+
+export function ThemeToggle({ translations }: ThemeToggleProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('theme') as Theme | null
     return saved || 'system'
@@ -48,9 +58,9 @@ export function ThemeToggle() {
   }
 
   const getLabel = () => {
-    if (theme === 'light') return 'Light'
-    if (theme === 'dark') return 'Dark'
-    return 'Auto'
+    if (theme === 'light') return translations.light
+    if (theme === 'dark') return translations.dark
+    return translations.auto
   }
 
   return (

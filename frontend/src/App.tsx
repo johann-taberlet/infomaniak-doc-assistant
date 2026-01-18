@@ -3,12 +3,14 @@ import { Chat } from './components/Chat'
 import { TTSLoadingModal } from './components/TTSLoadingModal'
 import { ThemeToggle } from './components/ThemeToggle'
 import { useTTS, AVAILABLE_LANGS } from './hooks/useTTS'
+import { useLocale } from './hooks/useLocale'
 import type { Message } from './types'
 import './App.css'
 
 function App() {
   const [showTTSModal, setShowTTSModal] = useState(false)
   const { status, loadProgress, error, load, speak, stop } = useTTS()
+  const { lang, t } = useLocale()
 
   const handleTTSRequest = useCallback(
     async (message: Message) => {
@@ -44,11 +46,18 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Infomaniak Doc Assistant</h1>
-        <ThemeToggle />
+        <h1>{t.appTitle}</h1>
+        <ThemeToggle translations={t.theme} />
       </header>
       <main className="app-main">
-        <Chat onTTSRequest={handleTTSRequest} ttsStatus={status} />
+        <Chat
+          onTTSRequest={handleTTSRequest}
+          ttsStatus={status}
+          translations={t.chat}
+          statusTranslations={t.status}
+          ttsTranslations={t.tts}
+          lang={lang}
+        />
       </main>
       <TTSLoadingModal
         isOpen={showTTSModal && status === 'loading'}
