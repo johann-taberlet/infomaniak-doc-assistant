@@ -25,6 +25,7 @@ class Settings(BaseSettings):
 
     # Qdrant Configuration
     QDRANT_HOST: str = "http://localhost:6333"
+    QDRANT_API_KEY: str = ""  # Required for Qdrant Cloud
     QDRANT_COLLECTION: str = Field(default="infomaniak_docs", min_length=1)
 
     # Application Configuration

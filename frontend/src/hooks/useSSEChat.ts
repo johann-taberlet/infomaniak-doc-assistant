@@ -102,7 +102,8 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
     ])
 
     // Build URL with query parameters
-    const url = `/chat/stream?message=${encodeURIComponent(content)}&session_id=${encodeURIComponent(sessionIdRef.current)}`
+    const apiBase = import.meta.env.VITE_API_URL || ''
+    const url = `${apiBase}/chat/stream?message=${encodeURIComponent(content)}&session_id=${encodeURIComponent(sessionIdRef.current)}`
 
     const eventSource = new EventSource(url)
     eventSourceRef.current = eventSource

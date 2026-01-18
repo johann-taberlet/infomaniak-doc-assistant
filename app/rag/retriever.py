@@ -43,7 +43,10 @@ class QdrantRetriever:
 
     def __init__(self) -> None:
         """Initialize the Qdrant client connection."""
-        self.client = QdrantClient(url=settings.QDRANT_HOST)
+        self.client = QdrantClient(
+            url=settings.QDRANT_HOST,
+            api_key=settings.QDRANT_API_KEY or None,
+        )
         self.collection_name = settings.QDRANT_COLLECTION
         self._bm25_initialized = False
 
