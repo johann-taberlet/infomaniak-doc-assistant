@@ -36,9 +36,9 @@ function App() {
     [status, load, speak, stop]
   )
 
-  const handleCloseTTSModal = useCallback(() => {
+  const handleCloseTTSModal = () => {
     setShowTTSModal(false)
-  }, [])
+  }
 
   return (
     <div className="app">

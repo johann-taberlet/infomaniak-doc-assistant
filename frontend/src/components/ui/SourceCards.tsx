@@ -22,7 +22,7 @@ export function SourceCards({ sources }: SourceCardsProps) {
         <span className="source-cards-title">Sources</span>
       </div>
       <div className="source-cards-scroll">
-        {sources.map((source) => (
+        {sources.map((source, index) => (
           <a
             key={source.url}
             href={source.url}
@@ -39,7 +39,7 @@ export function SourceCards({ sources }: SourceCardsProps) {
               >
                 {source.product}
               </span>
-              <span className="source-card-rank">#{sources.indexOf(source) + 1}</span>
+              <span className="source-card-rank">#{index + 1}</span>
             </div>
             <h4 className="source-card-title">{source.title}</h4>
             <p className="source-card-snippet">{stripMarkdown(source.snippet)}</p>

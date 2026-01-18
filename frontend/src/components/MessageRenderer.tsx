@@ -21,27 +21,15 @@ function getEffectiveLanguage(message: Message): string {
   return 'en'
 }
 
-function getTTSButtonContent(status?: TTSStatus): string {
-  switch (status) {
-    case 'loading':
-      return '⏳'
-    case 'generating':
-      return '⏳'
-    case 'playing':
-      return '⏹'
-    default:
-      return '🔊'
+function getTTSButtonProps(status?: TTSStatus): { content: string; className: string } {
+  const isLoading = status === 'loading' || status === 'generating'
+  if (isLoading) {
+    return { content: '\u23F3', className: 'tts-button loading' }
   }
-}
-
-function getTTSButtonClass(status?: TTSStatus): string {
-  const classes = ['tts-button']
-  if (status === 'loading' || status === 'generating') {
-    classes.push('loading')
-  } else if (status === 'playing') {
-    classes.push('playing')
+  if (status === 'playing') {
+    return { content: '\u23F9', className: 'tts-button playing' }
   }
-  return classes.join(' ')
+  return { content: '\uD83D\uDD0A', className: 'tts-button' }
 }
 
 export function MessageRenderer({
@@ -105,6 +93,8 @@ export function MessageRenderer({
     )
   }
 
+  const ttsButtonProps = getTTSButtonProps(ttsStatus)
+
   return (
     <div className={`message ${message.role}`}>
       {isAssistant ? (
@@ -112,12 +102,12 @@ export function MessageRenderer({
           {renderAssistantContent()}
           {showTTS && (
             <button
-              className={getTTSButtonClass(ttsStatus)}
+              className={ttsButtonProps.className}
               onClick={handleTTSClick}
               title={ttsStatus === 'playing' ? 'Stop' : 'Read aloud'}
               disabled={isDisabled}
             >
-              {getTTSButtonContent(ttsStatus)}
+              {ttsButtonProps.content}
             </button>
           )}
         </>
