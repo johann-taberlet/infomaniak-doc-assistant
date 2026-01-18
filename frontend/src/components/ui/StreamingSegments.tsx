@@ -6,6 +6,7 @@ import { StreamingStepGuide } from './StreamingStepGuide'
 import { SourceCards } from './SourceCards'
 import { QuickActions } from './QuickActions'
 import { PlatformAvailability } from './PlatformAvailability'
+import { streamingLog } from '../../utils/debugLog'
 import './Markdown.css'
 
 interface StreamingSegmentsProps {
@@ -59,9 +60,20 @@ export function StreamingSegments({
           const prevStepCount = stepGuideStepCountsRef.current.get(index) || 0
 
           if (currentStepCount > prevStepCount) {
+            streamingLog('Segments', 'event', `Step guide received new steps`, {
+              segmentIndex: index,
+              prevStepCount,
+              currentStepCount,
+              completedCount,
+              willResetCompletedCount: index < completedCount,
+            })
             stepGuideStepCountsRef.current.set(index, currentStepCount)
 
             if (index < completedCount) {
+              streamingLog('Segments', 'warn', `Resetting completedCount for new steps`, {
+                from: completedCount,
+                to: index,
+              })
               setCompletedCount(index)
             }
           }
@@ -71,9 +83,17 @@ export function StreamingSegments({
   }, [segments, completedCount, isStreaming])
 
   // Handle animation complete for current segment
-  const handleSegmentComplete = useCallback(() => {
-    setCompletedCount(prev => prev + 1)
-  }, [])
+  const handleSegmentComplete = useCallback((source?: string) => {
+    setCompletedCount(prev => {
+      streamingLog('Segments', 'event', `handleSegmentComplete called`, {
+        source: source || 'unknown',
+        prevCount: prev,
+        newCount: prev + 1,
+        totalSegments: segments.length,
+      })
+      return prev + 1
+    })
+  }, [segments.length])
 
   // Auto-complete instant components (source_cards, quick_actions, platform_availability)
   // This must be in useEffect to avoid React strict mode issues with setTimeout in render
@@ -81,7 +101,17 @@ export function StreamingSegments({
   const autoCompleteRef = useRef(false)
   useEffect(() => {
     const currentSegment = segments[completedCount]
-    if (!currentSegment) return
+    if (!currentSegment) {
+      streamingLog('Segments', 'info', `No segment at index ${completedCount}`, {
+        segmentsLength: segments.length,
+      })
+      return
+    }
+
+    streamingLog('Segments', 'state', `Checking segment ${completedCount}`, {
+      type: currentSegment.type,
+      componentType: currentSegment.type === 'component' ? (currentSegment.component as UIComponent).type : null,
+    })
 
     // Only auto-complete component segments that are "instant"
     if (currentSegment.type === 'component') {
@@ -92,9 +122,13 @@ export function StreamingSegments({
         component.type === 'platform_availability'
 
       if (isInstantComponent && !autoCompleteRef.current) {
+        streamingLog('Segments', 'event', `Auto-completing instant component`, {
+          componentType: component.type,
+          segmentIndex: completedCount,
+        })
         autoCompleteRef.current = true
         const timer = setTimeout(() => {
-          handleSegmentComplete()
+          handleSegmentComplete(`auto-complete:${component.type}`)
           autoCompleteRef.current = false
         }, 50)
         return () => {
@@ -110,6 +144,21 @@ export function StreamingSegments({
     const isCurrentlyAnimating = index === completedCount
     const isCompleted = index < completedCount
     const shouldShow = isCompleted || isCurrentlyAnimating
+
+    // Log render decisions for step_guide segments
+    if (segment.type === 'component') {
+      const component = segment.component as UIComponent
+      if (component.type === 'step_guide') {
+        streamingLog('Segments', 'info', `Rendering step_guide segment ${index}`, {
+          isCompleted,
+          isCurrentlyAnimating,
+          shouldShow,
+          skipAnimation: isCompleted,
+          stepsCount: component.steps?.length || 0,
+          completedCount,
+        })
+      }
+    }
 
     // Don't show future segments until animation queue reaches them
     // This applies both during AND after streaming - animation should complete naturally

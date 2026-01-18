@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Markdown } from './Markdown'
 import type { Step } from '../../types'
+import { streamingLog } from '../../utils/debugLog'
 import './StepGuide.css'
 import './Markdown.css'
 
@@ -41,6 +42,21 @@ export function StreamingStepGuide({
   const onCompleteCalledRef = useRef(false)
   const completeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const prevStepsLengthRef = useRef(0)
+  const prevSkipAnimationRef = useRef(skipAnimation)
+
+  // Log when skipAnimation prop changes - this is key to finding the bug
+  useEffect(() => {
+    if (skipAnimation !== prevSkipAnimationRef.current) {
+      streamingLog('StepGuide', 'warn', `skipAnimation prop changed!`, {
+        from: prevSkipAnimationRef.current,
+        to: skipAnimation,
+        title,
+        animatedStepCount,
+        stepsLength: steps.length,
+      })
+      prevSkipAnimationRef.current = skipAnimation
+    }
+  }, [skipAnimation, title, animatedStepCount, steps.length])
 
   // Cancel any pending complete timer
   const cancelCompleteTimer = useCallback(() => {
@@ -53,13 +69,19 @@ export function StreamingStepGuide({
   // Schedule onComplete call
   const scheduleComplete = useCallback(() => {
     cancelCompleteTimer()
+    streamingLog('StepGuide', 'event', `Scheduling onComplete`, {
+      completeDelay,
+      title,
+      stepsLength: steps.length,
+    })
     completeTimerRef.current = setTimeout(() => {
       if (!onCompleteCalledRef.current) {
+        streamingLog('StepGuide', 'event', `Calling onComplete callback`, { title })
         onCompleteCalledRef.current = true
         onComplete?.()
       }
     }, completeDelay)
-  }, [cancelCompleteTimer, completeDelay, onComplete])
+  }, [cancelCompleteTimer, completeDelay, onComplete, title, steps.length])
 
   // Handle steps array changes
   useEffect(() => {
@@ -79,24 +101,35 @@ export function StreamingStepGuide({
 
   // Animation effect - runs on every tick
   useEffect(() => {
-    // If skipAnimation is true, show all content instantly
+    // If skipAnimation is true, DON'T modify animation state
+    // Just let the render show all content via getStepDisplayText
+    // This prevents the race condition where skipAnimation flips true/false
+    // and we lose track of which steps were actually animated
     if (skipAnimation) {
-      if (animatedStepCount < steps.length) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- animation tick pattern
-        setAnimatedStepCount(steps.length)
-        setCurrentCharIndex(999999) // Large number to show full text
-      }
+      streamingLog('StepGuide', 'info', `skipAnimation=true, skipping effect (not modifying state)`, {
+        animatedStepCount,
+        stepsLength: steps.length,
+        title,
+      })
       return
     }
 
     // Already completed?
-    if (onCompleteCalledRef.current) return
+    if (onCompleteCalledRef.current) {
+      streamingLog('StepGuide', 'info', `Already completed, skipping`, { title })
+      return
+    }
 
     // No steps yet? Wait.
     if (steps.length === 0) return
 
     // All current steps fully animated?
     if (animatedStepCount >= steps.length) {
+      streamingLog('StepGuide', 'event', `All steps animated, scheduling complete`, {
+        animatedStepCount,
+        stepsLength: steps.length,
+        title,
+      })
       scheduleComplete()
       return
     }
@@ -111,6 +144,11 @@ export function StreamingStepGuide({
 
     // Current step fully displayed?
     if (currentCharIndex >= totalChars) {
+      streamingLog('StepGuide', 'event', `Step ${animatedStepCount + 1} fully displayed, moving to next`, {
+        stepNumber: animatedStepCount + 1,
+        totalSteps: steps.length,
+        title,
+      })
       // Move to next step after a small pause
       const timer = setTimeout(() => {
         setAnimatedStepCount(prev => prev + 1)
@@ -125,7 +163,7 @@ export function StreamingStepGuide({
     }, charDelay)
 
     return () => clearTimeout(timer)
-  }, [animatedStepCount, currentCharIndex, steps, charDelay, scheduleComplete, skipAnimation])
+  }, [animatedStepCount, currentCharIndex, steps, charDelay, scheduleComplete, skipAnimation, title])
 
   // Cleanup
   useEffect(() => {
@@ -166,6 +204,11 @@ export function StreamingStepGuide({
 
   // Get displayed text for a step
   const getStepDisplayText = (step: Step, stepArrayIndex: number): { title: string; description: string } => {
+    // If skipAnimation, show all text immediately (but don't modify animation state)
+    if (skipAnimation) {
+      return { title: step.title, description: step.description }
+    }
+
     // Step already fully animated
     if (stepArrayIndex < animatedStepCount) {
       return { title: step.title, description: step.description }
@@ -196,7 +239,8 @@ export function StreamingStepGuide({
   const progress = steps.length > 0 ? (completedSteps.size / steps.length) * 100 : 0
 
   // How many steps to render (fully animated + currently animating one)
-  const visibleStepCount = Math.min(animatedStepCount + 1, steps.length)
+  // If skipAnimation, show all steps
+  const visibleStepCount = skipAnimation ? steps.length : Math.min(animatedStepCount + 1, steps.length)
 
   return (
     <div className="step-guide">
@@ -222,7 +266,8 @@ export function StreamingStepGuide({
           const isUserCompleted = completedSteps.has(step.number)
           const isExpanded = expandedSteps.has(step.number)
           const hasDetails = step.details || step.command
-          const isFullyAnimated = arrayIndex < animatedStepCount
+          // If skipAnimation, treat all as fully animated for UI purposes
+          const isFullyAnimated = skipAnimation || arrayIndex < animatedStepCount
           const { title: displayedTitle, description: displayedDesc } = getStepDisplayText(step, arrayIndex)
 
           // Don't render if nothing to show yet
