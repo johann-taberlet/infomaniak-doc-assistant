@@ -52,6 +52,22 @@
   line-height: 1.5;
 }
 
+/* Spacing between text blocks and custom components */
+.message-content.markdown-content + .step-guide,
+.message-content.markdown-content + .source-cards,
+.message-content.markdown-content + .quick-actions,
+.message-content.markdown-content + .platform-availability {
+  margin-top: 1.5rem;
+}
+
+/* Spacing between custom components and text blocks */
+.step-guide + .message-content.markdown-content,
+.source-cards + .message-content.markdown-content,
+.quick-actions + .message-content.markdown-content,
+.platform-availability + .message-content.markdown-content {
+  margin-top: 1rem;
+}
+
 /* Status indicator (searching, generating, etc.) */
 .message-content.status-indicator {
   color: #6c757d;
