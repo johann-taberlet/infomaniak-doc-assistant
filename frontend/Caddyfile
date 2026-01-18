@@ -1,0 +1,32 @@
+# Caddyfile for serving React frontend and proxying API requests
+:{$PORT} {
+    # Proxy API requests to the backend service
+    handle /chat/* {
+        reverse_proxy {$BACKEND_URL}
+    }
+
+    handle /health {
+        reverse_proxy {$BACKEND_URL}
+    }
+
+    handle /metrics {
+        reverse_proxy {$BACKEND_URL}
+    }
+
+    # Serve static files from dist folder
+    handle {
+        root * /srv
+        try_files {path} /index.html
+        file_server
+    }
+
+    # Enable compression
+    encode gzip
+
+    # Security headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}
