@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Chat } from './components/Chat'
 import { TTSLoadingModal } from './components/TTSLoadingModal'
+import { ThemeToggle } from './components/ThemeToggle'
 import { useTTS, AVAILABLE_LANGS } from './hooks/useTTS'
 import type { Message } from './types'
 import './App.css'
@@ -44,6 +45,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>Infomaniak Doc Assistant</h1>
+        <ThemeToggle />
       </header>
       <main className="app-main">
         <Chat onTTSRequest={handleTTSRequest} ttsStatus={status} />

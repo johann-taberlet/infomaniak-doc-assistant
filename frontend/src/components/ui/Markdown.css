@@ -16,7 +16,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin: 0.75rem 0 0.5rem 0;
-  color: #222;
+  color: var(--ik-text-primary);
 }
 
 .markdown-content h3:first-child {
@@ -37,9 +37,9 @@
 }
 
 .markdown-content code {
-  background: #e9ecef;
+  background: var(--ik-bg-secondary);
   padding: 0.1rem 0.3rem;
-  border-radius: 3px;
+  border-radius: 4px;
   font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
   font-size: 0.9em;
 }
@@ -60,11 +60,13 @@
 }
 
 .markdown-content a {
-  color: #0066cc;
+  color: var(--ik-primary);
   text-decoration: none;
+  transition: color var(--ik-transition);
 }
 
 .markdown-content a:hover {
+  color: var(--ik-primary-hover);
   text-decoration: underline;
 }
 
@@ -77,10 +79,10 @@
 }
 
 .markdown-content blockquote {
-  border-left: 3px solid #0066cc;
+  border-left: 3px solid var(--ik-primary);
   margin: 0.5rem 0;
   padding-left: 0.75rem;
-  color: #555;
+  color: var(--ik-text-secondary);
 }
 
 /* Compact variant for smaller contexts like step descriptions */
@@ -107,22 +109,23 @@
 
 .markdown-content th,
 .markdown-content td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--ik-border);
   padding: 0.5rem 0.75rem;
   text-align: left;
 }
 
 .markdown-content th {
-  background: #f5f5f5;
+  background: var(--ik-bg-secondary);
   font-weight: 600;
+  color: var(--ik-text-primary);
 }
 
 .markdown-content tr:nth-child(even) {
-  background: #fafafa;
+  background: var(--ik-bg-tertiary);
 }
 
 .markdown-content tr:hover {
-  background: #f0f4ff;
+  background: var(--ik-primary-light);
 }
 
 /* Compact table variant */
@@ -134,4 +137,13 @@
 .markdown-content.markdown-compact th,
 .markdown-content.markdown-compact td {
   padding: 0.35rem 0.5rem;
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .markdown-content code {
+  background: var(--ik-bg-secondary);
+}
+
+:root[data-theme="dark"] .markdown-content pre {
+  background: #0D1117;
 }

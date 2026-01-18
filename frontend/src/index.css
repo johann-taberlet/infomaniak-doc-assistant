@@ -5,15 +5,100 @@
 }
 
 :root {
+  /* Infomaniak Design System Colors */
+  --ik-primary: #0098FF;
+  --ik-primary-hover: #0080DD;
+  --ik-primary-dark: #0066CC;
+  --ik-primary-light: #E8F4FD;
+  --ik-primary-border: #C9E4F6;
+
+  /* Backgrounds */
+  --ik-bg-page: #F5F8FC;
+  --ik-bg-card: #ffffff;
+  --ik-bg-secondary: #EEF3F8;
+  --ik-bg-tertiary: #F8FAFC;
+
+  /* Text colors */
+  --ik-text-primary: #1F2937;
+  --ik-text-secondary: #4B5563;
+  --ik-text-muted: #9CA3AF;
+  --ik-text-inverse: #ffffff;
+
+  /* Borders */
+  --ik-border: #E5E9F0;
+  --ik-border-light: #F0F3F7;
+  --ik-border-focus: var(--ik-primary);
+
+  /* Shadows */
+  --ik-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --ik-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --ik-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --ik-shadow-primary: 0 4px 12px rgba(0, 152, 255, 0.2);
+
+  /* Border radius */
+  --ik-radius-sm: 8px;
+  --ik-radius-md: 12px;
+  --ik-radius-lg: 16px;
+  --ik-radius-xl: 24px;
+  --ik-radius-full: 9999px;
+
+  /* Transitions */
+  --ik-transition: 0.2s ease;
+
+  /* Typography */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #333;
-  background-color: #f5f5f5;
+  color: var(--ik-text-primary);
+  background-color: var(--ik-bg-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light mode user message (default) */
+:root {
+  --ik-user-message-bg: var(--ik-primary);
+  --ik-user-message-text: #ffffff;
+}
+
+/* Dark Mode - Euria-inspired (via data-theme attribute) */
+:root[data-theme="dark"] {
+  /* Primary colors stay the same */
+  --ik-primary: #0098FF;
+  --ik-primary-hover: #38B6FF;
+  --ik-primary-dark: #0080DD;
+  --ik-primary-light: rgba(0, 152, 255, 0.15);
+  --ik-primary-border: rgba(0, 152, 255, 0.3);
+
+  /* Dark backgrounds */
+  --ik-bg-page: #0F172A;
+  --ik-bg-card: #1E293B;
+  --ik-bg-secondary: #334155;
+  --ik-bg-tertiary: #1E293B;
+  --ik-bg-sidebar: #0C1322;
+
+  /* Dark text colors */
+  --ik-text-primary: #F1F5F9;
+  --ik-text-secondary: #CBD5E1;
+  --ik-text-muted: #64748B;
+  --ik-text-inverse: #0F172A;
+
+  /* Dark borders */
+  --ik-border: #334155;
+  --ik-border-light: #1E293B;
+  --ik-border-focus: var(--ik-primary);
+
+  /* Dark shadows */
+  --ik-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ik-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --ik-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --ik-shadow-primary: 0 4px 12px rgba(0, 152, 255, 0.3);
+
+  /* User message specific */
+  --ik-user-message-bg: #334155;
+  --ik-user-message-text: #F1F5F9;
 }
 
 html, body {
