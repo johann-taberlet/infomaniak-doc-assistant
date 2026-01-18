@@ -20,6 +20,12 @@
   border: 1px solid var(--ik-border-light);
 }
 
+:root[data-theme="dark"] .chat-container {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
 .chat-empty {
   display: flex;
   flex-direction: column;
@@ -62,11 +68,15 @@
 }
 
 .message.user {
-  background: var(--ik-primary);
-  color: var(--ik-text-inverse);
+  background: var(--ik-user-message-bg);
+  color: var(--ik-user-message-text);
   margin-left: auto;
   border-radius: var(--ik-radius-lg) var(--ik-radius-lg) 4px var(--ik-radius-lg);
   box-shadow: var(--ik-shadow-primary);
+}
+
+:root[data-theme="dark"] .message.user {
+  box-shadow: var(--ik-shadow-md);
 }
 
 .message.assistant {
@@ -74,6 +84,13 @@
   color: var(--ik-text-primary);
   border: 1px solid var(--ik-border);
   border-radius: var(--ik-radius-lg) var(--ik-radius-lg) var(--ik-radius-lg) 4px;
+}
+
+:root[data-theme="dark"] .message.assistant {
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .message-content {
@@ -276,4 +293,23 @@
   color: var(--ik-text-muted);
   cursor: not-allowed;
   box-shadow: none;
+}
+
+/* Dark mode for chat form */
+:root[data-theme="dark"] .chat-form {
+  background: var(--ik-bg-card);
+  border-color: var(--ik-border);
+}
+
+:root[data-theme="dark"] .chat-form input {
+  background: var(--ik-bg-secondary);
+}
+
+:root[data-theme="dark"] .chat-form input:focus {
+  background: var(--ik-bg-card);
+  box-shadow: 0 0 0 3px rgba(0, 152, 255, 0.2);
+}
+
+:root[data-theme="dark"] .chat-form button:disabled {
+  background: var(--ik-bg-secondary);
 }

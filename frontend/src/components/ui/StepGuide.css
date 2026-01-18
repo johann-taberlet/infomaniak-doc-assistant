@@ -189,3 +189,12 @@
 .step-copy:hover {
   opacity: 1;
 }
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .step-guide {
+  background: var(--ik-bg-card);
+}
+
+:root[data-theme="dark"] .step-checkbox {
+  background: var(--ik-bg-secondary);
+}

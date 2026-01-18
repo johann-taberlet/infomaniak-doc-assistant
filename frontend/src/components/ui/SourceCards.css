@@ -71,6 +71,18 @@
   transform: translateY(-2px);
 }
 
+:root[data-theme="dark"] .source-cards {
+  background: var(--ik-bg-card);
+}
+
+:root[data-theme="dark"] .source-card {
+  background: var(--ik-bg-secondary);
+}
+
+:root[data-theme="dark"] .source-card:hover {
+  background: var(--ik-bg-tertiary);
+}
+
 .source-card-header {
   display: flex;
   align-items: center;

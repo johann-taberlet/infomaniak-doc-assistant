@@ -138,3 +138,12 @@
 .markdown-content.markdown-compact td {
   padding: 0.35rem 0.5rem;
 }
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .markdown-content code {
+  background: var(--ik-bg-secondary);
+}
+
+:root[data-theme="dark"] .markdown-content pre {
+  background: #0D1117;
+}

@@ -6,13 +6,20 @@
 }
 
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--ik-bg-card);
   color: var(--ik-text-primary);
-  padding: 1rem 1.5rem;
-  text-align: center;
+  padding: 0.75rem 1.5rem;
   flex-shrink: 0;
   border-bottom: 1px solid var(--ik-border);
   box-shadow: var(--ik-shadow-sm);
+}
+
+:root[data-theme="dark"] .app-header {
+  background: var(--ik-bg-page);
+  border-bottom-color: var(--ik-border);
 }
 
 .app-header h1 {

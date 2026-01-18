@@ -57,6 +57,50 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light mode user message (default) */
+:root {
+  --ik-user-message-bg: var(--ik-primary);
+  --ik-user-message-text: #ffffff;
+}
+
+/* Dark Mode - Euria-inspired (via data-theme attribute) */
+:root[data-theme="dark"] {
+  /* Primary colors stay the same */
+  --ik-primary: #0098FF;
+  --ik-primary-hover: #38B6FF;
+  --ik-primary-dark: #0080DD;
+  --ik-primary-light: rgba(0, 152, 255, 0.15);
+  --ik-primary-border: rgba(0, 152, 255, 0.3);
+
+  /* Dark backgrounds */
+  --ik-bg-page: #0F172A;
+  --ik-bg-card: #1E293B;
+  --ik-bg-secondary: #334155;
+  --ik-bg-tertiary: #1E293B;
+  --ik-bg-sidebar: #0C1322;
+
+  /* Dark text colors */
+  --ik-text-primary: #F1F5F9;
+  --ik-text-secondary: #CBD5E1;
+  --ik-text-muted: #64748B;
+  --ik-text-inverse: #0F172A;
+
+  /* Dark borders */
+  --ik-border: #334155;
+  --ik-border-light: #1E293B;
+  --ik-border-focus: var(--ik-primary);
+
+  /* Dark shadows */
+  --ik-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ik-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --ik-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --ik-shadow-primary: 0 4px 12px rgba(0, 152, 255, 0.3);
+
+  /* User message specific */
+  --ik-user-message-bg: #334155;
+  --ik-user-message-text: #F1F5F9;
+}
+
 html, body {
   height: 100%;
 }
