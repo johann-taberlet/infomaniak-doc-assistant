@@ -35,6 +35,7 @@ export function StreamingSegments({
   // Reset when message ID changes (new message) or segments array shrinks
   useEffect(() => {
     if (messageId !== prevMessageIdRef.current) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on prop change
       setCompletedCount(0)
       prevSegmentsLengthRef.current = 0
       prevMessageIdRef.current = messageId

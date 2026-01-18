@@ -68,6 +68,7 @@ export function StreamingStepGuide({
       onCompleteCalledRef.current = false
     }
     if (steps.length < prevStepsLengthRef.current) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on prop change
       setAnimatedStepCount(0)
       setCurrentCharIndex(0)
       onCompleteCalledRef.current = false
@@ -81,6 +82,7 @@ export function StreamingStepGuide({
     // If skipAnimation is true, show all content instantly
     if (skipAnimation) {
       if (animatedStepCount < steps.length) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- animation tick pattern
         setAnimatedStepCount(steps.length)
         setCurrentCharIndex(999999) // Large number to show full text
       }
@@ -157,8 +159,8 @@ export function StreamingStepGuide({
   const copyCommand = async (command: string) => {
     try {
       await navigator.clipboard.writeText(command)
-    } catch (err) {
-      console.error('Failed to copy:', err)
+    } catch {
+      // Silently ignore clipboard errors
     }
   }
 

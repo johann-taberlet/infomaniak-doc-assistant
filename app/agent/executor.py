@@ -12,6 +12,7 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, System
 from app.agent.prompts import NDJSON_SYSTEM_PROMPT
 from app.agent.tools import search_docs
 from app.llm import get_chat_model
+from app.observability.langfuse import get_langfuse_handler
 
 # In-memory conversation store (session_id -> messages)
 _conversations: dict[str, list[BaseMessage]] = {}
@@ -30,12 +31,6 @@ def add_to_conversation(session_id: str, message: BaseMessage) -> None:
     # Keep only last 10 messages to prevent context overflow
     if len(_conversations[session_id]) > 10:
         _conversations[session_id] = _conversations[session_id][-10:]
-
-
-def clear_conversation(session_id: str) -> None:
-    """Clear conversation history for a session."""
-    if session_id in _conversations:
-        del _conversations[session_id]
 
 
 async def search_documentation(query: str) -> str:
@@ -98,7 +93,11 @@ async def stream_ndjson_response(
     # Accumulate response for history
     full_response = ""
 
-    async for chunk in model.astream(messages):
+    # Get optional Langfuse handler for observability
+    langfuse_handler = get_langfuse_handler()
+    config = {"callbacks": [langfuse_handler]} if langfuse_handler else None
+
+    async for chunk in model.astream(messages, config=config):
         if chunk.content:
             content = str(chunk.content)
             full_response += content

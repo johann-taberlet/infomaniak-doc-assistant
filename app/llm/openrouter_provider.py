@@ -67,7 +67,7 @@ class OpenRouterProvider(LLMProvider):
             model=settings.OPENROUTER_CHAT_MODEL,
             openai_api_key=settings.OPENROUTER_API_KEY,
             openai_api_base="https://openrouter.ai/api/v1",
-            temperature=0.7,
+            temperature=settings.LLM_TEMPERATURE,
             default_headers={
                 "HTTP-Referer": settings.OPENROUTER_SITE_URL,
                 "X-Title": settings.OPENROUTER_SITE_NAME,

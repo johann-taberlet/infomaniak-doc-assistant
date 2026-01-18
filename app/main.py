@@ -1,5 +1,6 @@
 """FastAPI application entry point."""
 
+import asyncio
 import json
 import logging
 import time
@@ -16,6 +17,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.agent.executor import search_documentation, stream_ndjson_response
 from app.agent.tools import get_sources, reset_context
+from app.config import settings
 from app.models.schemas import ChatRequest, ChatResponse
 
 logger = logging.getLogger(__name__)
@@ -23,12 +25,12 @@ logger = logging.getLogger(__name__)
 # Configure file logging for timeline analysis
 _timeline_logger = logging.getLogger("timeline")
 _timeline_logger.setLevel(logging.INFO)
-_timeline_handler = logging.FileHandler("/tmp/agent_timeline.log", mode="a")
+_timeline_handler = logging.FileHandler(settings.LOG_TIMELINE_PATH, mode="a")
 _timeline_handler.setFormatter(logging.Formatter("%(message)s"))
 _timeline_logger.addHandler(_timeline_handler)
 
-# Simple in-memory metrics
-# PRODUCTION: Use asyncio.Lock for thread-safety, or prometheus_client for proper metrics
+# Thread-safe in-memory metrics
+_metrics_lock = asyncio.Lock()
 metrics = {
     "request_count": 0,
     "error_count": 0,
@@ -81,7 +83,8 @@ async def health() -> dict[str, str]:
 @app.get("/metrics")
 async def get_metrics() -> dict[str, int]:
     """Return application metrics."""
-    return metrics
+    async with _metrics_lock:
+        return dict(metrics)
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -91,7 +94,8 @@ async def chat(request: ChatRequest) -> ChatResponse:
     Note: This endpoint is kept for backwards compatibility but the
     streaming endpoint (/chat/stream) is preferred for better UX.
     """
-    metrics["request_count"] += 1
+    async with _metrics_lock:
+        metrics["request_count"] += 1
 
     try:
         # Use provided session_id or generate a new one
@@ -130,7 +134,8 @@ async def chat(request: ChatRequest) -> ChatResponse:
             answer=answer, sources=[s.get("url", "") for s in sources if s.get("url")]
         )
     except Exception:
-        metrics["error_count"] += 1
+        async with _metrics_lock:
+            metrics["error_count"] += 1
         raise
 
 
@@ -363,7 +368,8 @@ async def sse_stream(message: str, session_id: str) -> AsyncGenerator[str, None]
     except Exception as e:
         # Log the full error for debugging
         logger.exception("Error during SSE stream: %s", str(e))
-        metrics["error_count"] += 1
+        async with _metrics_lock:
+            metrics["error_count"] += 1
 
         # Send user-friendly error message
         error_message = (

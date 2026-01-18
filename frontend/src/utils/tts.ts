@@ -119,7 +119,7 @@ class UnicodeProcessor {
     text = text.replace(/\s+/g, ' ').trim()
 
     // Add period if missing terminal punctuation
-    if (!/[.!?;:,'\"')\]}…。」』】〉》›»]$/.test(text)) {
+    if (!/[.!?;:,'"')\]}…。」』】〉》›»]$/.test(text)) {
       text += '.'
     }
 
@@ -236,6 +236,7 @@ export class TextToSpeech {
     const textEmb = textEncOutputs.text_emb
 
     // Sample noisy latent
+    // eslint-disable-next-line prefer-const -- xt is reassigned in loop
     let { xt, latentMask } = this.sampleNoisyLatent(
       duration,
       this.sampleRate,
@@ -489,7 +490,6 @@ export async function loadTextToSpeechParallel(
   sessionOptions: ort.InferenceSession.SessionOptions = {},
   progressCallback?: ProgressCallback
 ): Promise<{ textToSpeech: TextToSpeech; cfgs: TTSConfig }> {
-  console.log('Loading TTS models in parallel...')
 
   const cfgs = await loadCfgs(onnxDir)
 

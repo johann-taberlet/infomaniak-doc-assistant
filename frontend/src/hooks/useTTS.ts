@@ -23,7 +23,6 @@ interface UseTTSOptions {
 
 interface UseTTSReturn {
   status: TTSStatus
-  isReady: boolean
   loadProgress: { modelName: string; current: number; total: number } | null
   error: string | null
   load: () => Promise<boolean>
@@ -73,7 +72,6 @@ export function useTTS(options: UseTTSOptions = {}): UseTTSReturn {
       // Check WebGPU support
       const webgpuSupported = await checkWebGPUSupport()
       const executionProvider = webgpuSupported ? 'webgpu' : 'wasm'
-      console.log(`Using ${executionProvider} execution provider`)
 
       const sessionOptions: ort.InferenceSession.SessionOptions = {
         executionProviders: [executionProvider],
@@ -99,7 +97,6 @@ export function useTTS(options: UseTTSOptions = {}): UseTTSReturn {
       setLoadProgress(null)
       return true
     } catch (err) {
-      console.error('Failed to load TTS:', err)
       setError(err instanceof Error ? err.message : 'Failed to load TTS')
       setStatus('error')
       return false
@@ -173,7 +170,6 @@ export function useTTS(options: UseTTSOptions = {}): UseTTSReturn {
 
         await audio.play()
       } catch (err) {
-        console.error('TTS error:', err)
         setError(err instanceof Error ? err.message : 'TTS error')
         setStatus('ready')
       }
@@ -183,7 +179,6 @@ export function useTTS(options: UseTTSOptions = {}): UseTTSReturn {
 
   return {
     status,
-    isReady: status === 'ready' || status === 'playing',
     loadProgress,
     error,
     load,

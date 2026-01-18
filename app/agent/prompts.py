@@ -124,9 +124,3 @@ Question: "Is Lite Sync available on Linux?"
 ## CONTEXTE DOCUMENTAIRE
 {context}
 """
-
-SEARCH_PROMPT = """Tu es un assistant IA pour les produits Infomaniak.
-Cherche dans la documentation pour répondre à la question de l'utilisateur.
-
-Appelle search_docs(query) avec une requête de recherche pertinente en anglais (la documentation est en anglais).
-"""

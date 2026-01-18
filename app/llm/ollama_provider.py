@@ -20,7 +20,7 @@ class OllamaProvider(LLMProvider):
         return ChatOllama(
             model=settings.OLLAMA_CHAT_MODEL,
             base_url=settings.OLLAMA_HOST,
-            temperature=0.7,
+            temperature=settings.LLM_TEMPERATURE,
             num_ctx=4096,
         )
 

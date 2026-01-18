@@ -11,7 +11,6 @@ interface UseSSEChatReturn {
   messages: Message[]
   isStreaming: boolean
   sendMessage: (content: string) => void
-  clearMessages: () => void
 }
 
 function generateId(): string {
@@ -181,13 +180,12 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
             )
           )
         }
-      } catch (e) {
-        console.error('Parse error:', e)
+      } catch {
+        // Ignore parse errors for malformed SSE data
       }
     }
 
-    eventSource.onerror = (error) => {
-      console.error('EventSource error:', error)
+    eventSource.onerror = () => {
       eventSource.close()
       eventSourceRef.current = null
       setIsStreaming(false)
@@ -218,20 +216,9 @@ export function useSSEChat(options: UseSSEChatOptions = {}): UseSSEChatReturn {
     }
   }, [isStreaming, options, handleSegment])
 
-  const clearMessages = useCallback(() => {
-    if (eventSourceRef.current) {
-      eventSourceRef.current.close()
-      eventSourceRef.current = null
-    }
-    setMessages([])
-    setIsStreaming(false)
-    sessionIdRef.current = generateId()
-  }, [])
-
   return {
     messages,
     isStreaming,
     sendMessage,
-    clearMessages,
   }
 }

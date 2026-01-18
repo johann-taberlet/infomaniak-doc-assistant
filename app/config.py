@@ -8,23 +8,13 @@ class Settings(BaseSettings):
     """Application settings with validation constraints."""
 
     # LLM Provider - constrained to supported values
-    LLM_PROVIDER: Literal["ollama", "mistral", "qwen", "openrouter"] = "ollama"
+    LLM_PROVIDER: Literal["ollama", "openrouter"] = "ollama"
+    LLM_TEMPERATURE: float = Field(default=0.7, ge=0.0, le=2.0)
 
     # Ollama Configuration
     OLLAMA_HOST: str = "http://localhost:11434"
     OLLAMA_CHAT_MODEL: str = "qwen3:8b"
     OLLAMA_EMBEDDING_MODEL: str = "nomic-embed-text"
-
-    # Qwen API Configuration
-    QWEN_API_KEY: str = ""
-    QWEN_API_BASE: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-    QWEN_CHAT_MODEL: str = "qwen-turbo"
-    QWEN_EMBEDDING_MODEL: str = "text-embedding-v3"
-
-    # Mistral API Configuration
-    MISTRAL_API_KEY: str = ""
-    MISTRAL_CHAT_MODEL: str = "mistral-large-latest"
-    MISTRAL_EMBEDDING_MODEL: str = "mistral-embed"
 
     # OpenRouter API Configuration
     OPENROUTER_API_KEY: str = ""
@@ -41,6 +31,7 @@ class Settings(BaseSettings):
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = Field(default=8000, ge=1, le=65535)
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
+    LOG_TIMELINE_PATH: str = "/tmp/agent_timeline.log"
 
     # Observability
     LANGFUSE_ENABLED: bool = False

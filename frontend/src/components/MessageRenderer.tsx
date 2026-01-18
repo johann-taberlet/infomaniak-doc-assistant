@@ -1,10 +1,8 @@
 import { Markdown } from './ui/Markdown'
 import type { Message } from '../types'
-import type { TTSStatus } from '../hooks/useTTS'
+import { AVAILABLE_LANGS, type TTSStatus } from '../hooks/useTTS'
 import { StreamingSegments } from './ui/StreamingSegments'
 import './ui/Markdown.css'
-
-const AVAILABLE_LANGS = ['en', 'ko', 'es', 'pt', 'fr'] as const
 
 interface MessageRendererProps {
   message: Message

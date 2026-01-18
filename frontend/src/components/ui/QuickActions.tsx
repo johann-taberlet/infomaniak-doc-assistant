@@ -22,17 +22,17 @@ export function QuickActions({ actions }: QuickActionsProps) {
     } else if (action.action === 'copy' && action.label) {
       try {
         await navigator.clipboard.writeText(action.label)
-      } catch (err) {
-        console.error('Failed to copy:', err)
+      } catch {
+        // Silently ignore clipboard errors
       }
     }
   }
 
   return (
     <div className="quick-actions">
-      {actions.map((action, index) => (
+      {actions.map((action) => (
         <button
-          key={index}
+          key={`${action.label}-${action.url || action.action}`}
           className="quick-action-btn"
           onClick={() => handleClick(action)}
         >

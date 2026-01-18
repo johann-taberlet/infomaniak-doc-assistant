@@ -30,6 +30,7 @@ export function StreamingText({
     if (content !== contentRef.current) {
       // If new content is extension of old, don't reset
       if (!content.startsWith(contentRef.current)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on prop change
         setDisplayedLength(0)
         onCompleteCalledRef.current = false
       }
