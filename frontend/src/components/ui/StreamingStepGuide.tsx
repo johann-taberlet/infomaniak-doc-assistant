@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Markdown } from './Markdown'
 import type { Step } from '../../types'
-import { streamingLog } from '../../utils/debugLog'
 import './StepGuide.css'
 import './Markdown.css'
 
@@ -42,21 +41,6 @@ export function StreamingStepGuide({
   const onCompleteCalledRef = useRef(false)
   const completeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const prevStepsLengthRef = useRef(0)
-  const prevSkipAnimationRef = useRef(skipAnimation)
-
-  // Log when skipAnimation prop changes - this is key to finding the bug
-  useEffect(() => {
-    if (skipAnimation !== prevSkipAnimationRef.current) {
-      streamingLog('StepGuide', 'warn', `skipAnimation prop changed!`, {
-        from: prevSkipAnimationRef.current,
-        to: skipAnimation,
-        title,
-        animatedStepCount,
-        stepsLength: steps.length,
-      })
-      prevSkipAnimationRef.current = skipAnimation
-    }
-  }, [skipAnimation, title, animatedStepCount, steps.length])
 
   // Cancel any pending complete timer
   const cancelCompleteTimer = useCallback(() => {
@@ -69,19 +53,13 @@ export function StreamingStepGuide({
   // Schedule onComplete call
   const scheduleComplete = useCallback(() => {
     cancelCompleteTimer()
-    streamingLog('StepGuide', 'event', `Scheduling onComplete`, {
-      completeDelay,
-      title,
-      stepsLength: steps.length,
-    })
     completeTimerRef.current = setTimeout(() => {
       if (!onCompleteCalledRef.current) {
-        streamingLog('StepGuide', 'event', `Calling onComplete callback`, { title })
         onCompleteCalledRef.current = true
         onComplete?.()
       }
     }, completeDelay)
-  }, [cancelCompleteTimer, completeDelay, onComplete, title, steps.length])
+  }, [cancelCompleteTimer, completeDelay, onComplete])
 
   // Handle steps array changes
   useEffect(() => {
@@ -106,17 +84,11 @@ export function StreamingStepGuide({
     // This prevents the race condition where skipAnimation flips true/false
     // and we lose track of which steps were actually animated
     if (skipAnimation) {
-      streamingLog('StepGuide', 'info', `skipAnimation=true, skipping effect (not modifying state)`, {
-        animatedStepCount,
-        stepsLength: steps.length,
-        title,
-      })
       return
     }
 
     // Already completed?
     if (onCompleteCalledRef.current) {
-      streamingLog('StepGuide', 'info', `Already completed, skipping`, { title })
       return
     }
 
@@ -125,11 +97,6 @@ export function StreamingStepGuide({
 
     // All current steps fully animated?
     if (animatedStepCount >= steps.length) {
-      streamingLog('StepGuide', 'event', `All steps animated, scheduling complete`, {
-        animatedStepCount,
-        stepsLength: steps.length,
-        title,
-      })
       scheduleComplete()
       return
     }
@@ -144,11 +111,6 @@ export function StreamingStepGuide({
 
     // Current step fully displayed?
     if (currentCharIndex >= totalChars) {
-      streamingLog('StepGuide', 'event', `Step ${animatedStepCount + 1} fully displayed, moving to next`, {
-        stepNumber: animatedStepCount + 1,
-        totalSteps: steps.length,
-        title,
-      })
       // Move to next step after a small pause
       const timer = setTimeout(() => {
         setAnimatedStepCount(prev => prev + 1)
@@ -163,7 +125,7 @@ export function StreamingStepGuide({
     }, charDelay)
 
     return () => clearTimeout(timer)
-  }, [animatedStepCount, currentCharIndex, steps, charDelay, scheduleComplete, skipAnimation, title])
+  }, [animatedStepCount, currentCharIndex, steps, charDelay, scheduleComplete, skipAnimation])
 
   // Cleanup
   useEffect(() => {
