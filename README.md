@@ -1,6 +1,6 @@
 # Infomaniak Documentation AI Assistant
 
-AI assistant for Infomaniak documentation (kDrive, kMeet, kChat, kSuite, SwissTransfer).
+AI assistant for Infomaniak documentation (kDrive, kMeet, kChat).
 
 ## Architecture
 
