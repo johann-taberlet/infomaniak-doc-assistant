@@ -69,5 +69,7 @@ static/tts/onnx/*.onnx
 
 .claude/
 .playwright-mcp
-docs
 .mcp.json
+
+# Evaluation results (keep directory structure)
+docs/evaluations/*.json
