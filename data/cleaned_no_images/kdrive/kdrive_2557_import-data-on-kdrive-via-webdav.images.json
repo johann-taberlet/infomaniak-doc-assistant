@@ -1,0 +1,25 @@
+{
+  "faq_id": "2557",
+  "title": "Import data on kDrive via WebDAV",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2557/import-data-on-kdrive-via-webdav",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/6185195444e6411533b94edb001cbcde9d807554.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "5. Click on **Import external data**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3205ed9524f70be33f0e379c06cd05f63f33f336.png",
+      "heading": "Prerequisites",
+      "step": 6,
+      "context": "6. Click the blue **Start** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0c7e4e37c21753333f9ccc00427de8b992d09792.png",
+      "heading": "Prerequisites",
+      "step": 10,
+      "context": "10. Click on **Start**:"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "faq_id": "2409",
+  "title": "Connect to kDrive via WebDAV (get the kDrive ID)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2409/connect-to-kdrive-via-webdav-get-the-kdrive-id",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/c0d1f008cc4d19c9630f43a59bdfd81905998d32.png",
+      "heading": "Obtain the identifier (kDrive ID)",
+      "step": 3,
+      "context": "3. The URL `https://ksuite.infomaniak.com/kdrive/app/drive/123456/` displayed at the top of your bro"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a1e2af5e6b6dfb9bfe34fe55882e705a7465fcd3.png",
+      "heading": "Obtain the identifier (kDrive ID)",
+      "step": 4,
+      "context": "4. In some cases, especially when the Organization ID is mentioned in the URL, there may be several "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f1b6551ff42be8d98eaf929e0540d4ea60f6274e.png",
+      "heading": "\u2026 on Windows",
+      "step": 3,
+      "context": "3. In the **Computer** tab, select **Add a network location**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/deff5dad94635d59f541e142b3bcbdd1c5a6f4db.png",
+      "heading": "\u2026 on Windows",
+      "step": 5,
+      "context": "5. Click on **Choose a custom network location**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/716ba50f12e7b2d439bc9d3878d4ed0fdac65384.png",
+      "heading": "\u2026 on macOS",
+      "step": 2,
+      "context": "2. Click on **Connect to server**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/fde2cccf409a13541818f57ac19b61d3040fb30d.png",
+      "heading": "\u2026 on macOS",
+      "step": 4,
+      "context": "4. Click on **Connect**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/65cf36bf3b5f8f75e95c73c1831057f906632e6c.png",
+      "heading": "\u2026 on macOS",
+      "step": 8,
+      "context": "8. Click on the blue button to connect:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d31c4d7f658c596f5f3f6889f2fbaa7574325e49.png",
+      "heading": "\u2026 on macOS",
+      "step": 9,
+      "context": "9. There you go, the kDrive content is displayed on the Finder:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c8a6be58f9ca0550f03cb93fd71fc7450db2e496.png",
+      "heading": "... on Linux (Gnome)",
+      "step": 2,
+      "context": "2. In the sidebar, click on **Network**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8c888e032f44ff022c32abce9c142c030aceefaf.png",
+      "heading": "... with a Windows software",
+      "step": null,
+      "context": "Use the [RaiDrive](https://www.raidrive.com/) software for quick access to your hosted data. Complet"
+    }
+  ]
+}

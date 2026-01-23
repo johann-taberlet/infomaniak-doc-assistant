@@ -1,0 +1,31 @@
+{
+  "faq_id": "1738",
+  "title": "Remove a user from an Organization",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1738/remove-a-user-from-an-organization",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/3550862c303548ae6b090aa47a621212cf431e6a.png",
+      "heading": "Remove a user from your Organization",
+      "step": 3,
+      "context": "3. Click on **Remove from the Organization**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c057aa066fbb8455bba051d748c362a9ecac9497.png",
+      "heading": "Remove a user from your Organization",
+      "step": 4,
+      "context": "4. Click on the blue button **Continue**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8f6a906ed91e3328a7412b8e6eca703351bccc01.png",
+      "heading": "Remove a user from your Organization",
+      "step": 7,
+      "context": "7. Click on the red button **Remove this user**"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/26b22cc63f3564a0bb5a0a9ebfc1f5ca54a15552.png",
+      "heading": "Remove a user from your Organization",
+      "step": 7,
+      "context": "If the user had access to **kDrive** or was invited to **view a third-party email address**, several"
+    }
+  ]
+}

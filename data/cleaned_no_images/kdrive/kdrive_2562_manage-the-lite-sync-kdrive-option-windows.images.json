@@ -1,0 +1,55 @@
+{
+  "faq_id": "2562",
+  "title": "Manage the Lite Sync kDrive option (Windows)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2562/manage-the-lite-sync-kdrive-option-windows",
+  "images": [
+    {
+      "url": "https://faq.storage.infomaniak.com/600a94fd3934a3.64423228png",
+      "heading": "Prerequisites & scope of use of Lite Sync",
+      "step": 4,
+      "context": "The cloud icon"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/6026707c50dc19.39686260png",
+      "heading": "Prerequisites & scope of use of Lite Sync",
+      "step": 4,
+      "context": "will appear to the far right of a sync name on the application, indicating that Lite Sync is enabled"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5e9b21d989644ae0c73e2b667b2290df9bf0d159.png",
+      "heading": "Prerequisites & scope of use of Lite Sync",
+      "step": 4,
+      "context": "is displayed, this means that Lite Sync is not enabled:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8b4826e80186e263347aff604940b894b0ccafba.png",
+      "heading": "Keep on this device",
+      "step": 2,
+      "context": "2. Select the Keep on this device option under kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d323aa76dde944120f68c826ccee7b87fa5805ae.png",
+      "heading": "Free up space",
+      "step": 2,
+      "context": "2. Select the Free up space option under kDrive:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cb36030cc548.14484672png",
+      "heading": "Usage example #2 (icon summary)",
+      "step": null,
+      "context": "Files on the hard drive synchronized with the Lite Sync option, everything is in the cloud (on your "
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cb360d7488f7.97293862png",
+      "heading": "Usage example #2 (icon summary)",
+      "step": null,
+      "context": "Deactivation of the LiteSync option, the \"physical\" synchronization starts:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cb3618a6af41.36350113png",
+      "heading": "Usage example #2 (icon summary)",
+      "step": null,
+      "context": "Synchronization complete, the files have been downloaded to your computer and then have the appropri"
+    }
+  ]
+}

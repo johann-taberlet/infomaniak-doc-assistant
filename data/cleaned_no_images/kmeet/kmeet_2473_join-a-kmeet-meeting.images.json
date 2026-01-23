@@ -1,0 +1,31 @@
+{
+  "faq_id": "2473",
+  "title": "Join a kMeet meeting",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2473/join-a-kmeet-meeting",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/334fdcc6d02c740cf14deddacb6768390c68a7b2.png",
+      "heading": "Preamble",
+      "step": null,
+      "context": "- To quickly obtain and share the link to the current meeting, the creator must click on the user ic"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2ef8ddd1b8161dd23bb08e88c4833f02c397d716.png",
+      "heading": "Connect to a meeting room",
+      "step": 4,
+      "context": "4. Click the **OK** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a33ea10a9b4f4e4e0a8896b77a784ca768ecde1c.png",
+      "heading": "Connect to a meeting room",
+      "step": 5,
+      "context": "5. If necessary, authorize access to your [webcam](https://www.infomaniak.com/en/support/faq/2452) a"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/1048a86ada62f078dff28cd1c00718f5061dc3b0.png",
+      "heading": "Connect to a meeting room",
+      "step": 8,
+      "context": "8. Click the blue button to join the meeting:"
+    }
+  ]
+}

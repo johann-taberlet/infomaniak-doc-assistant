@@ -1,0 +1,43 @@
+{
+  "faq_id": "2846",
+  "title": "Invite an external user to use kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2846/invite-an-external-user-to-use-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/150021bdd672a47c85a18dafcab916f5b56c2cfc.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 2,
+      "context": "2. Click the button to **Invite members**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5f0ee5a548d69ceffbaff179b8dd80f7aa67d6fa.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 3,
+      "context": "3. Click the link to invite a new user:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ef46377e433aa64670fc9891a453b60bdbba6193.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 6,
+      "context": "6. Click the blue button to send the invitation:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3b1c12c5dc76cdfaec685037a3494453c11486db.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 7,
+      "context": "7. The invited person receives an email with a link leading to the kChat interface and the **channel"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/39aa57e205a0a4807e833ee2fdc0fa5d2f26d319.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 8,
+      "context": "8. Obviously, there is a registration phase if the user does not yet have an Infomaniak account and "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ac475ee89a8984052c9f78516f69bea64cf71bfe.png",
+      "heading": "Invite a user to chat in a private channel",
+      "step": 9,
+      "context": "9. Once registration is complete, the user can access kChat:"
+    }
+  ]
+}

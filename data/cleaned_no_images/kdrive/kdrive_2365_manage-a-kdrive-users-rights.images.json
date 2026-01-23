@@ -1,0 +1,121 @@
+{
+  "faq_id": "2365",
+  "title": "Manage a kDrive user's rights",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2365/manage-a-kdrive-users-rights",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/883df6c7622d962c1c65c6a56e7cd8fd42c2ca87.png",
+      "heading": "How kDrive user permissions work",
+      "step": null,
+      "context": "You can add a new user to kDrive (*kDrive Pro* for example, therefore outside *kSuite*), and define "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/fa610afd5f8f63d2c93ab889281f868c6cc3d870.png",
+      "heading": "How kDrive user permissions work",
+      "step": null,
+      "context": "You can add a new user to kDrive (*kDrive Pro* for example, therefore outside *kSuite*), and define "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd8284033dfa6513fc372392c0f9cd18a38f4507.png",
+      "heading": "How kDrive user permissions work",
+      "step": null,
+      "context": "\u2026 or via **kDrive user management**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ffb1050fecc333562fad48baa283abdde41ab9b1.png",
+      "heading": "How kDrive user permissions work",
+      "step": null,
+      "context": "\u2026 or via **kDrive user management**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b96e904458f2104485cd96ed8f16ffd204d933a8.png",
+      "heading": "Modify a kDrive user's permissions",
+      "step": 4,
+      "context": "4. Click on **Manage users**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ba5837cd72f2264699ae14e61d33d289a7feee24.png",
+      "heading": "Modify a kDrive user's permissions",
+      "step": 5,
+      "context": "5. Manage the desired user's rights, choose the desired access level:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/bb302de35d2954e1ce301eae95b3cff83f3aba3c.png",
+      "heading": "In case of a problem",
+      "step": null,
+      "context": "If a modification is not possible:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/adccaf34ecd6433ab9841ae97329e8ea8549b701.png",
+      "heading": "In case of a problem",
+      "step": null,
+      "context": "\u2026 then you need to act on the user's rights **at the Organization level itself**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6511be5da985fa19a4dc31c5ac0cc18de45b2587.png",
+      "heading": "In case of a problem",
+      "step": null,
+      "context": "\u2026 and reduce their role **as an administrator** by giving them a **user** role:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c183fabe6d2317e969875901a4c57921409e69e3.png",
+      "heading": "In case of a problem",
+      "step": null,
+      "context": "Thus, the proposed modification in point 5 above will now be accessible:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f22408c288fd937c388214feba51d5395ba07152.png",
+      "heading": "Other actions on the user",
+      "step": null,
+      "context": "If necessary, open the action menu **\u22ee** of the desired user for **advanced actions**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f2f2ac389724ef7bac8e32cd8060e13fbdb1cafa.png",
+      "heading": "Other actions on the user",
+      "step": null,
+      "context": "If necessary, also manage the permissions related to actions on [categories](https://www.infomaniak."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/1e0d8aa41aa0c44a6d72c85672d9375641f2b086.png",
+      "heading": "Rights in the Organization: product management",
+      "step": null,
+      "context": "In this example, you can manage the kDrive management rights of the user `ralph` from the product ac"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/29222ce90a057a6bc74b9a5d18adf4602cb02ba6.png",
+      "heading": "Rights in the Organization: product management",
+      "step": null,
+      "context": "If necessary, specify which kDrive is concerned and especially which permissions (**technical** / **"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c0d5e4ccd5fe46b42150a2d3790848f60e619e6.png",
+      "heading": "Rights in the Organization: product management",
+      "step": null,
+      "context": "With only **Technical** rights, they will not see the **Statistics** element in the sidebar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cf61dfd9778b8b82752f063056b6197a2cca3f80.png",
+      "heading": "Rights in the Organization: product management",
+      "step": null,
+      "context": "If, on the other hand, only the **Statistics** box is activated, then they will not access the **das"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/56d8872f5720cee5139af412a6285a6db44b76e9.png",
+      "heading": "Rights in the Organization: product management",
+      "step": null,
+      "context": "And if the administrator deactivates both **Technical** and **Statistics** boxes, only the storage i"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/60aa4b4526d76de9f53a2da313d3684952a0f86a.png",
+      "heading": "User rights on kDrive",
+      "step": null,
+      "context": "Even with both **Technical** and **Statistics** boxes (mentioned above) activated, a user who only h"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ccac9df6d8d02e1cbbda2a0349339217ecce624f.png",
+      "heading": "User rights on kDrive",
+      "step": null,
+      "context": "The user will need an **Administrator** role (see point 5 above) to access this window for creating "
+    }
+  ]
+}

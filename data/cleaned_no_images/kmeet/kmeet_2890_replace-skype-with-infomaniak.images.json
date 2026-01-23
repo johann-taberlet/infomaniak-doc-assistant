@@ -1,0 +1,61 @@
+{
+  "faq_id": "2890",
+  "title": "Replace Skype with Infomaniak",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2890/replace-skype-with-infomaniak",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/fcde46a5990415d66b36f3cc951521a289383baa.png",
+      "heading": "1. Quick use without registration",
+      "step": 2,
+      "context": "2. Click on **Start a new meeting**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0312d518b6dae711394ef8b16280318f917a1f94.png",
+      "heading": "1. Quick use without registration",
+      "step": 4,
+      "context": "4. Click on the button to **Continue**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/50806816db958245ed3280de0eb41fd5b0e15a6b.png",
+      "heading": "1. Quick use without registration",
+      "step": 5,
+      "context": "5. Grant the necessary rights to kMeet:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0f0eff38fc8d288c9050c60474570783e46a5ba1.png",
+      "heading": "1. Quick use without registration",
+      "step": 8,
+      "context": "8. Click on the **button** to join the virtual meeting room (as the first participant since no one h"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8bc350ab3008edb4d67f497eaa02ca3b53552b20.png",
+      "heading": "1. Quick use without registration",
+      "step": 10,
+      "context": "10. Close the information window so that you can all chat together:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f312eba8498aca6fc8dbf4c054c3cf372e801e16.png",
+      "heading": "1. Quick use without registration",
+      "step": 11,
+      "context": "11. The toolbar at the bottom of the screen allows you to enable or disable the microphone, the came"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7c21d736ec1acace30f0bbe4ed9a81fc679d8740.png",
+      "heading": "2. Planning and invitations withmy kSuite",
+      "step": 5,
+      "context": "5. Click the button to **save** your event:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ea150e0ed7db8059dcd8521e95fab96df664553b.png",
+      "heading": "2. Planning and invitations withmy kSuite",
+      "step": 6,
+      "context": "6. Invitations will then be automatically sent by email to the participants, containing the clickabl"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2242020701d4d1acc14835fa857c945ca6d15da3.png",
+      "heading": "2. Planning and invitations withmy kSuite",
+      "step": 7,
+      "context": "7. The kMeet meeting link is also visible on the event in the calendar directly:"
+    }
+  ]
+}

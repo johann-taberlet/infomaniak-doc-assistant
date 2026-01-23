@@ -1,0 +1,19 @@
+{
+  "faq_id": "1822",
+  "title": "Resolve a kDrive block (antivirus, firewall, etc.)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1822/resolve-a-kdrive-block-antivirus-firewall-etc",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/d446c6f3c79a74c7e9188163d6f40d72cc476c5e.png",
+      "heading": "... Kaspersky",
+      "step": null,
+      "context": "To reduce problems related to the use of kDrive files when Kaspersky is installed, you can exclude k"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ccf48e7950222d4088f769d52d72c269a9ac43b8.png",
+      "heading": "... Kaspersky",
+      "step": null,
+      "context": "If the problem persists, uncheck the box (3) below:"
+    }
+  ]
+}

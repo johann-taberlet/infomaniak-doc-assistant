@@ -1,0 +1,19 @@
+{
+  "faq_id": "2404",
+  "title": "Sync Synology with kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2404/sync-synology-with-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/1965517315e78a34bdc9376b1d83aeec127eadc9.png",
+      "heading": "Synchronize kDrive and Synology via Cloud Sync",
+      "step": 5,
+      "context": "5. Choose **WebDAV** at the bottom of the list of available Clouds:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a4fae69d74d2fc186771d48ed16bbf86d0bd170a.png",
+      "heading": "Synchronize kDrive and Synology via Cloud Sync",
+      "step": 7,
+      "context": "7. Select the local folder, destination, and desired synchronization type:"
+    }
+  ]
+}

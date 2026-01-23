@@ -1,0 +1,31 @@
+{
+  "faq_id": "2379",
+  "title": "Import data to kDrive without a desktop app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2379/import-data-to-kdrive-without-a-desktop-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/c5caee9971567c8c454dab2845acd8682cb1b496.gif",
+      "heading": "Drag & Drop",
+      "step": null,
+      "context": "- **Drag and drop** the items to be sent to kDrive, from a window of your computer, to the window of"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/786e40b4d2ebc32ba9e1ebfcf8b9781ea35faa51.gif",
+      "heading": "\u201cNew\u201d button",
+      "step": null,
+      "context": "- Use the **New** button at the top left of your kDrive interface, then choose the desired import (e"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0f52ed6a840a4ffab0f922b5f6d7ff5866421d54.gif",
+      "heading": "Right-click",
+      "step": null,
+      "context": "- Right-**click** where you want to import new content, then choose the desired import (either **fil"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3a71a859be8a037a39a01dae83637b9cac40442b.gif",
+      "heading": "Import external data",
+      "step": null,
+      "context": "- Import specific content using the **Import external data** menu:"
+    }
+  ]
+}

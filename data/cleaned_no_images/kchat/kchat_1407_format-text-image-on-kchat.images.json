@@ -1,0 +1,25 @@
+{
+  "faq_id": "1407",
+  "title": "Format text & image on kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1407/format-text-image-on-kchat",
+  "images": [
+    {
+      "url": "https://www.domain.xyz/xyz/image.png",
+      "heading": "\u2026 from a URL",
+      "step": null,
+      "context": "Insert the following code into your message by replacing the alternative text and the address (URL)  | ``"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cf42ed351438.72473921png",
+      "heading": "Example",
+      "step": null,
+      "context": "Message with image insertion syntax:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cf43f8289054.75719356png",
+      "heading": "\u2026 from the hard drive or kDrive",
+      "step": null,
+      "context": "Click on the paperclip icon to insert an existing image on your hard drive or kDrive:"
+    }
+  ]
+}

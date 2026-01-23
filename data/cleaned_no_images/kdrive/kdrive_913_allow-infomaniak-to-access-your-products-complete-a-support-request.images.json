@@ -1,0 +1,19 @@
+{
+  "faq_id": "913",
+  "title": "Allow Infomaniak to access your products / Complete a support request",
+  "source_url": "https://www.infomaniak.com/en/support/faq/913/allow-infomaniak-to-access-your-products-complete-a-support-request",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/e85e158aa1097686b086ff18c00116ba38a74409.png",
+      "heading": "Authorize Support to access a type of content",
+      "step": 2,
+      "context": "2. Click the toggle switch to authorize access to the content of\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c63d14d14a3223da1c46d088b86fa5b2aad14c2.png",
+      "heading": "Authorize Support to access a type of content",
+      "step": 2,
+      "context": "2. Click on [Support]( https://ksuite.infomaniak.com/all?global-settings=user-support) in the left s"
+    }
+  ]
+}

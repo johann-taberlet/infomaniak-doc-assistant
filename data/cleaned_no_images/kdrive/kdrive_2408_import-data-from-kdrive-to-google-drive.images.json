@@ -1,0 +1,61 @@
+{
+  "faq_id": "2408",
+  "title": "Import data from kDrive to Google Drive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2408/import-data-from-kdrive-to-google-drive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/057eab83b978cc2c211fb6e87581b5f007abc083.png",
+      "heading": "Install rclone on your computer",
+      "step": 2,
+      "context": "2. Enter the password for your session on your computer to start the installation:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/539fa24f75731eef3063e0107f27daa2bb0c6a92.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 3,
+      "context": "3. Name the remote disk, for example `gdrive`:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8700f387c9af90fe9a360da3bb31278a436711c1.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 4,
+      "context": "4. Search for the keyword `Drive` and click on `Google Drive API`:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ac848bd17b9c8592047f3994f88e6df5efb7cd8d.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 2,
+      "context": "2. Then choose the `scope` n\u00b01:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a12324deda42612b1631a979e5cb8ef0dda07e87.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 5,
+      "context": "5. Answer \u201cYes\u201d `y` to the question about the web browser connection:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5a2126de55dd9d76c5656ab662e42191c30f7c20.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 7,
+      "context": "7. Once permissions are granted, you should receive the following message:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d8db20c5969a8df1d470fec8102e571b455fcc60.png",
+      "heading": "Configure the remote disk (Google Drive) on rclone",
+      "step": 9,
+      "context": "9. Answer \u201cYes\u201d `y` to the last question:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/bae2707f23e257c1ad9cd8e20a4b9ddf90fed124.png",
+      "heading": "Configuration of the destination disk (kDrive) on rclone",
+      "step": 1,
+      "context": "1. Still in the terminal, enter `n` for a new disk configuration and enter the name `kDrive` to reco"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8a2a9718f49dfeaee411a895c30c92163740afda.png",
+      "heading": "Configuration of the destination disk (kDrive) on rclone",
+      "step": 6,
+      "context": "6. Answer \u201cYes\u201d `y` to the last question and your 2 disks are displayed:"
+    }
+  ]
+}

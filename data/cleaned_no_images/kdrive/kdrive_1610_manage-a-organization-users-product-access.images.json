@@ -1,0 +1,49 @@
+{
+  "faq_id": "1610",
+  "title": "Manage a Organization user's product access",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1610/manage-a-organization-users-product-access",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/8ff3da03a76fab32ba918256c7077b609fc65544.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click on **Edit product access**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ad5653feb650590190328fbb475c55be7c85a2c2.png",
+      "heading": "Prerequisites",
+      "step": 8,
+      "context": "8. Click the **Save** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e7153f80d06a8dd7aec691e261a6b06c4eacbf71.png",
+      "heading": "Prerequisites",
+      "step": 9,
+      "context": "9. Start again at step 5 if you need to grant access to multiple products. You can also grant full a"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6cdafc972fdfb79e0467f02f0c08312ccc9b566d.png",
+      "heading": "Service usage / Service management",
+      "step": null,
+      "context": "Note, on your product table, it is important to distinguish between **product access** (such as *kDr"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/1c2b158bfc2d6f712d67671ae7bd13fef463f7fd.png",
+      "heading": "Technical rights / Statistical rights",
+      "step": null,
+      "context": "With certain services like *kDrive*, it is possible to grant a collaborator **TECHNICAL** and/or **S"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e06af1c3f37d07f6ad5f5f1cce6a0dcac2c0f841.png",
+      "heading": "Technical rights / Statistical rights",
+      "step": null,
+      "context": "Other services like *domain names* do not have a **STATISTICS** section:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d94f1ae43059cb02f62b71334b8bf44b0d18ef44.png",
+      "heading": "Technical rights / Statistical rights",
+      "step": null,
+      "context": "Some specific services like the *billetterie* allow you to grant even more detailed rights:"
+    }
+  ]
+}

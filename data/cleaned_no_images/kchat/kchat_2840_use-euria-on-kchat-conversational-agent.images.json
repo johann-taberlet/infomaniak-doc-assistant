@@ -1,0 +1,19 @@
+{
+  "faq_id": "2840",
+  "title": "Use Euria on kChat (conversational agent)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2840/use-euria-on-kchat-conversational-agent",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/f90dcdaa2910c3f1c1da0c8ea7817a1d51e4403c.png",
+      "heading": "Add Euria to kChat contacts",
+      "step": 2,
+      "context": "2. \u2026 or on the **+** icon next to **Direct Messages** to search for the bot"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/920083838d888c31a3dd32eff22e6d2f7d7f8614.png",
+      "heading": "Add Euria to kChat contacts",
+      "step": 3,
+      "context": "Then simply write to them as if you were conversing with an acquaintance:"
+    }
+  ]
+}

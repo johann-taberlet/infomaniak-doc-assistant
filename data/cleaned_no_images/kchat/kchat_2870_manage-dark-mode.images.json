@@ -1,0 +1,61 @@
+{
+  "faq_id": "2870",
+  "title": "Manage dark mode",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2870/manage-dark-mode",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/6ab73317059db9cc5f3cb5d82a4b32db66ca15a9.gif",
+      "heading": "Manage dark mode",
+      "step": null,
+      "context": "Infomaniak tools, such as the Infomaniak **Mail** web app (online service [ksuite.infomaniak.com/mai"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/990a99d0d1f9fcc6b835d17bab03d7d653358e47.gif",
+      "heading": "Enable manual mode",
+      "step": 1,
+      "context": "1. [Click here](https://ksuite.infomaniak.com/all?global-settings=user-account) or on the badge with"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3550b268d2ab6a17795af85ac2834cec5f5607d0.png",
+      "heading": "Enable manual mode",
+      "step": 3,
+      "context": "3. Click on **Light** to apply the light mode:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/acd20ef6b595d07ad2d9402ea20c297f3f9573a2.png",
+      "heading": "Enable automatic mode",
+      "step": 3,
+      "context": "3. Click on the **Automatic** mode:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/15395ce9e26f5cf5787a09eb77b2d8724eda5e6d.png",
+      "heading": "... on macOS",
+      "step": 1,
+      "context": "1. Click on **System Preferences**..."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/31134b85c6f66ae733b6b4654511769c54f6c06f.png",
+      "heading": "... on macOS",
+      "step": 2,
+      "context": "2. Click on **Appearance**and choose the dark mode on the right:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/662768950f3533.90128668png",
+      "heading": "... on Windows",
+      "step": 2,
+      "context": "2. Click on **Settings**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/662768ab7f1915.59337954png",
+      "heading": "... on Windows",
+      "step": 3,
+      "context": "3. Click on **Personalize** then **Colors**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/662768d9f235b9.07923118png",
+      "heading": "... on Windows",
+      "step": 4,
+      "context": "4. Click on **Dark**:"
+    }
+  ]
+}

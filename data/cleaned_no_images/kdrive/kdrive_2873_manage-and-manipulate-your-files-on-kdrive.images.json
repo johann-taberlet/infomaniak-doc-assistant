@@ -1,0 +1,37 @@
+{
+  "faq_id": "2873",
+  "title": "Manage and manipulate your files on kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2873/manage-and-manipulate-your-files-on-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/30458c449c8390fbfd6565d49d768d4e41ce1bb3.gif",
+      "heading": "Add to favorites / follow a file",
+      "step": null,
+      "context": "Favorites are synchronized between the Web app **kDrive** Infomaniak (online service [ksuite.infoman"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d636aa983466131245736ad620add9a32485bb1f.gif",
+      "heading": "Add to favorites / follow a file",
+      "step": null,
+      "context": "\u2026 and the mobile app (application for iOS / Android smartphone or tablet):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/143404f4eae690c64f12e6624d3c729dbb8c4343.png",
+      "heading": "On the kDrive Web app",
+      "step": 2,
+      "context": "2. Select a file to mark as a favorite and click on the icon **\u2606**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/448c8f1f92d02c2e739dc8a399afc3723e3c13c9.png",
+      "heading": "On the kDrive Web app",
+      "step": 3,
+      "context": "3. You can also add multiple files to favorites using the top menu\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/594cd594435fde80dee145683061db80d66e62e6.png",
+      "heading": "On the kDrive Web app",
+      "step": 4,
+      "context": "4. \u2026 or click on the action menu **\u22ee** located to the right of the item in question:"
+    }
+  ]
+}

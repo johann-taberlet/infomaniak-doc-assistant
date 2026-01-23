@@ -1,0 +1,31 @@
+{
+  "faq_id": "2387",
+  "title": "Manage kDrive storage",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2387/manage-kdrive-storage",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/533606c938e6e10cca64115731ce2cec110258f0.png",
+      "heading": "View kDrive storage space",
+      "step": 3,
+      "context": "3. Click on **Storage space** in the left sidebar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/57a24219a53e062b296e84c0faba57a22aedf5fd.png",
+      "heading": "View kDrive storage space",
+      "step": 4,
+      "context": "4. Select large files (or [file versions](https://www.infomaniak.com/en/support/faq/2384) that are a"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/629b921fa20fea394d964e8105114246f9b6e497.png",
+      "heading": "View kDrive storage space",
+      "step": 5,
+      "context": "5. Click on the action menu**\u22ee**\u00a0located above your selection to perform an action (deletion, for ex"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c50240935ab29f19e32f0a7a42890528e0c51059.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Click on **Change Offer**:"
+    }
+  ]
+}

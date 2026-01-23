@@ -1,0 +1,25 @@
+{
+  "faq_id": "2501",
+  "title": "Understanding kDrive permissions",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2501/understanding-kdrive-permissions",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/34dab26b093e259d77f0b6e623e3c033deb67c42.gif",
+      "heading": "Types of access rights",
+      "step": null,
+      "context": "The permissions granted as well as the information about the beneficiaries of the shares are visible"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6c77fef19a76f9a8790e4c5d9332f28f8ac92beb.png",
+      "heading": "Types of access rights",
+      "step": null,
+      "context": "An eventual public link activated on a file is indicated by a green icon in this column:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/67527a6d957687f7be7f742b5887f212a5af95e2.png",
+      "heading": "Resolving an inheritance rights issue",
+      "step": 4,
+      "context": "4. The solution is to click on the link present in the sharing window, which informs you of the inco"
+    }
+  ]
+}

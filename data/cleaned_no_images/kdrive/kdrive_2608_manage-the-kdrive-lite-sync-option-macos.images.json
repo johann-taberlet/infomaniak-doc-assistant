@@ -1,0 +1,37 @@
+{
+  "faq_id": "2608",
+  "title": "Manage the kDrive Lite Sync option (macOS)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2608/manage-the-kdrive-lite-sync-option-macos",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/e8c35d5b6d44954d557585d1e156523d1ac696e6.png",
+      "heading": "Prerequisites & scope of use of Lite Sync",
+      "step": 3,
+      "context": "3. Select **kDrive settings**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ec6b6b8cebef93116b9e3eab29a245a9af7ca62f.png",
+      "heading": "Always keep on this device",
+      "step": 2,
+      "context": "2. Select the option **Always keep locally available** under kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e459374d000865f226a3d4785bccc418b45b8a36.png",
+      "heading": "Always keep on this device",
+      "step": 3,
+      "context": "3. The symbol visible on the icon of the affected files will change to indicate that the file is no "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/74c1d6f93a752a4804e00014b92da800897e2d86.png",
+      "heading": "Free up space",
+      "step": 2,
+      "context": "2. Select the option **free up local space** under kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6e95205013622d9733a3bf2d376196d6bd02488b.png",
+      "heading": "Free up space",
+      "step": 3,
+      "context": "3. The symbol visible on the icon of the affected files/folders will change to indicate that the dat"
+    }
+  ]
+}

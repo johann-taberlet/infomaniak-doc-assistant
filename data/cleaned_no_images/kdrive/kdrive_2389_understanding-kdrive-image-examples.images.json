@@ -1,0 +1,37 @@
+{
+  "faq_id": "2389",
+  "title": "Understanding kDrive: image examples",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2389/understanding-kdrive-image-examples",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/f32a3884cceb280ba3ab0f7f1b560e8dd9d05a01.gif",
+      "heading": "Get information about a folder and its contents",
+      "step": null,
+      "context": "Simply right-click on any folder to get the size and content information:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/69851e394592a40dd3e48a0213a08d27df7a109f.gif",
+      "heading": "Restore the shared folder on the computer",
+      "step": null,
+      "context": "If you accidentally delete the folder corresponding to the data you share with all kDrive users (\"*O"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/76464399316b804c0ca0c666f292e46a89fcf8aa.gif",
+      "heading": "Restore the shared folder on the computer",
+      "step": null,
+      "context": "If it does not come back immediately, wait for the background tasks already in progress to complete:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7a9c5677134ee0dab08f4a7773161e2d0d8e1a40.gif",
+      "heading": "Text editor: search / replace",
+      "step": 1,
+      "context": "1. Create a blank text document:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/22aa454df12b7c8b25b24ed69ab8ff14aa4e13e3.gif",
+      "heading": "Text editor: search / replace",
+      "step": 2,
+      "context": "2. Once the document is created, modify it, enter your text, highlight the term to be replaced, and "
+    }
+  ]
+}

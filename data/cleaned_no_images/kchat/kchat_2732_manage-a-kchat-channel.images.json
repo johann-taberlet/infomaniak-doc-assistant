@@ -1,0 +1,109 @@
+{
+  "faq_id": "2732",
+  "title": "Manage a kChat channel",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2732/manage-a-kchat-channel",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/8f39afb7947a7b73e9f89c0ede86e1484ffc2731.png",
+      "heading": "General Channel",
+      "step": null,
+      "context": "Every Organization on kChat automatically has a General Channel in which all users are automatically"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d185e5543b2b9416ac73b6c99291f3236ca3e698.png",
+      "heading": "Additional Channel",
+      "step": 2,
+      "context": "2. Click on **Create a new channel**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b5bbf772b42ef75b2637862d543bd386df8034a4.png",
+      "heading": "Information related to a channel",
+      "step": null,
+      "context": "When you create a new channel, you can choose:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5d43cbfbf119ce911c424b17878a29886a584e64.png",
+      "heading": "E. a header",
+      "step": null,
+      "context": ""
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cea866a00d862f58006883cb3193a66f5dfe2fd3.png",
+      "heading": "Convert a public channel to a private channel",
+      "step": 3,
+      "context": "3. Choose **Convert**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/71323d2f1720965cbde52510eb7fde17987e4e7f.png",
+      "heading": "And the reverse?",
+      "step": 4,
+      "context": "4. Click on **Convert to public channel**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ec3670559ea6589a1d0e35f25642abb6ee6c02cb.png",
+      "heading": "Leave a channel",
+      "step": 3,
+      "context": "3. Click on Leave the channel:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9b2e261a3d2deb50cf6a0b8f8bff06ef8d5f9a43.png",
+      "heading": "Leave a channel",
+      "step": 3,
+      "context": "If you leave a public channel, you leave it immediately but can rejoin it whenever you want simply b"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3046d4840361071ac1c906ae5b6e8589d154c996.png",
+      "heading": "Archive / delete a channel",
+      "step": 3,
+      "context": "3. Click on **Archive the channel**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/eaf6ec3f93d000dc4d2400620dfff2469f1c4be7.png",
+      "heading": "Archive / delete a channel",
+      "step": 3,
+      "context": "If you create a channel and then archive it, you can rejoin it whenever you want simply by finding i"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/fdc170cc8d34178d0365461b96a16db5681c1ad2.png",
+      "heading": "Archive / delete a channel",
+      "step": 3,
+      "context": "3. Click on **Unarchive the channel**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9c22cc45264b485424a4e40210b39c16707e45b2.png",
+      "heading": "Archive / delete a channel",
+      "step": 3,
+      "context": "or close it to no longer see it on your interface:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e67c195b3786e9f655acc8b5847cbd0897d986e1.png",
+      "heading": "Archive / delete a channel",
+      "step": 3,
+      "context": "3. Click on **Delete**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0a7a354c3a0c25c2e4e29ab01027b89ce3e3ce3c.png",
+      "heading": "Add to favorites",
+      "step": 2,
+      "context": "2. A new Favorites menu will appear in the left sidebar grouping all the items you have added to fav"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/655b619e1f2ba8.51566367gif",
+      "heading": "Mute a channel",
+      "step": 2,
+      "context": "2. Choose **Mute**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/655b62b8145495.69310346gif",
+      "heading": "Organize by categories",
+      "step": null,
+      "context": "By clicking on the **+** button located in the left sidebar of kChat, you can add one or more catego"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/655b64a60f7e79.78654048png",
+      "heading": "User-to-user chat channel",
+      "step": null,
+      "context": "Each user of an Organization can freely create personal messages whose content will only be visible "
+    }
+  ]
+}

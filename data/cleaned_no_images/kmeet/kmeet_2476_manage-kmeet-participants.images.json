@@ -1,0 +1,43 @@
+{
+  "faq_id": "2476",
+  "title": "Manage kMeet participants",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2476/manage-kmeet-participants",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/5fbd9e5697363f2e4c6b69cfb3a2ec4849fe0c54.png",
+      "heading": "Approve or deny participants",
+      "step": 2,
+      "context": "2. Click the button to start a new meeting:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/06b923acdfae4ac2fa37a7e94ea7962d7e466971.png",
+      "heading": "Approve or deny participants",
+      "step": 4,
+      "context": "4. Activate **participant control:**"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c68e801a747d81f0b88fed35cf932a7097b7e8ed.png",
+      "heading": "Approve or deny participants",
+      "step": 7,
+      "context": "7. When your participants try to join the meeting, an audio notification invites you to allow or den"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/987b4d443d0b8c47543bffe86e848d7b47520c6a.png",
+      "heading": "Approve or deny participants",
+      "step": 8,
+      "context": "8. You can also set a participant as a **new moderator** during the meeting, or just below, **exclud"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/dab9f0dc2cf856ccaaa4a9f0962f758f9512d3cc.png",
+      "heading": "Moderation options",
+      "step": 2,
+      "context": "2. Click on **Settings**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/377bafee4ba546589102cafc1aac9d28bacb8a4b.png",
+      "heading": "Moderation options",
+      "step": 4,
+      "context": "4. The options allow you to manage the expected behavior when new participants connect:"
+    }
+  ]
+}

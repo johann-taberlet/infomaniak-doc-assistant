@@ -1,0 +1,19 @@
+{
+  "faq_id": "2565",
+  "title": "Customize kDrive shares and repositories",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2565/customize-kdrive-shares-and-repositories",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/a315e1ef648fd7fc10743f8c87e99205821dc80e.png",
+      "heading": "Customize share links & drop boxes",
+      "step": 2,
+      "context": "2. Click on the chevron \u200d to expand the **Shares** section in the left sidebar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/940add6f16ec5d279f25cd66c635c1851c7bb246.png",
+      "heading": "Customize share links & drop boxes",
+      "step": 5,
+      "context": "5. Click on **Save**:"
+    }
+  ]
+}

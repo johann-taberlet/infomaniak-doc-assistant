@@ -1,0 +1,19 @@
+{
+  "faq_id": "2579",
+  "title": "Display kDrive activity statistics and report",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2579/display-kdrive-activity-statistics-and-report",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/baffd648a16052111e5bcc0dfc1167b7645d362b.png",
+      "heading": "Access kDrive stats",
+      "step": 4,
+      "context": "4. Choose the type of statistics to view:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/13569b349086b65bdeadc6d107e87a84b16d9afb.png",
+      "heading": "Customize the display",
+      "step": null,
+      "context": "Each screen of these statistics (Shared links, Activities on kDrive, etc.) includes **icons and butt"
+    }
+  ]
+}

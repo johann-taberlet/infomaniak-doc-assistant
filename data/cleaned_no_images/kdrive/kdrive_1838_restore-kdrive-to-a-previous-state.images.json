@@ -1,0 +1,49 @@
+{
+  "faq_id": "1838",
+  "title": "Restore kDrive to a previous state",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1838/restore-kdrive-to-a-previous-state",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c0586b008955cd12e24db23114bc023577ab133.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Click on **Restore**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/62725118e08c0d2c0d23c72de5af36836daf7af2.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "5. Read the on-screen information, then click the button to **start**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/67c26986544de258cdda26d731d9a347a6aeed20.png",
+      "heading": "Prerequisites",
+      "step": 8,
+      "context": "8. Click on **Continue**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0ac6269ae7d258dcd65376e2016e9a711562d8ca.png",
+      "heading": "Prerequisites",
+      "step": 10,
+      "context": "10. Click on **Continue**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/45e9caef17858b3429cb8278ea01e5f44a498f28.png",
+      "heading": "Prerequisites",
+      "step": 11,
+      "context": "11. **Launch the analysis in the next step**, and determine the next steps based on the proposed res"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6aef1415e3e7374e9a79326ebf7281dadb4ca31e.png",
+      "heading": "Analysis Report",
+      "step": null,
+      "context": "An administrator viewing a report of a restoration initiated by another administrator will not see e"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/728a0616d7eb6943c35ae3651d8caf35608c0aff.png",
+      "heading": "In case of conflict",
+      "step": null,
+      "context": "At the root of the kDrive of the administrator who performed the operation (or for the affected user"
+    }
+  ]
+}

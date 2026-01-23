@@ -1,0 +1,19 @@
+{
+  "faq_id": "2350",
+  "title": "Upgrade an existing kDrive to a new kSuite",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2350/upgrade-an-existing-kdrive-to-a-new-ksuite",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/b51ba79b83de6b0a1dd3e994f49908f360146a9f.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click on **Upgrade the offer**."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ff5bbe381464346a6957c78620da9b1e74513699.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "You can also do this from an information banner visible on the homepage of your [Manager](https://ma"
+    }
+  ]
+}

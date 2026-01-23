@@ -1,0 +1,31 @@
+{
+  "faq_id": "1886",
+  "title": "Manage kChat members",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1886/manage-kchat-members",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/02a48ceac4274f38c38d288952ccc8be39588bbc.png",
+      "heading": "View members of a channel",
+      "step": 3,
+      "context": "3. Participants are displayed in a column on the right side of kChat:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b0ff1c9d553e59b29024a152f096c6a8f9d13329.png",
+      "heading": "Invite or remove a member from a private channel",
+      "step": null,
+      "context": "To manage the users who have access to a private channel:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f212508e90c4a04a457e578347a2ba677a47c81d.png",
+      "heading": "Invite or remove a member from a private channel",
+      "step": 3,
+      "context": "3. The blue **Add** button allows you to invite a kChat user or a **complete** [work team](https://w"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/267fdc586301a0e300c78dd02ae5de89f682a845.png",
+      "heading": "Invite or remove a member from a private channel",
+      "step": 4,
+      "context": "4. The **Manage** button allows you to remove a member from this channel or designate them as **Admi"
+    }
+  ]
+}

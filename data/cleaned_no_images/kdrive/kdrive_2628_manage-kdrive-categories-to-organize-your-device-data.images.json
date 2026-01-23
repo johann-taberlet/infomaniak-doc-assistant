@@ -1,0 +1,19 @@
+{
+  "faq_id": "2628",
+  "title": "Manage kDrive categories to organize your device data",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2628/manage-kdrive-categories-to-organize-your-device-data",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/5a7d2155a05f53c5c792b575294820e819eb1923.gif",
+      "heading": "\u2026 on the mobile app kDrive",
+      "step": 4,
+      "context": "4. Return to the content using the back arrow at the top left:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b293c8f7168370988a85857dd2f83ac1c03aa3d3.gif",
+      "heading": "\u2026 on the Web app kDrive Infomaniak",
+      "step": null,
+      "context": "To display only the files in your kDrive belonging to a specific category:"
+    }
+  ]
+}

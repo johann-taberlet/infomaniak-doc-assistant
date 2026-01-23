@@ -1,0 +1,31 @@
+{
+  "faq_id": "1355",
+  "title": "Broadcast a kMeet meeting via Live Streaming mode",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1355/broadcast-a-kmeet-meeting-via-live-streaming-mode",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/bd1d6ea53f9108e13b53afb1baa2b82a75f0e7e9.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Choose to **Start live broadcast**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/be4629a8dc2232991299a164074d8f2a76a88d11.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Click the button to **Start**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/adf9743d6075cda546d08cd25b826cc7163e1545.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "5. Wait for the Video Streaming stream to be created:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/66dcdf8a2323fcce1cc7897653b531d4ac67a2cd.png",
+      "heading": "Prerequisites",
+      "step": 7,
+      "context": "7. A symbol displayed on kMeet as well as an audible alert indicates the start of the broadcast via "
+    }
+  ]
+}

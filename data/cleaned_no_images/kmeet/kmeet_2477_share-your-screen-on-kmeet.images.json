@@ -1,0 +1,19 @@
+{
+  "faq_id": "2477",
+  "title": "Share your screen on kMeet",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2477/share-your-screen-on-kmeet",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/38e30edb98d4102f857e514284810662798b9594.png",
+      "heading": "Start screen sharing",
+      "step": 3,
+      "context": "3. Click on the screen icon with an arrow to **Share your screen**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/eb289c59d9f02f7d2e28b1c8f999fea7d61c6a1e.png",
+      "heading": "Start screen sharing",
+      "step": 6,
+      "context": "6. Click the button to start the **sharing**:"
+    }
+  ]
+}

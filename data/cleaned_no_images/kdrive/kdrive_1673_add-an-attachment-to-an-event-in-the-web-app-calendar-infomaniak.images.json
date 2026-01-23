@@ -1,0 +1,25 @@
+{
+  "faq_id": "1673",
+  "title": "Add an attachment to an event in the Web app Calendar Infomaniak",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1673/add-an-attachment-to-an-event-in-the-web-app-calendar-infomaniak",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/40fde827b8308941298e8814103864f653fd4b58.png",
+      "heading": "Add a kDrive attachment",
+      "step": null,
+      "context": "When you [create a new event](https://www.infomaniak.com/en/support/faq/956) on the Infomaniak Web a"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/76607f8624bea111efa6477fdf4b5961ab80275e.png",
+      "heading": "Add a kDrive attachment",
+      "step": null,
+      "context": "Thanks to this link \u201c**Insert a kDrive link**\u201d, you can access kDrive directly from the event creati"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ca05f427c2f2fee45cba9e24cecac79e0bccb4e3.png",
+      "heading": "Add a kDrive attachment",
+      "step": null,
+      "context": "Whether the event is recurring or not, you can add files that will be shared with those who view the"
+    }
+  ]
+}

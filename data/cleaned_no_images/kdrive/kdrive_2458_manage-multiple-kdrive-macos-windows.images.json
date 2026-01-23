@@ -1,0 +1,43 @@
+{
+  "faq_id": "2458",
+  "title": "Manage multiple kDrive (macOS / Windows)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2458/manage-multiple-kdrive-macos-windows",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/7b3bf886e03bbcdb3f2de4b204c29b07c48ecbe5.png",
+      "heading": "\u2026 from the kDrive desktop app (desktop application on macOS / Windows / Linux)",
+      "step": 3,
+      "context": "3. Click on **Add a kDrive**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/317466c44412f49e2a0696938b7220e5b3a340aa.png",
+      "heading": "\u2026 from the kDrive desktop app (desktop application on macOS / Windows / Linux)",
+      "step": 5,
+      "context": "5. Click on **Add an account**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c107880d607f0dc489b2ed0421cf6390b5441697.png",
+      "heading": "\u2026 from the kDrive desktop app (desktop application on macOS / Windows / Linux)",
+      "step": 8,
+      "context": "8. It is now possible to switch from one kDrive to another when you click on the kDrive icon and the"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/91411714ecb6e9a65611cfe68a3b5045cea7dbe4.png",
+      "heading": "\u2026 from the kDrive Web app (online service ksuite.infomaniak.com/kdrive)",
+      "step": 3,
+      "context": "3. Click on the kDrive you want to use"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6b5ca1b7618345a9318d39e2bb94df5ed283fab6.png",
+      "heading": "Disconnect a kDrive from the desktop app",
+      "step": 3,
+      "context": "3. Click on **kDrive settings**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5b787092013d0a021a6ba62d2e1d1e3f5315b2c0.png",
+      "heading": "Disconnect a kDrive from the desktop app",
+      "step": 5,
+      "context": "5. Choose **Remove synchronization** (only from your device, with no impact on kDrive):"
+    }
+  ]
+}

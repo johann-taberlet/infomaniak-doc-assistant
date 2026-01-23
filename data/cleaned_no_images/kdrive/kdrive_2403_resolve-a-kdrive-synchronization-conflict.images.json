@@ -1,0 +1,31 @@
+{
+  "faq_id": "2403",
+  "title": "Resolve a kDrive synchronization conflict",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2403/resolve-a-kdrive-synchronization-conflict",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/ab5ad01f13d50d598f1fc4ae261fd26d851dd3f9.png",
+      "heading": "How to display conflicts?",
+      "step": 3,
+      "context": "3. Click on the listed event to view its details:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/6615573b482e24.53982984gif",
+      "heading": "How to display conflicts?",
+      "step": 4,
+      "context": "4. Conflicts and errors are displayed in 2 distinct tabs allowing you to become aware of unsynchroni"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b14b65533e89a38e3c05d4460eeecd4a54b7093a.png",
+      "heading": "How to display conflicts?",
+      "step": 5,
+      "context": "5. **The first tab** allows you to resolve conflicts:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f4bb8f66c9028a186e5cc808358e5c243c690436.png",
+      "heading": "Avoid synchronization conflicts",
+      "step": 4,
+      "context": "4. **Delete** the conflict file that is not synchronized (the one with the exclamation mark and the "
+    }
+  ]
+}

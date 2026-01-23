@@ -1,0 +1,37 @@
+{
+  "faq_id": "2580",
+  "title": "Update the kDrive app on computer",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2580/update-the-kdrive-app-on-computer",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/21caeb0b0f41aed7f2e75423ca1549c40b03a4d5.png",
+      "heading": "\u2026 on macOS / Windows / Linux",
+      "step": 2,
+      "context": "2. Click on the icon **\u22ee** at the top right of the application, then on **Preferences**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/086842e149e9fb5aaef79645b7344c7ab1f1cd0b.png",
+      "heading": "\u2026 on macOS / Windows / Linux",
+      "step": 2,
+      "context": "or directly on **Preferences** if the kDrive window is already open:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ce06c69b729e205c3683230b583cbe82d7289e7e.png",
+      "heading": "\u2026 on macOS / Windows / Linux",
+      "step": 3,
+      "context": "3. Scroll all the way down and under the **Version** category, the version currently installed on yo"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e6947b8a8b6a71a05486ae907570055af58f8833.png",
+      "heading": "\u2026 on macOS / Windows",
+      "step": null,
+      "context": "- Refer to the steps above and **click on the displayed button offering the update**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/efa4319d11e2ec814179c82447894a8a3657e670.png",
+      "heading": "\u2026 on macOS / Windows",
+      "step": 1,
+      "context": "1. **Download the latest version**[from the official page](https://infomaniak.com/gtl/apps.kdrive) ("
+    }
+  ]
+}

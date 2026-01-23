@@ -1,0 +1,31 @@
+{
+  "faq_id": "1908",
+  "title": "Import data from kDrive to another kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/d33a4d63d20c80d933752fd29888bc6b861349b0.png",
+      "heading": "kSuite Configuration",
+      "step": null,
+      "context": "If you are in a kSuite environment (the kDrive app displayed within `ksuite.infomaniak.com`, you mus"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f472403eea9104d39ed832606236a80f245dec7f.gif",
+      "heading": "Copying data between multiple kDrives",
+      "step": 3,
+      "context": "3. Select, if necessary, the other kDrive from which you want to copy files:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/94013e9803bad93965ac1ce2602c0ebfab8f5c98.png",
+      "heading": "Copying data between multiple kDrives",
+      "step": 7,
+      "context": "7. Choose the relevant kDrive from the list visible in this same dropdown menu:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/02fc0176f605292b88115c56005cb1879c2b6a15.png",
+      "heading": "Copying data between multiple kDrives",
+      "step": 9,
+      "context": "9. Click on the blue button to start the copy:"
+    }
+  ]
+}

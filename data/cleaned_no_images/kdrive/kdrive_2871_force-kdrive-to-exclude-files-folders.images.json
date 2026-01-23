@@ -1,0 +1,19 @@
+{
+  "faq_id": "2871",
+  "title": "Force kDrive to exclude files & folders",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2871/force-kdrive-to-exclude-files-folders",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/0501b8bea8068de76e458924a8d2993e5c44e3ba.png",
+      "heading": "Manage files excluded from kDrive",
+      "step": 3,
+      "context": "3. Click on **Preferences**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/34c42945735be9bb849104bed57762cfd4158a39.png",
+      "heading": "Manage files excluded from kDrive",
+      "step": 7,
+      "context": "7. Click the blue **Save** button:"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "faq_id": "1577",
+  "title": "Modify an existing kDrive offer",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1577/modify-an-existing-kdrive-offer",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/2dcbdd77c4a76c820addc94cb81eaf7b3b38b4d0.png",
+      "heading": "From the kDrive Web App",
+      "step": 2,
+      "context": "2. Click on **Manage** to go to the offer change and **view the current offer**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b8b66c2738e9a88c659d42da5f4ea1f40bd8309e.png",
+      "heading": "From the kDrive Web App",
+      "step": 2,
+      "context": "If no dashboard is accessible at the bottom left, you have limited features (e.g., **my kSuite** off"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8789e24e95447cc2ac4ab3dcedf149e0d05ad0dc.png",
+      "heading": "From the Infomaniak Manager",
+      "step": null,
+      "context": "- either a **my kSuite** / **my kSuite+** offer:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e499387f8b64e64118ef91fac42c8f48b208c9c4.png",
+      "heading": "From the Infomaniak Manager",
+      "step": null,
+      "context": "- or you have been invited during a document share (you are therefore an external user of kDrive):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9e5211446eb0972d72e1679544ed356f61e78227.png",
+      "heading": "From the Infomaniak Manager",
+      "step": null,
+      "context": "Otherwise, find your **kDrive** among your **collaborative tools**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2dcbdd77c4a76c820addc94cb81eaf7b3b38b4d0.png",
+      "heading": "Prerequisites",
+      "step": 2,
+      "context": "2. Click on **Manage** to go to the offer change and **view the current offer**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/062f8cfe9ce271ba3a7c01aeacedef11314840f6.png",
+      "heading": "Prerequisites",
+      "step": 2,
+      "context": "You can then switch to a higher offer from the Infomaniak Shop:"
+    }
+  ]
+}

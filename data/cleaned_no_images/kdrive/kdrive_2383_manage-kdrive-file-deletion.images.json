@@ -1,0 +1,31 @@
+{
+  "faq_id": "2383",
+  "title": "Manage kDrive file deletion",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2383/manage-kdrive-file-deletion",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/70a4359ccc6b2bd305d13c9327446ef1bd9b92a5.png",
+      "heading": "\u2026 of the kDrive Web app",
+      "step": 4,
+      "context": "4. Click on **Settings** to configure the retention duration of files in the trash:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd16e6b0db3e31ce391ac38a0d3f2d25ae750d05.png",
+      "heading": "\u2026 of the kDrive Web app",
+      "step": 6,
+      "context": "6. Confirm the settings by clicking the **Confirm** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6624aaaf9c27bbebd9d790fa666a20db538faba9.png",
+      "heading": "\u2026 of the kDrive desktop app",
+      "step": 3,
+      "context": "3. Click on **Application Preferences**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9be360d2e7d09a6d27d4705727c0eded4cef94f1.png",
+      "heading": "\u2026 of the kDrive desktop app",
+      "step": 4,
+      "context": "4. Enable or disable the toggle switch to decide whether to send the synchronized version to the com"
+    }
+  ]
+}

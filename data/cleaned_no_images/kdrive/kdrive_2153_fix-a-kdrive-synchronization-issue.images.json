@@ -1,0 +1,55 @@
+{
+  "faq_id": "2153",
+  "title": "Fix a kDrive synchronization issue",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2153/fix-a-kdrive-synchronization-issue",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/4d6627a80753537ac120fe2da401467c40a122de.png",
+      "heading": "On Windows: Access the kDrive icon for verification",
+      "step": null,
+      "context": "To check if the kDrive app is running on a Windows computer, you need to locate the folder icon"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d9f056983ae3483439d66210b55a9aa6bdc356ce.png",
+      "heading": "On Windows: Access the kDrive icon for verification",
+      "step": 4,
+      "context": "4. Click on the icon to access your kDrive synchronization settings and information:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/661540cfddfb60.95169324gif",
+      "heading": "Missing folders on the computer",
+      "step": 4,
+      "context": "4. Disable the toggle switch to have no limits on the size of synchronized folders:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/661541b09953e6.29170974gif",
+      "heading": "Missing folders on the computer",
+      "step": 6,
+      "context": "6. Validate with the blue button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/82927361b8d231b12253fe4823a41ab920fab432.png",
+      "heading": "Synchronization in progress (0/10) then on pause",
+      "step": 2,
+      "context": "2. Click OK:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2517f7a8ca6d144d3df4278c517ca63d5094d697.png",
+      "heading": "Synchronization in progress (0/10) then on pause",
+      "step": 3,
+      "context": "3. Locate **Windows Search** in the list of the **Services** window and activate it if it is not alr"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b6af908d40e7489151cde8beccc686def51355fa.png",
+      "heading": "Continuous synchronization (files .eml)",
+      "step": 2,
+      "context": "2. Click on **Indexing Options** (Control Panel):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c82edc983e68d1ab34027ca4628908b4810c06f7.png",
+      "heading": "Continuous synchronization (files .eml)",
+      "step": 4,
+      "context": "4. Uncheck the box for the `eml` type:"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "faq_id": "2320",
+  "title": "Search for data on kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2320/search-for-data-on-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/4bdb3c89bef85e2004d532fab683935ed189e72b.png",
+      "heading": "Enable search within hosted content",
+      "step": 5,
+      "context": "5. Click on **Intelligent Features**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3c02fa61087c5dcbf944fc916a0bbb3c4c82681f.png",
+      "heading": "Enable search within hosted content",
+      "step": 7,
+      "context": "7. Click the toggle switch to enable content search:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/72109ed83e1eb695abc9f508a1e38ebecb7fa421.png",
+      "heading": "\u2026 on the kDrive mobile app (applicationfor iOS/Android smartphone or tablet)",
+      "step": null,
+      "context": "On the main page of the **kDrive** app, a search field allows you to enter the text to find:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5d4235b82c464b7a1a1ae2ed17c51e3aae063b60.png",
+      "heading": "\u2026 on the kDrive mobile app (applicationfor iOS/Android smartphone or tablet)",
+      "step": null,
+      "context": "If you are browsing your folders, a magnifying glass is visible at the top right of the screen to st"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/966ca324951ac125d6fc9f4bb25cd40c3401be9f.png",
+      "heading": "\u2026 on the kDrive Web app (online serviceksuite.infomaniak.com/kdrive)",
+      "step": null,
+      "context": "The search bar is always placed at the top of the screen. The keyboard shortcut `CMD-F` or `CTRL-F` "
+    }
+  ]
+}

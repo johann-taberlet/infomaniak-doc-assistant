@@ -1,0 +1,67 @@
+{
+  "faq_id": "2515",
+  "title": "Import data from kDrive from iCloud",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2515/import-data-from-kdrive-from-icloud",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/057eab83b978cc2c211fb6e87581b5f007abc083.png",
+      "heading": "Install rclone on your computer",
+      "step": 2,
+      "context": "2. Enter the password for your session on your computer to start the installation:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/02113c330daed83f3aac65ce0a7cb5c895d7bb3e.png",
+      "heading": "Configure the remote disk (iCloud) on rclone",
+      "step": 3,
+      "context": "3. Name the remote disk, for example `appledrive`:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4aba0af310eff969275a80278c1eb658371e87f4.png",
+      "heading": "Configure the remote disk (iCloud) on rclone",
+      "step": 7,
+      "context": "7. Enter your password twice as requested:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/40b7ff8e020250ba38e044f811e875397ad6ef14.png",
+      "heading": "Configure the remote disk (iCloud) on rclone",
+      "step": 9,
+      "context": "9. A window on your device should open to warn you of a remote connection; authorize it:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0844656dd33f3947b20c2800c685c30804419b13.png",
+      "heading": "Configure the remote disk (iCloud) on rclone",
+      "step": 10,
+      "context": "10. A window on your device should open with a 2FA code; copy it:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c45e287f1cefae21077e9db45f450bfe1d4febaf.png",
+      "heading": "Configuration of the destination disk (kDrive) on rclone",
+      "step": 1,
+      "context": "1. Still in the terminal, enter `n` for a new disk configuration and enter the name `kDrive` to reco"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e0f4bcfaa155c9992da7a2a95da6c05e75463c4a.png",
+      "heading": "Configuration of the destination disk (kDrive) on rclone",
+      "step": 6,
+      "context": "6. Answer \u201cYes\u201d `y` to the last question and your 2 disks will be displayed:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4bde814ec3dd386703168d5de00df78dbb76645a.png",
+      "heading": "Details about the dates of your exported photos",
+      "step": 2,
+      "context": "2. Install the application by authorizing its opening in advance if necessary:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5cf9450b9771055d3b75e9538d0542e95abf572e.png",
+      "heading": "Details about the dates of your exported photos",
+      "step": 3,
+      "context": "3. Open **Script Editor**(located in your Applications > Utilities folder):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f8611be5bb4ecc8b3abebd2b526800a054cdfba9.png",
+      "heading": "Details about the dates of your exported photos",
+      "step": 6,
+      "context": "6. Click on **Run** to start the script, a window opens:"
+    }
+  ]
+}

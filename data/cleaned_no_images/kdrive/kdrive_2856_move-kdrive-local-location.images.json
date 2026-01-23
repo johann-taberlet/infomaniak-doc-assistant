@@ -1,0 +1,43 @@
+{
+  "faq_id": "2856",
+  "title": "Move kDrive local location",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2856/move-kdrive-local-location",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/af2a336812f38ced18dbceec346ebfb7069f85f0.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 2,
+      "context": "2. If necessary, locate the folder currently used by the desktop app **kDrive** (click on **Drive Se"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ed40d46d127a075a40f2963c1de5681d843598d1.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 3,
+      "context": "3. **Quit** the desktop app kDrive on the device where you want to change the folder used:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2f655f27de66be2a2b472ce3dd99789636819d30.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 4,
+      "context": "4. Completely uninstall the desktop app kDrive by **deleting all configuration/settings data**, etc."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9c2a9aabec2cfb688dbf1e3f3b6040429a5fb550.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 6,
+      "context": "6. [Reinstall](http://infomaniak.com/gtl/ksuite.kdrive.apps) the desktop app **kDrive** and when the"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0e3a5dc0d7983b2b86854cf6a3bd45fb95ed9fd8.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 7,
+      "context": "7. Choose the new hard drive as the location of the new folder (name it as you wish):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a696b29935bab3d68a2f85d438eea406fb54925f.png",
+      "heading": "Modify the local directory used by kDrive",
+      "step": 8,
+      "context": "8. Complete the configuration:"
+    }
+  ]
+}

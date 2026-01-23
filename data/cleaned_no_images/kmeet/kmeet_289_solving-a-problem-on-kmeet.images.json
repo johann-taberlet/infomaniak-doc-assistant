@@ -1,0 +1,25 @@
+{
+  "faq_id": "289",
+  "title": "Solving a problem on kMeet",
+  "source_url": "https://www.infomaniak.com/en/support/faq/289/solving-a-problem-on-kmeet",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd2a82ecc51847e2a1f06e844fad4d9bf26396b5.png",
+      "heading": "Screen sharing impossible",
+      "step": 1,
+      "context": "1. Go to **System Settings** under **Privacy and Security** then **Screen Recording**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6f95776ca53da45b862cee77a0b2c91a8348a4e1.png",
+      "heading": "Screen sharing impossible",
+      "step": 2,
+      "context": "2. Add your **browser** if necessary, or even **kMeet** if you have the desktop app on your computer"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0bd6c32f1098d8b8d26f14c61555b9bb0a7eae11.png",
+      "heading": "Screen sharing impossible",
+      "step": 3,
+      "context": "3. Then also take note of the icons present in your browser's address bar and detect any potential a"
+    }
+  ]
+}

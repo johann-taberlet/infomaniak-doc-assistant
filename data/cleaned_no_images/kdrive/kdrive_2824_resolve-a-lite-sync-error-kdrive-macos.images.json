@@ -1,0 +1,49 @@
+{
+  "faq_id": "2824",
+  "title": "Resolve a Lite Sync error (kDrive macOS)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2824/resolve-a-lite-sync-error-kdrive-macos",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/bc223f1b60a738b6b86aa0d913686a48db53e8cd.png",
+      "heading": "Sync lock 1/10",
+      "step": 3,
+      "context": "3. Scroll down to the **Endpoint Security Extensions :: kDrive LiteSync Extension**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6de6ae0387de1d9e81e90ac5b8455bdefeb923c3.png",
+      "heading": "Sync lock 1/10",
+      "step": 4,
+      "context": "4. Check that the permissions are enabled and validate at the bottom:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ea89ba3bd8535baec03180ad167c8c47ab3d93fa.png",
+      "heading": "... check the extension permissions",
+      "step": null,
+      "context": "In the *System Settings / Privacy and Security / Full Disk Access* of the macOS device:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9c22c56d498db09110c4efa928064a8384374e57.png",
+      "heading": "... check the extension permissions",
+      "step": null,
+      "context": "Grant full access to **kDrive** and the **Lite Sync** extensions:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ed0c7005374d4c05a8ed2a85dfdc52ea8bcde2b9.png",
+      "heading": "If it is still not OK",
+      "step": null,
+      "context": "- Request [kDrive logs](https://www.infomaniak.com/en/support/faq/2488) (level **Debug**):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/14b7947b393a4e931f3896f0ec8942c97b1926d9.png",
+      "heading": "If it is still not OK",
+      "step": null,
+      "context": "- Check in the **Console** for any blockage reports on the date of the last app startup and, if so, "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d66cc510ad6fd7ea027d5c830a403fde0e6c6467.png",
+      "heading": "If it is still not OK",
+      "step": null,
+      "context": "- In the **Console**, select the Mac, filter on `[KD]`, click on Start:"
+    }
+  ]
+}

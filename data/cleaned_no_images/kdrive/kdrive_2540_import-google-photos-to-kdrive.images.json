@@ -1,0 +1,67 @@
+{
+  "faq_id": "2540",
+  "title": "Import Google Photos to kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2540/import-google-photos-to-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/16ccd22b4306733854711e437c8ba36f6b393a19.png",
+      "heading": "1. Export your Google photos",
+      "step": 2,
+      "context": "2. Deselect all products to keep only **Google Photos**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/428524420408a0b4f4a475f4f3a79e4775146e44.png",
+      "heading": "1. Export your Google photos",
+      "step": 3,
+      "context": "3. If necessary, deselect the albums not to export:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9c67dede74eb6c276f8957c0c563b241e09fb443.png",
+      "heading": "1. Export your Google photos",
+      "step": 4,
+      "context": "4. Move on to the next step at the bottom of the page:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/18c7fce035152188d39c8bd648b1b6d5658bb3da.png",
+      "heading": "1. Export your Google photos",
+      "step": 6,
+      "context": "6. Click at the bottom on the \u201cCreate an export\u201d button to start the export:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9053fd65956caba39aca9202c1fbee9a940ff6d0.png",
+      "heading": "1. Export your Google photos",
+      "step": 8,
+      "context": "8. Download and then decompress the content on your computer:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4bde814ec3dd386703168d5de00df78dbb76645a.png",
+      "heading": "\u2026 on macOS",
+      "step": 2,
+      "context": "2. Install the application by authorizing its opening beforehand if necessary:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5cf9450b9771055d3b75e9538d0542e95abf572e.png",
+      "heading": "\u2026 on macOS",
+      "step": 3,
+      "context": "3. Open **Script Editor** (located in your Applications > Utilities folder):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f8611be5bb4ecc8b3abebd2b526800a054cdfba9.png",
+      "heading": "\u2026 on macOS",
+      "step": 6,
+      "context": "6. Click on **Run** to start the script, a window opens:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/05c4c3f4449357d5c804b714602ee2c56f58faee.png",
+      "heading": "3. Import photos to kDrive",
+      "step": 6,
+      "context": "6. Wait until your data is fully imported (the activity log scrolls at the bottom right):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/288825a5898ef1b068f9a02a0efce7a37a82916a.png",
+      "heading": "4. Access your photos from your devices",
+      "step": null,
+      "context": "- On the Web app **kDrive** Infomaniak (online service [ksuite.infomaniak.com/kdrive](https://ksuite"
+    }
+  ]
+}

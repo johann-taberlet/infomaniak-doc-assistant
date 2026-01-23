@@ -1,0 +1,37 @@
+{
+  "faq_id": "2488",
+  "title": "Display and transmit kDrive logs",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2488/display-and-transmit-kdrive-logs",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/9e0702607c49ed869085a69d2c3c69f934992a21.png",
+      "heading": "Save and Share Logs with Support",
+      "step": 5,
+      "context": "5. Scroll down to the *Advanced* section and click the arrow to the right of the **debugging informa"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/edafa9f2174ff1f90600fe3df752cd41def41a5e.png",
+      "heading": "Save and Share Logs with Support",
+      "step": 6,
+      "context": "6. Check the box for **extended logs** as in the image below:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/44b5de69f9f48ff35cde4d1a70aaf91c7edf418f.png",
+      "heading": "Save and Share Logs with Support",
+      "step": 8,
+      "context": "8. Return to the same place 10 minutes later (points 1-6 above) then **click the blue button to shar"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c5a684234a8c4bace85052647ac0d12ebd7763e7.png",
+      "heading": "Alternative method",
+      "step": 2,
+      "context": "2. From this folder, you will have access to all the bug reports of the kDrive application on your d"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/007615405a7edd0c8af1954c82f36519224a7bba.png",
+      "heading": "Alternative method",
+      "step": 3,
+      "context": "3. If they are still too large to be sent by email, upload the .zip archive to [swisstransfer.com](h"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "faq_id": "1622",
+  "title": "Receive your daily schedule by email or kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1622/receive-your-daily-schedule-by-email-or-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/da44d85a7c56840eb17058dcd9e60481f7509c0e.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click the button to **Add a daily reminder** and configure it:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7a258214c740429ea08f66b22e280da56b93550b.png",
+      "heading": "Prerequisites",
+      "step": 6,
+      "context": "6. Confirm your choices at the bottom of the page:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ed3db7523eb8a6cf05db0f1ca2f01cf8b142909d.png",
+      "heading": "Disable the daily reminder",
+      "step": 1,
+      "context": "1. Click on the [link](https://ksuite.infomaniak.com/calendar?settings=personalization__reports) loc"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/23798d3684d2a6302c860a6c22bdaf1c83cedd8a.png",
+      "heading": "Disable the daily reminder",
+      "step": 2,
+      "context": "2. Click on the reminder to delete:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c090de432096237cd38d4d26743b1a1d0c8dfcf9.png",
+      "heading": "Disable the daily reminder",
+      "step": 3,
+      "context": "3. Delete the reminder from the edit page:"
+    }
+  ]
+}

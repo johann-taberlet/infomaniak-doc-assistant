@@ -1,0 +1,49 @@
+{
+  "faq_id": "2566",
+  "title": "Use Euria on kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/1f7141d616724e5a0796c9a85102d8c6169aaf15.png",
+      "heading": "Prerequisites",
+      "step": null,
+      "context": "- You can also **activate** (or **deactivate**) **Euria** by going to the [unified settings](https:/"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d988afe25b19bf11b315d9ab615b0c46a1ee4aae.png",
+      "heading": "Prerequisites",
+      "step": null,
+      "context": "- It is then necessary to accept (or revoke) the [content search features on documents](https://www."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4955a1f2c7d37cabff889efe7bd58ace1abf283e.png",
+      "heading": "Prerequisites",
+      "step": 2,
+      "context": "2. Open a **PDF** document (Euria is also available with other text/code file types: `.md`, `.txt`, "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c85865130a07ebe2befc206cd44c208b826f69a5.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Euria will open in a right sidebar; if you close it, Euria remains accessible via the round icon "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f6c8d3fdb9ceebbf61aca2e7c640b625e47dbfc9.png",
+      "heading": "Create an event for your agenda",
+      "step": null,
+      "context": "Euria can also extract events from a more complex document:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/13ef56903749d1d602c2ba56964bec14e49dd84f.png",
+      "heading": "Create an event for your agenda",
+      "step": null,
+      "context": "Euria will explain what it has done (a VCALENDAR code) and what you will need to do (create a new fi"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/1c5acffd1691c82d722b37178d8843fb70689b08.png",
+      "heading": "Create a family tree of characters",
+      "step": null,
+      "context": "But you can take the experience further by then asking for a \u201cMermaid\u201d diagram based on this list. Y"
+    }
+  ]
+}

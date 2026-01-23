@@ -1,0 +1,19 @@
+{
+  "faq_id": "2384",
+  "title": "Restore a kDrive file to a previous version",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2384/restore-a-kdrive-file-to-a-previous-version",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd81dfd29656295847cbabe00aecce7fa8977879.png",
+      "heading": "Manage previous file versions",
+      "step": 4,
+      "context": "4. Click on **Version History**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e8916a6e089cd025330102aa6e0d292bb636c3b5.png",
+      "heading": "Manage previous file versions",
+      "step": 4,
+      "context": "Otherwise, a menu on the right of each version allows you to:"
+    }
+  ]
+}

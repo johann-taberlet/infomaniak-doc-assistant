@@ -1,0 +1,19 @@
+{
+  "faq_id": "2620",
+  "title": "Draw on kMeet",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2620/draw-on-kmeet",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/d3e2d73508a734cbbc0601ddceccaeec058b597d.png",
+      "heading": "Display a collaborative whiteboard",
+      "step": 3,
+      "context": "3. Click on **Display the whiteboard**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3c1bc1e9b964eb4f634d41bb631fe6b2118f62de.png",
+      "heading": "Display a collaborative whiteboard",
+      "step": 5,
+      "context": "5. Each participant's cursor is displayed:"
+    }
+  ]
+}

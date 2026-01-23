@@ -1,0 +1,31 @@
+{
+  "faq_id": "1633",
+  "title": "Manage a user's rights within an Organization",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1633/manage-a-users-rights-within-an-organization",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/cf6bf2336c4708e07ec8dce46fef7706ed1ca2bc.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click on **Modify the role**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b4f41ba733ba5d47f19e9cbcf1d55b6b46a5a89b.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Modify the desired role:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3bd0833ead4ed866629b73f9751c1fb5a4d38508.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "If you assign the user a simple collaborator role\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/14add8787309bf170aaa525df8f982ad8f11c892.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "\u2026 you will be able to modify the services to which he can access; refer to [this other guide](https:"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "faq_id": "1854",
+  "title": "Share data via email from the kDrive Web app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1854/share-data-via-email-from-the-kdrive-web-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/6a72424f1cd1061320d4a35a7f0dcadde34f06a8.png",
+      "heading": "Share by email from kDrive",
+      "step": 3,
+      "context": "3. From the dropdown menu that appears, choose to share the item by email:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/384cc4797f1be5f3da4dd5e52375243e4facb4d7.png",
+      "heading": "Share by email from kDrive",
+      "step": 5,
+      "context": "5. Click on **Continue**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/bbf6e9a62ae295d8fb1d77851e22821d850ab1a1.png",
+      "heading": "Share by email from kDrive",
+      "step": 6,
+      "context": "6. The Web app [Mail](https://ksuite.infomaniak.com/mail) opens in the browser and the body of the m"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3597b51000cf1d2302a3168dbea3ae8f67d40d03.png",
+      "heading": "Invite to collaborate on the file",
+      "step": null,
+      "context": "For documents with file extensions such as Office `.docx`, `.xls`, etc., it is recommended to perfor"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a4ced89da667f2f77a53f714e036b2d5bab94be4.png",
+      "heading": "Invite to collaborate on the file",
+      "step": null,
+      "context": "- If you **authorize the modification of the document** from kDrive, the user will be able to **coll"
+    }
+  ]
+}

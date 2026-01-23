@@ -1,0 +1,67 @@
+{
+  "faq_id": "2410",
+  "title": "Understanding kDrive folders (personal, shared, common)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2410/understanding-kdrive-folders-personal-shared-common",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/48112985213639be133d8b6abc1a5b6aebeb8d78.png",
+      "heading": "1.Organization folders: common to the collaborators of your Organization",
+      "step": null,
+      "context": "This folder displays the folder tree shared automatically with certain or all users of the same kDri"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ae12e45f261de0c91146418eb957e63895e0b5ba.png",
+      "heading": "1.Organization folders: common to the collaborators of your Organization",
+      "step": null,
+      "context": "If you create a new folder here, you can choose to share it with the entire Organization (all kDrive"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f54ceed70ad2e6d6759694a538f55344acbaca41.png",
+      "heading": "2.My folder: default personal & private folder",
+      "step": null,
+      "context": "This folder displays the folder tree specific to the user themselves: indeed, each kDrive user has t"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8618071e5b8c2e9d46a54d7fd2daa2bd476bdad6.png",
+      "heading": "3.Shares",
+      "step": 4,
+      "context": "4. The [drop boxes](https://www.infomaniak.com/en/support/faq/2386)"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/be1f92e463cac27e05cc0c5347ee8c6ed257aa81.png",
+      "heading": "My favorites",
+      "step": null,
+      "context": "This menu groups your files and folders [defined as favorites](https://www.infomaniak.com/en/support"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/14665e160931581c75e8494adb3ef448baed734d.gif",
+      "heading": "My favorites",
+      "step": null,
+      "context": "\u2026 and the mobile app:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/09ff82fa4faf3339d65c78d3f85f57c96ef16a62.png",
+      "heading": "My latest modifications",
+      "step": null,
+      "context": "This menu displays the latest operations performed by your user:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c6edf8050512a5692163dd54f998977979d397ae.png",
+      "heading": "Trash",
+      "step": null,
+      "context": "This menu leads to your deleted data, which [can still be restored](https://www.infomaniak.com/en/su"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/661af128ec5935f6bcfa203a5f408e19c80c95ef.png",
+      "heading": "Categories",
+      "step": null,
+      "context": "You can also quickly access your files [if they are categorized](https://www.infomaniak.com/en/suppo"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/86b81032905e385204ab22eb2c8b251633599349.png",
+      "heading": "Set the default display when starting up",
+      "step": 5,
+      "context": "5. Choose the page that should be displayed by default when arriving at the homepage:"
+    }
+  ]
+}

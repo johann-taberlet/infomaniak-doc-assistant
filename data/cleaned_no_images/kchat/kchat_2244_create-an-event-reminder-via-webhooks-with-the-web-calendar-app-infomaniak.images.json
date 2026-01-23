@@ -1,0 +1,73 @@
+{
+  "faq_id": "2244",
+  "title": "Create an event reminder via webhooks with the Web Calendar app Infomaniak",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2244/create-an-event-reminder-via-webhooks-with-the-web-calendar-app-infomaniak",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/c36290e77de80a0b5d0d2ccfad218693d8d738f8.png",
+      "heading": "Announce the webhook to Calendar",
+      "step": 4,
+      "context": "4. Click on the **Add a webhook** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/07c59894d7ada1f5ca1925f2b7e6a84096b678f9.png",
+      "heading": "Announce the webhook to Calendar",
+      "step": 5,
+      "context": "5. Define:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/04396a8c467fd0fa1ce00aa6cfc324562541f6a7.png",
+      "heading": "Create an event with a chat reminder",
+      "step": 3,
+      "context": "3. Click on **Event**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/44d6ef5c60fdddd5bd15fb30b36c3af8e6bd0b44.png",
+      "heading": "Create an event with a chat reminder",
+      "step": 4,
+      "context": "4. Display the **additional fields**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/68bcb8d4e0c3f3883d06809c43e36b9c6644c04d.png",
+      "heading": "Create an event with a chat reminder",
+      "step": 5,
+      "context": "5. Click on **Add a reminder**to configure it:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/bf26b1aac8dfc5ffb27c08410ceccf400ac1928c.png",
+      "heading": "kChat",
+      "step": 3,
+      "context": "3. Click on **Incoming Webhooks**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2b558b3c60433e4fac3c544d28d36f9706a4f59b.png",
+      "heading": "kChat",
+      "step": 5,
+      "context": "5. **Complete the required information** to create the \"bot\" that will post follow-up messages in kC"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7689df2366aecfcf49273c6631d878eedf165719.png",
+      "heading": "kChat",
+      "step": 6,
+      "context": "6. Save to obtain the webhook URL:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8a0cd7210e52e4d9da08407cc996f887a6abe763.png",
+      "heading": "kChat",
+      "step": 7,
+      "context": "7. Create the custom notification in **Calendar** (read above if necessary):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/aac7afa7c82e00c4817c28eadefb245be4a4ea03.png",
+      "heading": "kChat",
+      "step": 8,
+      "context": "8. Select your custom notification when adding a reminder to your event:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f67490b579ff0d247dd39159be5c9e4b71331f4e.png",
+      "heading": "Slack",
+      "step": 2,
+      "context": "2. Choose the discussion thread where your reminders will appear (for example **@slackbot** or **#ge"
+    }
+  ]
+}

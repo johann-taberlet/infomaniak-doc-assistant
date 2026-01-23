@@ -1,0 +1,25 @@
+{
+  "faq_id": "2472",
+  "title": "Save a kMeet meeting on kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/66f2cea9431f7e05711046b978120cd4b091840e.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click on the icon \u25c9 **Start recording**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5ddbe8afd6900ca9d783df9cc5d2ff94edcdb1b4.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Confirm the operation and if necessary, log in to your Infomaniak account, then select a kDrive t"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/50e0080dd57ab23f7c813c1c95b6e47f95cf523e.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "5. To stop saving, click on the toolbar again, then choose **Stop recording**:"
+    }
+  ]
+}

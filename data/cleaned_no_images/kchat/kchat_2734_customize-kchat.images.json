@@ -1,0 +1,31 @@
+{
+  "faq_id": "2734",
+  "title": "Customize kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2734/customize-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/bb7c8c6659e612668d55d97605cbb8d9640d12c7.png",
+      "heading": "Configure kChat on the Manager",
+      "step": 2,
+      "context": "2. Click on **Settings** in the left sidebar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a862e38d99a0ee41835af71dd3dc853f8dc71af6.png",
+      "heading": "Dark Mode / Light Mode",
+      "step": null,
+      "context": "However, the desktop app can be configured independently of the rest; this is set from the icon \u200d at"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/76b05eaeba29fb4d861b95c8a7cea88e68ad94d5.png",
+      "heading": "Customize a discussion, a channel, etc.",
+      "step": null,
+      "context": "Next to each element of the left sidebar is an action menu **\u22ee** allowing you to define the sorting "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/21aa48a12f015c207ac24991f33af0ddce5bdab1.png",
+      "heading": "Set a status",
+      "step": 4,
+      "context": "4. Enter an expiration date if necessary:"
+    }
+  ]
+}

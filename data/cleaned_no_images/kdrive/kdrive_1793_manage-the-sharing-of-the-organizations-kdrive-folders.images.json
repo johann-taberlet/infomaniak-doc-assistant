@@ -1,0 +1,133 @@
+{
+  "faq_id": "1793",
+  "title": "Manage the sharing of the organization's kDrive Folders",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1793/manage-the-sharing-of-the-organizations-kdrive-folders",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/c659a7aa28bdf8bcdd3109dba6030438f10567cb.png",
+      "heading": "Switching from a simple share to a kSuite invitation",
+      "step": null,
+      "context": "- \u2026 with **1 single user** out of 2\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/02caa322d7f5cbf85f608ee99e82ccf0a8168e36.png",
+      "heading": "Switching from a simple share to a kSuite invitation",
+      "step": null,
+      "context": "- \u2026 data in \u201c**Organization Folders**\u201d and in \u201c**My Folder**\u201d:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/64b50075d74a8b30b03540c64e5b82149b3d31c7.png",
+      "heading": "A. Result of a share without the need for the invited user to sign up",
+      "step": 3,
+      "context": "- They can **navigate**, **view**, and **download** files, including to their own kDrive, all in *re"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f8414afb40b49f0ac2cb4d352f8d526327662e8d.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 5,
+      "context": "5. Click to **add** (the operation can be performed for multiple users at the same time):"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d4ae5e14ce65980e3cd5c4e29d8279a4500d075e.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 7,
+      "context": "7. Click on **Send the invitation**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e9b17e98bf94dc826bfabf2b759fa77d1d9cd86f.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 8,
+      "context": "8. This choice (see point 6 above) will allow you to **invite** this person as an **external user** "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2bb0d0237dbac0070e5d6d272a6ef0f1442e35da.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 9,
+      "context": "9. The administrator can see the pending request and resend the invitation if necessary:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/62fe428e4c62a264471aa0c7d55ad12e29abbaa1.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 10,
+      "context": "10. The invited person receives an email to register as an Infomaniak user:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a4880abca912bf3fb9ebc5d6b38cc3e6280d3f06.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 11,
+      "context": "11. The person fills in the form with their details and chooses a password, **their email address is"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/65f40b97c53381d7c05cbee1301681304293c1dd.png",
+      "heading": "B. Result of a share with sign-up (not counted in kSuite)",
+      "step": 12,
+      "context": "12. Once registration is complete, a simplified kDrive interface with \u201c**Shared with me**\u201d on the le"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a6cc0c151912586ec2694b80b1c02db54923de0a.png",
+      "heading": "C. Result of a share with registration as a kSuite user",
+      "step": null,
+      "context": "Now imagine that no sharing or invitation has taken place yet. Repeat steps 1 to 7 above\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2624cd61f39b8f557ea120a13258b553b9f849f8.png",
+      "heading": "C. Result of a share with registration as a kSuite user",
+      "step": 1,
+      "context": "1. **Invite** this person as a **kSuite user** by clicking on the link that opens the **user managem"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/aaf986e0aebd1eecf9cc59517b53816bb3a56cb5.png",
+      "heading": "C. Result of a share with registration as a kSuite user",
+      "step": 2,
+      "context": "2. **Create the kSuite user** (by following the order **A** (if necessary) then **B** and **C** belo"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b565555e028982504d182527e4ae26b9d22444ab.png",
+      "heading": "D. Restrict user access",
+      "step": null,
+      "context": "> **Note:** **The Organization's Folders are common folders but**[do not necessarily imply](https://"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/064091abd95f3da3315ff09285c1400cccf09866.png",
+      "heading": "D. Restrict user access",
+      "step": null,
+      "context": "If the invited user sees nothing in this shared folder, check **from the administrator account** if "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/01889faa021e50e084cda2feaa808bb8523dc0d8.gif",
+      "heading": "D. Restrict user access",
+      "step": 1,
+      "context": "1. Right-click on the parent folder, select the **Share** item, then choose the second sharing tab a"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ec93d6798948fa911c20b753965fb26de6039293.png",
+      "heading": "D. Restrict user access",
+      "step": 2,
+      "context": "2. Then share again, but more restrictively, from the folder in question:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/69213ee452b4a310d7997965e3ffebd62c6f7284.png",
+      "heading": "D. Restrict user access",
+      "step": 3,
+      "context": "3. Check the access column in the kDrive tree:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6ccaa28aa1cb5ac5eddb23263003d7e3c27651b5.png",
+      "heading": "D. Restrict user access",
+      "step": 4,
+      "context": "4. And here is the user who now sees only part of the **shared** folder:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b94f10cedb4c8aa91d4d31add676572ddcadbb36.png",
+      "heading": "D. Restrict user access",
+      "step": 5,
+      "context": "5. And this time, if the user installs the kDrive app, they can choose the kDrive in question:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/202ab07e2d71028d63f4b3b7367cbc70fde98975.png",
+      "heading": "D. Restrict user access",
+      "step": 5,
+      "context": "and access the files on the computer:"
+    }
+  ]
+}

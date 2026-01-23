@@ -1,0 +1,19 @@
+{
+  "faq_id": "2274",
+  "title": "Rename a kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2274/rename-a-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/e94e97fb7887e9ca67f6c459816caa2fffc0cae4.png",
+      "heading": "... from the Infomaniak Manager",
+      "step": 3,
+      "context": "3. Click on **Rename the product**."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5debe023357f682e34a112e2f0538d1efd99b044.png",
+      "heading": "... from the unified app settings",
+      "step": 5,
+      "context": "5. Click on the **pencil**\u270e icon to edit the name of the kDrive as you wish:"
+    }
+  ]
+}

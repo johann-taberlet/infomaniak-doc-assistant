@@ -1,7 +1,8 @@
 # ADR-001: Frontend SDK Selection for AI Chat & Agentic UI
 
-**Status:** Proposed
+**Status:** Accepted
 **Date:** 2026-01-23
+**Research:** [docs/research/copilotkit-vs-vercel-ai-sdk.md](../research/copilotkit-vs-vercel-ai-sdk.md)
 **Decision Makers:** Johann Taberlet
 
 ## Context
@@ -87,8 +88,34 @@ onToolCall: async ({ toolCall }) => {
 }
 ```
 
+## Research Summary
+
+A detailed comparison was conducted (see linked research document). Key findings:
+
+| Aspect | Vercel AI SDK | CopilotKit |
+|--------|--------------|------------|
+| FastAPI Support | **Native protocol, multiple Python libs** | SDK exists but issues reported |
+| Vite React | Works out of box | Designed for Next.js |
+| Learning Curve | Lower | Higher (AG-UI protocol) |
+| Agentic Patterns | Manual but flexible | Built-in (AG-UI) |
+| Maturity | v6 (stable) | v1.5x (evolving) |
+
+**CopilotKit Concerns:**
+- Reported 404/redirect issues with FastAPI integration
+- API still evolving (breaking changes)
+- Heavier bundle size
+
+**Vercel AI SDK Strengths:**
+- Well-documented Data Stream Protocol for Python backends
+- Framework-agnostic hooks (`@ai-sdk/react`)
+- Multiple Python libraries: `py-ai-datastream`, `fastapi-ai-sdk`
+
 ## References
 
 - [Vercel AI SDK Docs](https://ai-sdk.dev/docs/introduction)
-- [json-render GitHub](https://github.com/vercel-labs/json-render)
+- [AI SDK Stream Protocol](https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol)
+- [AI SDK Generative UI](https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces)
+- [py-ai-datastream](https://github.com/elementary-data/py-ai-datastream)
 - [fastapi-ai-sdk](https://github.com/doganarif/fastapi-ai-sdk)
+- [CopilotKit Docs](https://docs.copilotkit.ai/)
+- [AG-UI Protocol](https://docs.copilotkit.ai/ag-ui-protocol)

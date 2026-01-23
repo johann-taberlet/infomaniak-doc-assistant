@@ -15,7 +15,7 @@ import httpx
 from pathlib import Path
 from bs4 import BeautifulSoup, NavigableString
 
-OUTPUT_DIR = Path("data/docs")
+OUTPUT_DIR = Path("data/raw")
 
 # Product IDs for Infomaniak FAQ search API
 PRODUCTS = {

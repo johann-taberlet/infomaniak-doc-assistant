@@ -1,0 +1,19 @@
+{
+  "faq_id": "2504",
+  "title": "Force kDrive to sync hidden files",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2504/force-kdrive-to-sync-hidden-files",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/d7457ebe0ef629ebb9043e70c901631ef97f38c1.png",
+      "heading": "Synchronize hidden files in kDrive",
+      "step": 3,
+      "context": "3. Click on **Preferences:**"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/33c3342e5c8fcb73517fdc5c38bab8eefd5fac6f.png",
+      "heading": "Synchronize hidden files in kDrive",
+      "step": 6,
+      "context": "6. Click on the blue button **Save:**"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "faq_id": "2885",
+  "title": "Edit a PDF file on the kDrive Web app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/f90c7dd6ad7203bbea3dfe43cf4ea8bea4de868d.png",
+      "heading": "Modify a PDF file",
+      "step": 3,
+      "context": "3. Click the **Edit** button at the top of the document to access the file editor:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/eb8c066674df1d0025f3876397ef80848353caf8.png",
+      "heading": "Rename a file (PDF or other)",
+      "step": null,
+      "context": "It is possible to rename any file by clicking on the action menu **\u22ee** located to the right of the c"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d4d28fba9dfc618514ab0e422d452f023648fd0e.gif",
+      "heading": "Rename a file (PDF or other)",
+      "step": null,
+      "context": "You can also open the file and rename it directly from the preview. Example with a PDF file:"
+    }
+  ]
+}

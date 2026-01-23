@@ -1,0 +1,49 @@
+{
+  "faq_id": "2514",
+  "title": "Import photos to the kDrive mobile app (Android)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2514/import-photos-to-the-kdrive-mobile-app-android",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/af26c964f2466bfecc1fdd8903561fe97c14652b.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 3,
+      "context": "3. Tap **Settings**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/bf5916db45cb604e78ee61a4432cf2a02d08fc70.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 4,
+      "context": "4. Tap **Photo backup**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c9df252811b479923223d31898ddd795349fd510.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 6,
+      "context": "6. Tap **Select a kDrive**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/63f1379059b31ceba429dace5522cab06f23d443.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 7,
+      "context": "7. Choose the kDrive user (if you have linked several on your device) and then the kDrive linked to "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d33a6ea9402306779ba8fb7f5cfcb8d065eb06b2.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 9,
+      "context": "9. Choose the folder(s) on the mobile device where your photos to be sent to kDrive are located, the"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/aef3594efdd10b84acefe63d37c274c8acfd8913.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 10,
+      "context": "10. Configure the rest (sending including videos, monthly sorting, request to delete content remaini"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8ce182936102af99ab9cbfd0b6ac4b5cfd4cf7a6.png",
+      "heading": "Enable sending to kDrive on Android",
+      "step": 11,
+      "context": "11. If you have chosen to send all your existing content and not just new photos, then the upload of"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "faq_id": "2454",
+  "title": "Manage the folders to sync on kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2454/manage-the-folders-to-sync-on-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/ad1db43452bd150052a498a22735446ca218a200.png",
+      "heading": "Choose the kDrive folders to synchronize",
+      "step": 3,
+      "context": "3. Click on **kDrive Settings**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/feea8e6c9122fa3d44b9f4594fddc45c6c27f9eb.png",
+      "heading": "Choose the kDrive folders to synchronize",
+      "step": 6,
+      "context": "6. Click on the blue **Validate** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/be4874ec18e4e02f8f388704b4cc1b8499794bbe.png",
+      "heading": "Warning",
+      "step": null,
+      "context": "- In case of doubt, also make sure that your computer does not instantly delete items that are too l"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c358e0c2ab073154298544212890093ea687c7a9.png",
+      "heading": "Add a local folder for advanced synchronization",
+      "step": 1,
+      "context": "1. In the same place accessible according to the procedure above, click on **\u200d**\u200d**Synchronize a loc"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8fdf3853ba211ed5ceab2aa905b3c2a9875b48ef.png",
+      "heading": "Add a local folder for advanced synchronization",
+      "step": 2,
+      "context": "2. ... which will allow you to synchronize one or more new folder(s) from your hard drive with the l"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/85d84219d33d8918b48fe8a56580a07bb55dc88e.png",
+      "heading": "Stop and remove a synchronization",
+      "step": 1,
+      "context": "1. In the same place accessible according to the procedure above, click on the icon **\u22ee**all the way"
+    }
+  ]
+}

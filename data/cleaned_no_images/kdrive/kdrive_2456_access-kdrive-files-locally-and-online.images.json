@@ -1,0 +1,13 @@
+{
+  "faq_id": "2456",
+  "title": "Access kDrive files locally and online",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2456/access-kdrive-files-locally-and-online",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/0a4caaa7a356d72a580aa9e3082dfbedd3ae1636.png",
+      "heading": "View kDrive files",
+      "step": 3,
+      "context": "3. Click on **Open kDrive Web** to access the files stored on the kDrive *server*:"
+    }
+  ]
+}

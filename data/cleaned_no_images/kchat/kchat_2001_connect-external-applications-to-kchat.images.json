@@ -1,0 +1,25 @@
+{
+  "faq_id": "2001",
+  "title": "Connect external applications to kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2001/connect-external-applications-to-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/6184238ffe75a7fd22ad0c252392f0fbd0754167.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Access the categories:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a8afd894584a705bee1a7d20f305bf2900c81a14.png",
+      "heading": "Create a simple incoming webhook",
+      "step": 2,
+      "context": "2. Click on the blue button **Add incoming webhooks**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/64cd0f7f3139d8.11278371png",
+      "heading": "Example code with parameters",
+      "step": null,
+      "context": "This will result in the display of this message in the channel *kchatemp* of the organization:"
+    }
+  ]
+}

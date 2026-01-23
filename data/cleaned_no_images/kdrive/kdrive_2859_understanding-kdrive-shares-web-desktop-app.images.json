@@ -1,0 +1,91 @@
+{
+  "faq_id": "2859",
+  "title": "Understanding kDrive shares (Web / Desktop app)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2859/understanding-kdrive-shares-web-desktop-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/99e4a14fb31c2381ff4b1b22fa6649e12cce5fdb.png",
+      "heading": "Steps to share a folder/file internally",
+      "step": 1,
+      "context": "1. In the kDrive web interface, one of the kDrive users right-clicks on their folder or file to shar"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6d7d0b962992b0a446fb46852623d2431e5f46ef.png",
+      "heading": "Steps to share a folder/file internally",
+      "step": 2,
+      "context": "2. Select \u201cShare the folder\u201d:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/28c1007682e022d3162b7ba314da2398d60d8f90.png",
+      "heading": "Steps to share a folder/file internally",
+      "step": 3,
+      "context": "3. In the \u201ckDrive Users\u201d tab, enter the name of **another user of the same kDrive**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/58fd19a8d73e54684cce9ffa68d66174c9781503.png",
+      "heading": "Steps to share a folder/file internally",
+      "step": 4,
+      "context": "4. Choose the permissions:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/87cade916bcef09c095ca313b8b5a0ba5160eeaa.png",
+      "heading": "Behavior in the desktop app",
+      "step": null,
+      "context": "When an internal share is made as above, a folder named \u201cShared\u201d automatically appears in the local "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/fbac6c955f0c50d4be2ad9945f9a563b265fa51f.png",
+      "heading": "Steps to share a folder/file externally",
+      "step": 2,
+      "context": "2. Select **\u201cShare the folder\u201d**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/14f5377ec830824c2e1745ad952ffd4ccb3cee1d.png",
+      "heading": "Steps to share a folder/file externally",
+      "step": 3,
+      "context": "3. In the **\u201ckDrive Users\u201d** tab, enter the **email address of the external person** (`faq@ik.me` in"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3c28cce808ebe1235aec1f8fa4000f43064f3650.png",
+      "heading": "Steps to share a folder/file externally",
+      "step": 4,
+      "context": "4. Click on the **email address** to add it, choose the **permissions** of the user and an optional "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/56289b4a0f894342e5b2fe67ec14e34c942f9068.png",
+      "heading": "Steps to share a folder/file externally",
+      "step": 5,
+      "context": "5. Select **\u201cExternal User\u201d** and click on the button at the bottom right to send the invitation:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/dd1edfa9f06d60e0b0a30b11844cfb3df49820dc.png",
+      "heading": "Behavior in the Web (and desktop) app",
+      "step": null,
+      "context": "As long as the user does not check their emails, nothing will happen, the kDrive will not appear to "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7c03e6eb01ecc45d33b50e2db07e032f06a879ff.png",
+      "heading": "Behavior in the Web (and desktop) app",
+      "step": null,
+      "context": "The user `faq@ik.me` will therefore need to check their emails:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/903c814042e52bd601f807441ce4923e95b337a9.png",
+      "heading": "Behavior in the Web (and desktop) app",
+      "step": null,
+      "context": "- The user is redirected to the shared data page in a restricted kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4e00b35f0420eb992dccd6be918d2db9c0f9e93e.png",
+      "heading": "Behavior in the Web (and desktop) app",
+      "step": null,
+      "context": "- To find them later, it may be necessary to first display \u201cAll Organizations\u201d to make the sharing r"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6365712898e400673995fb3674262e14bf68cd7f.png",
+      "heading": "Behavior in the Web (and desktop) app",
+      "step": null,
+      "context": "- Then, the shared data will be visible in the \u201cShared with me\u201d item:"
+    }
+  ]
+}

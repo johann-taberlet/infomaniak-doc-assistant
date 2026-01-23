@@ -1,0 +1,25 @@
+{
+  "faq_id": "2397",
+  "title": "Create a kMeet meeting side room",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2397/create-a-kmeet-meeting-side-room",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/ba0a87e7a5dc3bcb659cdf1f55b1234e84c999df.png",
+      "heading": "Create a side room",
+      "step": 3,
+      "context": "3. Click the button to add a side room:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/762402d90e1f869ad86bc60ee208683ccc32a44f.png",
+      "heading": "Create a side room",
+      "step": 4,
+      "context": "4. Participants can then join the created room or leave it (by displaying the menu with the same but"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/fe1747d86fe96ba54e3f46fd42315d2b15294e2a.png",
+      "heading": "Create a side room",
+      "step": 5,
+      "context": "5. The moderator can also force one of the participants to join one of the side rooms by clicking on"
+    }
+  ]
+}

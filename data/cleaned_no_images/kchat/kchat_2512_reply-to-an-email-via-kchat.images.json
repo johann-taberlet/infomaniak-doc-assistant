@@ -1,0 +1,31 @@
+{
+  "faq_id": "2512",
+  "title": "Reply to an email via kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2512/reply-to-an-email-via-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/184989c261ce350efec183eaa0c8df9245f68430.png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Click on the kChat message icon in the email toolbar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/1e5385995325379acaa32d6b443a6b36ca51be69.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Compose your kChat message, format it if necessary and click the **Send** button at the bottom ri"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e47337ee84c35997297db6455bdd90b9783f8e30.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "- in the send confirmation message:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/14983481f7979e82ecfa6ba0b9aa1107190eb542.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "- in an information banner on the email conversation:"
+    }
+  ]
+}

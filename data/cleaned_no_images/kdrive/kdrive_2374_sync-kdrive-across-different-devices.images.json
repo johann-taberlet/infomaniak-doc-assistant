@@ -1,0 +1,67 @@
+{
+  "faq_id": "2374",
+  "title": "Sync kDrive across different devices",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2374/sync-kdrive-across-different-devices",
+  "images": [
+    {
+      "url": "https://faq.storage.infomaniak.com/63451afb367882.67329583png",
+      "heading": "\u2026 on mobile",
+      "step": null,
+      "context": "> **Note:**"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2b2e7ee69cbe9e2e080d49781144acc46e579702.png",
+      "heading": "Install the kDrive app",
+      "step": 2,
+      "context": "2. At the end of the installation, the application should open and a form will ask you to log in to "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/08f6a7fce5338b8aa83dbf83d8d21d85acfe668b.png",
+      "heading": "Install the kDrive app",
+      "step": 3,
+      "context": "3. Then, choose from the list the kDrive you want to synchronize (if your account allows access to m"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/27a99e07033269945025023d52ed567d52e3eef0.png",
+      "heading": "Install the kDrive app",
+      "step": 4,
+      "context": "4. Enable or disable the Lite Sync option (feature of the [Windows](https://www.infomaniak.com/en/su"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/62f21cfc0f99732d8b47846ddcb4176d5bca156f.png",
+      "heading": "Install the kDrive app",
+      "step": 5,
+      "context": "5. A kDrive folder is created on your hard drive at the indicated location (a location that is recom"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/dfe4b8f9e79cfc51d982f015fc57a3775bb1f693.png",
+      "heading": "Install the kDrive app",
+      "step": 6,
+      "context": "6. During installation, **pay attention to the permissions that may be requested** (especially on ma"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6efbae71093bbe51b662541357a1d31d7f8f8e4f.png",
+      "heading": "Install the kDrive app",
+      "step": 7,
+      "context": "7. Once the installation is complete, you can choose to open the location of the kDrive files on you"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3fbd25d2bb6d8dbff196714c3b448facfdf7f050.png",
+      "heading": "Install the kDrive app",
+      "step": 8,
+      "context": "8. On a macOS device, for example, it looks like this:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b50c08eab14606ba4b419213e1cb573d6b7aa571.png",
+      "heading": "Install the kDrive app",
+      "step": 10,
+      "context": "10. The data appears, you can compare it with point 8 above:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0a33268ac409a662b15e4fd31db9f39405a0be6e.png",
+      "heading": "Synchronize files with kDrive",
+      "step": null,
+      "context": "- Take the opportunity to browse the **application preferences** and the **Drive preferences**, from"
+    }
+  ]
+}

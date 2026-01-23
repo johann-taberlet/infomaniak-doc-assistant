@@ -1,0 +1,25 @@
+{
+  "faq_id": "1463",
+  "title": "Sign a PDF document on the kDrive web app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/f90c7dd6ad7203bbea3dfe43cf4ea8bea4de868d.png",
+      "heading": "Create and apply your signature to a PDF",
+      "step": 3,
+      "context": "3. Click the **Edit** button at the top of the document to access the file editor:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b493ad42a9944445a1602b51ab66d529db7d266b.png",
+      "heading": "Create and apply your signature to a PDF",
+      "step": 8,
+      "context": "8. Click on **Save**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c0c49055d8ee37f0c4958a305a32507dda80056.png",
+      "heading": "Create and apply your signature to a PDF",
+      "step": 12,
+      "context": "12. Once finished, save the changes and choose whether to **create a copy** of the modified document"
+    }
+  ]
+}

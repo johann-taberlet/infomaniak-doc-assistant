@@ -1,0 +1,79 @@
+{
+  "faq_id": "1758",
+  "title": "Manage kChat conversations",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1758/manage-kchat-conversations",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/8c4ee2a83748350b93bd84f1252feba2d9a2d2c2.png",
+      "heading": "Start a conversation",
+      "step": null,
+      "context": "To write to a user in your Organization, click on their name in the list of members on the left side"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8c40baf29988db8d490a0972b3553ec58f4c5447.png",
+      "heading": "Start a conversation",
+      "step": null,
+      "context": "You can also click on the **+** to the right of **Personal Messages** to select up to 7 members and "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7f7f519b453247bd6a85eaaf661cc83a2f20eced.png",
+      "heading": "Start a conversation",
+      "step": null,
+      "context": "Write and send your message by pressing the send button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/728b9e1122e109abc4882d8a21954facebe05f87.png",
+      "heading": "Scheduled sending: schedule a message",
+      "step": null,
+      "context": "To schedule a message to be sent at a later date/time, simply click on the chevron to the right of t"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c53aeba0a9f3c5c9df4be98945641a99cd0f672.gif",
+      "heading": "Mention another user",
+      "step": null,
+      "context": "To contact one of the Organization's members (or an entire [work team](https://www.infomaniak.com/en"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65cf74414d7f60.45831983gif",
+      "heading": "Request a read receipt",
+      "step": null,
+      "context": "For users to be able to acknowledge receipt of your message and thus indicate that they have read th"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/614ed68038d7425c713e3065848544b32bf0c389.png",
+      "heading": "Request a read receipt",
+      "step": null,
+      "context": "Once the message is sent, the result will be as follows:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658d4dad863552.94527387gif",
+      "heading": "Edit / delete a message, or pin it",
+      "step": null,
+      "context": "To **edit** a message (which will then have a mention of edited message), click on the action menu t"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/79837ba011cbb60d67be0ed1f51397c596da3862.png",
+      "heading": "Organize conversations in kChat",
+      "step": null,
+      "context": "The type of sorting for the items you manage on the left side of the screen is very important."
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/e7963f98c5f6fad3d9e7def26ea3312412c4ff30.png",
+      "heading": "Organize conversations in kChat",
+      "step": null,
+      "context": "This sorting option is available for all items: discussion channels, categories, direct messages, et"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/c3e9338c6802e752d654ec99dab1c5830585101f.gif",
+      "heading": "Search for a conversation",
+      "step": null,
+      "context": "Searching for items (word, participant, file) is at the top of the window:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/afbbad3044f668209d227f1d49aa63f292b1fbe3.gif",
+      "heading": "Discussion thread",
+      "step": null,
+      "context": "These discussion threads are then centralized to be read and reread in the **Discussion Threads** se"
+    }
+  ]
+}

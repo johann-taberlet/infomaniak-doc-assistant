@@ -1,0 +1,73 @@
+{
+  "faq_id": "2796",
+  "title": "Import data to kDrive (iOS)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2796/import-data-to-kdrive-ios",
+  "images": [
+    {
+      "url": "https://faq.storage.infomaniak.com/658a970e7a1c60.67123906PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 2,
+      "context": "2. Click on the iPhone share icon:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a972b9134f1.91244715PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 3,
+      "context": "3. Choose kDrive from the options offered:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a9741a44ff7.23618562PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 4,
+      "context": "4. Select the kDrive and the backup location - if this does not suit you, press it to change the sto"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a97a393c330.02729307PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 5,
+      "context": "5. Choose another folder or **create a new folder**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a98190c2937.39675592PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 6,
+      "context": "6. Determine the type of folder to create (shared folder with kDrive users or personal & private fol"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a985f5f7ae7.84251780PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 7,
+      "context": "7. Name the folder, choose the possible shared access and then press the blue button to create the f"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a9aed0681f3.10292578png",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 8,
+      "context": "8. Press the newly created folder to select it as the location:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a98c93fbbd2.02754161PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 9,
+      "context": "9. Create a possible subfolder in it or **validate** the chosen location with the blue button:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a98fc5b8632.89536745PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 10,
+      "context": "10. Press the blue button to start **sending** your files to kDrive:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a992d54c261.69573495PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 11,
+      "context": "11. It is possible to follow the progress of the transfer to kDrive:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/658a99731c5280.51328412PNG",
+      "heading": "Manually send data to kDrive iOS (iPhone, iPad)",
+      "step": 12,
+      "context": "12. The upload takes place in the background:"
+    }
+  ]
+}

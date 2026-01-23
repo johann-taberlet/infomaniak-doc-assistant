@@ -1,0 +1,55 @@
+{
+  "faq_id": "2382",
+  "title": "Share data from the kDrive web app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2382/share-data-from-the-kdrive-web-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/e8cb81a0a870ee0957571aae62b4c34bfb53a900.gif",
+      "heading": "Share a file/folder on kDrive",
+      "step": 3,
+      "context": "3. Click on **Share**... at the top of the dropdown menu:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f938bac02e8c19965c132ebca0e471a22baece63.png",
+      "heading": "Share a file/folder on kDrive",
+      "step": 3,
+      "context": "so that anyone **with the link displayed on this modal** can access the shared file:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8fb7a277ef337a3689b011994664fe2aabc4be47.png",
+      "heading": "Share a file/folder on kDrive",
+      "step": 3,
+      "context": "- \u2026 or enter a kDrive user, a contact from your address book, the email address of a new contact (or"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/04a70e309d496fac280f900cb37fd9555862d8d2.png",
+      "heading": "Create a public + editable share link",
+      "step": null,
+      "context": "When you activate a share link on a Word, Excel, or PowerPoint type file, it is possible to authoriz"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/6d45324fd1f31888a4d43868191abce3d956d2a7.png",
+      "heading": "Request access from the shared file page",
+      "step": null,
+      "context": "The user who shares a folder can activate a button in the advanced sharing settings:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ee14c72e31aa8494fa0e4876af5b0c3a2b5e134f.png",
+      "heading": "Request access from the shared file page",
+      "step": null,
+      "context": "This \u201c**Add files**\u201d button will be displayed on the sharing page (`A`) so that the user who accesse"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/15ef89d4a14e513a971f35995d4095e5d976058d.png",
+      "heading": "Common folders",
+      "step": null,
+      "context": "However, a folder can also be created with **restricted sharing** (this is offered to you when creat"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/aeb8cf2326dce4d3f6d32328b4a44926d347d9ad.png",
+      "heading": "Common folders",
+      "step": null,
+      "context": "Other users with access to shared folders will also be able to access a subfolder by force either by"
+    }
+  ]
+}

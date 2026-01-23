@@ -1,0 +1,43 @@
+{
+  "faq_id": "1800",
+  "title": "Synchronize Joplin notes via WebDAV with kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1800/synchronize-joplin-notes-via-webdav-with-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/a7194e1a907f2a0def12ece6fd30e53fb31e591d.png",
+      "heading": "Preamble",
+      "step": null,
+      "context": "- Joplin will store several of its configuration files, so to avoid cluttering your kDrive directori"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65b8eb1738ef42.19155028png",
+      "heading": "Prerequisites",
+      "step": 2,
+      "context": "2. Press the menu at the top left:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65b8eb61d380b2.13692573png",
+      "heading": "Prerequisites",
+      "step": 3,
+      "context": "3. Press **Settings**:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65b8ec9481fe49.88077511png",
+      "heading": "Prerequisites",
+      "step": 6,
+      "context": "6. Select the **WebDAV** mode:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65b8ed74e807b7.80170368png",
+      "heading": "Prerequisites",
+      "step": 8,
+      "context": "8. Press the synchronization test and wait for the connection confirmation below:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65b8f125769279.98466075png",
+      "heading": "Prerequisites",
+      "step": 9,
+      "context": "9. Press the top left to return to the previous menu and press **Synchronize** to create the files o"
+    }
+  ]
+}

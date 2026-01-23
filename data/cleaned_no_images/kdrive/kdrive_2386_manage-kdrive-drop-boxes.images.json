@@ -1,0 +1,31 @@
+{
+  "faq_id": "2386",
+  "title": "Manage kDrive drop boxes",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2386/manage-kdrive-drop-boxes",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/290abb73fb32995451b4deb11da8cb394fad551a.png",
+      "heading": "Create a drop box",
+      "step": 4,
+      "context": "4. Click on **Drop Box**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b9c9c770c2ac32c1c97443909b7b018104c7f004.png",
+      "heading": "Create a drop box",
+      "step": 8,
+      "context": "8. Click on the blue **Create** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/baf7f554ba920c382177ab64ad2655b5998f0dc3.png",
+      "heading": "Create a drop box",
+      "step": 10,
+      "context": "10. The advanced options allow you to **receive an email notification upon file deposit**, protect t"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/73ae856680228edfd4b50c709c076f7e33b02a27.png",
+      "heading": "Disable or modify a drop box",
+      "step": 5,
+      "context": "or on **Settings** higher up in the dropdown menu to modify the advanced options (point 10 above):"
+    }
+  ]
+}

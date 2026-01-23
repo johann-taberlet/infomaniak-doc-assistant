@@ -1,0 +1,67 @@
+{
+  "faq_id": "1455",
+  "title": "Invite a user to use kChat",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/62f1da41dd2f458da0f3324a153f0cfc28998c6b.png",
+      "heading": "Prerequisites",
+      "step": 2,
+      "context": "2. Click on **Add a user**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a0fdcab3f59195bf3a51c86e23b5c6527e2f7f97.png",
+      "heading": "Prerequisites",
+      "step": 4,
+      "context": "4. Click on **Next**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/f8bbe74c91ebe29bffed9494d9308cdb6daa060e.png",
+      "heading": "Prerequisites",
+      "step": 5,
+      "context": "5. Enter the user's first and last name, and define their role as a **basic user**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd6d8707b1d2e83c0ba00d1ee1c00f1f8b8339d3.png",
+      "heading": "Prerequisites",
+      "step": 7,
+      "context": "7. Click on the **Invite** button:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8061edc091715e37273d21fdb088d9b4f5d0a0fa.png",
+      "heading": "Prerequisites",
+      "step": 7,
+      "context": "The invitation is pending until the invited user's final registration (read more below). The Organiz"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/297989d2bdfff26c743ec67b0cead055e1b9741d.png",
+      "heading": "Accept the invitation",
+      "step": 1,
+      "context": "1. The invited user receives the invitation to their email address and clicks on the **Accept the in"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7823adb973e414f6b0736c35bacc67d1dcea200b.png",
+      "heading": "Accept the invitation",
+      "step": 2,
+      "context": "2. They specify their contact details as well as the email address / password they wish to use and c"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/7596f4bcf8c550a061f0f32ef40cb0bd4d5a2600.png",
+      "heading": "Accept the invitation",
+      "step": 4,
+      "context": "4. Existing users are automatically notified of the arrival of the new participant and can now conve"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5affdf42fc525f72f494760bd39c53a4fd2543ef.png",
+      "heading": "Access to kSuite, and not access to the management of kSuite!",
+      "step": null,
+      "context": "In the invitation example above, the new user has been invited to join kChat, they are counted as a "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2ff3c8378b56d2dc23a5e21a801c7b5e6f9b2fd4.gif",
+      "heading": "Access to kSuite, and not access to the management of kSuite!",
+      "step": null,
+      "context": "This is why this user will not see any active link in the **Collaborative Tools \u2192 kSuite** section o"
+    }
+  ]
+}

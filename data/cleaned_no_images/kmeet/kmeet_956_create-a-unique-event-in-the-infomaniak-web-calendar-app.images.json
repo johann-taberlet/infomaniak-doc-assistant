@@ -1,0 +1,37 @@
+{
+  "faq_id": "956",
+  "title": "Create a unique event in the Infomaniak Web Calendar app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/956/create-a-unique-event-in-the-infomaniak-web-calendar-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/04396a8c467fd0fa1ce00aa6cfc324562541f6a7.png",
+      "heading": "Add a new event",
+      "step": 3,
+      "context": "3. Click on **Event**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5d49cbc8a8956baad0a2a068f8ecd55501812303.png",
+      "heading": "Add a new event",
+      "step": 6,
+      "context": "6. Display additional fields by clicking on **SHOW MORE FIELDS** at the bottom right (and some of th"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/12325df8c5e95cd84e82c561f7d2dfd8affd029c.png",
+      "heading": "Add a new event",
+      "step": 7,
+      "context": "7. Click on **SAVE** to add the event to the selected calendar:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/eee3a9ba2ad0e57267ce1c464a08f3d5a0b7248d.png",
+      "heading": "Add participants to the event",
+      "step": null,
+      "context": "To invite users, **add their name or email address** when creating the event or later:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d6ff97c31d161bc253dc869ad17177f7cf5c6089.png",
+      "heading": "Automatically find the best time between participants",
+      "step": 6,
+      "context": "6. Click on the dropdown menu below the participants to find the time immediately available for all "
+    }
+  ]
+}

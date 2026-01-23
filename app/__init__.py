@@ -1,1 +1,0 @@
-# Infomaniak Documentation AI Assistant

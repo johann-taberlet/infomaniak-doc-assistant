@@ -1,0 +1,19 @@
+{
+  "faq_id": "2406",
+  "title": "Import external data to kDrive",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-kdrive",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/bd02f08ad6329e6a2626534e486b47f5c78da751.png",
+      "heading": "Data not imported",
+      "step": 4,
+      "context": "4. Click on **Import external data** under **General**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/3daa78b092992d148469c54e55bb137abcf1b2f4.png",
+      "heading": "Data not imported",
+      "step": 8,
+      "context": "8. Enter any required information if prompted and click the blue **Start** button:"
+    }
+  ]
+}

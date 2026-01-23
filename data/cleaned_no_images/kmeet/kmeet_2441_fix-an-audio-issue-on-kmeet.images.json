@@ -1,0 +1,37 @@
+{
+  "faq_id": "2441",
+  "title": "Fix an audio issue on kMeet",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2441/fix-an-audio-issue-on-kmeet",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/6e51cd43b39823f968abf8f17380300467502e8b.png",
+      "heading": "1. (Re)authorize multimedia on computer",
+      "step": 2,
+      "context": "Examples with the kMeet application on computer:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4aedd1122ab87d2147398de238128b57104daf78.png",
+      "heading": "1. (Re)authorize multimedia on computer",
+      "step": 2,
+      "context": "Examples with the kMeet application on computer:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/ad1345f1e85b626c6558e4d9990b24d42a06174b.png",
+      "heading": "1. (Re)authorize multimedia on computer",
+      "step": 2,
+      "context": "Examples with the web version in your browser:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/cd4163ed4463ad78bd4d7265170bc5f8d307c09a.png",
+      "heading": "1. (Re)authorize multimedia on computer",
+      "step": 2,
+      "context": "Examples with the web version in your browser:"
+    },
+    {
+      "url": "https://faq.storage.infomaniak.com/65e6e3374301e6.37827587png",
+      "heading": "4. Join the ongoing meeting with a different device",
+      "step": 3,
+      "context": "3. Enter the meeting link (*https://kmeet.infomaniak.com/* followed by the meeting link letters); ex"
+    }
+  ]
+}

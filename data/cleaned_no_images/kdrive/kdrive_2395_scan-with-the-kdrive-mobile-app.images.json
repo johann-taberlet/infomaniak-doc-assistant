@@ -1,0 +1,67 @@
+{
+  "faq_id": "2395",
+  "title": "Scan with the kDrive mobile app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2395/scan-with-the-kdrive-mobile-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/ef0adfae07f501faeddf5fcdee28ec91f558b3b7.png",
+      "heading": "Scan documents",
+      "step": 2,
+      "context": "2. Press the **icon**\u200d at the bottom:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a434eabb4c37cec075ebbc2367d9719da20b5626.png",
+      "heading": "Scan documents",
+      "step": 3,
+      "context": "3. Press **Scan a document**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b220a29903c844c6ea3205dcde208787c46b820c.png",
+      "heading": "Scan documents",
+      "step": 4,
+      "context": "4. If necessary, authorize the accesses requested by the app:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/0be51b1b9c98a87ffe2354fd3f0a80f30d4f2a95.png",
+      "heading": "Scan documents",
+      "step": 5,
+      "context": "5. Document search and detection is performed **automatically** as soon as the image is stable:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/5c5f30a7de7c132e065aa7057eb7f016c52a6ad3.png",
+      "heading": "Scan documents",
+      "step": 6,
+      "context": "6. You can switch to **Manual** mode at the top right and trigger the photo yourself when you are re"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/39d72ee6fd90a0c251daf2d495608edb8e09dc30.png",
+      "heading": "Scan documents",
+      "step": 7,
+      "context": "7. If necessary, crop the document after manually taking the photo:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9b71ae3a1897108d79f18189d462c7a6e93a4044.png",
+      "heading": "Scan documents",
+      "step": 11,
+      "context": "11. Repeat the steps to scan other pages or press **Save**at the bottom right:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b698f3a13d59771afcb9643576c7403ef85eb3c4.png",
+      "heading": "Scan documents",
+      "step": 12,
+      "context": "12. If your scan contains multiple pages, it will be grouped into a PDF to be saved in the location "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/a9b54cbdba38728fc569066814f0a34c52a78fd9.png",
+      "heading": "Scan documents",
+      "step": 13,
+      "context": "13. The document is sent to the kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/9832a06d03872545e3f4ced3fb9328b4a0b3ffe4.png",
+      "heading": "Scan documents",
+      "step": 14,
+      "context": "14. You will find it on all your connected devices:"
+    }
+  ]
+}

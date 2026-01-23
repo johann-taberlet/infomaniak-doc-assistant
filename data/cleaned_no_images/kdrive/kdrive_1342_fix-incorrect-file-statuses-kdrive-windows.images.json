@@ -1,0 +1,13 @@
+{
+  "faq_id": "1342",
+  "title": "Fix incorrect file statuses (kDrive Windows)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1342/fix-incorrect-file-statuses-kdrive-windows",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/1edde450fc35109cef8d7b880c3fc0d81488787b.png",
+      "heading": "Resolve the issue of incorrect statuses",
+      "step": null,
+      "context": "The application sends the correct file status to the explorer, for example, the status sent here is "
+    }
+  ]
+}

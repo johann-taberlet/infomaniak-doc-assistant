@@ -1,0 +1,43 @@
+{
+  "faq_id": "2396",
+  "title": "Manage multiple kDrive on the mobile app",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2396/manage-multiple-kdrive-on-the-mobile-app",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/b654ecca6032c68dedc2b9d70e777b2809985be1.png",
+      "heading": "Access different kDrives from the mobile app",
+      "step": null,
+      "context": "This is the case on the **Web** app\u2026"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/276d06ee7307dd830b6a2414269651a4808177a9.png",
+      "heading": "Access different kDrives from the mobile app",
+      "step": null,
+      "context": "\u2026 as on the **mobile** app:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/d3936159d11fd290e9a8843a2fd2bf9716a0f8c8.png",
+      "heading": "Access different kDrives from the mobile app",
+      "step": 2,
+      "context": "2. Click on the chevron \u200d to the right of the current kDrive name:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8d4e2213d3ed8d55f90a537a5965e26b5868e9b7.png",
+      "heading": "Access different kDrives from the mobile app",
+      "step": 3,
+      "context": "3. On the sliding lower panel, click on the name of the desired kDrive:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/88a0327297901d19592350a579533f89322abb54.png",
+      "heading": "Access and manage other kDrive accounts",
+      "step": 4,
+      "context": "4. Press **Switch user**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/495a1cc99287106b2c812642b28a1f8b3cb58cdf.png",
+      "heading": "Access and manage other kDrive accounts",
+      "step": 5,
+      "context": "5. Press **Add a user**:"
+    }
+  ]
+}

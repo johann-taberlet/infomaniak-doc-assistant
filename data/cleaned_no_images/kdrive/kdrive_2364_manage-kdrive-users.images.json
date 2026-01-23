@@ -1,0 +1,73 @@
+{
+  "faq_id": "2364",
+  "title": "Manage kDrive users",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2364/manage-kdrive-users",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/549d1abb4539bbcc239f807439c7129de70338e2.png",
+      "heading": "Add a user",
+      "step": 4,
+      "context": "4. Click on **Invite a new user**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/985edf10bca8af1bc58cc3aee4c08955e2157db1.png",
+      "heading": "Add a user",
+      "step": 5,
+      "context": "5. If necessary, click again on the button to **invite a new user** and then click on:Add a user to "
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/805fcf55a563962ff74fe38edc86584c1ee99ee8.png",
+      "heading": "Block a user",
+      "step": 4,
+      "context": "4. Click on **Manage users**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/4e6e6244564e161533acf68dcdc9b7c313247616.png",
+      "heading": "Block a user",
+      "step": 6,
+      "context": "6. Click on **Block the user** and confirm the action:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/805fcf55a563962ff74fe38edc86584c1ee99ee8.png",
+      "heading": "How to delete a user",
+      "step": 4,
+      "context": "4. Click on **Manage users**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b954ca348dd2d5e22dfcf7782489b035796714a3.png",
+      "heading": "Delete an external user from kDrive",
+      "step": 6,
+      "context": "6. Click on **Remove access to kDrive**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/eb4ccf536c76f6e85fee387c01ed641122bb2048.png",
+      "heading": "Delete an external user from kDrive",
+      "step": 6,
+      "context": "You can also go to the shared file location and click on the sharing column to remove access for the"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/abcc9f40a9429fd0ef0a5d91c09237286a48d9a7.png",
+      "heading": "Delete an external user from kDrive",
+      "step": 6,
+      "context": "Note that the external user can also, from their *limited* kDrive, remove themselves by cutting acce"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/2c32824d8a258c10564f121b6f0ef2eeebc7d53f.png",
+      "heading": "Replace the kDrive Solo user",
+      "step": 5,
+      "context": "5. Click on **Manage users**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/63a638019097ae2804b3a19fe8dcc2d4c81047de.png",
+      "heading": "Replace the kDrive Solo user",
+      "step": 7,
+      "context": "7. Click on **Replace user**:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/b86d39452a7539e056455d06d4871fb857ad9734.png",
+      "heading": "Replace the kDrive Solo user",
+      "step": 10,
+      "context": "10. Click the **Replace** button:"
+    }
+  ]
+}

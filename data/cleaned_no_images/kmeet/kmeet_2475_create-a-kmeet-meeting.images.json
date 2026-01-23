@@ -1,0 +1,19 @@
+{
+  "faq_id": "2475",
+  "title": "Create a kMeet meeting",
+  "source_url": "https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/33df8a1369a26d4bb1b03dcdbf1040e8b4caf0c9.png",
+      "heading": "Create a virtual meeting room",
+      "step": 2,
+      "context": "2. Start a new meeting:"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/334fdcc6d02c740cf14deddacb6768390c68a7b2.png",
+      "heading": "Create a virtual meeting room",
+      "step": 8,
+      "context": "8. **Share the room link** to invite participants to join you:"
+    }
+  ]
+}

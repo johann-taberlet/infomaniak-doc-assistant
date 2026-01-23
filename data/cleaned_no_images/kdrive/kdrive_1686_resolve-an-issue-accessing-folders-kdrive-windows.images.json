@@ -1,0 +1,13 @@
+{
+  "faq_id": "1686",
+  "title": "Resolve an issue accessing folders (kDrive Windows)",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1686/resolve-an-issue-accessing-folders-kdrive-windows",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/7280f3fb00cdf165957be4cb438e38146727c4e9.png",
+      "heading": "Taking ownership of a folder",
+      "step": 10,
+      "context": "10. Check the 2 boxes **Replace owner on subcontainers and objects** to take ownership of the files "
+    }
+  ]
+}

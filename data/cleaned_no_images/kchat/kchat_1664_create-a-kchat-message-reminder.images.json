@@ -1,0 +1,19 @@
+{
+  "faq_id": "1664",
+  "title": "Create a kChat message reminder",
+  "source_url": "https://www.infomaniak.com/en/support/faq/1664/create-a-kchat-message-reminder",
+  "images": [
+    {
+      "url": "https://faq.storage5.infomaniak.com/c7d70160ab601734cc8b2c3351b0038f49831f36.png",
+      "heading": "Remind a kChat message at a specific time",
+      "step": 1,
+      "context": "1. Hover over the message to be reminded and select the additional actions icon **\u2022\u2022\u2022**in the top ri"
+    },
+    {
+      "url": "https://faq.storage5.infomaniak.com/8ee63b95303a213306366f7656260f71882de464.png",
+      "heading": "Remind a kChat message at a specific time",
+      "step": 2,
+      "context": "2. Click on **Remind**and choose the desired time to be notified:"
+    }
+  ]
+}
