@@ -73,3 +73,6 @@ static/tts/onnx/*.onnx
 
 # Evaluation results (keep directory structure)
 docs/evaluations/*.json
+
+# Allow frontend src/lib (not Python lib)
+!frontend/src/lib/
