@@ -50,11 +50,16 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 
 ## Phase B: RAG Generative UI
 
-### B1: json-render Setup
-- [ ] Install `@json-render/core` and `@json-render/react`
-- [ ] `frontend/src/lib/catalog.ts`
-- [ ] `frontend/src/lib/registry.tsx`
-- [ ] Basic renderer working
+### B1: json-render Setup ✅ DONE
+- [x] Install `@json-render/core` and `@json-render/react`
+- [x] `frontend/src/lib/catalog.ts` - Zod-based component schemas
+- [x] `frontend/src/lib/registry.tsx` - React component mappings
+- [x] `frontend/src/lib/JsonRenderer.tsx` - Wrapper with error boundary
+- [x] `frontend/src/lib/JsonRendererDemo.tsx` - Demo page for testing
+- [x] Basic renderer working with all components
+- [x] Tailwind CSS v4 migration
+- [x] Infomaniak Design System (CSS variables)
+- [x] ThemeToggle component (light/dark/system)
 
 ### B2: RAG JSON Generation
 - [ ] `backend/app/rag/json_generator.py`
@@ -62,15 +67,16 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 - [ ] JSON validation against catalog schema
 - [ ] Fallback to plain text
 
-### B3: Component Library
-- [ ] `Answer` component
-- [ ] `Steps` + `Step` components
-- [ ] `Card` component
-- [ ] `Table` component
-- [ ] `Comparison` component
-- [ ] `CodeBlock` component
-- [ ] `ActionSuggestion` component
-- [ ] `PlatformBadges` component
+### B3: Component Library ✅ DONE
+- [x] `Answer` component
+- [x] `Steps` + `Step` components
+- [x] `Card` component (info, warning, tip, important variants)
+- [x] `Table` component
+- [x] `Comparison` component
+- [x] `CodeBlock` component
+- [x] `ActionSuggestion` component
+- [x] `PlatformBadges` component
+- [x] `Text` component (added for flexibility)
 
 ---
 
@@ -153,23 +159,23 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 | Phase | Status | Progress |
 |-------|--------|----------|
 | A: Foundation | ✅ Complete | 3/3 done |
-| B: RAG Generative UI | ⚪ Not Started | 0/3 done |
+| B: RAG Generative UI | 🟡 In Progress | 2/3 done |
 | C: Action Execution | 🟡 In Progress | 1/3 done |
 | D: Fake Apps | ⚪ Not Started | 0/5 done |
 | E: Integration | ⚪ Not Started | 0/3 done |
 
-**Overall: ~24% complete (4/17 tasks)**
+**Overall: ~35% complete (6/17 tasks)**
 
 ---
 
 ## Next Step
 
-**B1: json-render Setup**
+**B2: RAG JSON Generation**
 
-Set up the json-render library for constrained generative UI:
-1. Install `@json-render/core` and `@json-render/react`
-2. Create `frontend/src/lib/catalog.ts` with component definitions
-3. Create `frontend/src/lib/registry.tsx` with React component mappings
-4. Basic renderer working with test components
+Modify the RAG pipeline to generate JSON instead of plain text:
+1. Create `backend/app/rag/json_generator.py`
+2. Update generation prompt for JSON output matching catalog schema
+3. Add JSON validation against catalog
+4. Implement fallback to plain text for invalid JSON
 
-This enables the RAG system to output structured JSON that renders as rich UI.
+This connects the backend RAG to the frontend generative UI components.

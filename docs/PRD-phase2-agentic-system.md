@@ -240,36 +240,80 @@ d:{"finishReason":"stop"}\n
 
 ### 4.3 json-render Catalog (RAG Mode)
 
+**Implementation:** `frontend/src/lib/catalog.ts` uses Zod schemas for runtime validation.
+
 ```typescript
-const docsCatalog = {
+// Actual implementation uses Zod for schema validation
+import { z } from 'zod';
+import { createCatalog } from '@json-render/core';
+
+const docsCatalog = createCatalog({
   components: {
     // Container for structured answers
-    Answer: { props: { summary?: string }, hasChildren: true },
+    Answer: { props: z.object({ summary: z.string().optional() }), hasChildren: true },
 
     // Step-by-step procedures
-    Steps: { props: { title?: string }, hasChildren: true },
-    Step: { props: { number: number, title: string, description: string } },
+    Steps: { props: z.object({ title: z.string().optional() }), hasChildren: true },
+    Step: { props: z.object({
+      number: z.number().int().min(1),  // Validated: positive integer
+      title: z.string(),
+      description: z.string()
+    }) },
 
     // Information cards
-    Card: { props: { title: string, type: "info"|"warning"|"tip"|"important" }, hasChildren: true },
+    Card: {
+      props: z.object({
+        title: z.string(),
+        type: z.enum(['info', 'warning', 'tip', 'important'])
+      }),
+      hasChildren: true
+    },
 
     // Data tables
-    Table: { props: { headers: string[], rows: string[][] } },
+    Table: { props: z.object({ headers: z.array(z.string()), rows: z.array(z.array(z.string())) }) },
 
     // Feature comparisons
-    Comparison: { props: { features: string[], items: { name: string, values: boolean[] }[] } },
+    Comparison: { props: z.object({
+      features: z.array(z.string()),
+      items: z.array(z.object({ name: z.string(), values: z.array(z.boolean()) }))
+    }) },
 
     // Code blocks
-    CodeBlock: { props: { language?: string, code: string } },
+    CodeBlock: { props: z.object({ language: z.string().optional(), code: z.string() }) },
 
-    // Links to related actions
-    ActionSuggestion: { props: { label: string, action: string, params?: object } },
+    // Links to related actions (action constrained to catalog actions)
+    ActionSuggestion: { props: z.object({
+      label: z.string(),
+      action: z.enum(['navigate', 'copy', 'openApp']),  // Type-safe action names
+      params: z.record(z.string(), z.unknown()).optional()
+    }) },
 
     // Platform availability
-    PlatformBadges: { props: { platforms: ("web"|"ios"|"android"|"macos"|"windows"|"linux")[] } },
-  }
-};
+    PlatformBadges: { props: z.object({
+      platforms: z.array(z.enum(['web', 'ios', 'android', 'macos', 'windows', 'linux']))
+    }) },
+
+    // Plain text content (added for flexibility)
+    Text: { props: z.object({ content: z.string() }) },
+  },
+  actions: {
+    navigate: z.object({ path: z.string() }),
+    copy: z.object({ text: z.string() }),
+    openApp: z.object({
+      app: z.enum(['kdrive', 'kmeet', 'kchat']),
+      action: z.string().optional()
+    }),
+  },
+  validation: 'strict',
+});
 ```
+
+**Design Decisions:**
+- **Zod schemas**: Runtime validation prevents malformed JSON from crashing the UI
+- **Error boundaries**: `JsonRenderer` wraps content in error boundary for graceful degradation
+- **Text component**: Added for simple text content within containers
+- **Action type safety**: `ActionSuggestion.action` constrained to defined catalog actions
+- **CSS variables**: Infomaniak Design System uses `--ik-*` CSS variables for theming
 
 ### 4.4 Fake Database Schema
 
@@ -501,19 +545,26 @@ class Skill:
 
 ### Phase B: RAG Generative UI
 
-#### B1: json-render Setup
+#### B1: json-render Setup ✅ COMPLETE
 
 **Goal:** Set up json-render in the frontend.
 
 **Deliverables:**
 - Install `@json-render/core` and `@json-render/react`
-- `frontend/src/lib/catalog.ts` - Component catalog
-- `frontend/src/lib/registry.tsx` - React component registry
+- `frontend/src/lib/catalog.ts` - Zod-based component catalog with strict validation
+- `frontend/src/lib/registry.tsx` - React component registry with Infomaniak Design System
+- `frontend/src/lib/JsonRenderer.tsx` - Wrapper with error boundary and action handlers
+- `frontend/src/lib/JsonRendererDemo.tsx` - Demo page exercising all components
+- `frontend/src/components/ThemeToggle.tsx` - Light/dark/system theme toggle
+- Tailwind CSS v4 migration with CSS variables
 
 **Acceptance Criteria:**
-- [ ] Packages installed
-- [ ] Catalog defined with all components
-- [ ] Basic renderer working with test JSON
+- [x] Packages installed (React 19, Tailwind v4, json-render)
+- [x] Catalog defined with all components + Text component
+- [x] Basic renderer working with test JSON
+- [x] Error boundaries prevent crashes from malformed data
+- [x] Theme toggle with localStorage persistence (safe for private browsing)
+- [x] All components styled with Infomaniak Design System
 
 ---
 
@@ -549,32 +600,35 @@ class JSONAnswerGenerator:
 
 ---
 
-#### B3: Component Library
+#### B3: Component Library ✅ COMPLETE
 
 **Goal:** Build React components for json-render catalog.
 
 **Deliverables:**
-- `frontend/src/components/generative/` - All components
-- Styling consistent with chat UI
-- Storybook stories (optional)
+- `frontend/src/lib/registry.tsx` - All components in single registry file
+- Styling with Infomaniak Design System CSS variables
+- Demo page for visual testing
 
 **Components:**
-| Component | Priority | Complexity |
-|-----------|----------|------------|
-| Answer | P0 | Low |
-| Steps + Step | P0 | Medium |
-| Card | P0 | Low |
-| Table | P0 | Medium |
-| Comparison | P1 | Medium |
-| CodeBlock | P1 | Low |
-| ActionSuggestion | P1 | Low |
-| PlatformBadges | P2 | Low |
+| Component | Priority | Status | Notes |
+|-----------|----------|--------|-------|
+| Answer | P0 | ✅ | Container with optional summary |
+| Steps + Step | P0 | ✅ | Animated step-by-step guides |
+| Card | P0 | ✅ | 4 variants: info, warning, tip, important |
+| Table | P0 | ✅ | Responsive with hover states |
+| Comparison | P1 | ✅ | Feature matrix with checkmarks |
+| CodeBlock | P1 | ✅ | Dark theme code display |
+| ActionSuggestion | P1 | ✅ | Pill buttons, disabled when no handler |
+| PlatformBadges | P2 | ✅ | Grid of platform icons |
+| Text | P1 | ✅ | Added for flexible text content |
 
 **Acceptance Criteria:**
-- [ ] All P0 components implemented
-- [ ] Components render correctly from JSON
-- [ ] Styling matches overall design
-- [ ] Responsive on mobile
+- [x] All P0 components implemented
+- [x] All P1/P2 components implemented
+- [x] Components render correctly from JSON
+- [x] Styling matches Infomaniak Design System
+- [x] Dark mode support via CSS variables
+- [x] Console warnings for unknown types (graceful degradation)
 
 ---
 
@@ -1118,26 +1172,25 @@ frontend/
 ├── src/
 │   ├── components/
 │   │   ├── chat/
-│   │   │   └── ToolStatus.tsx    # C3
-│   │   ├── generative/
-│   │   │   ├── Answer.tsx        # B3
-│   │   │   ├── Steps.tsx         # B3
-│   │   │   ├── Card.tsx          # B3
-│   │   │   ├── Table.tsx         # B3
-│   │   │   └── index.ts          # B3
+│   │   │   └── ToolStatus.tsx    # C3 (planned)
 │   │   ├── apps/
-│   │   │   ├── KMeet.tsx         # D3
-│   │   │   ├── KDrive.tsx        # D4
-│   │   │   └── KChat.tsx         # D5
-│   │   └── Layout.tsx            # E1
+│   │   │   ├── KMeet.tsx         # D3 (planned)
+│   │   │   ├── KDrive.tsx        # D4 (planned)
+│   │   │   └── KChat.tsx         # D5 (planned)
+│   │   ├── ThemeToggle.tsx       # B1 ✅
+│   │   └── Layout.tsx            # E1 (planned)
 │   ├── stores/
-│   │   ├── appStore.ts           # D1
-│   │   └── dbStore.ts            # D2
+│   │   ├── appStore.ts           # D1 (planned)
+│   │   └── dbStore.ts            # D2 (planned)
 │   ├── data/
-│   │   └── seed.ts               # D2
-│   └── lib/
-│       ├── catalog.ts            # B1
-│       └── registry.tsx          # B1
+│   │   └── seed.ts               # D2 (planned)
+│   ├── lib/
+│   │   ├── catalog.ts            # B1 ✅ Zod schemas
+│   │   ├── registry.tsx          # B1+B3 ✅ All components
+│   │   ├── JsonRenderer.tsx      # B1 ✅ Error boundary wrapper
+│   │   └── JsonRendererDemo.tsx  # B1 ✅ Demo page
+│   ├── App.tsx                   # Updated with demo route
+│   └── index.css                 # Infomaniak Design System
 ```
 
 ---
