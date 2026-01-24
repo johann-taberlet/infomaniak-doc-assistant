@@ -1,47 +1,149 @@
 @import "tailwindcss";
 
-/* Custom theme using Tailwind v4 CSS variables */
+/* Infomaniak Design System - Tailwind v4 Theme */
 @theme {
-  --color-primary: #0066cc;
-  --color-primary-dark: #0052a3;
-  --color-bg: #f5f7fa;
-  --color-bg-card: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-muted: #666666;
-  --color-border: #e0e0e0;
-  --color-user-bg: #e3f2fd;
-  --color-assistant-bg: #ffffff;
-  --color-error: #d32f2f;
+  /* Primary colors */
+  --color-ik-primary: #0098FF;
+  --color-ik-primary-hover: #0080DD;
+  --color-ik-primary-dark: #0066CC;
+  --color-ik-primary-light: #E8F4FD;
+  --color-ik-primary-border: #C9E4F6;
 
-  /* Card variants */
-  --color-info-bg: #e3f2fd;
-  --color-info-border: #2196f3;
-  --color-warning-bg: #fff3e0;
-  --color-warning-border: #ff9800;
-  --color-tip-bg: #e8f5e9;
-  --color-tip-border: #4caf50;
-  --color-important-bg: #fce4ec;
-  --color-important-border: #e91e63;
+  /* Backgrounds */
+  --color-ik-bg-page: #F5F8FC;
+  --color-ik-bg-card: #ffffff;
+  --color-ik-bg-secondary: #EEF3F8;
+  --color-ik-bg-tertiary: #F8FAFC;
+
+  /* Text colors */
+  --color-ik-text-primary: #1F2937;
+  --color-ik-text-secondary: #4B5563;
+  --color-ik-text-muted: #9CA3AF;
+  --color-ik-text-inverse: #ffffff;
+
+  /* Borders */
+  --color-ik-border: #E5E9F0;
+  --color-ik-border-light: #F0F3F7;
+
+  /* Status colors */
+  --color-ik-success: #28a745;
+  --color-ik-success-bg: #f8fff9;
+  --color-ik-warning: #ffc107;
+  --color-ik-warning-bg: #fffdf5;
+  --color-ik-error: #dc3545;
+  --color-ik-error-bg: #fff8f8;
+  --color-ik-info: #2196f3;
+  --color-ik-info-bg: #e3f2fd;
+  --color-ik-tip: #4caf50;
+  --color-ik-tip-bg: #e8f5e9;
+  --color-ik-important: #e91e63;
+  --color-ik-important-bg: #fce4ec;
+
+  /* Border radius */
+  --radius-ik-sm: 8px;
+  --radius-ik-md: 12px;
+  --radius-ik-lg: 16px;
+  --radius-ik-xl: 24px;
+  --radius-ik-full: 9999px;
+
+  /* Shadows */
+  --shadow-ik-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-ik-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-ik-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-ik-primary: 0 4px 12px rgba(0, 152, 255, 0.2);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--color-ik-text-primary);
+  background-color: var(--color-ik-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Message slide-in animation */
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-message-slide-in {
+  animation: messageSlideIn 0.3s ease-out;
 }
 
 /* Loading dots animation */
-@keyframes bounce {
-  0%, 80%, 100% {
-    transform: scale(0);
+@keyframes thinkingDot {
+  0%, 20% { opacity: 0; }
+  40% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+.animate-thinking-dot {
+  animation: thinkingDot 1.4s infinite;
+  opacity: 0;
+}
+
+.animate-thinking-dot:nth-child(1) { animation-delay: 0s; }
+.animate-thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.animate-thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Step enter animation */
+@keyframes stepEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  40% {
-    transform: scale(1);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.animate-bounce-dot {
-  animation: bounce 1.4s ease-in-out infinite both;
+.animate-step-enter {
+  animation: stepEnter 0.3s ease-out;
 }
 
-.animate-bounce-dot:nth-child(1) {
-  animation-delay: -0.32s;
-}
+/* Dark mode support (via data-theme attribute) */
+:root[data-theme="dark"] {
+  --color-ik-primary: #0098FF;
+  --color-ik-primary-hover: #38B6FF;
+  --color-ik-primary-dark: #0080DD;
+  --color-ik-primary-light: rgba(0, 152, 255, 0.15);
+  --color-ik-primary-border: rgba(0, 152, 255, 0.3);
 
-.animate-bounce-dot:nth-child(2) {
-  animation-delay: -0.16s;
+  --color-ik-bg-page: #0F172A;
+  --color-ik-bg-card: #1E293B;
+  --color-ik-bg-secondary: #334155;
+  --color-ik-bg-tertiary: #1E293B;
+
+  --color-ik-text-primary: #F1F5F9;
+  --color-ik-text-secondary: #CBD5E1;
+  --color-ik-text-muted: #64748B;
+  --color-ik-text-inverse: #0F172A;
+
+  --color-ik-border: #334155;
+  --color-ik-border-light: #1E293B;
+
+  --shadow-ik-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-ik-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-ik-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-ik-primary: 0 4px 12px rgba(0, 152, 255, 0.3);
 }

@@ -75,6 +75,7 @@ const demoTree: UITree = {
 
 /**
  * Demo component showcasing all generative UI components
+ * Using Infomaniak Design System
  */
 export function JsonRendererDemo() {
   const handleAction = (action: { name: string; params?: Record<string, unknown> }) => {
@@ -83,136 +84,165 @@ export function JsonRendererDemo() {
   };
 
   return (
-    <div className="p-8 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">JsonRenderer Demo</h2>
-      <p className="text-text-muted mb-6">
-        Testing the generative UI components from B1 json-render setup with Tailwind CSS v4.
-      </p>
+    <div className="min-h-screen bg-ik-bg-page p-8">
+      <div className="max-w-[900px] mx-auto">
+        <h2 className="text-2xl font-bold text-ik-text-primary mb-2">JsonRenderer Demo</h2>
+        <p className="text-ik-text-secondary mb-6">
+          Testing the generative UI components with Infomaniak Design System.
+        </p>
 
-      <div className="bg-white rounded-lg p-6 shadow-md">
-        <JsonRenderer tree={demoTree} onAction={handleAction} />
-      </div>
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light">
+          <JsonRenderer tree={demoTree} onAction={handleAction} />
+        </div>
 
-      <h3 className="text-xl font-semibold mt-8 mb-4">Additional Components</h3>
+        <h3 className="text-xl font-semibold text-ik-text-primary mt-10 mb-4">Additional Components</h3>
 
-      {/* Table Demo */}
-      <JsonRenderer
-        tree={{
-          root: 'table-demo',
-          elements: {
-            'table-demo': {
-              key: 'table-demo',
-              type: 'Table',
-              props: {
-                headers: ['Feature', 'Free', 'Pro', 'Business'],
-                rows: [
-                  ['Storage', '15 GB', '2 TB', 'Unlimited'],
-                  ['File sharing', 'Yes', 'Yes', 'Yes'],
-                  ['Version history', '30 days', '1 year', 'Unlimited'],
-                ],
-              },
-            },
-          },
-        }}
-      />
-
-      {/* Comparison Demo */}
-      <JsonRenderer
-        tree={{
-          root: 'comparison-demo',
-          elements: {
-            'comparison-demo': {
-              key: 'comparison-demo',
-              type: 'Comparison',
-              props: {
-                features: ['Cloud Storage', 'Video Calls', 'Team Chat', 'Calendar'],
-                items: [
-                  { name: 'kDrive', values: [true, false, false, false] },
-                  { name: 'kMeet', values: [false, true, false, true] },
-                  { name: 'kChat', values: [false, false, true, false] },
-                ],
-              },
-            },
-          },
-        }}
-      />
-
-      {/* Warning Card Demo */}
-      <JsonRenderer
-        tree={{
-          root: 'warning-demo',
-          elements: {
-            'warning-demo': {
-              key: 'warning-demo',
-              type: 'Card',
-              props: {
-                title: 'Important Notice',
-                type: 'warning',
-              },
-              children: ['warning-text'],
-            },
-            'warning-text': {
-              key: 'warning-text',
-              type: 'Text',
-              props: {
-                content: 'Make sure to backup your files before performing bulk operations.',
-              },
-            },
-          },
-        }}
-      />
-
-      {/* CodeBlock Demo */}
-      <JsonRenderer
-        tree={{
-          root: 'code-demo',
-          elements: {
-            'code-demo': {
-              key: 'code-demo',
-              type: 'CodeBlock',
-              props: {
-                language: 'bash',
-                code: 'curl -X POST https://api.infomaniak.com/kdrive/upload \\\n  -H "Authorization: Bearer $TOKEN" \\\n  -F "file=@document.pdf"',
-              },
-            },
-          },
-        }}
-      />
-
-      {/* Action Buttons Demo */}
-      <div className="mt-4">
-        <JsonRenderer
-          tree={{
-            root: 'actions-demo',
-            elements: {
-              'actions-demo': {
-                key: 'actions-demo',
-                type: 'Answer',
-                props: {},
-                children: ['action-1', 'action-2'],
-              },
-              'action-1': {
-                key: 'action-1',
-                type: 'ActionSuggestion',
-                props: {
-                  label: 'Open kDrive',
-                  action: 'openApp',
-                  params: { app: 'kdrive' },
+        {/* Table Demo */}
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
+          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Table Component</h4>
+          <JsonRenderer
+            tree={{
+              root: 'table-demo',
+              elements: {
+                'table-demo': {
+                  key: 'table-demo',
+                  type: 'Table',
+                  props: {
+                    headers: ['Feature', 'Free', 'Pro', 'Business'],
+                    rows: [
+                      ['Storage', '15 GB', '2 TB', 'Unlimited'],
+                      ['File sharing', 'Yes', 'Yes', 'Yes'],
+                      ['Version history', '30 days', '1 year', 'Unlimited'],
+                    ],
+                  },
                 },
               },
-              'action-2': {
-                key: 'action-2',
-                type: 'ActionSuggestion',
-                props: {
-                  label: 'Learn More',
-                  action: 'navigate',
-                  params: { path: '/docs/kdrive/sharing' },
+            }}
+          />
+        </div>
+
+        {/* Comparison Demo */}
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
+          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Comparison Component</h4>
+          <JsonRenderer
+            tree={{
+              root: 'comparison-demo',
+              elements: {
+                'comparison-demo': {
+                  key: 'comparison-demo',
+                  type: 'Comparison',
+                  props: {
+                    features: ['Cloud Storage', 'Video Calls', 'Team Chat', 'Calendar'],
+                    items: [
+                      { name: 'kDrive', values: [true, false, false, false] },
+                      { name: 'kMeet', values: [false, true, false, true] },
+                      { name: 'kChat', values: [false, false, true, false] },
+                    ],
+                  },
                 },
               },
-            },
-          }}
-          onAction={handleAction}
-        />
+            }}
+          />
+        </div>
+
+        {/* Card Variants Demo */}
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
+          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Card Variants</h4>
+          {(['info', 'warning', 'tip', 'important'] as const).map((type) => (
+            <JsonRenderer
+              key={type}
+              tree={{
+                root: `card-${type}`,
+                elements: {
+                  [`card-${type}`]: {
+                    key: `card-${type}`,
+                    type: 'Card',
+                    props: {
+                      title: `${type.charAt(0).toUpperCase() + type.slice(1)} Card`,
+                      type,
+                    },
+                    children: [`text-${type}`],
+                  },
+                  [`text-${type}`]: {
+                    key: `text-${type}`,
+                    type: 'Text',
+                    props: {
+                      content: `This is an example of a ${type} card with important information.`,
+                    },
+                  },
+                },
+              }}
+            />
+          ))}
+        </div>
+
+        {/* CodeBlock Demo */}
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
+          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">CodeBlock Component</h4>
+          <JsonRenderer
+            tree={{
+              root: 'code-demo',
+              elements: {
+                'code-demo': {
+                  key: 'code-demo',
+                  type: 'CodeBlock',
+                  props: {
+                    language: 'bash',
+                    code: 'curl -X POST https://api.infomaniak.com/kdrive/upload \\\n  -H "Authorization: Bearer $TOKEN" \\\n  -F "file=@document.pdf"',
+                  },
+                },
+              },
+            }}
+          />
+        </div>
+
+        {/* Action Buttons Demo */}
+        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light">
+          <h4 className="text-sm font-semibold text-ik-text-secondary mb-4">Action Suggestions</h4>
+          <div className="flex flex-wrap gap-2">
+            <JsonRenderer
+              tree={{
+                root: 'actions-demo',
+                elements: {
+                  'actions-demo': {
+                    key: 'actions-demo',
+                    type: 'Answer',
+                    props: {},
+                    children: ['action-1', 'action-2', 'action-3'],
+                  },
+                  'action-1': {
+                    key: 'action-1',
+                    type: 'ActionSuggestion',
+                    props: {
+                      label: 'Open kDrive',
+                      action: 'openApp',
+                      params: { app: 'kdrive' },
+                    },
+                  },
+                  'action-2': {
+                    key: 'action-2',
+                    type: 'ActionSuggestion',
+                    props: {
+                      label: 'Learn More',
+                      action: 'navigate',
+                      params: { path: '/docs/kdrive/sharing' },
+                    },
+                  },
+                  'action-3': {
+                    key: 'action-3',
+                    type: 'ActionSuggestion',
+                    props: {
+                      label: 'Copy Link',
+                      action: 'copy',
+                      params: { text: 'https://kdrive.infomaniak.com/share/abc123' },
+                    },
+                  },
+                },
+              }}
+              onAction={handleAction}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

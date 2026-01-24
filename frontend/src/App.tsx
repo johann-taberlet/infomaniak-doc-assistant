@@ -37,95 +37,109 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen max-w-3xl mx-auto p-4 sm:p-2 bg-bg font-sans text-text leading-relaxed">
-      <header className="text-center py-6">
-        <h1 className="text-2xl sm:text-xl font-bold text-primary mb-1">kSuite Assistant</h1>
-        <p className="text-text-muted text-sm">AI-powered help for kDrive, kMeet, and kChat</p>
+    <div className="h-full flex flex-col bg-ik-bg-page">
+      {/* Header */}
+      <header className="flex items-center justify-between bg-ik-bg-card px-6 py-3 border-b border-ik-border shadow-ik-sm shrink-0">
+        <h1 className="text-xl font-semibold text-ik-primary tracking-tight">
+          kSuite Assistant
+        </h1>
+        <span className="text-sm text-ik-text-muted">
+          AI-powered help for kDrive, kMeet, and kChat
+        </span>
       </header>
 
-      <main className="flex-1 flex flex-col bg-bg-card rounded-xl shadow-md overflow-hidden">
-        <div className="flex-1 overflow-y-auto p-6 sm:p-4 min-h-[400px] max-h-[60vh]">
-          {messages.length === 0 && (
-            <div className="text-center p-8">
-              <p className="text-text-muted mb-6">Ask me anything about Infomaniak kSuite products!</p>
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={() => handleSuggestionClick("How do I share a file in kDrive?")}
-                  className="p-3 border border-border rounded-lg bg-bg text-left cursor-pointer transition-all hover:border-primary hover:bg-user-bg"
-                >
-                  How do I share a file in kDrive?
-                </button>
-                <button
-                  onClick={() => handleSuggestionClick("How do I start a kMeet video call?")}
-                  className="p-3 border border-border rounded-lg bg-bg text-left cursor-pointer transition-all hover:border-primary hover:bg-user-bg"
-                >
-                  How do I start a kMeet video call?
-                </button>
-                <button
-                  onClick={() => handleSuggestionClick("How do I create a channel in kChat?")}
-                  className="p-3 border border-border rounded-lg bg-bg text-left cursor-pointer transition-all hover:border-primary hover:bg-user-bg"
-                >
-                  How do I create a channel in kChat?
-                </button>
+      {/* Main content */}
+      <main className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <div className="flex flex-col flex-1 w-full max-w-[900px] mx-auto p-6">
+          {/* Chat container */}
+          <div className="flex-1 bg-ik-bg-card rounded-ik-lg p-6 mb-4 overflow-y-auto shadow-ik-md border border-ik-border-light">
+            {messages.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-ik-text-muted">
+                {/* Gradient circle icon */}
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-ik-primary to-cyan-400 opacity-80 mb-3" />
+                <p className="mb-6">Ask me anything about Infomaniak kSuite products!</p>
+
+                {/* Suggestion buttons */}
+                <div className="flex flex-col gap-3 w-full max-w-md">
+                  {[
+                    "How do I share a file in kDrive?",
+                    "How do I start a kMeet video call?",
+                    "How do I create a channel in kChat?",
+                  ].map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className="px-4 py-3 text-left text-ik-text-secondary bg-ik-bg-tertiary border border-ik-border rounded-ik-md transition-all duration-200 hover:border-ik-primary hover:bg-ik-primary-light hover:text-ik-primary"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            ) : (
+              <div className="space-y-5">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`animate-message-slide-in max-w-[85%] p-4 rounded-ik-lg ${
+                      message.role === "user"
+                        ? "ml-auto bg-ik-primary text-ik-text-inverse rounded-br-sm shadow-ik-primary"
+                        : "mr-auto bg-ik-bg-secondary text-ik-text-primary border border-ik-border rounded-bl-sm"
+                    }`}
+                  >
+                    <div className="leading-relaxed whitespace-pre-wrap">
+                      {getMessageContent(message)}
+                    </div>
+                  </div>
+                ))}
 
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`mb-4 p-4 rounded-lg ${
-                message.role === "user"
-                  ? "bg-user-bg ml-8 sm:ml-4"
-                  : "bg-assistant-bg border border-border mr-8 sm:mr-4"
-              }`}
-            >
-              <div className="text-xs font-semibold text-text-muted mb-1 uppercase">
-                {message.role === "user" ? "You" : "Assistant"}
+                {isLoading && (
+                  <div className="animate-message-slide-in max-w-[85%] mr-auto p-4 rounded-ik-lg rounded-bl-sm bg-ik-bg-secondary border border-ik-border">
+                    <div className="flex items-center gap-1 text-ik-text-muted italic">
+                      <span>Thinking</span>
+                      <span className="animate-thinking-dot">.</span>
+                      <span className="animate-thinking-dot">.</span>
+                      <span className="animate-thinking-dot">.</span>
+                    </div>
+                  </div>
+                )}
+
+                {error && (
+                  <div className="p-4 bg-ik-error-bg text-ik-error border border-red-200 rounded-ik-md">
+                    Error: {error.message || "Something went wrong"}
+                  </div>
+                )}
               </div>
-              <div className="whitespace-pre-wrap break-words">{getMessageContent(message)}</div>
-            </div>
-          ))}
+            )}
+          </div>
 
-          {isLoading && (
-            <div className="mb-4 p-4 rounded-lg bg-assistant-bg border border-border mr-8 sm:mr-4">
-              <div className="text-xs font-semibold text-text-muted mb-1 uppercase">Assistant</div>
-              <div className="flex gap-1 py-2">
-                <span className="w-2 h-2 bg-primary rounded-full animate-bounce-dot" />
-                <span className="w-2 h-2 bg-primary rounded-full animate-bounce-dot" />
-                <span className="w-2 h-2 bg-primary rounded-full animate-bounce-dot" />
-              </div>
-            </div>
-          )}
-
-          {error && (
-            <div className="p-4 bg-red-50 text-error rounded-lg mb-4">
-              Error: {error.message || "Something went wrong"}
-            </div>
-          )}
-        </div>
-
-        <form onSubmit={handleSubmit} className="flex gap-2 p-4 border-t border-border">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about kDrive, kMeet, or kChat..."
-            disabled={isLoading}
-            className="flex-1 py-3 px-4 border border-border rounded-lg text-base outline-none transition-colors focus:border-primary disabled:bg-bg disabled:cursor-not-allowed"
-          />
-          <button
-            type="submit"
-            disabled={isLoading || !input.trim()}
-            className="py-3 px-6 bg-primary text-white border-none rounded-lg text-base cursor-pointer transition-colors hover:bg-primary-dark disabled:bg-border disabled:cursor-not-allowed"
+          {/* Input form */}
+          <form
+            onSubmit={handleSubmit}
+            className="flex gap-3 bg-ik-bg-card p-3 rounded-ik-xl shadow-ik-md border border-ik-border-light shrink-0"
           >
-            Send
-          </button>
-        </form>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about kDrive, kMeet, or kChat..."
+              disabled={isLoading}
+              className="flex-1 px-5 py-3 bg-ik-bg-tertiary text-ik-text-primary border-2 border-transparent rounded-ik-lg text-base transition-all duration-200 placeholder:text-ik-text-muted focus:outline-none focus:border-ik-primary focus:bg-ik-bg-card focus:shadow-[0_0_0_3px_rgba(0,152,255,0.1)] disabled:bg-ik-bg-secondary disabled:cursor-not-allowed"
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="px-7 py-3 bg-ik-primary text-ik-text-inverse font-medium rounded-ik-lg text-base cursor-pointer transition-all duration-200 shadow-ik-primary hover:bg-ik-primary-hover hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,152,255,0.3)] active:translate-y-0 disabled:bg-ik-border disabled:text-ik-text-muted disabled:cursor-not-allowed disabled:shadow-none disabled:hover:translate-y-0"
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </main>
 
-      <footer className="text-center p-4 text-text-muted text-xs">
-        <p>Powered by RAG with Qdrant | Demo for Infomaniak</p>
+      {/* Footer */}
+      <footer className="text-center py-3 text-ik-text-muted text-xs shrink-0">
+        Powered by RAG with Qdrant | Demo for Infomaniak
       </footer>
     </div>
   );
