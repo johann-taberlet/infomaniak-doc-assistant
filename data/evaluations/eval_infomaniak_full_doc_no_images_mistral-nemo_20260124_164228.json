@@ -1,0 +1,343 @@
+{
+  "collection": "infomaniak_full_doc_no_images",
+  "model": "mistralai/mistral-nemo",
+  "dataset": "backend/app/evaluation/datasets/rag_eval.yaml",
+  "experiment_tags": {
+    "config": "baseline",
+    "collection": "infomaniak_full_doc_no_images",
+    "timestamp": "2026-01-24T16:40:59.098774",
+    "model": "mistralai/mistral-nemo",
+    "retrieval_mode": "dense"
+  },
+  "aggregate_scores": {
+    "avg_correctness": 0.8300000000000001,
+    "avg_faithfulness": 0.89,
+    "avg_relevance": 0.95,
+    "avg_retrieval_latency_ms": 678.7333539978135,
+    "avg_generation_latency_ms": 3226.227691787062,
+    "avg_total_latency_ms": 3904.971691715764,
+    "avg_chunks_retrieved": 5.0,
+    "num_questions": 10,
+    "total_input_tokens": 40236,
+    "total_output_tokens": 633,
+    "total_cost_usd": 0.00083004,
+    "avg_input_tokens": 4023.6,
+    "avg_output_tokens": 63.3,
+    "avg_cost_usd": 8.3004e-05,
+    "avg_correctness_direct": 0.8300000000000001,
+    "avg_relevance_direct": 0.95,
+    "num_direct": 10
+  },
+  "results": [
+    {
+      "question_id": "direct-kmeet-001",
+      "question": "What browsers support kMeet end-to-end encryption?",
+      "expected_answer": "End-to-end encryption only works with desktop apps and up-to-date browsers based on the Chromium architecture, such as Opera, Brave, and Google Chrome.",
+      "generated_answer": "According to the provided documentation, end-to-end encryption in kMeet works with up-to-date browsers based on the Chromium architecture. This includes browsers like Opera, Brave, Google Chrome, etc. It does not work with other browsers like Firefox or Safari.",
+      "retrieved_context": "[Document 1] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: # Secure a k Meet meeting with a password and encryption key\n\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\n\n---\n\nThis guide explains how to add a **password** and an **encryption key** to a [k Meet](https://www.infomaniak.com/en/support/f...",
+      "scores": {
+        "correctness": 0.9,
+        "faithfulness": 0.9,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer correctly identifies that Chromium-based browsers (Chrome, Brave, Opera) are supported and explicitly mentions that Firefox and Safari are not. The only minor omission is the mention of 'desktop apps' which was in the expected answer, but since the question specifically asked about 'browsers', the answer is highly accurate in context.",
+        "faithfulness_reasoning": "The answer correctly identifies that end-to-end encryption requires up-to-date browsers based on the Chromium architecture, specifically mentioning Opera, Brave, and Google Chrome as examples provided in Document 1. The claim that it does not work with Firefox or Safari is a logical inference based on the 'Chromium architecture' requirement, though the text does not explicitly name those two as unsupported for this specific feature.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that end-to-end encryption works with desktop apps and up-to-date browsers based on the Chromium architecture, specifically naming Opera, Brave, and Google Chrome as examples."
+      },
+      "retrieval_latency_ms": 508.0565420212224,
+      "generation_latency_ms": 2498.767958022654,
+      "total_latency_ms": 3006.840125017334,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3675,
+      "output_tokens": 52,
+      "cost_usd": 7.557999999999999e-05
+    },
+    {
+      "question_id": "direct-kmeet-002",
+      "question": "What is the maximum recording duration for a kMeet meeting?",
+      "expected_answer": "The maximum recording duration for a kMeet meeting is 3 hours.",
+      "generated_answer": "The maximum recording duration for a kMeet meeting is 3 hours.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer is identical to the expected answer, containing the exact same factual information and wording.",
+        "faithfulness_reasoning": "The answer is directly supported by Document 1, which explicitly states that video recording 'has a maximum duration of 3 hours' in the preamble section.",
+        "relevance_reasoning": "Document 1 explicitly states that a kMeet video recording has a maximum duration of 3 hours. This directly and completely answers the user's question."
+      },
+      "retrieval_latency_ms": 820.2119579655118,
+      "generation_latency_ms": 1839.4291669828817,
+      "total_latency_ms": 2659.6502090105787,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3257,
+      "output_tokens": 14,
+      "cost_usd": 6.57e-05
+    },
+    {
+      "question_id": "direct-kmeet-003",
+      "question": "Can I record an encrypted kMeet meeting with a custom key?",
+      "expected_answer": "No, you cannot record a video conference that uses end-to-end encryption with a custom key.",
+      "generated_answer": "I don't have information about that in the documentation.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer fails to provide the necessary information. While it doesn't contain a factual error, it is a 'non-answer' that contradicts the expected answer's definitive 'No'. It does not preserve the core meaning or provide the key information required.",
+        "faithfulness_reasoning": "The answer states that the information is not in the documentation, but Document 1 explicitly states under the 'Prerequisites' section for recording: 'Do not create an encrypted video conference with a custom key.' This indicates that you cannot record a meeting if it uses a custom encryption key.",
+        "relevance_reasoning": "Document 1 explicitly answers the question by stating a prerequisite for recording: 'Do not create an encrypted video conference with a custom key.' This directly informs the user that recording is not possible when using a custom encryption key."
+      },
+      "retrieval_latency_ms": 752.0036660134792,
+      "generation_latency_ms": 1133.5108749917708,
+      "total_latency_ms": 1885.522500029765,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3081,
+      "output_tokens": 11,
+      "cost_usd": 6.206e-05
+    },
+    {
+      "question_id": "direct-kmeet-004",
+      "question": "What format are kMeet recordings saved in?",
+      "expected_answer": "kMeet recordings are saved in .mp4 video format.",
+      "generated_answer": "kMeet recordings are saved in .mp4 video format.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer is an exact match to the expected answer, containing all key information with no errors.",
+        "faithfulness_reasoning": "The answer is directly supported by Document 1, which states that kMeet recordings are in '.mp4 video format'.",
+        "relevance_reasoning": "Document 1 explicitly states that kMeet recordings are saved in .mp4 format. This information is mentioned twice in the document, providing a direct and clear answer to the question."
+      },
+      "retrieval_latency_ms": 699.8446250217967,
+      "generation_latency_ms": 1447.8717919555493,
+      "total_latency_ms": 2147.7249580202624,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3077,
+      "output_tokens": 12,
+      "cost_usd": 6.201999999999999e-05
+    },
+    {
+      "question_id": "direct-kmeet-005",
+      "question": "What happens when I call someone on Do Not Disturb in kChat?",
+      "expected_answer": "Calling a user who is on Do Not Disturb will not trigger a ringtone or call modal for them, but they will see the message in the conversation.",
+      "generated_answer": "Calling someone on \"Do Not Disturb\" in kChat will not trigger a ringtone or call modal for them, but they will see the message in the conversation.",
+      "retrieved_context": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: # Create a k Meet meeting from k Chat\n\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\n\n---\n\nThis guide explains how to start an audio or video conversation between one or more users [k Chat](https://infomaniak.com/gtl/kchat), with Infomaniak's ethical free video conferencing solution, [k Meet](https://infomani...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer is identical to the expected answer in terms of factual content and key information. It correctly identifies that no ringtone or modal is triggered, but the message remains visible.",
+        "faithfulness_reasoning": "The answer is directly supported by Document 1, which states: 'Calling a user who is on \u201cDo Not Disturb\u201d will not trigger a ringtone or call modal for them, but they will see the message in the conversation.'",
+        "relevance_reasoning": "Document 1 contains the exact answer to the question, explicitly stating that calling a user on 'Do Not Disturb' will not trigger a ringtone or call modal, but they will see the message in the conversation."
+      },
+      "retrieval_latency_ms": 627.4169170064852,
+      "generation_latency_ms": 1749.529458989855,
+      "total_latency_ms": 2376.9550420111045,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 4262,
+      "output_tokens": 35,
+      "cost_usd": 8.664e-05
+    },
+    {
+      "question_id": "direct-kdrive-001",
+      "question": "What methods can I use to create a signature in kDrive PDF editor?",
+      "expected_answer": "You can create a signature in three ways: draw freehand with the mouse, type text and choose a cursive font, or import an image (like a scan of your handwritten signature) from your device.",
+      "generated_answer": "In the kDrive PDF editor, you can create a signature using the following methods:\n\n1. **Draw freehand with the mouse**\n2. **Type text and choose the cursive font**\n3. **Import an image** (scan of your handwritten signature, for example) from your device",
+      "retrieved_context": "[Document 1] Sign a PDF document on the k Drive web app\nSource: https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app\nContent: # Sign a PDF document on the k Drive web app\n\nSource: https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app\n\n---\n\nThis guide explains how to sign a file in **PDF** format on the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)). Refer to [this oth...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains all the key information from the expected answer without any factual errors. It accurately lists the three methods (drawing, typing with cursive font, and importing an image) and preserves the core meaning perfectly, simply using a list format for better readability.",
+        "faithfulness_reasoning": "The answer is fully grounded in the provided context. Document 1, step 6, explicitly lists these three methods for creating a signature: drawing freehand with the mouse, typing text and choosing a cursive font, and importing an image from the device.",
+        "relevance_reasoning": "Document 1 provides a direct and comprehensive answer to the question. It explicitly lists the three methods for creating a signature in the kDrive PDF editor: drawing freehand with a mouse, typing text with a cursive font, and importing an image of a handwritten signature."
+      },
+      "retrieval_latency_ms": 704.8075000056997,
+      "generation_latency_ms": 2651.3437920366414,
+      "total_latency_ms": 3356.1638750252314,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3427,
+      "output_tokens": 60,
+      "cost_usd": 7.094000000000001e-05
+    },
+    {
+      "question_id": "direct-kdrive-002",
+      "question": "Where are kDrive files stored?",
+      "expected_answer": "Files are never analyzed and are exclusively stored in Switzerland.",
+      "generated_answer": "kDrive files are stored on the Infomaniak servers, and they can be accessed through the kDrive web app at [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive). Additionally, you can access the files locally on your device using the kDrive desktop app. When the app is installed and launched, you can view the files stored on the kDrive server or open the folder containing your kDrive files on your computer. For more details, refer to the [Access k Drive files locally and online](https://www.infomaniak.com/en/support/faq/2456) guide.",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: # Getting started guide: k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\n\n---\n\nThank you for choosing [k Drive](https://infomaniak.com/gtl/kdrive), the independent and privacy-respecting solution for collaborating, sharing, and accessing your data from all your devices. Your data is encrypted, continuously backed up,...",
+      "scores": {
+        "correctness": 0.6,
+        "faithfulness": 1.0,
+        "relevance": 0.5,
+        "correctness_reasoning": "The generated answer is factually correct regarding the technical infrastructure (Infomaniak servers) and how to access the files. However, it fails to mention the two key points emphasized in the expected answer: that the files are stored specifically in Switzerland and that they are never analyzed. While it provides more practical detail, it misses the core 'privacy and location' focus of the expected answer.",
+        "faithfulness_reasoning": "The answer is fully supported by the provided documents. Document 1 confirms data is hosted in Switzerland. Document 3 explicitly states that files are stored on the kDrive server and can be accessed via the web app (ksuite.infomaniak.com/kdrive) or locally on a computer via the desktop app. Document 4 also discusses the local storage location on hard drives.",
+        "relevance_reasoning": "Failed to parse response: Expecting value: line 1 column 1 (char 0)"
+      },
+      "retrieval_latency_ms": 709.598499990534,
+      "generation_latency_ms": 7959.643374953885,
+      "total_latency_ms": 8669.254334003199,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 5601,
+      "output_tokens": 134,
+      "cost_usd": 0.00011738
+    },
+    {
+      "question_id": "direct-kdrive-003",
+      "question": "What commands should I run to fix Windows system integrity for kDrive issues?",
+      "expected_answer": "Run these commands in an administrator command prompt: SFC /scannow, DISM /Online /Cleanup-Image /CheckHealth, DISM /Online /Cleanup-Image /ScanHealth, DISM /Online /Cleanup-Image /RestoreHealth",
+      "generated_answer": "To check and repair system integrity for kDrive issues on Windows, follow these steps:\n\n1. Open the command prompt with administrator access.\n2. Type each command below and wait for the analysis to complete:\n\n```\nSFC /scannow\nDISM /Online /Cleanup-Image /Check Health\nDISM /Online /Cleanup-Image /Scan Health\nDISM /Online /Cleanup-Image /Restore Health\n```",
+      "retrieved_context": "[Document 1] Fix incorrect file statuses (k Drive Windows)\nSource: https://www.infomaniak.com/en/support/faq/1342/fix-incorrect-file-statuses-kdrive-windows\nContent: # Fix incorrect file statuses (k Drive Windows)\n\nSource: https://www.infomaniak.com/en/support/faq/1342/fix-incorrect-file-statuses-kdrive-windows\n\n---\n\nThis guide helps resolve an issue with statuses (`OK`, `in progress`, etc.) that may occur with the files and folders in the k Drive tree in Windows Explorer, in case these indicati...",
+      "scores": {
+        "correctness": 0.8,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the correct sequence of commands and the necessary context (administrator access). However, it introduces a syntax error by adding a space in the DISM parameters (e.g., '/Check Health' instead of '/CheckHealth'). These commands will fail if copy-pasted directly into the command prompt.",
+        "faithfulness_reasoning": "The answer is fully grounded in the context. It accurately retrieves the specific commands and instructions for checking and repairing system integrity from Document 1, which is explicitly provided to resolve kDrive file status issues on Windows.",
+        "relevance_reasoning": "Document 1 contains the exact list of commands (SFC and DISM) required to check and repair Windows system integrity specifically to resolve kDrive file status issues. It provides step-by-step instructions for running these commands in the command prompt."
+      },
+      "retrieval_latency_ms": 729.3804579530843,
+      "generation_latency_ms": 2831.2404999742284,
+      "total_latency_ms": 3560.631500033196,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 5297,
+      "output_tokens": 92,
+      "cost_usd": 0.00010962
+    },
+    {
+      "question_id": "direct-kdrive-004",
+      "question": "Can I save changes to a PDF in kDrive without overwriting the original?",
+      "expected_answer": "Yes, when saving changes to a PDF in kDrive, you can choose whether to create a copy of the modified document or overwrite the existing file.",
+      "generated_answer": "Based on the provided documentation, here's how you can save changes to a PDF in kDrive without overwriting the original:\n\n1. Open the kDrive web app and navigate to the PDF file you want to edit.\n2. Click the \"Edit\" button at the top of the document.\n3. Make the desired changes to the PDF using the editor's tools.\n4. Once finished, click the \"Save\" button.\n5. Before saving, you'll see two options:\n   - \"Create a copy\": Select this option to save your changes as a new file, preserving the original.\n   - \"Overwrite\": Select this option to save your changes and replace the original file.\n\nSo, to summarize, select \"Create a copy\" to save changes to a PDF in kDrive without overwriting the original file.",
+      "retrieved_context": "[Document 1] Edit a PDF file on the k Drive Web app\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\nContent: # Edit a PDF file on the k Drive Web app\n\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\n\n---\n\nThis guide explains how to edit a file in **PDF** format on the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n\n**\u26a0 Available with:**\n\n### Preamb...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer is perfectly aligned with the expected answer. It confirms that saving a copy is possible and correctly identifies the two options (Create a copy vs. Overwrite) mentioned in the expected answer, while providing helpful step-by-step context.",
+        "faithfulness_reasoning": "The answer is fully grounded in the provided context. Document 1 explicitly states that after editing a PDF, the user can 'save the changes and choose whether to create a copy of the modified document or overwrite the existing file.' The steps provided in the answer accurately reflect the instructions found in Documents 1 and 3.",
+        "relevance_reasoning": "Document 1 and Document 3 explicitly answer the question. They state that after editing or signing a PDF, the user can choose to either 'create a copy' of the modified document or 'overwrite' the existing file."
+      },
+      "retrieval_latency_ms": 709.4562079873867,
+      "generation_latency_ms": 7868.589791003615,
+      "total_latency_ms": 8578.058790997602,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 5061,
+      "output_tokens": 167,
+      "cost_usd": 0.00010790000000000001
+    },
+    {
+      "question_id": "direct-kchat-001",
+      "question": "Why does kChat request access to macOS Keychain for Chromium Safe Storage?",
+      "expected_answer": "kChat requests access to the macOS Keychain for Chromium Safe Storage to store your access token. This is normal and necessary for proper functioning; no additional sensitive data is requested and nothing is sent outside.",
+      "generated_answer": "k Chat requests access to the macOS Keychain for \"Chromium Safe Storage\" to store your access token (token). This is necessary for the proper functioning of k Chat and is a normal and secure process. No additional sensitive data is requested and nothing is sent outside.",
+      "retrieved_context": "[Document 1] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: # Download and install k Chat\n\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\n\n---\n\nThis guide concerns the installation of [k Chat](https://infomaniak.com/gtl/kchat), the instant messaging solution of my k Suite.\n\n## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains all the key information from the expected answer, including the purpose (storing the access token), the necessity for proper functioning, and the assurance that no other sensitive data is accessed or sent externally. There are no factual errors or contradictions.",
+        "faithfulness_reasoning": "The answer is fully grounded in the provided context. Document 1 explicitly states that k Chat requests access to the macOS Keychain for 'Chromium Safe Storage' to store the access token, that this is necessary for proper functioning, and that no additional sensitive data is requested or sent outside.",
+        "relevance_reasoning": "Document 1 contains the exact answer to the question. It explicitly states that kChat requests access to the macOS Keychain for 'Chromium Safe Storage' to store the user's access token and explains that this is necessary for the app's proper functioning."
+      },
+      "retrieval_latency_ms": 526.5571660129353,
+      "generation_latency_ms": 2282.350208959542,
+      "total_latency_ms": 2808.915583009366,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline",
+        "timestamp": "2026-01-24T16:40:59.098774",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3498,
+      "output_tokens": 56,
+      "cost_usd": 7.22e-05
+    }
+  ]
+}

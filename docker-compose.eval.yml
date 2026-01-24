@@ -1,0 +1,25 @@
+# Docker Compose for running evaluations
+# Usage:
+#   docker compose up -d qdrant
+#   docker compose -f docker-compose.eval.yml run --rm eval python scripts/ingest_hybrid.py --recreate
+#   docker compose -f docker-compose.eval.yml run --rm eval python scripts/evaluate.py ...
+
+services:
+  eval:
+    build:
+      context: .
+      dockerfile: Dockerfile.eval
+    volumes:
+      - ./data:/app/data
+      - ./scripts:/app/scripts
+      - ./backend:/app/backend
+    env_file: .env
+    environment:
+      - QDRANT_HOST=http://host.docker.internal:6333
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  default:
+    name: infomaniak-doc-assistant_default
+    external: true

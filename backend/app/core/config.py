@@ -58,20 +58,23 @@ class Settings(BaseSettings):
     # Judge LLM (for evaluation) - uses a fast, cheap model
     judge_model: str = Field(default="google/gemini-3-flash-preview")
 
-    # Generation model for RAG answer generation
-    generation_model: str = Field(default="qwen/qwen3-8b")
+    # Generation model for RAG answer generation (evaluation winner: best quality/cost)
+    generation_model: str = Field(default="mistralai/mistral-nemo")
+
+    # Fallback model for complex queries (flagship quality)
+    fallback_model: str = Field(default="mistralai/mistral-large")
 
     # =========================================================================
     # Vector Database Configuration
     # =========================================================================
     qdrant_host: str = Field(default="http://localhost:6333")
     qdrant_api_key: str = Field(default="")
-    qdrant_collection: str = Field(default="infomaniak_docs")
+    qdrant_collection: str = Field(default="infomaniak_hybrid_full_doc_no_images")
 
     # =========================================================================
     # RAG Configuration
     # =========================================================================
-    chunking_strategy: ChunkingStrategy = Field(default=ChunkingStrategy.RECURSIVE)
+    chunking_strategy: ChunkingStrategy = Field(default=ChunkingStrategy.FULL_DOCUMENT)
     chunk_size: int = Field(default=1500, ge=100, le=10000)
     chunk_overlap: int = Field(default=200, ge=0, le=1000)
     dataset_path: Literal["cleaned", "cleaned_no_images"] = Field(default="cleaned_no_images")
@@ -79,7 +82,7 @@ class Settings(BaseSettings):
     # Retrieval settings
     rag_top_k: int = Field(default=5, ge=1, le=50)
     rag_similarity_threshold: float = Field(default=0.5, ge=0.0, le=1.0)
-    rag_vector_dimension: int = Field(default=4096)
+    rag_vector_dimension: int = Field(default=2560)  # qwen/qwen3-embedding-4b
 
     # Sentence window specific settings
     sentence_window_size: int = Field(default=3, ge=1, le=10)
