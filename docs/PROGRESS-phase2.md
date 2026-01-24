@@ -32,13 +32,19 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 - [x] Event emission with `2:` prefix (Vercel AI SDK protocol)
 - [x] Unit tests (76 tests for primitives, events, fakedb, tools)
 
-### A3: Skill Loader ⏳ NEXT
-- [ ] `backend/app/agents/skills.py`
-- [ ] `skills/` directory structure
-- [ ] YAML frontmatter parsing
-- [ ] `SkillLoader.list_skills()`
-- [ ] `SkillLoader.load_skill(name)`
-- [ ] `SkillLoader.match_skill(query, intent)`
+### A3: Skill Loader ✅ DONE
+- [x] `backend/app/agents/skills.py` - Skill loading and parsing
+- [x] `skills/` directory structure (kmeet/, kdrive/, kchat/)
+- [x] YAML frontmatter parsing with `pyyaml`
+- [x] `SkillLoader.list_skills()` - List all available skills
+- [x] `SkillLoader.load_skill(name)` - Load a skill by name
+- [x] `SkillLoader.get_skill(name)` - Get skill or None
+- [x] `SkillMetadata` and `Skill` dataclasses with validation
+- [x] Custom exceptions: `SkillNotFoundError`, `SkillParseError`
+- [x] Proper error handling and logging (no silent failures)
+- [x] I/O error handling (PermissionError, UnicodeDecodeError, OSError)
+- [x] Unit tests (36 passing)
+- [x] Config: `skills_dir` setting
 
 ---
 
@@ -70,10 +76,10 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 
 ## Phase C: Action Execution
 
-### C1: Skill Files
-- [ ] `skills/kmeet/start-meeting.md`
-- [ ] `skills/kdrive/share-file.md`
-- [ ] `skills/kchat/send-message.md`
+### C1: Skill Files ✅ DONE (moved to A3)
+- [x] `skills/kmeet/start-meeting.md`
+- [x] `skills/kdrive/share-file.md`
+- [x] `skills/kchat/send-message.md`
 
 ### C2: Agent Executor
 - [ ] `backend/app/agents/executor.py`
@@ -146,25 +152,24 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| A: Foundation | 🟡 In Progress | 2/3 done |
+| A: Foundation | ✅ Complete | 3/3 done |
 | B: RAG Generative UI | ⚪ Not Started | 0/3 done |
-| C: Action Execution | ⚪ Not Started | 0/3 done |
+| C: Action Execution | 🟡 In Progress | 1/3 done |
 | D: Fake Apps | ⚪ Not Started | 0/5 done |
 | E: Integration | ⚪ Not Started | 0/3 done |
 
-**Overall: ~12% complete (2/17 tasks)**
+**Overall: ~24% complete (4/17 tasks)**
 
 ---
 
 ## Next Step
 
-**A3: Skill Loader**
+**B1: json-render Setup**
 
-Create `backend/app/agents/skills.py` with:
-1. `skills/` directory structure for skill definitions
-2. YAML frontmatter parsing for skill metadata
-3. `SkillLoader.list_skills()` - List all available skills
-4. `SkillLoader.load_skill(name)` - Load a skill by name
-5. `SkillLoader.match_skill(query, intent)` - Match query to best skill
+Set up the json-render library for constrained generative UI:
+1. Install `@json-render/core` and `@json-render/react`
+2. Create `frontend/src/lib/catalog.ts` with component definitions
+3. Create `frontend/src/lib/registry.tsx` with React component mappings
+4. Basic renderer working with test components
 
-Skills will define the prompts and allowed primitives for each action type.
+This enables the RAG system to output structured JSON that renders as rich UI.
