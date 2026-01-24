@@ -58,6 +58,10 @@ class Settings(BaseSettings):
     # Judge LLM (for evaluation) - uses a fast, cheap model
     judge_model: str = Field(default="google/gemini-3-flash-preview")
 
+    # Intent Router (for classifying queries as RAG or Action)
+    router_model: str = Field(default="mistralai/mistral-nemo")
+    router_confidence_threshold: float = Field(default=0.7, ge=0.0, le=1.0)
+
     # Generation model for RAG answer generation (evaluation winner: best quality/cost)
     generation_model: str = Field(default="mistralai/mistral-nemo")
 
