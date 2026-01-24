@@ -83,22 +83,17 @@ export function JsonRendererDemo() {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ marginBottom: '1rem' }}>JsonRenderer Demo</h2>
-      <p style={{ color: '#666', marginBottom: '1.5rem' }}>
-        Testing the generative UI components from B1 json-render setup.
+    <div className="p-8 max-w-3xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4">JsonRenderer Demo</h2>
+      <p className="text-text-muted mb-6">
+        Testing the generative UI components from B1 json-render setup with Tailwind CSS v4.
       </p>
 
-      <div style={{
-        background: '#fff',
-        borderRadius: '8px',
-        padding: '1.5rem',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-      }}>
+      <div className="bg-white rounded-lg p-6 shadow-md">
         <JsonRenderer tree={demoTree} onAction={handleAction} />
       </div>
 
-      <h3 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Additional Components</h3>
+      <h3 className="text-xl font-semibold mt-8 mb-4">Additional Components</h3>
 
       {/* Table Demo */}
       <JsonRenderer
@@ -185,7 +180,7 @@ export function JsonRendererDemo() {
       />
 
       {/* Action Buttons Demo */}
-      <div style={{ marginTop: '1rem' }}>
+      <div className="mt-4">
         <JsonRenderer
           tree={{
             root: 'actions-demo',
@@ -222,4 +217,3 @@ export function JsonRendererDemo() {
     </div>
   );
 }
-
