@@ -15,6 +15,7 @@ from .events import (
     StateUpdateEvent,
     StreamEvent,
     ToastEvent,
+    ToastType,
     ToolStatus,
     ToolStatusEvent,
 )
@@ -163,7 +164,7 @@ class Primitives:
             self._success_tool("updateState", f"State updated: {path}")
             return self._make_result(success=True, data={"path": path, "value": value})
 
-        except Exception as e:
+        except ValueError as e:
             error_msg = str(e)
             self._error_tool("updateState", error_msg)
             return self._make_result(success=False, error=error_msg)
@@ -225,7 +226,7 @@ class Primitives:
                 success=True, data={"panel_id": panel_id, "props": props}
             )
 
-        except Exception as e:
+        except ValueError as e:
             error_msg = str(e)
             self._error_tool("showPanel", error_msg)
             return self._make_result(success=False, error=error_msg)
@@ -251,40 +252,53 @@ class Primitives:
             self._success_tool("navigate", f"Navigated to: {route}")
             return self._make_result(success=True, data={"route": route})
 
-        except Exception as e:
+        except ValueError as e:
             error_msg = str(e)
             self._error_tool("navigate", error_msg)
             return self._make_result(success=False, error=error_msg)
 
-    async def toast(self, message: str, type: str = "info") -> ToolResult:
+    async def toast(
+        self, message: str, toast_type: ToastType | str = ToastType.INFO
+    ) -> ToolResult:
         """Show a toast notification.
 
         Args:
             message: The message to display
-            type: Type of toast (info, success, warning, error)
+            toast_type: Type of toast (info, success, warning, error)
 
         Returns:
             ToolResult indicating success or failure
         """
-        self._start_tool("toast", f"Showing toast: {type}")
+        # Convert string to ToastType if needed
+        resolved_type: ToastType
+        if isinstance(toast_type, str):
+            try:
+                resolved_type = ToastType(toast_type)
+            except ValueError:
+                valid = ", ".join(t.value for t in ToastType)
+                self._start_tool("toast", f"Showing toast: {toast_type}")
+                self._error_tool("toast", f"Invalid toast type. Must be one of: {valid}")
+                return self._make_result(
+                    success=False, error=f"Invalid toast type. Must be one of: {valid}"
+                )
+        else:
+            resolved_type = toast_type
+
+        self._start_tool("toast", f"Showing toast: {resolved_type.value}")
 
         try:
             if not message or not isinstance(message, str):
                 raise ValueError("Message must be a non-empty string")
 
-            valid_types = {"info", "success", "warning", "error"}
-            if type not in valid_types:
-                raise ValueError(f"Type must be one of: {', '.join(valid_types)}")
-
             # Emit the toast event
-            self._emit_event(ToastEvent(message=message, type=type))
+            self._emit_event(ToastEvent(message=message, toast_type=resolved_type))
 
             self._success_tool("toast", "Toast displayed")
             return self._make_result(
-                success=True, data={"message": message, "type": type}
+                success=True, data={"message": message, "type": resolved_type.value}
             )
 
-        except Exception as e:
+        except ValueError as e:
             error_msg = str(e)
             self._error_tool("toast", error_msg)
             return self._make_result(success=False, error=error_msg)

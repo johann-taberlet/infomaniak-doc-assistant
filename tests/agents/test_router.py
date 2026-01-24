@@ -320,8 +320,8 @@ class TestIntentRouterIntegration:
         if expected_skill:
             assert intent.skill == expected_skill, f"Query '{query}' got skill {intent.skill}, expected {expected_skill}"
 
-        # Latency check - allow up to 5s for network variability
-        assert latency < 5.0, f"Classification took {latency:.2f}s, expected < 5s"
+        # Latency check - allow up to 10s for network variability in CI
+        assert latency < 10.0, f"Classification took {latency:.2f}s, expected < 10s"
 
     def test_long_query_no_crash(self, router):
         """Very long query should not crash."""

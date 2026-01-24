@@ -128,6 +128,12 @@ class TestFakeDBQueries:
         assert len(results) == 1
         assert results[0]["title"] == "Weekly Standup"
 
+    def test_query_contains_with_non_string_value_returns_no_match(self, db):
+        """Test that contains filter with non-string value doesn't crash."""
+        # Should gracefully return no matches instead of crashing
+        results = db.query("contacts", {"name_contains": 123})
+        assert len(results) == 0
+
 
 class TestFakeDBHelpers:
     """Tests for FakeDB helper methods."""

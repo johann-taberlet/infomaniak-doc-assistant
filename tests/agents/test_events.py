@@ -7,6 +7,7 @@ from backend.app.agents.events import (
     ShowPanelEvent,
     StateUpdateEvent,
     ToastEvent,
+    ToastType,
     ToolStatus,
     ToolStatusEvent,
 )
@@ -200,7 +201,7 @@ class TestToastEvent:
 
     def test_error_toast(self):
         """Test error toast."""
-        event = ToastEvent(message="Failed to save file", type="error")
+        event = ToastEvent(message="Failed to save file", toast_type=ToastType.ERROR)
         output = event.to_stream()
 
         json_part = output[2:-1]
@@ -210,7 +211,7 @@ class TestToastEvent:
 
     def test_success_toast(self):
         """Test success toast."""
-        event = ToastEvent(message="Changes saved", type="success")
+        event = ToastEvent(message="Changes saved", toast_type=ToastType.SUCCESS)
         output = event.to_stream()
 
         json_part = output[2:-1]

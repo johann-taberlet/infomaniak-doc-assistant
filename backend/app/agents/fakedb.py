@@ -6,6 +6,7 @@ The backend maintains a copy so the agent can make decisions based on query resu
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -220,12 +221,12 @@ class FakeDB:
     Multiple filters are combined with AND logic.
     """
 
-    contacts: list[dict[str, Any]] = field(default_factory=lambda: list(CONTACTS))
-    files: list[dict[str, Any]] = field(default_factory=lambda: list(FILES))
-    folders: list[dict[str, Any]] = field(default_factory=lambda: list(FOLDERS))
-    channels: list[dict[str, Any]] = field(default_factory=lambda: list(CHANNELS))
-    messages: list[dict[str, Any]] = field(default_factory=lambda: list(MESSAGES))
-    meetings: list[dict[str, Any]] = field(default_factory=lambda: list(MEETINGS))
+    contacts: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(CONTACTS))
+    files: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(FILES))
+    folders: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(FOLDERS))
+    channels: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(CHANNELS))
+    messages: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(MESSAGES))
+    meetings: list[dict[str, Any]] = field(default_factory=lambda: copy.deepcopy(MEETINGS))
 
     def get_collection(self, name: str) -> list[dict[str, Any]] | None:
         """Get a collection by name.
@@ -289,6 +290,8 @@ class FakeDB:
                     return False
                 item_value = item[field_name]
                 if not isinstance(item_value, str):
+                    return False
+                if not isinstance(value, str):
                     return False
                 if value.lower() not in item_value.lower():
                     return False

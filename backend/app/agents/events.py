@@ -16,8 +16,16 @@ class ToolStatus(str, Enum):
     """Status of a tool execution."""
 
     STARTING = "starting"
-    EXECUTING = "executing"
     SUCCESS = "success"
+    ERROR = "error"
+
+
+class ToastType(str, Enum):
+    """Type of toast notification."""
+
+    INFO = "info"
+    SUCCESS = "success"
+    WARNING = "warning"
     ERROR = "error"
 
 
@@ -125,11 +133,11 @@ class ToastEvent:
 
     Attributes:
         message: The message to display
-        type: Type of toast (info, success, warning, error)
+        toast_type: Type of toast (info, success, warning, error)
     """
 
     message: str
-    type: str = "info"
+    toast_type: ToastType = ToastType.INFO
 
     def to_stream(self) -> str:
         """Serialize to Vercel AI SDK data stream format.
@@ -139,7 +147,7 @@ class ToastEvent:
         """
         payload = {
             "message": self.message,
-            "type": self.type,
+            "type": self.toast_type.value,
         }
         return f'2:{json.dumps(["toast", payload])}\n'
 

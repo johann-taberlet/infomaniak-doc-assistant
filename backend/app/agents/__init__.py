@@ -19,6 +19,7 @@ from backend.app.agents.events import (
     StateUpdateEvent,
     StreamEvent,
     ToastEvent,
+    ToastType,
     ToolStatus,
     ToolStatusEvent,
 )
@@ -46,6 +47,7 @@ __all__ = [
     "StateUpdateEvent",
     "StreamEvent",
     "ToastEvent",
+    "ToastType",
     "ToolStatus",
     "ToolStatusEvent",
     # FakeDB

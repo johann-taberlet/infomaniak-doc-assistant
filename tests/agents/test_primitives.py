@@ -7,6 +7,7 @@ from backend.app.agents.events import (
     ShowPanelEvent,
     StateUpdateEvent,
     ToastEvent,
+    ToastType,
     ToolStatus,
     ToolStatusEvent,
 )
@@ -244,7 +245,7 @@ class TestPrimitivesToast:
 
         assert isinstance(result.events[1], ToastEvent)
         assert result.events[1].message == "Saved!"
-        assert result.events[1].type == "success"
+        assert result.events[1].toast_type == ToastType.SUCCESS
 
     @pytest.mark.asyncio
     async def test_toast_invalid_type_fails(self, primitives):
@@ -252,7 +253,7 @@ class TestPrimitivesToast:
         result = await primitives.toast("Hello", "invalid_type")
 
         assert result.success is False
-        assert "must be one of" in result.error
+        assert "Must be one of" in result.error
 
     @pytest.mark.asyncio
     async def test_toast_empty_message_fails(self, primitives):
