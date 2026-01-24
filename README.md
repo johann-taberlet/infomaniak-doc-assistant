@@ -108,6 +108,25 @@ See [docs/methodology.md](docs/methodology.md) for the complete evaluation frame
 └── docker-compose.eval.yml # Evaluation mode
 ```
 
+## Model Providers
+
+This project uses **OpenRouter** as the primary LLM provider. All evaluations were conducted with OpenRouter models to ensure reproducibility.
+
+| Component | Model | Provider | Local Alternative |
+|-----------|-------|----------|-------------------|
+| Embeddings | qwen3-embedding-4b | OpenRouter | nomic-embed-text (Ollama) |
+| Generation | mistral-nemo (12B) | OpenRouter | mistral:7b (Ollama) |
+| Fallback | mistral-large (123B) | OpenRouter | None (too large) |
+| Judge | gemini-flash | OpenRouter | None (closed model) |
+
+**Why OpenRouter?**
+- Access to open-weight models (Mistral, Qwen) via unified API
+- Consistent evaluation metrics across runs
+- No local GPU requirements
+- Cost-effective (~$0.00009/query)
+
+**Ollama support** exists for embeddings but wasn't used for evaluations. Running locally would require re-evaluation to validate quality metrics.
+
 ## Configuration
 
 Key environment variables (see `.env.example` for all options):
@@ -116,6 +135,7 @@ Key environment variables (see `.env.example` for all options):
 |----------|-------------|---------|
 | `OPENROUTER_API_KEY` | **Required** - API key for LLM | - |
 | `GENERATION_MODEL` | Model for answer generation | `mistralai/mistral-nemo` |
+| `FALLBACK_MODEL` | Flagship model for complex queries | `mistralai/mistral-large` |
 | `QDRANT_HOST` | Qdrant connection URL | `http://localhost:6333` |
 
 ## Local Development
