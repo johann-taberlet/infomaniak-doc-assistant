@@ -11,7 +11,7 @@ Usage:
     uv run python scripts/evaluate.py --collection infomaniak_baseline --tag experiment:v1
 
 Examples:
-    # Evaluate baseline collection
+    # Evaluate baseline collection (dense retrieval)
     uv run python scripts/evaluate.py --collection infomaniak_recursive_1500_no_images
 
     # Quick test with 5 questions
@@ -26,12 +26,37 @@ Examples:
     # Run on specific product
     uv run python scripts/evaluate.py --collection infomaniak_baseline --product kmeet
 
-    # Run with a specific generation model (Phase 2)
+    # Run with a specific generation model
     uv run python scripts/evaluate.py \\
         --collection infomaniak_full_doc_no_images \\
         --model qwen/qwen3-8b \\
-        --max-questions 10 \\
-        --tag experiment:phase2_model_comparison
+        --max-questions 10
+
+    # Hybrid retrieval evaluation
+    uv run python scripts/evaluate.py \\
+        --collection infomaniak_hybrid_full_doc_no_images \\
+        --hybrid-collection \\
+        --retrieval-mode hybrid \\
+        --enable-normalization \\
+        --model mistralai/mistral-nemo \\
+        --tag config:normalized_bm25
+
+    # HyDE + Dense retrieval
+    uv run python scripts/evaluate.py \\
+        --collection infomaniak_full_doc_no_images \\
+        --enable-hyde \\
+        --model mistralai/mistral-nemo \\
+        --tag config:hyde_dense
+
+    # HyDE + Hybrid (best expected config)
+    uv run python scripts/evaluate.py \\
+        --collection infomaniak_hybrid_full_doc_no_images \\
+        --hybrid-collection \\
+        --retrieval-mode hybrid \\
+        --enable-hyde \\
+        --enable-normalization \\
+        --model mistralai/mistral-nemo \\
+        --tag config:hyde_hybrid
 """
 
 import argparse
@@ -104,6 +129,30 @@ def main():
         help="LLM model for answer generation (e.g., qwen/qwen3-8b, mistralai/mistral-nemo)",
     )
 
+    # Retrieval enhancement options
+    parser.add_argument(
+        "--retrieval-mode",
+        type=str,
+        default="dense",
+        choices=["dense", "sparse", "hybrid"],
+        help="Retrieval mode: dense (default), sparse (BM25), or hybrid (RRF fusion)",
+    )
+    parser.add_argument(
+        "--hybrid-collection",
+        action="store_true",
+        help="Use HybridRetriever instead of QdrantRetriever (required for sparse/hybrid modes)",
+    )
+    parser.add_argument(
+        "--enable-hyde",
+        action="store_true",
+        help="Enable HyDE (Hypothetical Document Embeddings) for query expansion",
+    )
+    parser.add_argument(
+        "--enable-normalization",
+        action="store_true",
+        help="Enable BM25 vocabulary normalization for kSuite terms",
+    )
+
     args = parser.parse_args()
 
     # Parse tags
@@ -121,6 +170,13 @@ def main():
     if args.model:
         experiment_tags["model"] = args.model
 
+    # Add retrieval config tags
+    experiment_tags["retrieval_mode"] = args.retrieval_mode
+    if args.enable_hyde:
+        experiment_tags["hyde"] = "enabled"
+    if args.enable_normalization:
+        experiment_tags["normalization"] = "enabled"
+
     print("=" * 60)
     print("RAG Evaluation")
     print("=" * 60)
@@ -129,27 +185,65 @@ def main():
     print(f"Max questions:   {args.max_questions or 'all'}")
     print(f"Product filter:  {args.product or 'none'}")
     print(f"Model:           {args.model or 'none (retrieval only)'}")
+    print(f"Retrieval mode:  {args.retrieval_mode}")
+    print(f"Hybrid coll.:    {args.hybrid_collection}")
+    print(f"HyDE:            {args.enable_hyde}")
+    print(f"Normalization:   {args.enable_normalization}")
     print(f"Experiment tags: {experiment_tags}")
     print(f"Langfuse:        {'enabled' if settings.langfuse_enabled else 'disabled'}")
     print()
 
-    # Check if collection exists
-    from backend.app.rag.retriever import QdrantRetriever
+    # Initialize retriever based on configuration
+    retriever = None
+    if args.hybrid_collection:
+        from backend.app.rag.hybrid_retriever import (
+            HybridConfig,
+            HybridRetriever,
+            RetrievalMode,
+        )
 
-    retriever = QdrantRetriever(collection_name=args.collection)
+        # Map string mode to enum
+        mode_map = {
+            "dense": RetrievalMode.DENSE,
+            "sparse": RetrievalMode.SPARSE,
+            "hybrid": RetrievalMode.HYBRID,
+        }
+
+        config = HybridConfig(
+            mode=mode_map[args.retrieval_mode],
+            enable_hyde=args.enable_hyde,
+            enable_normalization=args.enable_normalization,
+        )
+        retriever = HybridRetriever(collection_name=args.collection, config=config)
+    else:
+        from backend.app.rag.retriever import QdrantRetriever
+
+        retriever = QdrantRetriever(collection_name=args.collection)
+
+        # Warn if using advanced features without hybrid collection
+        if args.retrieval_mode != "dense":
+            print(f"Warning: --retrieval-mode {args.retrieval_mode} requires --hybrid-collection")
+            print("Falling back to dense retrieval")
+            experiment_tags["retrieval_mode"] = "dense"
+
+    # Check if collection exists
     if not retriever.collection_exists():
         print(f"Error: Collection '{args.collection}' does not exist")
-        print("Run ingest.py first to create the collection")
+        if args.hybrid_collection:
+            print("Run ingest_hybrid.py first to create the hybrid collection")
+        else:
+            print("Run ingest.py first to create the collection")
         sys.exit(1)
 
     info = retriever.get_collection_info()
     print(f"Collection info: {info.get('points_count', 'unknown')} vectors")
     print()
 
-    # Initialize runner
+    # Initialize runner with configured retriever
     runner = EvaluationRunner(
         collection_name=args.collection,
         experiment_tags=experiment_tags,
+        retriever=retriever,
     )
 
     # Initialize answer generator if model is specified
