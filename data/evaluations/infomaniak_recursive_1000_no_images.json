@@ -1,0 +1,704 @@
+{
+  "collection": "infomaniak_recursive_1000_no_images",
+  "dataset": "backend/app/evaluation/datasets/rag_eval.yaml",
+  "experiment_tags": {
+    "collection": "infomaniak_recursive_1000_no_images",
+    "timestamp": "2026-01-23T20:35:58.853508"
+  },
+  "aggregate_scores": {
+    "avg_correctness": 0.42592592592592593,
+    "avg_faithfulness": 0.037037037037037035,
+    "avg_relevance": 0.6185185185185185,
+    "avg_retrieval_latency_ms": 710.7805864458593,
+    "avg_generation_latency_ms": 0.0010879680134907917,
+    "avg_total_latency_ms": 710.7896744079577,
+    "avg_chunks_retrieved": 5.0,
+    "num_questions": 27,
+    "avg_correctness_direct": 0.7071428571428572,
+    "avg_relevance_direct": 0.7785714285714286,
+    "num_direct": 14,
+    "avg_correctness_multi_doc": 0.32,
+    "avg_relevance_multi_doc": 0.6,
+    "num_multi_doc": 5,
+    "avg_correctness_out_of_scope": 0.0,
+    "avg_relevance_out_of_scope": 0.35,
+    "num_out_of_scope": 8
+  },
+  "results": [
+    {
+      "question_id": "direct-kmeet-001",
+      "question": "What browsers support kMeet end-to-end encryption?",
+      "expected_answer": "End-to-end encryption only works with desktop apps and up-to-date browsers based on the Chromium architecture, such as Opera, Brave, and Google Chrome.",
+      "generated_answer": "[Document 1] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: ## Secure a meeting with an encryption key\n\n### Prerequisites\n\n- This feature only works with desktop apps and up-to-date browsers based on the [Chromium](https://fr.wikipedia.org/wiki/Chromium) architecture (e.g., Opera, Brave, Google Chrome, etc.).\n\nThen follow the procedure above up to step 4. Once in the **security options**:\n\n1. Enable the toggle switch to encrypt end-to-end:\n\n2. When starting the video conference, an audio message will be heard to announce end-to-end encryption.\n\n---\n[Document 2] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: # Secure a k Meet meeting with a password and encryption key\n\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\n\n---\n\nThis guide explains how to add a **password** and an **encryption key** to a [k Meet](https://www.infomaniak.com/en/support/faq/2474) meeting, Infomaniak's ethical free video conferencing solution.\n\n---\n[Document 3] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 4] Resolve a video issue on k Meet\nSource: https://www.infomaniak.com/en/support/faq/2452/resolve-a-video-issue-on-kmeet\nContent: # Resolve a video issue on k Meet\n\nSource: https://www.infomaniak.com/en/support/faq/2452/resolve-a-video-issue-on-kmeet\n\n---\n\nThis guide helps you resolve any potential camera access issues with [k Meet](https://kmeet.infomaniak.com/), the ethical video conferencing solution offered by Infomaniak.\n\nWith current security standards, a **web browser** or an **application** installed on an operating system li",
+      "retrieved_context": "[Document 1] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: ## Secure a meeting with an encryption key\n\n### Prerequisites\n\n- This feature only works with desktop apps and up-to-date browsers based on the [Chromium](https://fr.wikipedia.org/wiki/Chromium) architecture (e.g., Opera, Brave, Google Chrome, etc.).\n\nThen follow the procedure above up to step 4. Once in ...",
+      "scores": {
+        "correctness": 0.9,
+        "faithfulness": 0.0,
+        "relevance": 0.9,
+        "correctness_reasoning": "The generated answer contains the exact information required by the expected answer, specifically mentioning desktop apps and up-to-date browsers based on the Chromium architecture (Opera, Brave, Google Chrome). It is slightly less concise as it includes the full source document text, but the factual content is a perfect match.",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer at all; it is a verbatim repetition of the provided context documents. It fails to address the user's question regarding which browsers support kMeet end-to-end encryption, despite the information being available in Document 1.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that end-to-end encryption works with up-to-date browsers based on the Chromium architecture and provides specific examples like Opera, Brave, and Google Chrome. The other documents are less relevant, but the primary information needed is clearly present."
+      },
+      "retrieval_latency_ms": 789.085874974262,
+      "generation_latency_ms": 0.0032500247471034527,
+      "total_latency_ms": 789.1053339699283,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kmeet-002",
+      "question": "What is the maximum recording duration for a kMeet meeting?",
+      "expected_answer": "The maximum recording duration for a kMeet meeting is 3 hours.",
+      "generated_answer": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format stored on [k Drive](https://infomaniak.com/gtl/kdrive) Infomaniak.\n\n### Preamble\n\n- Video recordingis done on the server side,does not generate any load for the participant's computer that launched it,is in .mp4 video format,has a maximum duration of 3 hours.\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 3] Broadcast a k Meet meeting via Live Streaming mode\nSource: https://www.infomaniak.com/en/support/faq/1355/broadcast-a-kmeet-meeting-via-live-streaming-mode\nContent: The stream is broadcast continuously for a maximum of 24 hours, and **will no longer be accessible** as soon as the k Meet meeting is stopped.\n\n---\n[Document 4] Getting Started Guide: k Meet\nSource: https://www.infomaniak.com/en/support/faq/2474/getting-started-guide-kmeet\nContent: - [Remotely control a device with k Meet](https://www.infomaniak.com/en/support/faq/2622)\n- [Start the chat during an online meeting](https://www.infomaniak.com/en/support/faq/2478)\n- [Stream the k Meet feed via Video Streaming](https://www.infomaniak.com/en/support/faq/1355)\n- [Draw on k Meet](https://www.infomaniak.com/en/support/faq/2620)\n- [Replace Skype with k Meet](https://www.infomaniak.com/en/support/faq/2890)\n\n---\n[Document 5] Transcribe a k Meet meeting in real-time (automatic subtitles)\nSource: https://www.infomaniak.com/en/support/faq/1431/transcribe-a-kmeet-meeting-in-r",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact information required. Document 1 explicitly states that the video recording 'has a maximum duration of 3 hours', which matches the expected answer perfectly.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the question. It fails to extract the specific information requested (the 3-hour maximum recording duration) and instead provides a raw dump of the source text, including truncated sections.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that video recording for a kMeet meeting has a maximum duration of 3 hours. The context is highly relevant and provides the specific information needed."
+      },
+      "retrieval_latency_ms": 716.406709048897,
+      "generation_latency_ms": 0.0014579854905605316,
+      "total_latency_ms": 716.421332967002,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kmeet-003",
+      "question": "Can I record an encrypted kMeet meeting with a custom key?",
+      "expected_answer": "No, you cannot record a video conference that uses end-to-end encryption with a custom key.",
+      "generated_answer": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: # Secure a k Meet meeting with a password and encryption key\n\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\n\n---\n\nThis guide explains how to add a **password** and an **encryption key** to a [k Meet](https://www.infomaniak.com/en/support/faq/2474) meeting, Infomaniak's ethical free video conferencing solution.\n\n---\n[Document 3] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format stored on [k Drive](https://infomaniak.com/gtl/kdrive) Infomaniak.\n\n### Preamble\n\n- Video recordingis done on the server side,does not generate any load for the participant's computer that launched it,is in .mp4 video format,has a maximum duration of 3 hours.\n\n---\n[Document 4] Transcribe a k Meet meeting in real-time (automatic subtitles)\nSource: https://www.infomaniak.com/en/support/faq/1431/transcribe-a-kmeet-meeting-in-real-time-automatic-subtitles\nContent: ## Automatically transcribe participants' statements\n\nYou can display an automatic transcription of the statements made by participants in a k Meet meeting:\n\n1. Start the [k Meet](https://ksuite.infomaniak.com/kmeet) app (Web, desktop, or mobile).\n2. [Create](https://www.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: # Secure a k Meet meeting with a password and encryption key\n\nSource: https://www.infomaniak.com/en/support/faq/2464/secur...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.6,
+        "correctness_reasoning": "The generated answer is completely incorrect as it fails to provide an answer to the question. Instead of stating that recording is not possible with a custom encryption key (as per the expected answer), it merely lists titles and snippets of documentation without drawing a conclusion or addressing the specific constraint mentioned in the prompt.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the user's question. It fails to address whether a meeting with a custom encryption key can be recorded and instead provides a truncated copy of the source text.",
+        "relevance_reasoning": "The context is partially relevant. Document 2 confirms that kMeet supports custom encryption keys, and Document 3 explains the recording process (server-side, .mp4 format). However, the documents do not explicitly state whether these two features are compatible or if end-to-end encryption prevents server-side recording."
+      },
+      "retrieval_latency_ms": 382.19533301889896,
+      "generation_latency_ms": 0.0012500095181167126,
+      "total_latency_ms": 382.2059169760905,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kmeet-004",
+      "question": "What format are kMeet recordings saved in?",
+      "expected_answer": "kMeet recordings are saved in .mp4 video format.",
+      "generated_answer": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format stored on [k Drive](https://infomaniak.com/gtl/kdrive) Infomaniak.\n\n### Preamble\n\n- Video recordingis done on the server side,does not generate any load for the participant's computer that launched it,is in .mp4 video format,has a maximum duration of 3 hours.\n\n---\n[Document 3] Transcribe a k Meet meeting in real-time (automatic subtitles)\nSource: https://www.infomaniak.com/en/support/faq/1431/transcribe-a-kmeet-meeting-in-real-time-automatic-subtitles\nContent: ## Automatically transcribe participants' statements\n\nYou can display an automatic transcription of the statements made by participants in a k Meet meeting:\n\n1. Start the [k Meet](https://ksuite.infomaniak.com/kmeet) app (Web, desktop, or mobile).\n2. [Create](https://www.infomaniak.com/en/support/faq/2475) or [join](https://www.infomaniak.com/en/support/faq/2473) a meeting room.\n3. Grant access to at least your microphone.\n4. Click on the **\u25cb\u25cb\u25cb** icon in the toolbar.\n5. Click on **Enable subtitles**.\n6. What is said by the participants is displayed at the bottom of your k Meet window:\n\n7. To stop displaying the transcription on your screen, click again on the appropriate menu (see point 5 above).\n\nIn case of any issues, refer to [this other guide](https://www.infomaniak.com/en/support/faq/2441).\n\n---\n[Document 4] Save a k Meet meeting on ",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an o...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact key information required by the expected answer. It explicitly states that the recording is in .mp4 video format, which matches the expected answer perfectly. Although it includes additional context from the source documents, the core factual answer is present and correct.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the question. It fails to extract the specific information requested (the .mp4 format) and instead outputs the raw source text, including metadata and unrelated sections.",
+        "relevance_reasoning": "Document 2 explicitly answers the question by stating that kMeet recordings are saved in '.mp4' format. The context also provides additional details about where they are stored and the recording duration, making it highly relevant."
+      },
+      "retrieval_latency_ms": 673.3444579876959,
+      "generation_latency_ms": 0.0008749775588512421,
+      "total_latency_ms": 673.352625046391,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kmeet-005",
+      "question": "What happens when I call someone on Do Not Disturb in kChat?",
+      "expected_answer": "Calling a user who is on Do Not Disturb will not trigger a ringtone or call modal for them, but they will see the message in the conversation.",
+      "generated_answer": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: - Call a user directly if you are in a direct discussion with them, or trigger a call to all members of a channel if you start the meeting from the channel.\n- Calling a user who is on \u201cDo Not Disturb\u201d will not trigger a ringtone or call modal for them, but they will see the message in the conversation.\n- The microphone is enabled by default when the call is accepted, but not the camera.\n- View the users of the meeting (who accepted, declined, or missed it) using the avatars in the k Chat message.\n- Once the call has started, an emoji will appear in your k Chat status to indicate that you are busy with the conversation.\n- A message sent from the video (k Meet) will also be visible in the k Chat conversation (and vice versa).\n- Indications related to the start and end of the meeting will automatically appear in the relevant k Chat conversation thread.\n\n---\n[Document 2] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ### Specifics for calls in channels\n\n- The call will not ring for the recipients, but they will see a message in k Chat as well as a notification.\n- A message (warning) will appear if you want to start a call in a channel with more than 7 users.\n\nRefer to [this other guide](https://www.infomaniak.com/en/support/faq/2474) if you are looking for information on **k Meet**.\n\n---\n[Document 4] Create a k Meet mee",
+      "retrieved_context": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: - Call a user directly if you are in a direct discussion with them, or trigger a call to all members of a channel if you start the meeting from the channel.\n- Calling a user who is on \u201cDo Not Disturb\u201d will not trigger a ringtone or call modal for them, but they will see the message in the conversation.\n- The microphone is enabled by default when the c...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact text from the source documentation that matches the expected answer word-for-word: 'Calling a user who is on Do Not Disturb will not trigger a ringtone or call modal for them, but they will see the message in the conversation.' All key information is preserved and there are no contradictions.",
+        "faithfulness_reasoning": "The generated answer is a verbatim copy of the provided context documents rather than an answer to the user's question. It fails to provide a synthesized response and includes irrelevant metadata and document headers.",
+        "relevance_reasoning": "Document 1 directly and explicitly answers the question. It states that calling a user on 'Do Not Disturb' will not trigger a ringtone or call modal for them, but they will see the message in the conversation. The context is highly focused on the interaction between kChat and kMeet calls."
+      },
+      "retrieval_latency_ms": 644.7366249631159,
+      "generation_latency_ms": 0.00100000761449337,
+      "total_latency_ms": 644.7454169974662,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kdrive-001",
+      "question": "What methods can I use to create a signature in kDrive PDF editor?",
+      "expected_answer": "You can create a signature in three ways: draw freehand with the mouse, type text and choose a cursive font, or import an image (like a scan of your handwritten signature) from your device.",
+      "generated_answer": "[Document 1] Sign a PDF document on the k Drive web app\nSource: https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app\nContent: ## Create and apply your signature to a PDF\n\nTo access k Drive and manage PDF document signatures:\n\n1. [Click here](https://ksuite.infomaniak.com/kdrive) to access the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n2. Open the relevant PDF document.\n3. Click the **Edit** button at the top of the document to access the file editor:\n\n4. Click the **Signature** icon in the toolbar.\n5. Click **Add a signature**.\n6. Choose the signature creation method: Draw freehand with the mouse. Type text and choose the cursive font (example below). Import an image (scan of your handwritten signature, for example) from your device.\n7. Type the desired text for the signature and click the **Aa** button to choose the handwriting style.\n8. Click on **Save**:\n\n---\n[Document 2] Edit a PDF file on the k Drive Web app\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\nContent: ## Modify a PDF file\n\nTo access k Drive and modify the PDF document:\n\n1. [Click here](https://ksuite.infomaniak.com/kdrive) to access the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n2. Open the relevant PDF document.\n3. Click the **Edit** button at the top of the document to access the file editor:\n\n4. The PDF editor allows you to:insert an image within your document, for example a photo: to highlight text or any element: to add text at the location, size, and color of your choice: to create a signature and then sign documents (refer to this other guide on this subject).\n5. Once finished, save the changes and choose whether to **create a copy** of the modified document or **overwrite** the existing file.\n\n---\n[Document 3] Sign a PDF document on the k Drive web app\nSource: https://www.infomaniak.co",
+      "retrieved_context": "[Document 1] Sign a PDF document on the k Drive web app\nSource: https://www.infomaniak.com/en/support/faq/1463/sign-a-pdf-document-on-the-kdrive-web-app\nContent: ## Create and apply your signature to a PDF\n\nTo access k Drive and manage PDF document signatures:\n\n1. [Click here](https://ksuite.infomaniak.com/kdrive) to access the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n2. Open the relevant PDF document.\n3. Click the **Edit** button...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains all the key information required by the expected answer. It explicitly lists the three methods for creating a signature: drawing freehand, typing text with a cursive font, and importing an image. The core meaning is perfectly preserved and supported by the provided documentation.",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer to the question; it is a verbatim repetition of the provided context documents. It fails to synthesize the information into a response and cuts off mid-sentence at the end.",
+        "relevance_reasoning": "Document 1 provides a direct and complete answer to the question, explicitly listing the three methods for creating a signature: drawing freehand, typing text with a cursive font, and importing an image. Document 2 and 3 provide additional context and confirmation of the feature's existence."
+      },
+      "retrieval_latency_ms": 451.25558297149837,
+      "generation_latency_ms": 0.0012909877113997936,
+      "total_latency_ms": 451.2647080118768,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kdrive-002",
+      "question": "Where are kDrive files stored?",
+      "expected_answer": "Files are never analyzed and are exclusively stored in Switzerland.",
+      "generated_answer": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Synchronize a VPS with k Drive\nSource: https://www.infomaniak.com/en/support/faq/2636/synchronize-a-vps-with-kdrive\nContent: ## Synchronize k Drive and VPS via r Clone\n\nThis operation allows you to retrieve in real-time the files and folders from k Drive and to read, create, or modify these files from your VPS while ensuring they are synchronized back to the k Drive server. An r Clone mount point can be created with a folder on your VPS to manipulate these k Drive files.\n\nRefer to the [r Clone documentation](https://rclone.org/commands/rclone_mount/) if you are looking for information about the available options:\n\n---\n[Document 3] Manage multiple k Drive (macOS / Windows)\nSource: https://www.infomaniak.com/en/support/faq/2458/manage-multiple-kdrive-macos-windows\nContent: ## Accessing different k Drives from the computer\n\nA user connected to the k Drive application on a computer may already have access to multiple k Drives if they are already working with multiple k Drives outside the app, if they have been added to other k Drives, etc. They are all accessible as long as the user is logged in with the identifier corresponding to these k Drives.\n\n---\n[Document 4] Use Euria on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive\nContent: ## Use AI for your files on k Drive\n\n---\n[Document 5] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: - [Restore a k Drive file to a previous version](https://www.infomaniak.com/en/support/faq/2384)\n- [Restore a deleted k Drive file](https://www.infomaniak.com/en/support/faq/2383)\n- [Force k Drive to synchronize hidden ",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Synchronize a VPS with k Drive\nSource: https://www.infomaniak.com/en/support/faq/2636/synchronize-a-vps-with-kdrive\nContent: ## Synchronize k Drive and VPS via r Clone\n\nThis operatio...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.4,
+        "correctness_reasoning": "The generated answer does not provide a response to the question. Instead, it merely lists several document snippets and titles from the provided context without extracting or synthesizing the information required to answer where the files are stored.",
+        "faithfulness_reasoning": "The 'Generated Answer' provided is not an answer to the question 'Where are kDrive files stored?'. Instead, it is a verbatim repetition of the source documents provided in the context. It fails to extract the relevant information (that files are stored on a '100% Swiss Made cloud' or 'k Drive server') and instead provides a truncated copy of the input text.",
+        "relevance_reasoning": "The context provides a partial answer. Document 1 explicitly mentions that kDrive is a '100% Swiss Made cloud', which indicates the geographical location and nature of the storage. However, the rest of the documents focus on synchronization, AI features, and account management rather than the physical or technical storage infrastructure."
+      },
+      "retrieval_latency_ms": 359.3243339564651,
+      "generation_latency_ms": 0.0008750357665121555,
+      "total_latency_ms": 359.33174996171147,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kdrive-003",
+      "question": "What commands should I run to fix Windows system integrity for kDrive issues?",
+      "expected_answer": "Run these commands in an administrator command prompt: SFC /scannow, DISM /Online /Cleanup-Image /CheckHealth, DISM /Online /Cleanup-Image /ScanHealth, DISM /Online /Cleanup-Image /RestoreHealth",
+      "generated_answer": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: - [Resolve a k Drive blockage (antivirus, firewall, etc.)](https://www.infomaniak.com/en/support/faq/1822)\n- [Resolve a k Drive sync conflict](https://www.infomaniak.com/en/support/faq/2403)\n- [Resolve a k Drive synchronization issue](https://www.infomaniak.com/en/support/faq/2153)\n- [Resolve a k Drive issue on Android device (don't kill my app)](https://www.infomaniak.com/en/support/faq/2685)\n- [Resolve a Lite Sync plugin error on macOS](https://www.infomaniak.com/en/support/faq/2824)\n- [Clear the browser cache](https://www.infomaniak.com/en/support/faq/793)\n- [Clear the mobile app k Drive cache](https://www.infomaniak.com/en/support/faq/1561)\n- [k Drive application version (macOS / Windows / Linux)](https://www.infomaniak.com/en/support/faq/2580)\n- [Restore a k Drive file to a previous version](https://www.infomaniak.com/en/support/faq/2384)\n- [Restore a deleted k Drive file](https://www.infomaniak.com/en/support/faq/2383)\n\n---\n[Document 2] Fix incorrect file statuses (k Drive Windows)\nSource: https://www.infomaniak.com/en/support/faq/1342/fix-incorrect-file-statuses-kdrive-windows\nContent: # Fix incorrect file statuses (k Drive Windows)\n\nSource: https://www.infomaniak.com/en/support/faq/1342/fix-incorrect-file-statuses-kdrive-windows\n\n---\n\nThis guide helps resolve an issue with statuses (`OK`, `in progress`, etc.) that may occur with the files and folders in the k Drive tree in Windows Explorer, in case these indications no longer match reality.\n\n---\n[Document 3] Resolve a k Drive block (antivirus, firewall, etc.)\nSource: https://www.infomaniak.com/en/support/faq/1822/resolve-a-kdrive-block-antivirus-firewall-etc\nContent: # Resolve a k Drive block (antivirus, firewall, etc.)\n\nSource: https://www.infomaniak.com/en/support/faq/1822/resolve-a-kdrive-block-antivirus-firewall-etc\n\n---\n\nThis guide explains how to resolve an access or ",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: - [Resolve a k Drive blockage (antivirus, firewall, etc.)](https://www.infomaniak.com/en/support/faq/1822)\n- [Resolve a k Drive sync conflict](https://www.infomaniak.com/en/support/faq/2403)\n- [Resolve a k Drive synchronization issue](https://www.infomaniak.com/en/support/faq/2153)\n- [Resolve a k Drive issue on Android device (don't kill my app)](https://www.in...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.0,
+        "correctness_reasoning": "The generated answer is completely incorrect. It provides a list of links to general kDrive support documentation and FAQs, whereas the expected answer requires specific Windows command-line instructions (SFC and DISM) to repair system integrity. The generated answer fails to provide any of the requested commands.",
+        "faithfulness_reasoning": "The generated answer is completely irrelevant to the question. Instead of providing commands to fix Windows system integrity, it simply copy-pasted the text of the provided context documents. Furthermore, the context itself does not contain any information about Windows system integrity commands (like sfc or dism), so the question cannot be answered using the provided documents.",
+        "relevance_reasoning": "The retrieved documents do not contain any information regarding Windows system integrity commands (such as sfc /scannow or DISM). The context focuses on kDrive-specific troubleshooting like antivirus whitelisting, file restoration, and cache clearing, but completely lacks the specific technical commands requested to fix Windows system integrity."
+      },
+      "retrieval_latency_ms": 947.2312920261174,
+      "generation_latency_ms": 0.000625033862888813,
+      "total_latency_ms": 947.2382500534877,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kdrive-004",
+      "question": "Can I save changes to a PDF in kDrive without overwriting the original?",
+      "expected_answer": "Yes, when saving changes to a PDF in kDrive, you can choose whether to create a copy of the modified document or overwrite the existing file.",
+      "generated_answer": "[Document 1] Edit a PDF file on the k Drive Web app\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\nContent: ## Modify a PDF file\n\nTo access k Drive and modify the PDF document:\n\n1. [Click here](https://ksuite.infomaniak.com/kdrive) to access the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n2. Open the relevant PDF document.\n3. Click the **Edit** button at the top of the document to access the file editor:\n\n4. The PDF editor allows you to:insert an image within your document, for example a photo: to highlight text or any element: to add text at the location, size, and color of your choice: to create a signature and then sign documents (refer to this other guide on this subject).\n5. Once finished, save the changes and choose whether to **create a copy** of the modified document or **overwrite** the existing file.\n\n---\n[Document 2] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 3] Edit a PDF file on the k Drive Web app\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\nContent: # Edit a PDF file on the k Drive Web app\n\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\n\n---\n\nThis guide explains how to edit a file in **PDF** format on the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n\n**\u26a0 Available with:**\n\n### Preamble\n\n- The Web app **k Drive** natively integrates an editor that allows you to modify a PDF document online.\n- Your files are [never analyzed and are exclusively stored in Switzerland](https://news.infomaniak.com/collaboration-en-ligne/).\n- Refer to [this oth",
+      "retrieved_context": "[Document 1] Edit a PDF file on the k Drive Web app\nSource: https://www.infomaniak.com/en/support/faq/2885/edit-a-pdf-file-on-the-kdrive-web-app\nContent: ## Modify a PDF file\n\nTo access k Drive and modify the PDF document:\n\n1. [Click here](https://ksuite.infomaniak.com/kdrive) to access the Web app **k Drive** (online service [ksuite.infomaniak.com/kdrive](https://ksuite.infomaniak.com/kdrive)).\n2. Open the relevant PDF document.\n3. Click the **Edit** button at the top of the document to access ...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact information required by the expected answer. Specifically, Document 1, step 5 explicitly states that the user can 'choose whether to create a copy of the modified document or overwrite the existing file,' which perfectly matches the core meaning and factual content of the expected answer.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the user's question. It fails to provide a response and instead outputs the raw source text, including truncated sentences.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that after editing a PDF, the user can choose to 'create a copy' of the modified document or 'overwrite' the existing file. This provides the exact information needed to confirm that changes can be saved without overwriting the original."
+      },
+      "retrieval_latency_ms": 636.260291968938,
+      "generation_latency_ms": 0.0010829535312950611,
+      "total_latency_ms": 636.2685829517432,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kdrive",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kchat-001",
+      "question": "Why does kChat request access to macOS Keychain for Chromium Safe Storage?",
+      "expected_answer": "kChat requests access to the macOS Keychain for Chromium Safe Storage to store your access token. This is normal and necessary for proper functioning; no additional sensitive data is requested and nothing is sent outside.",
+      "generated_answer": "[Document 1] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https://ksuite.infomaniak.com/all?global-settings=user-apps) to download the **mobile** app (application for iOS / Android smartphone or tablet) and the **desktop** app (desktop application on macOS / Windows / Linux).\n\n> **Note:**\n k Chat requests access to the **macOS Keychain for \u201cChromium Safe Storage\u201d**, which is used to store your access token (token). This request is normal and necessary for the proper functioning of k Chat; no additional sensitive data is requested and nothing is sent outside.\n\nAlso refer to the [getting started guide](https://www.infomaniak.com/en/support/faq/2076).\n\n---\n[Document 2] Getting started: k Chat\nSource: https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat\nContent: # Getting started: k Chat\n\nSource: https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat\n\n---\n\nThank you for choosing Infomaniak and [k Chat](https://infomaniak.com/gtl/kchat) as your discussion solution between you, your circle, or your company! These guides will help you organize your channels, users, conversations, and more!\n\n### Preamble\n\n- Multiplatform, [k Chat](https://infomaniak.com/gtl/kchat) is the instant messaging of my k Suite that allows you to exchange, share, and coordinate your teams securely from\u2026\u2026 your web browser\u2026 your iOS / Android device\u2026 your macOS / Windows / Linux computer\n- [Downloadthe k Chat app](https://www.infomaniak.com/en/support/faq/144) on your devices!It is not possible to modify the location of the kchat-desktop folder",
+      "retrieved_context": "[Document 1] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https:...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact information required by the expected answer. It correctly identifies that the access is for storing the access token, confirms it is normal and necessary for functioning, and notes that no additional sensitive data is requested or sent outside. The inclusion of the full document text does not detract from the accuracy of the specific answer.",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer at all; it is a verbatim copy-paste of the provided context documents (Document 1 and part of Document 2). It fails to address the specific question asked ('Why does kChat request access to macOS Keychain...').",
+        "relevance_reasoning": "Document 1 contains the exact answer to the question. It explicitly states that kChat requests access to the macOS Keychain for 'Chromium Safe Storage' to store the user's access token, noting that this is necessary for the app's proper functioning and that no other sensitive data is accessed."
+      },
+      "retrieval_latency_ms": 631.4267920097336,
+      "generation_latency_ms": 0.0009170034900307655,
+      "total_latency_ms": 631.435249990318,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kchat-002",
+      "question": "What security certifications does Infomaniak have for kChat?",
+      "expected_answer": "Infomaniak is a Swiss company certified ISO 27001 and ISO 9001 that complies with the GDPR.",
+      "generated_answer": "[Document 1] Understanding k Chat Data Security\nSource: https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security\nContent: # Understanding k Chat Data Security\n\nSource: https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security\n\n---\n\nInfomaniak is a Swiss company certified ISO 27001 and ISO 9001 that complies with the GDPR.\n\nIts main objective is to ensure the security and confidentiality of the data entrusted to it.\n\nNumerous measures are implemented to ensure the protection of your communications with [k Chat](https://infomaniak.com/gtl/kchat):\n\n- The Infomaniak Manager allows you to check if the users of your Organization have activated two-factor authentication.\n- Data at rest and in transit is encrypted, as are the backups automatically performed by Infomaniak.\n- Data is hosted in Switzerland in data centers developed and managed exclusively by Infomaniak.\n\nk Chat avoids spam and other deceptive methods that are responsible for the majority of security issues and data leaks in businesses.\n\n---\n[Document 2] Replace Skype with Infomaniak\nSource: https://www.infomaniak.com/en/support/faq/2890/replace-skype-with-infomaniak\nContent: - Integration with **k Chat** for [video calls](https://www.infomaniak.com/en/support/faq/2827)\n- [Privacy respect](https://news.infomaniak.com/cloud-ethique/) (no ads, hosted in Switzerland)\n- Security with [AES-256 encryption](https://www.infomaniak.com/en/support/faq/2464)\n- [Eco-friendly](https://www.infomaniak.com/gtl/ecology) (renewable energy, CO2 compensation)\n\n---\n[Document 3] Getting started: k Chat\nSource: https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat\nContent: ## What would you like to do?\n\n- [Configure k Chat](https://www.infomaniak.com/en/support/faq/2734)\n- [Manage users](https://www.infomaniak.com/en/support/faq/1886)\n- [Manage a channel](https://www.infomaniak.com/en/support/faq/2732)\n- [Manage a conversation](https://www.infomaniak.com/en/support/faq/175",
+      "retrieved_context": "[Document 1] Understanding k Chat Data Security\nSource: https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security\nContent: # Understanding k Chat Data Security\n\nSource: https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security\n\n---\n\nInfomaniak is a Swiss company certified ISO 27001 and ISO 9001 that complies with the GDPR.\n\nIts main objective is to ensure the security and confidentiality of the data entrusted to it.\n\nNumerous measures are implemented...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 0.9,
+        "correctness_reasoning": "The generated answer contains the exact key information required by the expected answer (ISO 27001, ISO 9001, and GDPR compliance). While it includes additional context and documentation headers, the core facts are present and accurate without any contradictions.",
+        "faithfulness_reasoning": "The 'Generated Answer' provided is not an answer to the question at all; it is a verbatim repetition of the first three retrieved documents. It fails to extract or summarize the specific information requested (ISO 27001 and ISO 9001 certifications) and instead presents raw context as the response.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that Infomaniak (the provider of kChat) is certified ISO 27001 and ISO 9001, and complies with the GDPR. While the other documents are less relevant, Document 1 provides the specific certifications requested."
+      },
+      "retrieval_latency_ms": 635.7229170389473,
+      "generation_latency_ms": 0.001500011421740055,
+      "total_latency_ms": 635.7329170568846,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kchat-003",
+      "question": "How do I access slash commands in kChat?",
+      "expected_answer": "Click in the composition field within a channel, enter a / (slash or forward slash) and the attached command, then confirm to send the command. If you type only the / sign, a modal appears with the commands that can be executed.",
+      "generated_answer": "[Document 1] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: # Using k Chat slash commands\n\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\n\n---\n\nThis guide covers messages that start with `/` on [k Chat](https://infomaniak.com/gtl/kchat) interpreted as slash commands.\n\n## Execute a slash command on k Chat\n\nTo access slash commands on k Chat:\n\n1. Click in the composition field within a channel.\n2. Enter a `/` (*slash* or *forward slash*) and the attached command.\n3. Confirm to send the command.\n\nIf you type only the `/` sign, a modal appears with the commands that can be executed, such as going offline, for example.\n\nHere is a table of the main commands:\n\n---\n[Document 2] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: ### Prerequisites\n\n- Not be an external user (they will not see the menu *Integrations*).\n\nTo create a **custom slash command**:\n\n1. [Click here](https://kchat.infomaniak.com/)to access the **Web k Chat** app (online service [kchat.infomaniak.com](https://kchat.infomaniak.com/)) or open the **desktop k Chat** app (desktop application on macOS / Windows / Linux).\n2. Click on the **New** icon  next to your k Chat organization name.\n3. Click on **Integrations**:\n\n4. Click on **Slash command**:\n\n5. Click the blue button to **Add a command**:\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 4] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-com",
+      "retrieved_context": "[Document 1] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: # Using k Chat slash commands\n\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\n\n---\n\nThis guide covers messages that start with `/` on [k Chat](https://infomaniak.com/gtl/kchat) interpreted as slash commands.\n\n## Execute a slash command on k Chat\n\nTo access slash commands on k Chat:\n\n1. Click in the composition field within a channe...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact information required by the expected answer. It correctly identifies the steps: clicking the composition field, entering the '/' sign followed by a command, and confirming. It also includes the detail about the modal appearing when only the '/' sign is typed.",
+        "faithfulness_reasoning": "The generated answer is a direct copy of the relevant sections of the provided context (Document 1 and Document 2). It accurately reflects the steps to access and create slash commands as described in the source text without adding any external information.",
+        "relevance_reasoning": "The context provides direct, step-by-step instructions on how to access and execute slash commands in kChat (Document 1). It also includes information on how to create custom slash commands (Document 2), making it highly relevant and comprehensive for the user's query."
+      },
+      "retrieval_latency_ms": 629.0006670169532,
+      "generation_latency_ms": 0.0008750357665121555,
+      "total_latency_ms": 629.0085420478135,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kchat-004",
+      "question": "Can external users create custom slash commands in kChat?",
+      "expected_answer": "No, external users cannot create custom slash commands because they will not see the Integrations menu.",
+      "generated_answer": "[Document 1] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: ### Prerequisites\n\n- Not be an external user (they will not see the menu *Integrations*).\n\nTo create a **custom slash command**:\n\n1. [Click here](https://kchat.infomaniak.com/)to access the **Web k Chat** app (online service [kchat.infomaniak.com](https://kchat.infomaniak.com/)) or open the **desktop k Chat** app (desktop application on macOS / Windows / Linux).\n2. Click on the **New** icon  next to your k Chat organization name.\n3. Click on **Integrations**:\n\n4. Click on **Slash command**:\n\n5. Click the blue button to **Add a command**:\n\n---\n[Document 2] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: # Using k Chat slash commands\n\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\n\n---\n\nThis guide covers messages that start with `/` on [k Chat](https://infomaniak.com/gtl/kchat) interpreted as slash commands.\n\n## Execute a slash command on k Chat\n\nTo access slash commands on k Chat:\n\n1. Click in the composition field within a channel.\n2. Enter a `/` (*slash* or *forward slash*) and the attached command.\n3. Confirm to send the command.\n\nIf you type only the `/` sign, a modal appears with the commands that can be executed, such as going offline, for example.\n\nHere is a table of the main commands:\n\n---\n[Document 3] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: ## Create a custom slash command\n\n---\n[Document 4] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: > **Note:** Remember that creating custom slash commands may require additional programming skills, especially if you need to integrate custom features or interactions with external systems. Also, make sure to follow security best practices whe",
+      "retrieved_context": "[Document 1] Using k Chat slash commands\nSource: https://www.infomaniak.com/en/support/faq/2134/using-kchat-slash-commands\nContent: ### Prerequisites\n\n- Not be an external user (they will not see the menu *Integrations*).\n\nTo create a **custom slash command**:\n\n1. [Click here](https://kchat.infomaniak.com/)to access the **Web k Chat** app (online service [kchat.infomaniak.com](https://kchat.infomaniak.com/)) or open the **desktop k Chat** app (desktop application on macOS / Windows / Linux).\n2. ...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact information required by the expected answer. It explicitly states that a prerequisite for creating a custom slash command is to 'Not be an external user' and provides the specific reason that 'they will not see the menu Integrations', which matches the expected answer perfectly.",
+        "faithfulness_reasoning": "The 'Generated Answer' provided is not an answer to the question at all. Instead, it is a verbatim repetition of the retrieved documents (the context). It fails to synthesize the information to answer whether external users can create custom slash commands (the answer should have been 'No' based on Document 1).",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that a prerequisite for creating custom slash commands is to 'Not be an external user' and explains that external users cannot see the 'Integrations' menu required for this task. The other documents provide supporting context regarding the creation and use of these commands."
+      },
+      "retrieval_latency_ms": 780.4992910241708,
+      "generation_latency_ms": 0.0007500057108700275,
+      "total_latency_ms": 780.5064170388505,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "direct-kchat-005",
+      "question": "Is kChat data encrypted?",
+      "expected_answer": "Yes, data at rest and in transit is encrypted, as are the backups automatically performed by Infomaniak. Data is hosted in Switzerland in data centers developed and managed exclusively by Infomaniak.",
+      "generated_answer": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 2] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https://ksuite.infomaniak.com/all?global-settings=user-apps) to download the **mobile** app (application for iOS / Android smartphone or tablet) and the **desktop** app (desktop application on macOS / Windows / Linux).\n\n> **Note:**\n k Chat requests access to the **macOS Keychain for \u201cChromium Safe Storage\u201d**, which is used to store your access token (token). This request is normal and necessary for the proper functioning of k Chat; no additional sensitive data is requested and nothing is sent outside.\n\nAlso refer to the [getting started guide](https://www.infomaniak.com/en/support/faq/2076).\n\n---\n[Document 3] Understanding k Chat Data Security\nSource: https://www.infomaniak.com/en/support/faq/2733/understanding-kchat-data-security\nContent: k Chat avoids spam and other deceptive methods that are responsible for the majority of security issues and data leaks in businesses.\n\nBy using k Chat to communicate, you\u2026\n- \u2026 receive messages only from your colleagues or external users you have approved.\n- \u2026 can create private channels to restrict sensitive information to sp",
+      "retrieved_context": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 2] Download and install k Chat\nSource: https://www.infomaniak...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.1,
+        "correctness_reasoning": "The generated answer is completely incorrect. Instead of answering the question about data encryption, it provides a list of source documents and their contents regarding how to create meetings and download the app. It fails to mention encryption, backups, or data residency in Switzerland.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the question. Furthermore, the provided context does not contain information regarding whether kChat data is encrypted, so the question cannot be answered based on the given text.",
+        "relevance_reasoning": "The retrieved documents discuss general features, installation, and security management (like access rights and private channels), but none of them explicitly state whether kChat data is encrypted. Document 3 mentions 'Data Security' in the title but only discusses access control and spam prevention, not encryption."
+      },
+      "retrieval_latency_ms": 472.812750027515,
+      "generation_latency_ms": 0.0010420335456728935,
+      "total_latency_ms": 472.8221250115894,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kchat",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "multi-001",
+      "question": "How can I start a video call from kChat and then record it to kDrive?",
+      "expected_answer": "In kChat, press the Call button on any conversation or channel to start a kMeet meeting. Once in the meeting, click the action menu (\u25cb\u25cb\u25cb) in the toolbar, then Start recording. Select a kDrive to save the recording. The recording will be available at the root of the chosen kDrive when all participants leave.",
+      "generated_answer": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 4] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 5] Manage voice messages with k Chat\nSource: https://www.infomaniak.com/en/support/faq/2876/manage-voice-messages-with-kchat\nContent: ## Send a voice message (and automatic transcription)\n\nTo record a voice message using the microphone of your device and allow it to be broadcast in the ongoing discussion (private message for example but also all places where you can send a text message):\n\n1. [Click here](https://ksuite.infomaniak.com/kchat) to access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat)) or open the **k Chat mobile app** (application for iOS / Android smartphone or tablet) or even the **k Chat desktop app** (desktop application on macOS / Windows / Linux).\n2. Click on the microphone ico",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.8,
+        "correctness_reasoning": "The generated answer is completely incorrect. Instead of providing instructions on how to start and record a video call, it simply lists titles and snippets of documentation sources without synthesizing them into a coherent answer. It fails to mention the specific steps required (pressing the Call button, using the action menu, selecting kDrive) that are present in the expected answer.",
+        "faithfulness_reasoning": "The generated answer is not an actual answer to the question. Instead, it is a verbatim repetition of the provided context documents, and it even cuts off mid-sentence at the end. It fails to synthesize the information to explain how to record a call to kDrive.",
+        "relevance_reasoning": "The context is mostly relevant as it addresses both parts of the user's question. Documents 3 and 4 explain how to start a video call from kChat using the 'Call' button. Documents 1 and 2 confirm that kMeet meetings can be recorded to kDrive, although the specific 'how-to' steps for the recording process are missing from the snippets. Document 5 is irrelevant as it pertains to voice messages."
+      },
+      "retrieval_latency_ms": 620.9095829981379,
+      "generation_latency_ms": 0.0010840012691915035,
+      "total_latency_ms": 620.9171249647625,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "multi_doc",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "multi-002",
+      "question": "What security features are available across kSuite products?",
+      "expected_answer": "kSuite products offer multiple security features: kMeet supports password protection and AES-256 end-to-end encryption; kChat data is encrypted at rest and in transit with ISO 27001/9001 certified Swiss hosting; kDrive stores files exclusively in Switzerland with automatic encrypted backups.",
+      "generated_answer": "[Document 1] Understanding the different Infomaniak 'Suites' (k Suite, my k Suite...)\nSource: https://www.infomaniak.com/en/support/faq/2497/understanding-the-different-infomaniak-suites-ksuite-my-ksuite\nContent: ### Additional tools (k Drive\u2026)\n\nIf you choose a Suite (**k Suite** or **my k Suite** / **my k Suite+**), this user account will lead you to your Organization where the suite of tools will be found, therefore your email but also k Drive, k Chat etc.\n\nClick on the links to obtain the**comparison tables**detailed all the functionalities available according to the formula:\n\n1. k Drive can be obtained by creating a [my k Suite or my k Suite+ account](http://infomaniak.com/gtl/ksuite.myksuite.prices#comparison).\n2. k Drive can be obtained independently in [3 different versions](https://infomaniak.com/gtl/ksuite.kdrive.prices#prices): Solo Team Pro\n3. k Drive can be obtained if you subscribe (free or by a paid subscription) to **k Suite** which exists in [3 different versions](https://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision): Standard Business Enterprise\n\n---\n[Document 2] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ## Invite to use k Suite\n\n---\n[Document 3] Import data from k Drive to another k Drive\nSource: https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive\nContent: ## k Suite Configuration\n\nIf you are in a k Suite environment (the k Drive app displayed within `ksuite.infomaniak.com`, you must ensure that all Organizations are displayed, otherwise you will not be able to switch from one k Drive to another and consequently will not have the copy function to other k Drives:\n\n---\n[Document 4] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.k",
+      "retrieved_context": "[Document 1] Understanding the different Infomaniak 'Suites' (k Suite, my k Suite...)\nSource: https://www.infomaniak.com/en/support/faq/2497/understanding-the-different-infomaniak-suites-ksuite-my-ksuite\nContent: ### Additional tools (k Drive\u2026)\n\nIf you choose a Suite (**k Suite** or **my k Suite** / **my k Suite+**), this user account will lead you to your Organization where the suite of tools will be found, therefore your email but also k Drive, k Chat etc.\n\nClick on the links to obtain the**co...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.1,
+        "correctness_reasoning": "The generated answer is completely incorrect. Instead of answering the question about security features, it provides a collection of raw document snippets and links related to product descriptions and installation. It fails to mention any of the specific security features listed in the expected answer, such as AES-256 encryption, ISO certifications, or Swiss hosting.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the question. It fails to identify or summarize security features and provides no original synthesis of the information requested.",
+        "relevance_reasoning": "The retrieved documents focus on the administrative setup, pricing tiers, and installation of kSuite products (kDrive, kChat). They do not list or describe security features, with the minor exception of a technical note about macOS Keychain access for kChat. The context fails to answer the core question about security features across the suite."
+      },
+      "retrieval_latency_ms": 679.7678750008345,
+      "generation_latency_ms": 0.000959029421210289,
+      "total_latency_ms": 679.7754999715835,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "multi_doc",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "multi-003",
+      "question": "How do the kSuite apps work together for team collaboration?",
+      "expected_answer": "kChat integrates with kMeet for video calls directly from conversations. kMeet recordings can be saved to kDrive. kChat shows meeting start/end indications and messages sent from kMeet appear in the kChat conversation. The Calendar can create kMeet video links for scheduled meetings.",
+      "generated_answer": "[Document 1] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ## Invite to use k Suite\n\n---\n[Document 2] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ### Access to k Suite, and not access to the management of k Suite!\n\nIt is important to differentiate **the use of the k Chat app (within k Suite)** and **the management of k Suite** itself.\n\nIn the invitation example above, the new user has been invited to join k Chat, they are counted as a k Suite user when an administrator accesses the management of their k Suite users:\n\nHowever, this new user will not be able to directly manage the k Suite to which they have been invited since their role (defined in the first point 5 above) does not authorize them to do so.\n\nThis is why this user will not see any active link in the **Collaborative Tools \u2192 k Suite** section of their Infomaniak **a**nager. They will need to switch to the **Infomaniak applications** using the menu  at the top right:\n\nNote that if necessary, this user can order their own k Suite without any link to the k Suite to which they have been invited.\n\n---\n[Document 3] Import data from k Drive to another k Drive\nSource: https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive\nContent: ## k Suite Configuration\n\nIf you are in a k Suite environment (the k Drive app displayed within `ksuite.infomaniak.com`, you must ensure that all Organizations are displayed, otherwise you will not be able to switch from one k Drive to another and consequently will not have the copy function to other k Drives:\n\n---\n[Document 4] Understanding the different Infomaniak 'Suites' (k Suite, my k Suite...)\nSource: https://www.infomaniak.com/en/support/faq/2497/understanding-the-different-infomaniak-suites-ksuite-my-ksuite\nContent: ### Additional tools (k Drive\u2026)\n\nIf you choose a Suite (**k Suite** or **my k Suite**",
+      "retrieved_context": "[Document 1] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ## Invite to use k Suite\n\n---\n[Document 2] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ### Access to k Suite, and not access to the management of k Suite!\n\nIt is important to differentiate **the use of the k Chat app (within k Suite)** and **the management of k Suite** itself.\n\nIn the invitat...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.4,
+        "correctness_reasoning": "The generated answer is completely irrelevant to the question. Instead of explaining how the apps work together (integrations between kChat, kMeet, kDrive, and Calendar), it provides a series of disconnected snippets about inviting users, managing permissions, and importing data between kDrive accounts. It fails to mention any of the key collaborative integrations described in the expected answer.",
+        "faithfulness_reasoning": "The generated answer is not an actual response to the question. Instead, it simply repeats the provided context documents verbatim and cuts off mid-sentence. It fails to synthesize the information or provide any original explanation of how the apps work together.",
+        "relevance_reasoning": "The retrieved documents identify the core apps within kSuite (kChat, kDrive, and Email) and mention that they are accessed through a unified portal (ksuite.infomaniak.com). However, the context lacks specific details on 'how' they work together for collaboration (e.g., file sharing from kDrive into kChat, integrated calendar features, or collaborative editing). It focuses more on administrative setup, invitations, and installation rather than the collaborative workflow."
+      },
+      "retrieval_latency_ms": 453.906208043918,
+      "generation_latency_ms": 0.0009579816833138466,
+      "total_latency_ms": 453.91495898365974,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "multi_doc",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "multi-004",
+      "question": "What are the differences between kDrive standalone and kDrive within kSuite?",
+      "expected_answer": "kDrive exists as an independent product or as part of kSuite/my kSuite. The standalone version has full management access through the dashboard, while my kSuite may have limited features that can be unlocked by upgrading. Both provide Swiss-hosted collaborative storage.",
+      "generated_answer": "[Document 1] Understanding the different Infomaniak 'Suites' (k Suite, my k Suite...)\nSource: https://www.infomaniak.com/en/support/faq/2497/understanding-the-different-infomaniak-suites-ksuite-my-ksuite\nContent: ### Additional tools (k Drive\u2026)\n\nIf you choose a Suite (**k Suite** or **my k Suite** / **my k Suite+**), this user account will lead you to your Organization where the suite of tools will be found, therefore your email but also k Drive, k Chat etc.\n\nClick on the links to obtain the**comparison tables**detailed all the functionalities available according to the formula:\n\n1. k Drive can be obtained by creating a [my k Suite or my k Suite+ account](http://infomaniak.com/gtl/ksuite.myksuite.prices#comparison).\n2. k Drive can be obtained independently in [3 different versions](https://infomaniak.com/gtl/ksuite.kdrive.prices#prices): Solo Team Pro\n3. k Drive can be obtained if you subscribe (free or by a paid subscription) to **k Suite** which exists in [3 different versions](https://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision): Standard Business Enterprise\n\n---\n[Document 2] Import data from k Drive to another k Drive\nSource: https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive\nContent: ## k Suite Configuration\n\nIf you are in a k Suite environment (the k Drive app displayed within `ksuite.infomaniak.com`, you must ensure that all Organizations are displayed, otherwise you will not be able to switch from one k Drive to another and consequently will not have the copy function to other k Drives:\n\n---\n[Document 3] Upgrade an existing k Drive to a new k Suite\nSource: https://www.infomaniak.com/en/support/faq/2350/upgrade-an-existing-kdrive-to-a-new-ksuite\nContent: ## Upgrade my k Drive to k Suite\n\n### Prerequisites\n\n- **Not yet have a k Suite in the Organization.**\n- Have a paid [k Drive](https://infomaniak.com/gtl/ksuite.kdrive) offer and be out of the trial period.\n- Be the Legal Representative or Administrator of the",
+      "retrieved_context": "[Document 1] Understanding the different Infomaniak 'Suites' (k Suite, my k Suite...)\nSource: https://www.infomaniak.com/en/support/faq/2497/understanding-the-different-infomaniak-suites-ksuite-my-ksuite\nContent: ### Additional tools (k Drive\u2026)\n\nIf you choose a Suite (**k Suite** or **my k Suite** / **my k Suite+**), this user account will lead you to your Organization where the suite of tools will be found, therefore your email but also k Drive, k Chat etc.\n\nClick on the links to obtain the**co...",
+      "scores": {
+        "correctness": 0.6,
+        "faithfulness": 0.0,
+        "relevance": 0.7,
+        "correctness_reasoning": "The generated answer provides relevant documentation that confirms kDrive can be obtained independently or as part of kSuite/my kSuite. It touches on the core concept that kDrive exists in different environments (standalone vs. kSuite). However, it fails to explicitly mention the specific differences highlighted in the expected answer, such as the 'full management access' for standalone vs. 'limited features' for my kSuite. It provides raw documentation rather than a synthesized comparison.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an actual answer to the question. It fails to synthesize the information to explain the differences between kDrive standalone and kDrive within kSuite, and it cuts off mid-sentence at the end.",
+        "relevance_reasoning": "The context provides key information to distinguish the two: it explains that kDrive can be obtained independently (Solo, Team, Pro) or as part of a suite (kSuite Standard, Business, Enterprise). It clarifies that in kSuite, kDrive is integrated with other tools like kChat and Email, and that users of a standalone kDrive become kSuite users upon upgrading. However, it lacks a specific feature-by-feature comparison table, which is referenced via external links."
+      },
+      "retrieval_latency_ms": 729.6028339769691,
+      "generation_latency_ms": 0.0015830155462026596,
+      "total_latency_ms": 729.6164580038749,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "multi_doc",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "multi-005",
+      "question": "What warning appears when starting a kMeet call from a kChat channel with many users?",
+      "expected_answer": "A warning message appears if you want to start a call in a channel with more than 7 users. Unlike direct calls, channel calls do not ring for recipients - they only see a message in kChat and receive a notification.",
+      "generated_answer": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 2] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ### Specifics for calls in channels\n\n- The call will not ring for the recipients, but they will see a message in k Chat as well as a notification.\n- A message (warning) will appear if you want to start a call in a channel with more than 7 users.\n\nRefer to [this other guide](https://www.infomaniak.com/en/support/faq/2474) if you are looking for information on **k Meet**.\n\n---\n[Document 4] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ### Specifics for calls in channels\n\n- The call will not ring for the recipients, but they will see a message in k Chat as well as a notification.\n- A message (warning) will appear if you want to start a call in a channel with more than 7 users.\n\nRefer to [this other guide](https://www.infomaniak.com/en/support/faq/2474) if you are looking for information on **k Meet**.\n\n---\n[Document 5] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/suppo",
+      "retrieved_context": "[Document 1] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 2] Create a k Meet meeting from k Chat\nSource: https://www.in...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains the exact key information required by the expected answer. It correctly identifies that a warning appears for channels with more than 7 users and notes the specific behavior regarding notifications and the lack of ringing for recipients. Although it includes the source documents, the content itself is a perfect match.",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer at all; it is a verbatim repetition of the provided context documents, including the source URLs and document headers. It fails to address the specific question asked ('What warning appears...').",
+        "relevance_reasoning": "The context contains the exact answer to the question. Documents 3 and 4 explicitly state that a warning message appears when starting a call in a channel with more than 7 users."
+      },
+      "retrieval_latency_ms": 730.5622500134632,
+      "generation_latency_ms": 0.0007090275175869465,
+      "total_latency_ms": 730.5730420048349,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "multi_doc",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-001",
+      "question": "How much does kDrive cost per month?",
+      "expected_answer": "The documentation does not contain specific pricing information for kDrive. You should visit infomaniak.com or contact Infomaniak support for current pricing.",
+      "generated_answer": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Manage multiple k Drive (macOS / Windows)\nSource: https://www.infomaniak.com/en/support/faq/2458/manage-multiple-kdrive-macos-windows\nContent: ## Accessing different k Drives from the computer\n\nA user connected to the k Drive application on a computer may already have access to multiple k Drives if they are already working with multiple k Drives outside the app, if they have been added to other k Drives, etc. They are all accessible as long as the user is logged in with the identifier corresponding to these k Drives.\n\n---\n[Document 3] Modify an existing k Drive offer\nSource: https://www.infomaniak.com/en/support/faq/1577/modify-an-existing-kdrive-offer\nContent: ### Preamble\n\n- **k Drive** is the name given to the file storage/sharing service offered by Infomaniak in Switzerland.\n- k Drive is accessible **for free** or by **subscription** depending on whether you are **alone** using it or if you want **collaborators** to also access it.\n- k Drive exists as an independent product, or as a product among others within the **k Suite** & **my k Suite** / **my k Suite+** suite. To help you identify the offer most suited to your needs, refer to this other guide.\n\n> **Note:** If you have been invited to view/collaborate on a file from a k Drive, it is possible that you do not actually own the k Drive product; you only have **access** to the k Drive managed by someone else. You cannot therefore interact with the current offer.\n\n---\n[Document 4] Manage the k Drive subscription from Apple iOS\nSource: https://www.infomaniak.com/en/support/faq/2632/manage-the-kdrive-subscription-from-apple-ios\nContent: ## Purchasing a k Drive subscription via the iOS app\n\nYou can inde",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Manage multiple k Drive (macOS / Windows)\nSource: https://www.infomaniak.com/en/support/faq/2458/manage-multiple-kdrive-macos-windows\nContent: ## Accessing different k Drives from th...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.3,
+        "correctness_reasoning": "The generated answer is completely incorrect as it fails to provide a response to the question. Instead of answering how much kDrive costs or stating that the information is unavailable (as the expected answer does), it simply provides a raw list of document snippets and sources. It does not synthesize the information or address the user's query.",
+        "faithfulness_reasoning": "The generated answer is not an answer to the question. Instead, it is a verbatim repetition of the provided context documents, which even cuts off mid-sentence at the end. It fails to provide any information regarding the monthly cost of kDrive.",
+        "relevance_reasoning": "The retrieved documents identify that kDrive has 'Free', 'Solo', and 'Team' subscription tiers and mentions that billing can be handled via Apple or Infomaniak. However, none of the documents provide the actual price or cost per month, which is the specific information requested in the question."
+      },
+      "retrieval_latency_ms": 670.4710830235854,
+      "generation_latency_ms": 0.0010420335456728935,
+      "total_latency_ms": 670.4786249902099,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-002",
+      "question": "Can I use kMeet with Microsoft Teams integration?",
+      "expected_answer": "The documentation does not mention Microsoft Teams integration for kMeet. The docs cover kChat and Calendar integration but not third-party services like Teams.",
+      "generated_answer": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 4] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-kchat\nContent: ## Create a meeting between k Chat users\n\nTo be able to discuss within a virtual room with the microphone and webcam of your device, simply press the **Call** button visible on any k Chat conversation, private or public channel, via the application or directly on the browser:\n\n---\n[Document 5] Getting Started Guide: k Meet\nSource: https://www.infomaniak.com/en/support/faq/2474/getting-started-guide-kmeet\nContent: - [Remotely control a device with k Meet](https://www.infomaniak.com/en/support/faq/2622)\n- [Start the chat during an online meeting](https://www.infomaniak.com/en/support/faq/2478)\n- [Stream the k Meet feed via Video Streaming](https://www.infomaniak.com/en/support/faq/1355)\n- [Draw on k Meet](https://www.infomaniak.com/en/support/faq/2620)\n- [Replace Skype with k Meet](https://www.infomaniak.com/en/support/faq/2890)\n",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 2] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 3] Create a k Meet meeting from k Chat\nSource: https://www.infomaniak.com/en/support/faq/2827/create-a-kmeet-meeting-from-...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.1,
+        "correctness_reasoning": "The generated answer is completely incorrect as it fails to provide a response to the question. Instead of answering whether kMeet integrates with Microsoft Teams, it simply lists snippets of documentation regarding kDrive and kChat. It does not contain the key information found in the expected answer.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the question. Furthermore, the provided context contains no information regarding Microsoft Teams integration, so the question cannot be answered based on the given text.",
+        "relevance_reasoning": "The retrieved documents focus on kMeet's internal features (recording to kDrive, integration with kChat, remote control, and drawing) and mention replacing Skype. However, there is no mention of Microsoft Teams or any integration with it, which is the core of the user's question."
+      },
+      "retrieval_latency_ms": 839.6120420075022,
+      "generation_latency_ms": 0.0005839974619448185,
+      "total_latency_ms": 839.6178749972023,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-003",
+      "question": "What is the maximum file size I can upload to kDrive?",
+      "expected_answer": "The documentation does not specify maximum file upload size limits for kDrive.",
+      "generated_answer": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Export an email to k Drive\nSource: https://www.infomaniak.com/en/support/faq/973/export-an-email-to-kdrive\nContent: ## Add an email to k Drive\u2026\n\n---\n[Document 3] Use Euria on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2566/use-euria-on-kdrive\nContent: ## Use AI for your files on k Drive\n\n---\n[Document 4] Manage k Drive storage\nSource: https://www.infomaniak.com/en/support/faq/2387/manage-kdrive-storage\nContent: # Manage k Drive storage\n\nSource: https://www.infomaniak.com/en/support/faq/2387/manage-kdrive-storage\n\n---\n\nThis guide explains how to view how the storage space of your [k Drive](https://infomaniak.com/gtl/kdrive) is used and how to increase its capacity if needed.\n\n### Preamble\n\n- The maximum number of files per k Drive is not a fixed limit, but if it is exceeded, the stability of the storage system and the k Drive application cannot be guaranteed by Infomaniak.\n- Only the specific conditions **Backup and Storage** that you can find in your Manager are binding.\n\n## Current limits\n\n**\u26a0 Max. number of files / subfolders:**\n\n**\u26a0 Bandwidth (in GB) allowed per day and per user***(these limits, provided for informational and preventive purposes, may apply if excessive use degrades the service, in order to guarantee its stability and availability for all users)***:**\n\n**\u26a0 Max. number of daily downloads of a file per user:**\n\n**\u26a0 Max. size of a file (in GB) sent via:**\n\n---\n[Document 5] Synchronize a VPS with k Drive\nSource: https://www.infomaniak.com/en/support/faq/2636/synchronize-a-vps-with-kdrive\nContent: ## Synchronize k Drive and VPS via r Clone\n\nThis operation allows you to retrieve in real-time the files and folders from k Drive ",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Export an email to k Drive\nSource: https://www.infomaniak.com/en/support/faq/973/export-an-email-to-kdrive\nContent: ## Add an email to k Drive\u2026\n\n---\n[Document 3] Use Euria on k Drive...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.3,
+        "correctness_reasoning": "The 'Generated Answer' provided is actually a collection of source documents rather than a synthesized answer to the question. It fails to state that the documentation does not specify the maximum file upload size, and instead presents raw text where the specific limit values are missing or truncated (e.g., 'Max. size of a file (in GB) sent via:' followed by nothing).",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer at all; it is a verbatim repetition of the provided context documents. It fails to address the user's question regarding the maximum file size and provides no synthesized information or conclusion.",
+        "relevance_reasoning": "Document 4 contains the specific heading 'Max. size of a file (in GB) sent via:', which directly addresses the question. However, the actual numerical values or limits are missing from the provided text, making it impossible to provide a factual answer. The context is relevant in topic but fails to provide the necessary data."
+      },
+      "retrieval_latency_ms": 666.7076669982634,
+      "generation_latency_ms": 0.0007919734343886375,
+      "total_latency_ms": 666.7159580392763,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-004",
+      "question": "Does Infomaniak offer an API for kChat?",
+      "expected_answer": "The documentation mentions that custom slash commands can call external APIs, but does not provide details about a public kChat API for developers.",
+      "generated_answer": "[Document 1] Getting started: k Chat\nSource: https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat\nContent: ## What would you like to do?\n\n- [Configure k Chat](https://www.infomaniak.com/en/support/faq/2734)\n- [Manage users](https://www.infomaniak.com/en/support/faq/1886)\n- [Manage a channel](https://www.infomaniak.com/en/support/faq/2732)\n- [Manage a conversation](https://www.infomaniak.com/en/support/faq/1758)\n- [React to messages](https://www.infomaniak.com/en/support/faq/1190)\n- [Manage k Chat notifications](https://www.infomaniak.com/en/support/faq/1460)\n- [Format messages and insert images](https://www.infomaniak.com/en/support/faq/1407)\n- [Send a voice message and its automatic transcription](https://www.infomaniak.com/en/support/faq/2876)\n- [Translate the content of a message on the k Chat Infomaniak app](https://www.infomaniak.com/en/support/faq/1467)\n\n---\n[Document 2] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https://ksuite.infomaniak.com/all?global-settings=user-apps) to download the **mobile** app (application for iOS / Android smartphone or tablet) and the **desktop** app (desktop application on macOS / Windows / Linux).\n\n> **Note:**\n k Chat requests access to the **macOS Keychain for \u201cChromium Safe Storage\u201d**, which is used to store your access token (token). This request is normal and necessary for the proper functioning of k Chat; no additional sensitive data is requested and nothing is sent outside.\n\nAlso refer to the [getting started guide](https://www.infomaniak.com/en/support/faq/2076).\n\n---\n[Document",
+      "retrieved_context": "[Document 1] Getting started: k Chat\nSource: https://www.infomaniak.com/en/support/faq/2076/getting-started-kchat\nContent: ## What would you like to do?\n\n- [Configure k Chat](https://www.infomaniak.com/en/support/faq/2734)\n- [Manage users](https://www.infomaniak.com/en/support/faq/1886)\n- [Manage a channel](https://www.infomaniak.com/en/support/faq/2732)\n- [Manage a conversation](https://www.infomaniak.com/en/support/faq/1758)\n- [React to messages](https://www.infomaniak.com/en/support/faq/1190)...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.1,
+        "correctness_reasoning": "The generated answer is completely incorrect as it fails to answer the question. Instead of providing information about the kChat API, it merely provides a list of links and documentation snippets regarding general kChat setup and installation. It does not mention slash commands or the lack of a public API, which were the key points in the expected answer.",
+        "faithfulness_reasoning": "The 'Generated Answer' is not an answer to the question at all. It is simply a verbatim repetition of the provided context documents. It fails to address whether Infomaniak offers an API for kChat and provides no original synthesis or conclusion based on the text.",
+        "relevance_reasoning": "The retrieved documents provide a general overview of kChat features (translation, voice messages, installation), but they do not mention an API, developer tools, or integration capabilities. The only mention of a 'token' is in the context of local storage for the desktop app, which does not answer whether a public API is available."
+      },
+      "retrieval_latency_ms": 1999.0867079468444,
+      "generation_latency_ms": 0.0009579816833138466,
+      "total_latency_ms": 1999.0946250036359,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-005",
+      "question": "Can I migrate my data from Google Drive to kDrive?",
+      "expected_answer": "The documentation does not contain information about migrating data from Google Drive or other cloud storage services to kDrive.",
+      "generated_answer": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Import external data to k Drive\nSource: https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-kdrive\nContent: # Import external data to k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-kdrive\n\n---\n\nThis guide explains how to import (one time only) to [k Drive](https://infomaniak.com/gtl/kdrive) data (files, folders, etc.) from an external cloud, such as your previous provider's, for example Dropbox or Microsoft.\n\n### Prerequisites\n\n- Have a [k Drive](https://infomaniak.com/gtl/ksuite.kdrive) or [k Suite](https://infomaniak.com/gtl/ksuite) offer (WebDAV not required)\n- Have sufficient permissions within [k Drive](https://www.infomaniak.com/en/support/faq/2365) or [k Suite](https://www.infomaniak.com/en/support/faq/879).\n- **Do not change your passwords until the import is complete**!\n\n---\n[Document 3] Import data from k Drive to Google Drive\nSource: https://www.infomaniak.com/en/support/faq/2408/import-data-from-kdrive-to-google-drive\nContent: # Import data from k Drive to Google Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2408/import-data-from-kdrive-to-google-drive\n\n---\n\nThis guide details how to import **Google Drive** data using **r Clone** on [k Drive](https://infomaniak.com/gtl/kdrive) Infomaniak.\n\n**\u26a0 Available with:**\n\n---\n[Document 4] Synchronize a VPS with k Drive\nSource: https://www.infomaniak.com/en/support/faq/2636/synchronize-a-vps-with-kdrive\nContent: ## Synchronize k Drive and VPS via r Clone\n\nThis operation allows you to retrieve in real-time the files and folders from k Drive and to read, create, or modify these files from your VPS while ensuring they are synchronized b",
+      "retrieved_context": "[Document 1] Getting started guide: k Drive\nSource: https://www.infomaniak.com/en/support/faq/2366/getting-started-guide-kdrive\nContent: ## Collaborative storage on a 100% Swiss Made cloud\n\n- [Discover k Drive in video](https://www.youtube.com/watch?v=Knu341x WeC8) (the interface has evolved since)\n\n---\n[Document 2] Import external data to k Drive\nSource: https://www.infomaniak.com/en/support/faq/2406/import-external-data-to-kdrive\nContent: # Import external data to k Drive\n\nSource: https://www....",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.9,
+        "correctness_reasoning": "The generated answer is completely incorrect and contradictory. The 'Expected Answer' states that the documentation does not contain information about migrating from Google Drive to kDrive. However, the 'Generated Answer' provides several documents that explicitly describe how to import data from external clouds and specifically mentions importing Google Drive data using rClone (Document 3). The generated answer failed to provide a concise response and instead provided source text that directly contradicts the expected answer's claim of absence.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the user's question. It fails to provide a response and instead outputs the source text itself.",
+        "relevance_reasoning": "The context directly addresses the question. Document 2 explains the general process for importing data from external clouds to kDrive, and Document 3 specifically mentions importing Google Drive data to kDrive using rClone (despite its slightly confusing title, the content clarifies the direction of the import)."
+      },
+      "retrieval_latency_ms": 693.8154999515973,
+      "generation_latency_ms": 0.0010409858077764511,
+      "total_latency_ms": 693.8229999504983,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-006",
+      "question": "What is the participant limit for kMeet free tier?",
+      "expected_answer": "The documentation mentions that paid kSuite offers have no participant limit, but does not specify the exact limit for free tier meetings.",
+      "generated_answer": "[Document 1] Create a k Meet meeting\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting\nContent: # Create a k Meet meeting\n\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting\n\n---\n\nThis guide explains how to start an online meeting with [k Meet](https://infomaniak.com/gtl/meet), Infomaniak's ethical and free video conferencing solution.\n\n---\n[Document 2] Create a k Meet meeting\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting\nContent: ### Preamble\n\n- There is no limit to the number of participants with paid k Suite offers.\n- Participants can [write](https://www.infomaniak.com/en/support/faq/2478) in a shared chat, [annotate](https://www.infomaniak.com/en/support/faq/2620) a [screen share](https://www.infomaniak.com/en/support/faq/2477) and even [control a remote device](https://www.infomaniak.com/en/support/faq/2622).\n- To create a meeting room **in advance** and invite participants by creating an associated event in the Infomaniak calendar, refer to [this other guide](https://www.infomaniak.com/en/support/faq/956).\n- It is also possible to share the video stream within a [Video Streaming Broadcast](https://www.infomaniak.com/en/support/faq/1355) (for example, to avoid depending on the connection to k Meet).\n\n---\n[Document 3] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 4] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: ## Record a k Meet meeting on k Drive\n\n---\n[Document 5] Broadcast a k Meet meeting via Live Streaming mode\nSource: https://www.infomaniak.com/en/support/faq/1355/broadcast-a-kmeet-meeting-via-live-streaming-mode\nContent: The stream is broadcast continuously for a maximum of 24 hours, and **will no longer be accessible** as soon as the k Meet meeting is stop",
+      "retrieved_context": "[Document 1] Create a k Meet meeting\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting\nContent: # Create a k Meet meeting\n\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-kmeet-meeting\n\n---\n\nThis guide explains how to start an online meeting with [k Meet](https://infomaniak.com/gtl/meet), Infomaniak's ethical and free video conferencing solution.\n\n---\n[Document 2] Create a k Meet meeting\nSource: https://www.infomaniak.com/en/support/faq/2475/create-a-k...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.3,
+        "correctness_reasoning": "The generated answer is completely incorrect as it fails to provide a response to the question. Instead of answering the question about participant limits, it simply provides a list of source documents and their contents. It does not extract or synthesize the information required by the expected answer.",
+        "faithfulness_reasoning": "The 'Generated Answer' provided is simply a verbatim repetition of the retrieved documents rather than an actual answer to the question. Furthermore, the provided context does not contain the answer to the specific question regarding the participant limit for the kMeet free tier; it only mentions that there is no limit for 'paid k Suite offers'.",
+        "relevance_reasoning": "The context mentions that there is 'no limit to the number of participants with paid k Suite offers,' which implies a distinction for the free tier. However, it fails to explicitly state what the specific participant limit is for the free tier, making it impossible to fully answer the question using only the provided documents."
+      },
+      "retrieval_latency_ms": 862.6150829950348,
+      "generation_latency_ms": 0.0009159557521343231,
+      "total_latency_ms": 862.622165994253,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-007",
+      "question": "How do I set up SSO/SAML authentication for kSuite?",
+      "expected_answer": "The documentation does not contain information about SSO or SAML authentication setup for kSuite.",
+      "generated_answer": "[Document 1] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ## Invite to use k Suite\n\n---\n[Document 2] Import data from k Drive to another k Drive\nSource: https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive\nContent: ## k Suite Configuration\n\nIf you are in a k Suite environment (the k Drive app displayed within `ksuite.infomaniak.com`, you must ensure that all Organizations are displayed, otherwise you will not be able to switch from one k Drive to another and consequently will not have the copy function to other k Drives:\n\n---\n[Document 3] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ### Access to k Suite, and not access to the management of k Suite!\n\nIt is important to differentiate **the use of the k Chat app (within k Suite)** and **the management of k Suite** itself.\n\nIn the invitation example above, the new user has been invited to join k Chat, they are counted as a k Suite user when an administrator accesses the management of their k Suite users:\n\nHowever, this new user will not be able to directly manage the k Suite to which they have been invited since their role (defined in the first point 5 above) does not authorize them to do so.\n\nThis is why this user will not see any active link in the **Collaborative Tools \u2192 k Suite** section of their Infomaniak **a**nager. They will need to switch to the **Infomaniak applications** using the menu  at the top right:\n\nNote that if necessary, this user can order their own k Suite without any link to the k Suite to which they have been invited.\n\n---\n[Document 4] Upgrade an existing k Drive to a new k Suite\nSource: https://www.infomaniak.com/en/support/faq/2350/upgrade-an-existing-kdrive-to-a-new-ksuite\nContent: ## Upgrade my k Drive to k Suite\n\n### Prerequisites\n\n- **Not yet have a k Suite in the Organization.**\n- Have a paid [k Drive](https:",
+      "retrieved_context": "[Document 1] Invite a user to use k Chat\nSource: https://www.infomaniak.com/en/support/faq/1455/invite-a-user-to-use-kchat\nContent: ## Invite to use k Suite\n\n---\n[Document 2] Import data from k Drive to another k Drive\nSource: https://www.infomaniak.com/en/support/faq/1908/import-data-from-kdrive-to-another-kdrive\nContent: ## k Suite Configuration\n\nIf you are in a k Suite environment (the k Drive app displayed within `ksuite.infomaniak.com`, you must ensure that all Organizations are displayed, ...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.0,
+        "correctness_reasoning": "The generated answer is completely incorrect. Instead of stating that the documentation does not contain information about SSO/SAML (as the expected answer does), it provides a collection of irrelevant document snippets regarding user invitations, data imports, and upgrades. It fails to address the specific question about authentication methods.",
+        "faithfulness_reasoning": "The generated answer is a verbatim repetition of the provided context documents rather than an answer to the user's question. Furthermore, the provided context contains no information regarding SSO or SAML authentication, making it impossible to answer the question based on the retrieved documents.",
+        "relevance_reasoning": "None of the retrieved documents contain information regarding SSO, SAML, or authentication configuration for kSuite. The documents focus on inviting users, importing data, upgrading plans, and installing the kChat application."
+      },
+      "retrieval_latency_ms": 846.2629580171779,
+      "generation_latency_ms": 0.001125037670135498,
+      "total_latency_ms": 846.2718750233762,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    },
+    {
+      "question_id": "oos-008",
+      "question": "Can I use kChat on my Apple Watch?",
+      "expected_answer": "The documentation mentions iOS apps but does not specifically mention Apple Watch support for kChat.",
+      "generated_answer": "[Document 1] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https://ksuite.infomaniak.com/all?global-settings=user-apps) to download the **mobile** app (application for iOS / Android smartphone or tablet) and the **desktop** app (desktop application on macOS / Windows / Linux).\n\n> **Note:**\n k Chat requests access to the **macOS Keychain for \u201cChromium Safe Storage\u201d**, which is used to store your access token (token). This request is normal and necessary for the proper functioning of k Chat; no additional sensitive data is requested and nothing is sent outside.\n\nAlso refer to the [getting started guide](https://www.infomaniak.com/en/support/faq/2076).\n\n---\n[Document 2] Manage k Chat notifications\nSource: https://www.infomaniak.com/en/support/faq/1460/manage-kchat-notifications\nContent: # Manage k Chat notifications\n\nSource: https://www.infomaniak.com/en/support/faq/1460/manage-kchat-notifications\n\n---\n\nThis guide details the important elements to ensure you don't miss any k Chat discussions that concern you.\n\n### Preamble\n\n- If notifications are correctly configured to work on the mobile app **k Chat**, they will also work on connected watches (*smartwatch*) such as *Garmin* or *Apple Watch*.\n\n## Manage desktop app icon notifications\n\nYou can, for example, decide to animate the desktop app icon when a new message arrives:\n\n1. Open the desktop app **k Chat** (desktop application on macOS / Windows / Linux).\n2. Left-click on the desktop app icon in the notification area of your computer (top right on macOS, bottom right on Windows and a double",
+      "retrieved_context": "[Document 1] Download and install k Chat\nSource: https://www.infomaniak.com/en/support/faq/144/download-and-install-kchat\nContent: ## Get k Chat\n\nk Chat is offered with **my k Suite**, with capabilities [adapted to each version](http://infomaniak.com/gtl/ksuite.ksuite-pro.prices#comparision).\n\nOnce you have set up **my k Suite** within your Organization:\n\n- Access the **k Chat Web app** (online service [ksuite.infomaniak.com/kchat](https://ksuite.infomaniak.com/kchat))\n- \u2026 or [click here](https:...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 0.8,
+        "correctness_reasoning": "The generated answer is not an answer at all; it is a raw dump of the source documentation. It fails to synthesize the information to answer the question. Furthermore, the content of the generated answer actually contradicts the 'Expected Answer' because Document 2 explicitly states that notifications will work on Apple Watch if configured on the mobile app, whereas the Expected Answer claims there is no specific mention of Apple Watch support.",
+        "faithfulness_reasoning": "The generated answer is a verbatim copy-paste of the provided context documents rather than an actual answer to the user's question. It fails to provide a response and instead repeats the source material, including truncated sentences.",
+        "relevance_reasoning": "Document 2 explicitly mentions that if notifications are correctly configured on the kChat mobile app, they will also work on connected watches such as the Apple Watch. While it doesn't describe a standalone Apple Watch app, it provides a definitive answer regarding compatibility and functionality on the device."
+      },
+      "retrieval_latency_ms": 648.453125031665,
+      "generation_latency_ms": 0.0008330098353326321,
+      "total_latency_ms": 648.4608330065385,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "out_of_scope",
+        "product": "",
+        "collection": "infomaniak_recursive_1000_no_images",
+        "timestamp": "2026-01-23T20:35:58.853508"
+      }
+    }
+  ]
+}

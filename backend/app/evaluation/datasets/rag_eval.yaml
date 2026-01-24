@@ -1,0 +1,187 @@
+# RAG Evaluation Dataset for Infomaniak Documentation
+#
+# Categories:
+# - direct: Questions with answers directly in a single FAQ document
+# - multi_doc: Questions requiring synthesis from multiple documents
+# - out_of_scope: Questions where the answer is NOT in the documentation
+#
+# For out_of_scope questions, expected_answer describes what a good response
+# should acknowledge (e.g., "I don't have information about this")
+
+questions:
+  # =============================================================================
+  # DIRECT QUESTIONS - Answers directly from single FAQ documents
+  # =============================================================================
+
+  # kMeet Direct Questions
+  - id: "direct-kmeet-001"
+    question: "What browsers support kMeet end-to-end encryption?"
+    expected_answer: "End-to-end encryption only works with desktop apps and up-to-date browsers based on the Chromium architecture, such as Opera, Brave, and Google Chrome."
+    category: direct
+    product: kmeet
+
+  - id: "direct-kmeet-002"
+    question: "What is the maximum recording duration for a kMeet meeting?"
+    expected_answer: "The maximum recording duration for a kMeet meeting is 3 hours."
+    category: direct
+    product: kmeet
+
+  - id: "direct-kmeet-003"
+    question: "Can I record an encrypted kMeet meeting with a custom key?"
+    expected_answer: "No, you cannot record a video conference that uses end-to-end encryption with a custom key."
+    category: direct
+    product: kmeet
+
+  - id: "direct-kmeet-004"
+    question: "What format are kMeet recordings saved in?"
+    expected_answer: "kMeet recordings are saved in .mp4 video format."
+    category: direct
+    product: kmeet
+
+  - id: "direct-kmeet-005"
+    question: "What happens when I call someone on Do Not Disturb in kChat?"
+    expected_answer: "Calling a user who is on Do Not Disturb will not trigger a ringtone or call modal for them, but they will see the message in the conversation."
+    category: direct
+    product: kmeet
+
+  # kDrive Direct Questions
+  - id: "direct-kdrive-001"
+    question: "What methods can I use to create a signature in kDrive PDF editor?"
+    expected_answer: "You can create a signature in three ways: draw freehand with the mouse, type text and choose a cursive font, or import an image (like a scan of your handwritten signature) from your device."
+    category: direct
+    product: kdrive
+
+  - id: "direct-kdrive-002"
+    question: "Where are kDrive files stored?"
+    expected_answer: "Files are never analyzed and are exclusively stored in Switzerland."
+    category: direct
+    product: kdrive
+
+  - id: "direct-kdrive-003"
+    question: "What commands should I run to fix Windows system integrity for kDrive issues?"
+    expected_answer: "Run these commands in an administrator command prompt: SFC /scannow, DISM /Online /Cleanup-Image /CheckHealth, DISM /Online /Cleanup-Image /ScanHealth, DISM /Online /Cleanup-Image /RestoreHealth"
+    category: direct
+    product: kdrive
+
+  - id: "direct-kdrive-004"
+    question: "Can I save changes to a PDF in kDrive without overwriting the original?"
+    expected_answer: "Yes, when saving changes to a PDF in kDrive, you can choose whether to create a copy of the modified document or overwrite the existing file."
+    category: direct
+    product: kdrive
+
+  # kChat Direct Questions
+  - id: "direct-kchat-001"
+    question: "Why does kChat request access to macOS Keychain for Chromium Safe Storage?"
+    expected_answer: "kChat requests access to the macOS Keychain for Chromium Safe Storage to store your access token. This is normal and necessary for proper functioning; no additional sensitive data is requested and nothing is sent outside."
+    category: direct
+    product: kchat
+
+  - id: "direct-kchat-002"
+    question: "What security certifications does Infomaniak have for kChat?"
+    expected_answer: "Infomaniak is a Swiss company certified ISO 27001 and ISO 9001 that complies with the GDPR."
+    category: direct
+    product: kchat
+
+  - id: "direct-kchat-003"
+    question: "How do I access slash commands in kChat?"
+    expected_answer: "Click in the composition field within a channel, enter a / (slash or forward slash) and the attached command, then confirm to send the command. If you type only the / sign, a modal appears with the commands that can be executed."
+    category: direct
+    product: kchat
+
+  - id: "direct-kchat-004"
+    question: "Can external users create custom slash commands in kChat?"
+    expected_answer: "No, external users cannot create custom slash commands because they will not see the Integrations menu."
+    category: direct
+    product: kchat
+
+  - id: "direct-kchat-005"
+    question: "Is kChat data encrypted?"
+    expected_answer: "Yes, data at rest and in transit is encrypted, as are the backups automatically performed by Infomaniak. Data is hosted in Switzerland in data centers developed and managed exclusively by Infomaniak."
+    category: direct
+    product: kchat
+
+  # =============================================================================
+  # MULTI-DOCUMENT QUESTIONS - Require combining info from different documents
+  # =============================================================================
+
+  - id: "multi-001"
+    question: "How can I start a video call from kChat and then record it to kDrive?"
+    expected_answer: "In kChat, press the Call button on any conversation or channel to start a kMeet meeting. Once in the meeting, click the action menu (○○○) in the toolbar, then Start recording. Select a kDrive to save the recording. The recording will be available at the root of the chosen kDrive when all participants leave."
+    category: multi_doc
+    product: ""
+
+  - id: "multi-002"
+    question: "What security features are available across kSuite products?"
+    expected_answer: "kSuite products offer multiple security features: kMeet supports password protection and AES-256 end-to-end encryption; kChat data is encrypted at rest and in transit with ISO 27001/9001 certified Swiss hosting; kDrive stores files exclusively in Switzerland with automatic encrypted backups."
+    category: multi_doc
+    product: ""
+
+  - id: "multi-003"
+    question: "How do the kSuite apps work together for team collaboration?"
+    expected_answer: "kChat integrates with kMeet for video calls directly from conversations. kMeet recordings can be saved to kDrive. kChat shows meeting start/end indications and messages sent from kMeet appear in the kChat conversation. The Calendar can create kMeet video links for scheduled meetings."
+    category: multi_doc
+    product: ""
+
+  - id: "multi-004"
+    question: "What are the differences between kDrive standalone and kDrive within kSuite?"
+    expected_answer: "kDrive exists as an independent product or as part of kSuite/my kSuite. The standalone version has full management access through the dashboard, while my kSuite may have limited features that can be unlocked by upgrading. Both provide Swiss-hosted collaborative storage."
+    category: multi_doc
+    product: ""
+
+  - id: "multi-005"
+    question: "What warning appears when starting a kMeet call from a kChat channel with many users?"
+    expected_answer: "A warning message appears if you want to start a call in a channel with more than 7 users. Unlike direct calls, channel calls do not ring for recipients - they only see a message in kChat and receive a notification."
+    category: multi_doc
+    product: ""
+
+  # =============================================================================
+  # OUT-OF-SCOPE QUESTIONS - Answers NOT in the documentation
+  # =============================================================================
+
+  - id: "oos-001"
+    question: "How much does kDrive cost per month?"
+    expected_answer: "The documentation does not contain specific pricing information for kDrive. You should visit infomaniak.com or contact Infomaniak support for current pricing."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-002"
+    question: "Can I use kMeet with Microsoft Teams integration?"
+    expected_answer: "The documentation does not mention Microsoft Teams integration for kMeet. The docs cover kChat and Calendar integration but not third-party services like Teams."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-003"
+    question: "What is the maximum file size I can upload to kDrive?"
+    expected_answer: "The documentation does not specify maximum file upload size limits for kDrive."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-004"
+    question: "Does Infomaniak offer an API for kChat?"
+    expected_answer: "The documentation mentions that custom slash commands can call external APIs, but does not provide details about a public kChat API for developers."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-005"
+    question: "Can I migrate my data from Google Drive to kDrive?"
+    expected_answer: "The documentation does not contain information about migrating data from Google Drive or other cloud storage services to kDrive."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-006"
+    question: "What is the participant limit for kMeet free tier?"
+    expected_answer: "The documentation mentions that paid kSuite offers have no participant limit, but does not specify the exact limit for free tier meetings."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-007"
+    question: "How do I set up SSO/SAML authentication for kSuite?"
+    expected_answer: "The documentation does not contain information about SSO or SAML authentication setup for kSuite."
+    category: out_of_scope
+    product: ""
+
+  - id: "oos-008"
+    question: "Can I use kChat on my Apple Watch?"
+    expected_answer: "The documentation mentions iOS apps but does not specifically mention Apple Watch support for kChat."
+    category: out_of_scope
+    product: ""

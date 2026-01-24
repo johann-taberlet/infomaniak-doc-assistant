@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-01-23T22:07:46.127465",
+  "collection": "infomaniak_full_doc_no_images",
+  "num_questions": 10,
+  "results": [
+    {
+      "model": "mistralai/mistral-nemo",
+      "avg_correctness": 0.75,
+      "avg_faithfulness": 0.79,
+      "avg_relevance": 0.78,
+      "avg_latency_ms": 5412.051454198081,
+      "total_cost_usd": 0.00077766,
+      "quality_score": 0.768
+    },
+    {
+      "model": "qwen/qwen3-8b",
+      "avg_correctness": 0.6,
+      "avg_faithfulness": 0.6900000000000001,
+      "avg_relevance": 0.78,
+      "avg_latency_ms": 3988.999995792983,
+      "total_cost_usd": 0.0019199,
+      "quality_score": 0.663
+    },
+    {
+      "model": "z-ai/glm-4.7-flash",
+      "avg_correctness": 0.53,
+      "avg_faithfulness": 0.8,
+      "avg_relevance": 0.78,
+      "avg_latency_ms": 17202.155616600066,
+      "total_cost_usd": 0.00436239,
+      "quality_score": 0.661
+    }
+  ]
+}
