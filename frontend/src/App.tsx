@@ -1,10 +1,40 @@
+import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import type { UIMessage } from "ai";
+
+// Create transport with API endpoint
+const transport = new DefaultChatTransport({
+  api: "/api/chat",
+});
 
 function App() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
-    useChat({
-      api: "/api/chat",
-    });
+  const [input, setInput] = useState("");
+  const { messages, sendMessage, status, error } = useChat({
+    transport,
+  });
+
+  const isLoading = status === "streaming" || status === "submitted";
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    sendMessage({ text: input });
+    setInput("");
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setInput(suggestion);
+  };
+
+  // Extract text content from message parts
+  const getMessageContent = (message: UIMessage): string => {
+    return message.parts
+      .filter((part): part is { type: "text"; text: string } => part.type === "text")
+      .map((part) => part.text)
+      .join("");
+  };
 
   return (
     <div className="app">
@@ -19,34 +49,13 @@ function App() {
             <div className="welcome">
               <p>Ask me anything about Infomaniak kSuite products!</p>
               <div className="suggestions">
-                <button
-                  onClick={() => {
-                    const event = {
-                      target: { value: "How do I share a file in kDrive?" },
-                    } as React.ChangeEvent<HTMLInputElement>;
-                    handleInputChange(event);
-                  }}
-                >
+                <button onClick={() => handleSuggestionClick("How do I share a file in kDrive?")}>
                   How do I share a file in kDrive?
                 </button>
-                <button
-                  onClick={() => {
-                    const event = {
-                      target: { value: "How do I start a kMeet video call?" },
-                    } as React.ChangeEvent<HTMLInputElement>;
-                    handleInputChange(event);
-                  }}
-                >
+                <button onClick={() => handleSuggestionClick("How do I start a kMeet video call?")}>
                   How do I start a kMeet video call?
                 </button>
-                <button
-                  onClick={() => {
-                    const event = {
-                      target: { value: "How do I create a channel in kChat?" },
-                    } as React.ChangeEvent<HTMLInputElement>;
-                    handleInputChange(event);
-                  }}
-                >
+                <button onClick={() => handleSuggestionClick("How do I create a channel in kChat?")}>
                   How do I create a channel in kChat?
                 </button>
               </div>
@@ -61,7 +70,7 @@ function App() {
               <div className="message-role">
                 {message.role === "user" ? "You" : "Assistant"}
               </div>
-              <div className="message-content">{message.content}</div>
+              <div className="message-content">{getMessageContent(message)}</div>
             </div>
           ))}
 
@@ -87,7 +96,7 @@ function App() {
           <input
             type="text"
             value={input}
-            onChange={handleInputChange}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about kDrive, kMeet, or kChat..."
             disabled={isLoading}
           />

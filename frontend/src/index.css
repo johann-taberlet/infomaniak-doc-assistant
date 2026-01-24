@@ -1,3 +1,6 @@
+/* Import generative UI component styles */
+@import './styles/generative.css';
+
 :root {
   --primary: #0066cc;
   --primary-dark: #0052a3;
