@@ -6,8 +6,15 @@ This module provides:
 - Intent: Classification result with type, confidence, and skill
 - IntentType: Enum for intent types (rag, action)
 - SkillInfo: Metadata about available skills
+- IntentClassificationError: Raised when classification fails
 """
 
-from backend.app.agents.router import Intent, IntentRouter, IntentType, SkillInfo
+from backend.app.agents.router import (
+    Intent,
+    IntentClassificationError,
+    IntentRouter,
+    IntentType,
+    SkillInfo,
+)
 
-__all__ = ["IntentRouter", "Intent", "IntentType", "SkillInfo"]
+__all__ = ["IntentRouter", "Intent", "IntentType", "SkillInfo", "IntentClassificationError"]

@@ -12,6 +12,7 @@ import pytest
 from backend.app.agents.router import (
     DEFAULT_SKILLS,
     Intent,
+    IntentClassificationError,
     IntentRouter,
     IntentType,
     SkillInfo,
@@ -236,6 +237,49 @@ class TestIntentRouterClassify:
         custom_skills = [SkillInfo(name="custom-skill", description="Custom action")]
         intent = mock_router.classify("Do custom thing", available_skills=custom_skills)
         assert intent.skill == "custom-skill"
+
+
+class TestIntentRouterRetry:
+    """Tests for retry behavior and error handling."""
+
+    @pytest.fixture
+    def mock_router(self):
+        """Create router with mocked LLM."""
+        with patch.object(IntentRouter, "__init__", lambda self, **kwargs: None):
+            router = IntentRouter()
+            router.model = "test-model"
+            router._llm = MagicMock()
+            return router
+
+    def test_retry_succeeds_after_transient_failure(self, mock_router):
+        """Should retry and succeed after transient failure."""
+        mock_router._llm.invoke.side_effect = [
+            Exception("API timeout"),
+            MagicMock(content='{"type": "rag", "confidence": 0.9, "skill": null, "reasoning": "ok"}'),
+        ]
+        with patch("backend.app.agents.router.RETRY_DELAY_SECONDS", 0):
+            intent = mock_router.classify("test query")
+        assert intent.type == IntentType.RAG
+        assert mock_router._llm.invoke.call_count == 2
+
+    def test_raises_exception_after_all_retries_exhausted(self, mock_router):
+        """Should raise IntentClassificationError after all retries fail."""
+        mock_router._llm.invoke.side_effect = Exception("Persistent failure")
+        with patch("backend.app.agents.router.RETRY_DELAY_SECONDS", 0):
+            with patch("backend.app.agents.router.MAX_RETRIES", 3):
+                with pytest.raises(IntentClassificationError) as exc_info:
+                    mock_router.classify("test query")
+        assert "Persistent failure" in str(exc_info.value)
+        assert mock_router._llm.invoke.call_count == 3
+
+    def test_exception_contains_retry_count(self, mock_router):
+        """Exception message should mention retry count."""
+        mock_router._llm.invoke.side_effect = Exception("Network error")
+        with patch("backend.app.agents.router.RETRY_DELAY_SECONDS", 0):
+            with patch("backend.app.agents.router.MAX_RETRIES", 2):
+                with pytest.raises(IntentClassificationError) as exc_info:
+                    mock_router.classify("test query")
+        assert "2 retries" in str(exc_info.value)
 
 
 @pytest.mark.integration

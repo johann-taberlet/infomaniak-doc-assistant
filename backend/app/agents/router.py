@@ -7,6 +7,7 @@ Classifies queries as:
 """
 
 import json
+import logging
 import time
 from dataclasses import dataclass, field
 from enum import Enum
@@ -15,6 +16,14 @@ from langchain_openai import ChatOpenAI
 from langfuse import observe
 
 from backend.app.core.config import settings
+
+logger = logging.getLogger(__name__)
+
+
+class IntentClassificationError(Exception):
+    """Raised when intent classification fails after all retries."""
+
+    pass
 
 # Retry configuration for transient API errors
 MAX_RETRIES = 3
@@ -165,7 +174,12 @@ Respond with ONLY a JSON object (no markdown, no explanation):
 {{"type": "<rag|action>", "confidence": <0.0-1.0>, "skill": "<skill-name|null>", "reasoning": "<brief explanation>"}}"""
 
     def _invoke_with_retry(self, prompt: str) -> str:
-        """Invoke LLM with retry logic for transient errors."""
+        """
+        Invoke LLM with retry logic for transient errors.
+
+        Raises:
+            IntentClassificationError: When all retries are exhausted.
+        """
         last_error = None
         for attempt in range(MAX_RETRIES):
             try:
@@ -174,56 +188,65 @@ Respond with ONLY a JSON object (no markdown, no explanation):
             except Exception as e:
                 last_error = e
                 if attempt < MAX_RETRIES - 1:
-                    print(f"  [Retry {attempt + 1}/{MAX_RETRIES}] API error: {e}")
+                    logger.warning(
+                        "Intent router API error, retrying",
+                        extra={"attempt": attempt + 1, "max_retries": MAX_RETRIES, "error": str(e)},
+                    )
                     time.sleep(RETRY_DELAY_SECONDS * (attempt + 1))
-        # If all retries failed, return a fallback response
-        print(f"  [Warning] All retries failed: {last_error}")
-        return '{"type": "rag", "confidence": 0.5, "skill": null, "reasoning": "API error, defaulting to RAG"}'
+
+        # All retries exhausted - raise exception so caller can handle
+        logger.error(
+            "Intent classification failed after all retries",
+            extra={"max_retries": MAX_RETRIES, "last_error": str(last_error)},
+        )
+        raise IntentClassificationError(f"Classification failed after {MAX_RETRIES} retries: {last_error}")
+
+    def _extract_json_text(self, content: str | list) -> str:
+        """Extract JSON text from LLM response, handling various formats."""
+        # Handle list response format (some models return content blocks)
+        if isinstance(content, list):
+            text = str(content[0]) if content else ""
+        else:
+            text = str(content)
+
+        # Extract from markdown code blocks
+        if "```json" in text:
+            json_start = text.find("```json") + 7
+            json_end = text.find("```", json_start)
+            return text[json_start:json_end].strip()
+        if "```" in text:
+            json_start = text.find("```") + 3
+            json_end = text.find("```", json_start)
+            return text[json_start:json_end].strip()
+
+        return text
 
     def _parse_response(self, content: str | list) -> Intent:
         """Parse the LLM response to extract intent."""
         try:
-            # Handle different response formats
-            if isinstance(content, list):
-                text = str(content[0]) if content else ""
-            else:
-                text = str(content)
-
-            # Handle markdown code blocks
-            if "```json" in text:
-                json_start = text.find("```json") + 7
-                json_end = text.find("```", json_start)
-                text = text[json_start:json_end].strip()
-            elif "```" in text:
-                json_start = text.find("```") + 3
-                json_end = text.find("```", json_start)
-                text = text[json_start:json_end].strip()
-
-            # Parse JSON
+            text = self._extract_json_text(content)
             data = json.loads(text)
 
-            # Extract and validate fields
+            # Parse intent type (default to RAG for safety)
             intent_type_str = data.get("type", "rag").lower()
             intent_type = IntentType.ACTION if intent_type_str == "action" else IntentType.RAG
 
-            confidence = float(data.get("confidence", 0.5))
-            confidence = max(0.0, min(1.0, confidence))  # Clamp to valid range
+            # Parse confidence and clamp to valid range
+            confidence = max(0.0, min(1.0, float(data.get("confidence", 0.5))))
 
+            # Normalize skill (empty strings and "null" become None)
             skill = data.get("skill")
-            if skill == "null" or skill == "":
+            if not skill or skill == "null":
                 skill = None
-
-            reasoning = str(data.get("reasoning", ""))
 
             return Intent(
                 type=intent_type,
                 confidence=confidence,
                 skill=skill,
-                reasoning=reasoning,
+                reasoning=str(data.get("reasoning", "")),
             )
 
         except (json.JSONDecodeError, KeyError, ValueError) as e:
-            # If parsing fails, default to RAG
             return Intent(
                 type=IntentType.RAG,
                 confidence=0.5,
