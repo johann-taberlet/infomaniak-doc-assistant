@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Copy dependency files
+COPY pyproject.toml uv.lock ./
+
+# Install all dependencies (including dev for tests)
+RUN uv sync --frozen
+
+# Copy application code
+COPY backend/ ./backend/
+
+# Scripts and data are mounted via volumes
+
+# Default command shows help
+CMD ["uv", "run", "python", "-c", "print('Usage: docker compose -f docker-compose.eval.yml run --rm eval python scripts/<script>.py')"]

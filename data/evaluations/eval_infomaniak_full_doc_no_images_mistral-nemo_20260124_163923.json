@@ -1,0 +1,126 @@
+{
+  "collection": "infomaniak_full_doc_no_images",
+  "model": "mistralai/mistral-nemo",
+  "dataset": "backend/app/evaluation/datasets/rag_eval.yaml",
+  "experiment_tags": {
+    "config": "baseline_dense",
+    "collection": "infomaniak_full_doc_no_images",
+    "timestamp": "2026-01-24T16:39:00.606560",
+    "model": "mistralai/mistral-nemo",
+    "retrieval_mode": "dense"
+  },
+  "aggregate_scores": {
+    "avg_correctness": 0.6666666666666666,
+    "avg_faithfulness": 0.6666666666666666,
+    "avg_relevance": 0.9666666666666667,
+    "avg_retrieval_latency_ms": 744.3246113446852,
+    "avg_generation_latency_ms": 2128.534221982894,
+    "avg_total_latency_ms": 2872.8722779778764,
+    "avg_chunks_retrieved": 5.0,
+    "num_questions": 3,
+    "total_input_tokens": 10004,
+    "total_output_tokens": 62,
+    "total_cost_usd": 0.00020256,
+    "avg_input_tokens": 3334.6666666666665,
+    "avg_output_tokens": 20.666666666666668,
+    "avg_cost_usd": 6.752e-05,
+    "avg_correctness_direct": 0.6666666666666666,
+    "avg_relevance_direct": 0.9666666666666667,
+    "num_direct": 3
+  },
+  "results": [
+    {
+      "question_id": "direct-kmeet-001",
+      "question": "What browsers support kMeet end-to-end encryption?",
+      "expected_answer": "End-to-end encryption only works with desktop apps and up-to-date browsers based on the Chromium architecture, such as Opera, Brave, and Google Chrome.",
+      "generated_answer": "End-to-end encryption in kMeet is only supported by desktop apps and up-to-date browsers based on the Chromium architecture. These include Opera, Brave, Google Chrome, among others.",
+      "retrieved_context": "[Document 1] Secure a k Meet meeting with a password and encryption key\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\nContent: # Secure a k Meet meeting with a password and encryption key\n\nSource: https://www.infomaniak.com/en/support/faq/2464/secure-a-kmeet-meeting-with-a-password-and-encryption-key\n\n---\n\nThis guide explains how to add a **password** and an **encryption key** to a [k Meet](https://www.infomaniak.com/en/support/f...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer contains all the key information from the expected answer, including the requirement for desktop apps and Chromium-based browsers. It lists the same examples (Opera, Brave, Chrome) and maintains the exact same meaning without any factual errors.",
+        "faithfulness_reasoning": "The answer is fully grounded in the provided context. Document 1 explicitly states that the end-to-end encryption feature 'only works with desktop apps and up-to-date browsers based on the Chromium architecture' and lists Opera, Brave, and Google Chrome as examples.",
+        "relevance_reasoning": "Document 1 directly answers the question by stating that end-to-end encryption works with desktop apps and up-to-date browsers based on the Chromium architecture, specifically naming Opera, Brave, and Google Chrome as examples."
+      },
+      "retrieval_latency_ms": 756.7324169795029,
+      "generation_latency_ms": 3688.765666971449,
+      "total_latency_ms": 4445.520666951779,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline_dense",
+        "timestamp": "2026-01-24T16:39:00.606560",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3666,
+      "output_tokens": 37,
+      "cost_usd": 7.48e-05
+    },
+    {
+      "question_id": "direct-kmeet-002",
+      "question": "What is the maximum recording duration for a kMeet meeting?",
+      "expected_answer": "The maximum recording duration for a kMeet meeting is 3 hours.",
+      "generated_answer": "The maximum recording duration for a kMeet meeting is 3 hours.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 1.0,
+        "faithfulness": 1.0,
+        "relevance": 0.9,
+        "correctness_reasoning": "The generated answer is identical to the expected answer, containing the exact same factual information and wording.",
+        "faithfulness_reasoning": "The answer is directly supported by Document 1, which explicitly states that video recording 'has a maximum duration of 3 hours' in the preamble section.",
+        "relevance_reasoning": "Document 1 explicitly states that a kMeet video recording has a maximum duration of 3 hours. While the question asks for the maximum 'meeting' duration and the text specifies 'recording' duration, this is the most direct answer available in the context. The context also mentions 'unlimited audio and video calls' in Document 2, providing a comprehensive view of duration limits."
+      },
+      "retrieval_latency_ms": 732.9170000157319,
+      "generation_latency_ms": 1360.6832079822198,
+      "total_latency_ms": 2093.6089999740943,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline_dense",
+        "timestamp": "2026-01-24T16:39:00.606560",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3257,
+      "output_tokens": 14,
+      "cost_usd": 6.57e-05
+    },
+    {
+      "question_id": "direct-kmeet-003",
+      "question": "Can I record an encrypted kMeet meeting with a custom key?",
+      "expected_answer": "No, you cannot record a video conference that uses end-to-end encryption with a custom key.",
+      "generated_answer": "I don't have information about that in the documentation.",
+      "retrieved_context": "[Document 1] Save a k Meet meeting on k Drive\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\nContent: # Save a k Meet meeting on k Drive\n\nSource: https://www.infomaniak.com/en/support/faq/2472/save-a-kmeet-meeting-on-kdrive\n\n---\n\nThis guide explains how to start recording an online meeting organized with [k Meet](https://infomaniak.com/gtl/meet), the ethical free video conferencing solution by Infomaniak, to obtain a video of the presentation in .mp4 format...",
+      "scores": {
+        "correctness": 0.0,
+        "faithfulness": 0.0,
+        "relevance": 1.0,
+        "correctness_reasoning": "The generated answer is a 'don't know' response, which fails to provide the specific factual information contained in the expected answer. It does not preserve the core meaning or provide the necessary 'No' response.",
+        "faithfulness_reasoning": "The answer states that the information is not in the documentation, but Document 1 explicitly states under the 'Prerequisites' section for recording: 'Do not create an encrypted video conference with a custom key.' This indicates that you cannot record a meeting if it uses a custom encryption key.",
+        "relevance_reasoning": "Document 1 explicitly answers the question by stating a prerequisite for recording: 'Do not create an encrypted video conference with a custom key.' This directly informs the user that recording is not possible when using a custom encryption key."
+      },
+      "retrieval_latency_ms": 743.3244170388207,
+      "generation_latency_ms": 1336.153790995013,
+      "total_latency_ms": 2079.4871670077555,
+      "num_chunks_retrieved": 5,
+      "metadata": {
+        "category": "direct",
+        "product": "kmeet",
+        "collection": "infomaniak_full_doc_no_images",
+        "config": "baseline_dense",
+        "timestamp": "2026-01-24T16:39:00.606560",
+        "model": "mistralai/mistral-nemo",
+        "retrieval_mode": "dense"
+      },
+      "input_tokens": 3081,
+      "output_tokens": 11,
+      "cost_usd": 6.206e-05
+    }
+  ]
+}
