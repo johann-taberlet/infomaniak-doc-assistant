@@ -85,6 +85,13 @@ class Settings(BaseSettings):
     sentence_window_size: int = Field(default=3, ge=1, le=10)
 
     # =========================================================================
+    # Hybrid Search Configuration
+    # =========================================================================
+    bm25_model: str = Field(default="Qdrant/bm25")
+    hyde_model: str = Field(default="mistralai/mistral-nemo")
+    hybrid_rrf_k: int = Field(default=60, ge=1, le=200)
+
+    # =========================================================================
     # Observability (Langfuse)
     # =========================================================================
     langfuse_enabled: bool = Field(default=False)

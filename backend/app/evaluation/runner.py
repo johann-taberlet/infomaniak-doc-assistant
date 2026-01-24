@@ -20,6 +20,22 @@ from backend.app.core.config import settings
 from backend.app.evaluation.judge import EvaluationScores, LLMJudge
 from backend.app.rag.retriever import QdrantRetriever, RetrievalResult
 
+# Type alias for retrievers (QdrantRetriever or HybridRetriever)
+# Both have compatible search() methods returning list[RetrievalResult]
+from typing import Protocol
+
+
+class RetrieverProtocol(Protocol):
+    """Protocol for retrievers compatible with evaluation."""
+
+    def search(
+        self,
+        query: str,
+        top_k: int | None = None,
+        score_threshold: float | None = None,
+        filter_product: str | None = None,
+    ) -> list[RetrievalResult]: ...
+
 
 @dataclass
 class EvaluationQuestion:
@@ -87,6 +103,7 @@ class EvaluationRunner:
         self,
         collection_name: str,
         experiment_tags: dict[str, str] | None = None,
+        retriever: RetrieverProtocol | None = None,
     ):
         """
         Initialize evaluation runner.
@@ -94,12 +111,14 @@ class EvaluationRunner:
         Args:
             collection_name: Qdrant collection to evaluate
             experiment_tags: Tags for Langfuse experiment tracking
+            retriever: Custom retriever (QdrantRetriever or HybridRetriever).
+                      If None, creates a QdrantRetriever for the collection.
         """
         self.collection_name = collection_name
         self.experiment_tags = experiment_tags or {}
 
-        # Initialize components
-        self.retriever = QdrantRetriever(collection_name=collection_name)
+        # Initialize components - use provided retriever or create default
+        self.retriever: RetrieverProtocol = retriever or QdrantRetriever(collection_name=collection_name)
         self.judge = LLMJudge()
 
         # Initialize Langfuse if enabled
