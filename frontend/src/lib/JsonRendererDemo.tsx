@@ -3,7 +3,7 @@ import { JsonRenderer } from './JsonRenderer';
 
 /**
  * Demo UI tree for testing JsonRenderer
- * Based on the verification test JSON from B1 plan
+ * Exercises all catalog components with realistic kDrive documentation content
  */
 const demoTree: UITree = {
   root: 'answer-1',

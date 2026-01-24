@@ -1,9 +1,13 @@
 import { createCatalog } from '@json-render/core';
 import { z } from 'zod';
 
+/** Action names defined in the catalog */
+const ACTION_NAMES = ['navigate', 'copy', 'openApp'] as const;
+
 /**
  * Docs Catalog - Defines all allowed components for generative UI
- * Based on PRD section 4.3 for kSuite documentation assistant
+ * Based on PRD section 4.3 for kSuite documentation assistant,
+ * extended with Text component and action definitions
  */
 export const docsCatalog = createCatalog({
   name: 'kSuite Documentation',
@@ -23,7 +27,7 @@ export const docsCatalog = createCatalog({
     },
     Step: {
       props: z.object({
-        number: z.number(),
+        number: z.number().int().min(1),
         title: z.string(),
         description: z.string(),
       }),
@@ -76,7 +80,7 @@ export const docsCatalog = createCatalog({
     ActionSuggestion: {
       props: z.object({
         label: z.string(),
-        action: z.string(),
+        action: z.enum(ACTION_NAMES),
         params: z.record(z.string(), z.unknown()).optional(),
       }),
       description: 'Suggested action button for user interaction',
@@ -125,3 +129,6 @@ export type DocsCatalog = typeof docsCatalog;
 
 // Export component names for type safety
 export const componentNames = docsCatalog.componentNames;
+
+// Export action names for dynamic handler generation
+export { ACTION_NAMES };

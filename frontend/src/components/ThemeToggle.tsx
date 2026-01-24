@@ -1,12 +1,36 @@
 import { useState, useEffect } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark' | 'system';
+
+const THEME_STORAGE_KEY = 'theme';
+const THEME_ATTRIBUTE = 'data-theme';
+
+/** Type guard to validate theme values from localStorage */
+const isValidTheme = (value: string | null): value is Theme =>
+  value === 'light' || value === 'dark' || value === 'system';
+
+/** Safely read theme from localStorage with fallback */
+const getStoredTheme = (): Theme => {
+  try {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    return isValidTheme(saved) ? saved : 'system';
+  } catch (error) {
+    console.warn('Failed to read theme from localStorage:', error);
+    return 'system';
+  }
+};
+
+/** Safely persist theme to localStorage */
+const persistTheme = (theme: Theme): void => {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch (error) {
+    console.warn('Failed to persist theme to localStorage:', error);
+  }
+};
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('theme') as Theme | null;
-    return saved || 'system';
-  });
+  const [theme, setTheme] = useState<Theme>(getStoredTheme);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -14,14 +38,14 @@ export function ThemeToggle() {
     const applyTheme = (selectedTheme: Theme) => {
       if (selectedTheme === 'system') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        root.setAttribute(THEME_ATTRIBUTE, prefersDark ? 'dark' : 'light');
       } else {
-        root.setAttribute('data-theme', selectedTheme);
+        root.setAttribute(THEME_ATTRIBUTE, selectedTheme);
       }
     };
 
     applyTheme(theme);
-    localStorage.setItem('theme', theme);
+    persistTheme(theme);
 
     // Listen for system theme changes when in system mode
     if (theme === 'system') {

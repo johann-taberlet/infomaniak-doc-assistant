@@ -119,7 +119,15 @@ function App() {
 
                 {error && (
                   <div className="p-4 bg-[var(--ik-error-bg)] text-[var(--ik-error)] border border-red-200 rounded-[var(--ik-radius-md)]">
-                    Error: {error.message || "Something went wrong"}
+                    <p className="font-medium">Unable to get a response</p>
+                    <p className="text-sm mt-1">
+                      {error.message?.toLowerCase().includes('network') ||
+                      error.message?.toLowerCase().includes('fetch')
+                        ? 'Please check your internet connection and try again.'
+                        : error.message?.toLowerCase().includes('timeout')
+                          ? 'The request timed out. Please try again.'
+                          : 'Something unexpected happened. Please try again or refresh the page.'}
+                    </p>
                   </div>
                 )}
               </div>
