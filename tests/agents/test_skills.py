@@ -395,3 +395,180 @@ Content.
         with pytest.raises(SkillParseError) as exc_info:
             loader.load_skill("test/bad-triggers")
         assert "'trigger-phrases' must be a list" in str(exc_info.value)
+
+
+# =============================================================================
+# Exception Attribute Tests
+# =============================================================================
+
+
+class TestExceptionAttributes:
+    """Tests for exception attributes for programmatic access."""
+
+    def test_skill_not_found_error_has_skill_name(self, loader):
+        """Test SkillNotFoundError has skill_name attribute."""
+        with pytest.raises(SkillNotFoundError) as exc_info:
+            loader.load_skill("nonexistent/skill")
+        assert exc_info.value.skill_name == "nonexistent/skill"
+
+    def test_skill_parse_error_has_path_and_reason(self, tmp_path):
+        """Test SkillParseError has path and reason attributes."""
+        category = tmp_path / "test"
+        category.mkdir()
+        skill_file = category / "bad.md"
+        skill_file.write_text("# No frontmatter")
+
+        loader = SkillLoader(str(tmp_path))
+        with pytest.raises(SkillParseError) as exc_info:
+            loader.load_skill("test/bad")
+
+        assert exc_info.value.path == skill_file
+        assert "YAML frontmatter" in exc_info.value.reason
+
+
+# =============================================================================
+# SkillMetadata Validation Tests
+# =============================================================================
+
+
+class TestSkillMetadataValidation:
+    """Tests for SkillMetadata self-validation."""
+
+    def test_empty_name_raises_value_error(self):
+        """Test creating metadata with empty name raises ValueError."""
+        with pytest.raises(ValueError) as exc_info:
+            SkillMetadata(name="", description="desc", allowed_tools=[])
+        assert "name must be non-empty" in str(exc_info.value)
+
+    def test_whitespace_only_name_raises_value_error(self):
+        """Test creating metadata with whitespace-only name raises ValueError."""
+        with pytest.raises(ValueError) as exc_info:
+            SkillMetadata(name="   ", description="desc", allowed_tools=[])
+        assert "name must be non-empty" in str(exc_info.value)
+
+    def test_empty_description_raises_value_error(self):
+        """Test creating metadata with empty description raises ValueError."""
+        with pytest.raises(ValueError) as exc_info:
+            SkillMetadata(name="test", description="", allowed_tools=[])
+        assert "description must be non-empty" in str(exc_info.value)
+
+    def test_allowed_tools_not_list_raises_type_error(self):
+        """Test creating metadata with non-list allowed_tools raises TypeError."""
+        with pytest.raises(TypeError) as exc_info:
+            SkillMetadata(name="test", description="desc", allowed_tools="not a list")  # type: ignore
+        assert "allowed_tools must be a list" in str(exc_info.value)
+
+    def test_allowed_tools_with_non_strings_raises_type_error(self):
+        """Test creating metadata with non-string items in allowed_tools raises TypeError."""
+        with pytest.raises(TypeError) as exc_info:
+            SkillMetadata(name="test", description="desc", allowed_tools=[1, 2, 3])  # type: ignore
+        assert "allowed_tools must contain only strings" in str(exc_info.value)
+
+    def test_trigger_phrases_with_non_strings_raises_type_error(self):
+        """Test creating metadata with non-string items in trigger_phrases raises TypeError."""
+        with pytest.raises(TypeError) as exc_info:
+            SkillMetadata(
+                name="test",
+                description="desc",
+                allowed_tools=[],
+                trigger_phrases=[1, 2, 3],  # type: ignore
+            )
+        assert "trigger_phrases must contain only strings" in str(exc_info.value)
+
+
+# =============================================================================
+# Additional Coverage Tests
+# =============================================================================
+
+
+class TestAdditionalCoverage:
+    """Additional tests to improve coverage."""
+
+    def test_load_skill_missing_description(self, tmp_path):
+        """Test loading a skill without description raises SkillParseError."""
+        category = tmp_path / "test"
+        category.mkdir()
+        skill_file = category / "no-desc.md"
+        skill_file.write_text(
+            """---
+name: no-desc
+allowed-tools: []
+---
+
+Content.
+"""
+        )
+
+        loader = SkillLoader(str(tmp_path))
+        with pytest.raises(SkillParseError) as exc_info:
+            loader.load_skill("test/no-desc")
+        assert "Missing 'description'" in exc_info.value.reason
+
+    def test_frontmatter_missing_closing_delimiter(self, tmp_path):
+        """Test skill with missing closing --- in frontmatter."""
+        category = tmp_path / "test"
+        category.mkdir()
+        skill_file = category / "bad-delimiter.md"
+        skill_file.write_text(
+            """---
+name: test
+description: Test
+allowed-tools: []
+Content without closing delimiter.
+"""
+        )
+
+        loader = SkillLoader(str(tmp_path))
+        with pytest.raises(SkillParseError) as exc_info:
+            loader.load_skill("test/bad-delimiter")
+        assert "opening and closing ---" in exc_info.value.reason
+
+    def test_skill_with_unicode_content(self, tmp_path):
+        """Test skill files with unicode content are loaded correctly."""
+        category = tmp_path / "test"
+        category.mkdir()
+        skill_file = category / "unicode.md"
+        skill_file.write_text(
+            """---
+name: unicode-skill
+description: Skill avec des caractères spéciaux
+allowed-tools: []
+---
+
+# Réponse française
+
+Contenu avec des accents: é, è, ç, à
+""",
+            encoding="utf-8",
+        )
+
+        loader = SkillLoader(str(tmp_path))
+        skill = loader.load_skill("test/unicode")
+        assert "é, è, ç, à" in skill.content
+        assert "spéciaux" in skill.metadata.description
+
+    def test_deeply_nested_skill_listing(self, tmp_path):
+        """Test behavior of skills in nested subdirectories."""
+        deep_dir = tmp_path / "category" / "subcategory"
+        deep_dir.mkdir(parents=True)
+        skill_file = deep_dir / "deep-skill.md"
+        skill_file.write_text(
+            """---
+name: deep-skill
+description: Deeply nested
+allowed-tools: []
+---
+
+Content.
+"""
+        )
+
+        loader = SkillLoader(str(tmp_path))
+        skills = loader.list_skills()
+        # Verify deeply nested skills are found
+        assert len(skills) == 1
+        assert skills[0].name == "deep-skill"
+
+        # Verify they can be loaded with the correct path
+        skill = loader.load_skill("category/subcategory/deep-skill")
+        assert skill.metadata.name == "deep-skill"

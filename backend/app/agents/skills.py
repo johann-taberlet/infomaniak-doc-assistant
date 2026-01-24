@@ -17,6 +17,7 @@ Skills are organized in a directory structure like:
 Skill names use the format "category/skill-name" (e.g., "kmeet/start-meeting").
 """
 
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -24,17 +25,24 @@ import yaml
 
 from backend.app.core.config import get_settings
 
+logger = logging.getLogger(__name__)
+
 
 class SkillNotFoundError(Exception):
     """Raised when a skill file cannot be found."""
 
-    pass
+    def __init__(self, skill_name: str, message: str | None = None):
+        self.skill_name = skill_name
+        super().__init__(message or f"Skill not found: {skill_name}")
 
 
 class SkillParseError(Exception):
     """Raised when a skill file has invalid format."""
 
-    pass
+    def __init__(self, path: str | Path, reason: str):
+        self.path = Path(path) if isinstance(path, str) else path
+        self.reason = reason
+        super().__init__(f"{reason}: {path}")
 
 
 @dataclass
@@ -45,6 +53,21 @@ class SkillMetadata:
     description: str
     allowed_tools: list[str]
     trigger_phrases: list[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        """Validate metadata fields after initialization."""
+        if not self.name or not self.name.strip():
+            raise ValueError("name must be non-empty")
+        if not self.description or not self.description.strip():
+            raise ValueError("description must be non-empty")
+        if not isinstance(self.allowed_tools, list):
+            raise TypeError("allowed_tools must be a list")
+        if not all(isinstance(t, str) for t in self.allowed_tools):
+            raise TypeError("allowed_tools must contain only strings")
+        if not isinstance(self.trigger_phrases, list):
+            raise TypeError("trigger_phrases must be a list")
+        if not all(isinstance(t, str) for t in self.trigger_phrases):
+            raise TypeError("trigger_phrases must contain only strings")
 
 
 @dataclass
@@ -87,11 +110,16 @@ class SkillLoader:
 
         Returns:
             List of SkillMetadata for all valid skills found.
-            Invalid skills are silently skipped.
+            Invalid skills are logged and skipped.
         """
         skills: list[SkillMetadata] = []
+        failed_count = 0
 
         if not self._skills_dir.exists():
+            logger.warning(
+                "Skills directory does not exist - no skills available: %s",
+                self._skills_dir,
+            )
             return skills
 
         # Scan for .md files in category subdirectories
@@ -104,11 +132,32 @@ class SkillLoader:
                 continue
 
             try:
-                skill = self._load_skill_file(md_file)
+                # Compute skill name from path (e.g., "kmeet/start-meeting")
+                skill_name = str(rel_path.with_suffix(""))
+                skill = self._load_skill_file(md_file, skill_name)
                 skills.append(skill.metadata)
-            except (SkillParseError, SkillNotFoundError):
-                # Skip invalid skills
-                continue
+            except SkillNotFoundError as e:
+                # Race condition: file was deleted between rglob and load
+                logger.warning(
+                    "Skill file disappeared during listing: %s",
+                    e.skill_name,
+                )
+                failed_count += 1
+            except SkillParseError as e:
+                # Malformed skill file - this is a configuration error
+                logger.error(
+                    "Failed to parse skill file (skill will not be available): %s - %s",
+                    e.path,
+                    e.reason,
+                )
+                failed_count += 1
+
+        logger.info(
+            "Skills loaded: %d successful, %d failed from %s",
+            len(skills),
+            failed_count,
+            self._skills_dir,
+        )
 
         return skills
 
@@ -130,16 +179,16 @@ class SkillLoader:
         skill_path = self._skills_dir / f"{skill_name}.md"
 
         if not skill_path.exists():
-            raise SkillNotFoundError(f"Skill not found: {skill_name}")
+            raise SkillNotFoundError(skill_name)
 
-        return self._load_skill_file(skill_path)
+        return self._load_skill_file(skill_path, skill_name)
 
     def get_skill(self, skill_name: str) -> Skill | None:
         """
         Get a skill by name, or None if not found.
 
         This is a convenience method that doesn't raise exceptions
-        for missing skills.
+        for missing skills. Parse errors are logged.
 
         Args:
             skill_name: Skill name in format "category/skill-name"
@@ -149,45 +198,64 @@ class SkillLoader:
         """
         try:
             return self.load_skill(skill_name)
-        except (SkillNotFoundError, SkillParseError):
+        except SkillNotFoundError:
+            # Expected case - skill doesn't exist
+            return None
+        except SkillParseError as e:
+            # Skill exists but is malformed - this is a bug that needs fixing
+            logger.error(
+                "Skill file is malformed and could not be loaded: %s - %s",
+                e.path,
+                e.reason,
+            )
             return None
 
-    def _load_skill_file(self, path: Path) -> Skill:
+    def _load_skill_file(self, path: Path, skill_name: str | None = None) -> Skill:
         """
         Load and parse a skill file.
 
         Args:
             path: Path to the skill markdown file.
+            skill_name: Optional skill name for better error messages.
 
         Returns:
             Parsed Skill object.
 
         Raises:
             SkillNotFoundError: If the file doesn't exist.
-            SkillParseError: If the file format is invalid.
+            SkillParseError: If the file format is invalid or unreadable.
         """
         if not path.exists():
-            raise SkillNotFoundError(f"Skill file not found: {path}")
+            raise SkillNotFoundError(skill_name or str(path))
 
-        content = path.read_text(encoding="utf-8")
-        frontmatter, markdown = self._parse_skill_file(content)
+        # Read file with proper error handling for I/O issues
+        try:
+            content = path.read_text(encoding="utf-8")
+        except PermissionError as e:
+            raise SkillParseError(path, f"Permission denied: {e}") from e
+        except UnicodeDecodeError as e:
+            raise SkillParseError(path, f"File is not valid UTF-8: {e}") from e
+        except OSError as e:
+            raise SkillParseError(path, f"Cannot read file: {e}") from e
+
+        frontmatter, markdown = self._parse_skill_file(content, path)
 
         # Extract and validate required fields
         name = frontmatter.get("name")
         if not name:
-            raise SkillParseError(f"Missing 'name' in frontmatter: {path}")
+            raise SkillParseError(path, "Missing 'name' in frontmatter")
 
         description = frontmatter.get("description")
         if not description:
-            raise SkillParseError(f"Missing 'description' in frontmatter: {path}")
+            raise SkillParseError(path, "Missing 'description' in frontmatter")
 
         allowed_tools = frontmatter.get("allowed-tools", [])
         if not isinstance(allowed_tools, list):
-            raise SkillParseError(f"'allowed-tools' must be a list: {path}")
+            raise SkillParseError(path, "'allowed-tools' must be a list")
 
         trigger_phrases = frontmatter.get("trigger-phrases", [])
         if not isinstance(trigger_phrases, list):
-            raise SkillParseError(f"'trigger-phrases' must be a list: {path}")
+            raise SkillParseError(path, "'trigger-phrases' must be a list")
 
         metadata = SkillMetadata(
             name=name,
@@ -198,12 +266,13 @@ class SkillLoader:
 
         return Skill(metadata=metadata, content=markdown)
 
-    def _parse_skill_file(self, content: str) -> tuple[dict, str]:
+    def _parse_skill_file(self, content: str, path: Path) -> tuple[dict, str]:
         """
         Parse frontmatter and content from a skill file.
 
         Args:
             content: Raw file content.
+            path: Path to the skill file (for error messages).
 
         Returns:
             Tuple of (frontmatter dict, markdown content).
@@ -212,18 +281,18 @@ class SkillLoader:
             SkillParseError: If the frontmatter format is invalid.
         """
         if not content.startswith("---"):
-            raise SkillParseError("Skill file must start with YAML frontmatter (---)")
+            raise SkillParseError(path, "Skill file must start with YAML frontmatter (---)")
 
         parts = content.split("---", 2)
         if len(parts) < 3:
             raise SkillParseError(
-                "Invalid frontmatter format: must have opening and closing ---"
+                path, "Invalid frontmatter format: must have opening and closing ---"
             )
 
         try:
             frontmatter = yaml.safe_load(parts[1])
         except yaml.YAMLError as e:
-            raise SkillParseError(f"Invalid YAML in frontmatter: {e}") from e
+            raise SkillParseError(path, f"Invalid YAML in frontmatter: {e}") from e
 
         if frontmatter is None:
             frontmatter = {}
