@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import type { UIMessage } from "ai";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { JsonRendererDemo } from "./lib/JsonRendererDemo";
+
+// Toggle to show component demo instead of chat
+const SHOW_DEMO = false;
 
 // Create transport with API endpoint
 const transport = new DefaultChatTransport({
@@ -13,6 +18,11 @@ function App() {
   const { messages, sendMessage, status, error } = useChat({
     transport,
   });
+
+  // Render demo mode for testing components
+  if (SHOW_DEMO) {
+    return <JsonRendererDemo />;
+  }
 
   const isLoading = status === "streaming" || status === "submitted";
 
@@ -37,26 +47,29 @@ function App() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-ik-bg-page">
+    <div className="h-full flex flex-col bg-[var(--ik-bg-page)]">
       {/* Header */}
-      <header className="flex items-center justify-between bg-ik-bg-card px-6 py-3 border-b border-ik-border shadow-ik-sm shrink-0">
-        <h1 className="text-xl font-semibold text-ik-primary tracking-tight">
+      <header className="flex items-center justify-between bg-[var(--ik-bg-card)] px-6 py-3 border-b border-[var(--ik-border)] shadow-[var(--ik-shadow-sm)] shrink-0">
+        <h1 className="text-xl font-semibold text-[var(--ik-primary)] tracking-tight">
           kSuite Assistant
         </h1>
-        <span className="text-sm text-ik-text-muted">
-          AI-powered help for kDrive, kMeet, and kChat
-        </span>
+        <div className="flex items-center gap-4">
+          <span className="text-sm text-[var(--ik-text-muted)] hidden sm:inline">
+            AI-powered help for kDrive, kMeet, and kChat
+          </span>
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col min-h-0 overflow-hidden">
-        <div className="flex flex-col flex-1 w-full max-w-[900px] mx-auto p-6">
+      <main className="flex-1 flex flex-col items-center min-h-0 overflow-hidden p-6">
+        <div className="flex flex-col flex-1 w-full max-w-[900px] min-h-0">
           {/* Chat container */}
-          <div className="flex-1 bg-ik-bg-card rounded-ik-lg p-6 mb-4 overflow-y-auto shadow-ik-md border border-ik-border-light">
+          <div className="flex-1 bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 mb-4 overflow-y-auto shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)]">
             {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-ik-text-muted">
+              <div className="flex flex-col items-center justify-center h-full text-[var(--ik-text-muted)]">
                 {/* Gradient circle icon */}
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-ik-primary to-cyan-400 opacity-80 mb-3" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--ik-primary)] to-cyan-400 opacity-80 mb-3" />
                 <p className="mb-6">Ask me anything about Infomaniak kSuite products!</p>
 
                 {/* Suggestion buttons */}
@@ -69,7 +82,7 @@ function App() {
                     <button
                       key={suggestion}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="px-4 py-3 text-left text-ik-text-secondary bg-ik-bg-tertiary border border-ik-border rounded-ik-md transition-all duration-200 hover:border-ik-primary hover:bg-ik-primary-light hover:text-ik-primary"
+                      className="px-4 py-3 text-left text-[var(--ik-text-secondary)] bg-[var(--ik-bg-tertiary)] border border-[var(--ik-border)] rounded-[var(--ik-radius-md)] transition-all duration-200 hover:border-[var(--ik-primary)] hover:bg-[var(--ik-primary-light)] hover:text-[var(--ik-primary)]"
                     >
                       {suggestion}
                     </button>
@@ -81,10 +94,10 @@ function App() {
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`animate-message-slide-in max-w-[85%] p-4 rounded-ik-lg ${
+                    className={`animate-message-slide-in max-w-[85%] p-4 ${
                       message.role === "user"
-                        ? "ml-auto bg-ik-primary text-ik-text-inverse rounded-br-sm shadow-ik-primary"
-                        : "mr-auto bg-ik-bg-secondary text-ik-text-primary border border-ik-border rounded-bl-sm"
+                        ? "ml-auto bg-[var(--ik-user-message-bg)] text-[var(--ik-user-message-text)] rounded-[var(--ik-radius-lg)] rounded-br-[4px] shadow-[var(--ik-shadow-primary)]"
+                        : "mr-auto bg-[var(--ik-bg-secondary)] text-[var(--ik-text-primary)] border border-[var(--ik-border)] rounded-[var(--ik-radius-lg)] rounded-bl-[4px]"
                     }`}
                   >
                     <div className="leading-relaxed whitespace-pre-wrap">
@@ -94,8 +107,8 @@ function App() {
                 ))}
 
                 {isLoading && (
-                  <div className="animate-message-slide-in max-w-[85%] mr-auto p-4 rounded-ik-lg rounded-bl-sm bg-ik-bg-secondary border border-ik-border">
-                    <div className="flex items-center gap-1 text-ik-text-muted italic">
+                  <div className="animate-message-slide-in max-w-[85%] mr-auto p-4 rounded-[var(--ik-radius-lg)] rounded-bl-[4px] bg-[var(--ik-bg-secondary)] border border-[var(--ik-border)]">
+                    <div className="flex items-center gap-1 text-[var(--ik-text-muted)] italic">
                       <span>Thinking</span>
                       <span className="animate-thinking-dot">.</span>
                       <span className="animate-thinking-dot">.</span>
@@ -105,7 +118,7 @@ function App() {
                 )}
 
                 {error && (
-                  <div className="p-4 bg-ik-error-bg text-ik-error border border-red-200 rounded-ik-md">
+                  <div className="p-4 bg-[var(--ik-error-bg)] text-[var(--ik-error)] border border-red-200 rounded-[var(--ik-radius-md)]">
                     Error: {error.message || "Something went wrong"}
                   </div>
                 )}
@@ -116,7 +129,7 @@ function App() {
           {/* Input form */}
           <form
             onSubmit={handleSubmit}
-            className="flex gap-3 bg-ik-bg-card p-3 rounded-ik-xl shadow-ik-md border border-ik-border-light shrink-0"
+            className="flex gap-3 bg-[var(--ik-bg-card)] p-3 rounded-[var(--ik-radius-xl)] shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] shrink-0"
           >
             <input
               type="text"
@@ -124,12 +137,12 @@ function App() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about kDrive, kMeet, or kChat..."
               disabled={isLoading}
-              className="flex-1 px-5 py-3 bg-ik-bg-tertiary text-ik-text-primary border-2 border-transparent rounded-ik-lg text-base transition-all duration-200 placeholder:text-ik-text-muted focus:outline-none focus:border-ik-primary focus:bg-ik-bg-card focus:shadow-[0_0_0_3px_rgba(0,152,255,0.1)] disabled:bg-ik-bg-secondary disabled:cursor-not-allowed"
+              className="flex-1 px-5 py-3 bg-[var(--ik-bg-tertiary)] text-[var(--ik-text-primary)] border-2 border-transparent rounded-[var(--ik-radius-lg)] text-base transition-all duration-200 placeholder:text-[var(--ik-text-muted)] focus:outline-none focus:border-[var(--ik-primary)] focus:bg-[var(--ik-bg-card)] disabled:bg-[var(--ik-bg-secondary)] disabled:cursor-not-allowed"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="px-7 py-3 bg-ik-primary text-ik-text-inverse font-medium rounded-ik-lg text-base cursor-pointer transition-all duration-200 shadow-ik-primary hover:bg-ik-primary-hover hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,152,255,0.3)] active:translate-y-0 disabled:bg-ik-border disabled:text-ik-text-muted disabled:cursor-not-allowed disabled:shadow-none disabled:hover:translate-y-0"
+              className="px-7 py-3 bg-[var(--ik-primary)] text-[var(--ik-text-inverse)] font-medium rounded-[var(--ik-radius-lg)] text-base cursor-pointer transition-all duration-200 shadow-[var(--ik-shadow-primary)] hover:bg-[var(--ik-primary-hover)] hover:-translate-y-0.5 active:translate-y-0 disabled:bg-[var(--ik-border)] disabled:text-[var(--ik-text-muted)] disabled:cursor-not-allowed disabled:shadow-none disabled:hover:translate-y-0"
             >
               Send
             </button>
@@ -138,7 +151,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="text-center py-3 text-ik-text-muted text-xs shrink-0">
+      <footer className="text-center py-3 text-[var(--ik-text-muted)] text-xs shrink-0">
         Powered by RAG with Qdrant | Demo for Infomaniak
       </footer>
     </div>

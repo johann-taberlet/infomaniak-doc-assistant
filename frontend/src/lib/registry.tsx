@@ -2,25 +2,25 @@ import type { ComponentRegistry } from '@json-render/react';
 
 /**
  * Docs Registry - Maps catalog components to React implementations
- * Using Infomaniak Design System with Tailwind CSS v4
+ * Using Infomaniak Design System with CSS variables
  */
 export const docsRegistry: ComponentRegistry = {
   Answer: ({ element, children }) => (
     <div className="my-4">
       {element.props.summary && (
-        <p className="italic text-ik-text-secondary mb-4">{element.props.summary}</p>
+        <p className="italic text-[var(--ik-text-secondary)] mb-4">{element.props.summary}</p>
       )}
       {children}
     </div>
   ),
 
   Steps: ({ element, children }) => (
-    <div className="mt-6 rounded-ik-md bg-ik-bg-tertiary border border-ik-border">
+    <div className="mt-6 rounded-[var(--ik-radius-md)] bg-[var(--ik-bg-tertiary)] border border-[var(--ik-border)]">
       {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-ik-border">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--ik-border)]">
         <span className="text-base">📋</span>
         {element.props.title && (
-          <span className="flex-1 font-semibold text-sm text-ik-text-secondary">
+          <span className="flex-1 font-semibold text-sm text-[var(--ik-text-secondary)]">
             {element.props.title}
           </span>
         )}
@@ -31,18 +31,18 @@ export const docsRegistry: ComponentRegistry = {
   ),
 
   Step: ({ element }) => (
-    <div className="animate-step-enter border-b border-ik-border last:border-b-0">
+    <div className="animate-step-enter border-b border-[var(--ik-border)] last:border-b-0">
       <div className="flex items-start gap-3 px-4 py-3">
         {/* Step number circle */}
-        <span className="shrink-0 w-7 h-7 flex items-center justify-center bg-ik-bg-card border-2 border-ik-border rounded-full text-xs font-semibold text-ik-text-secondary transition-colors hover:border-ik-primary hover:text-ik-primary">
+        <span className="shrink-0 w-7 h-7 flex items-center justify-center bg-[var(--ik-bg-card)] border-2 border-[var(--ik-border)] rounded-full text-xs font-semibold text-[var(--ik-text-secondary)] transition-colors hover:border-[var(--ik-primary)] hover:text-[var(--ik-primary)]">
           {element.props.number}
         </span>
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h4 className="m-0 mb-1 text-sm font-semibold text-ik-text-primary">
+          <h4 className="m-0 mb-1 text-sm font-semibold text-[var(--ik-text-primary)]">
             {element.props.title}
           </h4>
-          <p className="text-[0.8125rem] text-ik-text-secondary leading-snug">
+          <p className="text-[0.8125rem] text-[var(--ik-text-secondary)] leading-snug m-0">
             {element.props.description}
           </p>
         </div>
@@ -52,17 +52,17 @@ export const docsRegistry: ComponentRegistry = {
 
   Card: ({ element, children }) => {
     const typeStyles: Record<string, string> = {
-      info: 'bg-ik-info-bg border-l-4 border-ik-info',
-      warning: 'bg-ik-warning-bg border-l-4 border-ik-warning',
-      tip: 'bg-ik-tip-bg border-l-4 border-ik-tip',
-      important: 'bg-ik-important-bg border-l-4 border-ik-important',
+      info: 'bg-[var(--ik-info-bg)] border-l-4 border-[var(--ik-info)]',
+      warning: 'bg-[var(--ik-warning-bg)] border-l-4 border-[var(--ik-warning)]',
+      tip: 'bg-[var(--ik-tip-bg)] border-l-4 border-[var(--ik-tip)]',
+      important: 'bg-[var(--ik-important-bg)] border-l-4 border-[var(--ik-important)]',
     };
     return (
-      <div className={`rounded-ik-sm p-4 my-4 ${typeStyles[element.props.type] || ''}`}>
-        <h4 className="m-0 mb-2 text-sm font-semibold text-ik-text-primary">
+      <div className={`rounded-[var(--ik-radius-sm)] p-4 my-4 ${typeStyles[element.props.type] || ''}`}>
+        <h4 className="m-0 mb-2 text-sm font-semibold text-[var(--ik-text-primary)]">
           {element.props.title}
         </h4>
-        <div className="text-sm text-ik-text-secondary">{children}</div>
+        <div className="text-sm text-[var(--ik-text-secondary)]">{children}</div>
       </div>
     );
   },
@@ -75,7 +75,7 @@ export const docsRegistry: ComponentRegistry = {
             {element.props.headers.map((header: string, i: number) => (
               <th
                 key={i}
-                className="p-3 text-left font-semibold text-ik-text-primary bg-ik-bg-secondary border border-ik-border"
+                className="p-3 text-left font-semibold text-[var(--ik-text-primary)] bg-[var(--ik-bg-secondary)] border border-[var(--ik-border)]"
               >
                 {header}
               </th>
@@ -84,9 +84,9 @@ export const docsRegistry: ComponentRegistry = {
         </thead>
         <tbody>
           {element.props.rows.map((row: string[], i: number) => (
-            <tr key={i} className="even:bg-ik-bg-tertiary hover:bg-ik-primary-light transition-colors">
+            <tr key={i} className="even:bg-[var(--ik-bg-tertiary)] hover:bg-[var(--ik-primary-light)] transition-colors">
               {row.map((cell: string, j: number) => (
-                <td key={j} className="p-3 text-left border border-ik-border">
+                <td key={j} className="p-3 text-left border border-[var(--ik-border)]">
                   {cell}
                 </td>
               ))}
@@ -107,13 +107,13 @@ export const docsRegistry: ComponentRegistry = {
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr>
-              <th className="p-3 text-left font-semibold text-ik-text-primary bg-ik-bg-secondary border border-ik-border">
+              <th className="p-3 text-left font-semibold text-[var(--ik-text-primary)] bg-[var(--ik-bg-secondary)] border border-[var(--ik-border)]">
                 Feature
               </th>
               {items.map((item, i) => (
                 <th
                   key={i}
-                  className="p-3 text-center font-semibold text-ik-text-primary bg-ik-bg-secondary border border-ik-border"
+                  className="p-3 text-center font-semibold text-[var(--ik-text-primary)] bg-[var(--ik-bg-secondary)] border border-[var(--ik-border)]"
                 >
                   {item.name}
                 </th>
@@ -122,11 +122,11 @@ export const docsRegistry: ComponentRegistry = {
           </thead>
           <tbody>
             {features.map((feature, i) => (
-              <tr key={i} className="even:bg-ik-bg-tertiary hover:bg-ik-primary-light transition-colors">
-                <td className="p-3 text-left border border-ik-border">{feature}</td>
+              <tr key={i} className="even:bg-[var(--ik-bg-tertiary)] hover:bg-[var(--ik-primary-light)] transition-colors">
+                <td className="p-3 text-left border border-[var(--ik-border)]">{feature}</td>
                 {items.map((item, j) => (
-                  <td key={j} className="p-3 text-center border border-ik-border">
-                    <span className={item.values[i] ? 'text-ik-success font-bold' : 'text-ik-text-muted'}>
+                  <td key={j} className="p-3 text-center border border-[var(--ik-border)]">
+                    <span className={item.values[i] ? 'text-[var(--ik-success)] font-bold' : 'text-[var(--ik-text-muted)]'}>
                       {item.values[i] ? '✓' : '—'}
                     </span>
                   </td>
@@ -141,7 +141,7 @@ export const docsRegistry: ComponentRegistry = {
 
   CodeBlock: ({ element }) => (
     <div className="my-4">
-      <pre className="bg-[#212529] text-[#f8f8f2] p-4 rounded-ik-sm overflow-x-auto font-mono text-[0.8125rem] leading-relaxed">
+      <pre className="bg-[#212529] text-[#f8f8f2] p-4 rounded-[var(--ik-radius-sm)] overflow-x-auto font-mono text-[0.8125rem] leading-relaxed">
         <code>{element.props.code}</code>
       </pre>
     </div>
@@ -149,7 +149,7 @@ export const docsRegistry: ComponentRegistry = {
 
   ActionSuggestion: ({ element, onAction }) => (
     <button
-      className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-ik-border rounded-full text-[0.8125rem] text-ik-text-secondary font-medium cursor-pointer transition-all duration-200 hover:border-ik-primary hover:text-ik-primary hover:bg-ik-primary-light"
+      className="inline-flex items-center gap-1.5 px-4 py-2 bg-[var(--ik-bg-card)] border border-[var(--ik-border)] rounded-full text-[0.8125rem] text-[var(--ik-text-secondary)] font-medium cursor-pointer transition-all duration-200 hover:border-[var(--ik-primary)] hover:text-[var(--ik-primary)] hover:bg-[var(--ik-primary-light)]"
       onClick={() => onAction?.({ name: element.props.action, params: element.props.params })}
     >
       {element.props.label}
@@ -157,16 +157,16 @@ export const docsRegistry: ComponentRegistry = {
   ),
 
   PlatformBadges: ({ element }) => (
-    <div className="mt-6 rounded-ik-sm bg-ik-bg-tertiary border border-ik-border">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-ik-border">
+    <div className="mt-6 rounded-[var(--ik-radius-sm)] bg-[var(--ik-bg-tertiary)] border border-[var(--ik-border)]">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--ik-border)]">
         <span className="text-base">📱</span>
-        <span className="font-semibold text-sm text-ik-text-secondary">Available on</span>
+        <span className="font-semibold text-sm text-[var(--ik-text-secondary)]">Available on</span>
       </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-2 p-4">
         {element.props.platforms.map((platform: string) => (
           <div
             key={platform}
-            className="flex flex-col items-center p-3 bg-ik-bg-card border border-ik-border rounded-md text-center"
+            className="flex flex-col items-center p-3 bg-[var(--ik-bg-card)] border border-[var(--ik-border)] rounded-md text-center"
           >
             <span className="text-2xl mb-1">
               {platform === 'web' && '🌐'}
@@ -176,7 +176,7 @@ export const docsRegistry: ComponentRegistry = {
               {platform === 'windows' && '🪟'}
               {platform === 'linux' && '🐧'}
             </span>
-            <span className="text-xs font-medium text-ik-text-secondary capitalize">{platform}</span>
+            <span className="text-xs font-medium text-[var(--ik-text-secondary)] capitalize">{platform}</span>
           </div>
         ))}
       </div>
@@ -184,6 +184,6 @@ export const docsRegistry: ComponentRegistry = {
   ),
 
   Text: ({ element }) => (
-    <p className="my-2 text-ik-text-primary leading-relaxed">{element.props.content}</p>
+    <p className="my-2 text-[var(--ik-text-primary)] leading-relaxed">{element.props.content}</p>
   ),
 };

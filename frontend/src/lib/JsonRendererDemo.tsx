@@ -84,22 +84,33 @@ export function JsonRendererDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-ik-bg-page p-8">
+    <div className="min-h-screen bg-[var(--ik-bg-page)] p-6 md:p-8">
       <div className="max-w-[900px] mx-auto">
-        <h2 className="text-2xl font-bold text-ik-text-primary mb-2">JsonRenderer Demo</h2>
-        <p className="text-ik-text-secondary mb-6">
-          Testing the generative UI components with Infomaniak Design System.
-        </p>
+        {/* Page Header */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-[var(--ik-text-primary)] mb-2">
+            JsonRenderer Demo
+          </h2>
+          <p className="text-[var(--ik-text-secondary)]">
+            Testing the generative UI components with Infomaniak Design System.
+          </p>
+        </div>
 
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light">
+        {/* Main Demo Card */}
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] mb-8">
           <JsonRenderer tree={demoTree} onAction={handleAction} />
         </div>
 
-        <h3 className="text-xl font-semibold text-ik-text-primary mt-10 mb-4">Additional Components</h3>
+        {/* Additional Components Section */}
+        <h3 className="text-xl font-semibold text-[var(--ik-text-primary)] mb-6">
+          Additional Components
+        </h3>
 
         {/* Table Demo */}
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
-          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Table Component</h4>
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] mb-6">
+          <h4 className="text-sm font-semibold text-[var(--ik-text-secondary)] uppercase tracking-wide mb-4">
+            Table Component
+          </h4>
           <JsonRenderer
             tree={{
               root: 'table-demo',
@@ -122,8 +133,10 @@ export function JsonRendererDemo() {
         </div>
 
         {/* Comparison Demo */}
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
-          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Comparison Component</h4>
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] mb-6">
+          <h4 className="text-sm font-semibold text-[var(--ik-text-secondary)] uppercase tracking-wide mb-4">
+            Comparison Component
+          </h4>
           <JsonRenderer
             tree={{
               root: 'comparison-demo',
@@ -146,8 +159,10 @@ export function JsonRendererDemo() {
         </div>
 
         {/* Card Variants Demo */}
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
-          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">Card Variants</h4>
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] mb-6">
+          <h4 className="text-sm font-semibold text-[var(--ik-text-secondary)] uppercase tracking-wide mb-4">
+            Card Variants
+          </h4>
           {(['info', 'warning', 'tip', 'important'] as const).map((type) => (
             <JsonRenderer
               key={type}
@@ -177,8 +192,10 @@ export function JsonRendererDemo() {
         </div>
 
         {/* CodeBlock Demo */}
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light mb-6">
-          <h4 className="text-sm font-semibold text-ik-text-secondary mb-2">CodeBlock Component</h4>
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)] mb-6">
+          <h4 className="text-sm font-semibold text-[var(--ik-text-secondary)] uppercase tracking-wide mb-4">
+            CodeBlock Component
+          </h4>
           <JsonRenderer
             tree={{
               root: 'code-demo',
@@ -197,9 +214,11 @@ export function JsonRendererDemo() {
         </div>
 
         {/* Action Buttons Demo */}
-        <div className="bg-ik-bg-card rounded-ik-lg p-6 shadow-ik-md border border-ik-border-light">
-          <h4 className="text-sm font-semibold text-ik-text-secondary mb-4">Action Suggestions</h4>
-          <div className="flex flex-wrap gap-2">
+        <div className="bg-[var(--ik-bg-card)] rounded-[var(--ik-radius-lg)] p-6 shadow-[var(--ik-shadow-md)] border border-[var(--ik-border-light)]">
+          <h4 className="text-sm font-semibold text-[var(--ik-text-secondary)] uppercase tracking-wide mb-4">
+            Action Suggestions
+          </h4>
+          <div className="flex flex-wrap gap-3">
             <JsonRenderer
               tree={{
                 root: 'actions-demo',

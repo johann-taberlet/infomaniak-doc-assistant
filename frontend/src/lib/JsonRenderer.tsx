@@ -12,7 +12,7 @@ interface JsonRendererProps {
 // Fallback component for unknown element types
 function FallbackComponent({ element }: ComponentRenderProps) {
   return (
-    <div className="bg-ik-error-bg border border-ik-error rounded-ik-sm p-4 text-ik-error my-4">
+    <div className="bg-[var(--ik-error-bg)] border border-[var(--ik-error)] rounded-[var(--ik-radius-sm)] p-4 text-[var(--ik-error)] my-4">
       Unknown component type: {element.type}
     </div>
   );
