@@ -18,17 +18,21 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 - [x] Unit tests (27 passing)
 - [x] Config: `router_model`, `router_confidence_threshold`
 
-### A2: Low-Level Primitives ⏳ NEXT
-- [ ] `backend/app/agents/primitives.py`
-- [ ] `updateState(path, value)` - Modify React app state
-- [ ] `queryDB(collection, filter)` - Search fake database
-- [ ] `showPanel(panelId, props)` - Display UI component
-- [ ] `navigate(route)` - Change current view
-- [ ] `toast(message, type)` - Show notification
-- [ ] Pydantic schemas for each primitive
-- [ ] Unit tests
+### A2: Low-Level Primitives ✅ DONE
+- [x] `backend/app/agents/primitives.py` - Core primitive implementations
+- [x] `backend/app/agents/events.py` - Stream event types (Vercel AI SDK format)
+- [x] `backend/app/agents/fakedb.py` - Seed data for agent queries
+- [x] `backend/app/agents/tools.py` - OpenAI-format tool definitions
+- [x] `updateState(path, value)` - Modify React app state
+- [x] `queryDB(collection, filter)` - Search fake database
+- [x] `showPanel(panelId, props)` - Display UI component
+- [x] `navigate(route)` - Change current view
+- [x] `toast(message, type)` - Show notification
+- [x] `ToastType` enum for type safety
+- [x] Event emission with `2:` prefix (Vercel AI SDK protocol)
+- [x] Unit tests (76 tests for primitives, events, fakedb, tools)
 
-### A3: Skill Loader
+### A3: Skill Loader ⏳ NEXT
 - [ ] `backend/app/agents/skills.py`
 - [ ] `skills/` directory structure
 - [ ] YAML frontmatter parsing
@@ -142,25 +146,25 @@ Based on [PRD-phase2-agentic-system.md](./PRD-phase2-agentic-system.md)
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| A: Foundation | 🟡 In Progress | 1/3 done |
+| A: Foundation | 🟡 In Progress | 2/3 done |
 | B: RAG Generative UI | ⚪ Not Started | 0/3 done |
 | C: Action Execution | ⚪ Not Started | 0/3 done |
 | D: Fake Apps | ⚪ Not Started | 0/5 done |
 | E: Integration | ⚪ Not Started | 0/3 done |
 
-**Overall: ~6% complete (1/17 tasks)**
+**Overall: ~12% complete (2/17 tasks)**
 
 ---
 
 ## Next Step
 
-**A2: Low-Level Primitives**
+**A3: Skill Loader**
 
-Create `backend/app/agents/primitives.py` with 5 tools:
-1. `updateState` - Modify frontend state via stream
-2. `queryDB` - Query fake database (frontend-side)
-3. `showPanel` - Trigger UI panel display
-4. `navigate` - Change app route
-5. `toast` - Show notification
+Create `backend/app/agents/skills.py` with:
+1. `skills/` directory structure for skill definitions
+2. YAML frontmatter parsing for skill metadata
+3. `SkillLoader.list_skills()` - List all available skills
+4. `SkillLoader.load_skill(name)` - Load a skill by name
+5. `SkillLoader.match_skill(query, intent)` - Match query to best skill
 
-These primitives will emit events that the frontend consumes to update the fake apps.
+Skills will define the prompts and allowed primitives for each action type.
