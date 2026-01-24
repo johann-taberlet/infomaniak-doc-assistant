@@ -12,6 +12,15 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
+import logging
+
+from backend.app.agents.router import (
+    IntentClassificationError,
+    IntentRouter,
+    get_available_skills,
+)
+
+logger = logging.getLogger(__name__)
 from backend.app.core.config import settings
 from backend.app.rag.generator import AnswerGenerator
 from backend.app.rag.hybrid_retriever import HybridConfig, HybridRetriever, RetrievalMode
@@ -30,6 +39,30 @@ class ChatRequest(BaseModel):
     """Chat request in Vercel AI SDK format."""
 
     messages: list[Message] = Field(..., description="Conversation history")
+
+
+async def generate_error_stream(error_message: str) -> AsyncIterator[str]:
+    """
+    Generate an error response in Vercel AI SDK format.
+
+    This ensures users always see errors in the UI.
+    """
+    error_data = {"error": error_message}
+    yield f"e:{json.dumps(error_data)}\n"
+
+
+async def generate_action_stub(intent) -> AsyncIterator[str]:
+    """
+    Generate a stub response for action intents.
+
+    This is a placeholder until Phase C2 implements the agent executor.
+    """
+    skill_name = intent.skill or "unknown"
+    message = f"[Action Mode] I understood you want to execute: {skill_name}\n\nThis feature is coming soon! For now, I can only answer questions about kSuite documentation."
+
+    # Stream in Vercel AI SDK format
+    yield f'0:"{json.dumps(message)[1:-1]}"\n'
+    yield 'd:{"finishReason": "stop", "usage": {"promptTokens": 0, "completionTokens": 0}}\n'
 
 
 def format_context(results: list) -> str:
@@ -108,6 +141,39 @@ async def chat(request: ChatRequest) -> StreamingResponse:
 
     question = user_messages[-1].content
 
+    # Classify intent (RAG or Action)
+    intent_router = IntentRouter()
+    try:
+        intent = intent_router.classify(
+            query=question,
+            available_skills=get_available_skills(),
+            history=[{"role": m.role, "content": m.content} for m in request.messages[-4:-1]],
+        )
+    except IntentClassificationError as e:
+        logger.error("Intent classification failed", extra={"error": str(e), "question": question[:100]})
+        return StreamingResponse(
+            generate_error_stream("Sorry, I'm having trouble processing your request. Please try again."),
+            media_type="text/plain; charset=utf-8",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Vercel-AI-Data-Stream": "v1",
+            },
+        )
+
+    # Route to action stub if high-confidence action
+    if intent.is_action():
+        return StreamingResponse(
+            generate_action_stub(intent),
+            media_type="text/plain; charset=utf-8",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Vercel-AI-Data-Stream": "v1",
+            },
+        )
+
+    # Continue with RAG flow for documentation questions
     # Default collection for hybrid search
     collection_name = "infomaniak_hybrid_full_doc_no_images"
 
