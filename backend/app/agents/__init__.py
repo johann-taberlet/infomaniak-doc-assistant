@@ -11,6 +11,7 @@ This module provides:
 - Events: Streaming event types for Vercel AI SDK
 - Tools: LLM tool definitions in OpenAI format
 - FakeDB: Simulated database for agent queries
+- Skills: Skill loading and parsing for agentic system
 """
 
 from backend.app.agents.events import (
@@ -31,6 +32,15 @@ from backend.app.agents.router import (
     IntentRouter,
     IntentType,
     SkillInfo,
+)
+from backend.app.agents.skills import (
+    Skill,
+    SkillLoader,
+    SkillMetadata,
+    SkillNotFoundError,
+    SkillParseError,
+    get_skill_loader,
+    reset_skill_loader,
 )
 from backend.app.agents.tools import TOOL_DEFINITIONS, get_tool_by_name, get_tool_names
 
@@ -62,4 +72,12 @@ __all__ = [
     "TOOL_DEFINITIONS",
     "get_tool_by_name",
     "get_tool_names",
+    # Skills
+    "Skill",
+    "SkillLoader",
+    "SkillMetadata",
+    "SkillNotFoundError",
+    "SkillParseError",
+    "get_skill_loader",
+    "reset_skill_loader",
 ]
